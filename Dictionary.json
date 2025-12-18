@@ -1,102 +1,940 @@
 {
   "metadata": {
-    "name": "Dic-deep",
+    "name": "PDCS CORE VOCAB - A1",
     "version": "1.0",
     "language": "en-fa",
-    "description": "دیکشنری هوشمند انگلیسی-فارسی با سیستم تمرین لایتنر",
-    "created_date": "2024-01-15"
+    "level": "A1",
+    "word_count": 200,
+    "description": "۲۰۰ لغت ضروری سطح A1 با مثال، کالوکیشن و phrasal verbs"
   },
+  
   "words": [
     {
       "id": 1,
       "word": "be",
       "meaning_fa": "بودن",
-      "level": "A1",
       "examples": [
-        "I want to be a teacher. - من می‌خواهم یک معلم باشم.",
-        "Be happy! - خوشحال باش!"
+        {
+          "en": "I want to be a teacher.",
+          "fa": "من می‌خواهم یک معلم باشم.",
+          "tts_text": "I want to be a teacher"
+        },
+        {
+          "en": "Be happy!",
+          "fa": "خوشحال باش!",
+          "tts_text": "Be happy"
+        }
       ],
       "collocations": [
-        {"phrase": "be happy", "meaning_fa": "خوشحال بودن"},
-        {"phrase": "be ready", "meaning_fa": "آماده بودن"},
-        {"phrase": "be careful", "meaning_fa": "مواظب بودن"}
+        {
+          "phrase": "be happy",
+          "meaning_fa": "خوشحال بودن",
+          "example": "I want to be happy every day."
+        },
+        {
+          "phrase": "be ready",
+          "meaning_fa": "آماده بودن", 
+          "example": "Please be ready at 8 o'clock."
+        },
+        {
+          "phrase": "be careful",
+          "meaning_fa": "مواظب بودن",
+          "example": "Be careful on the road."
+        }
       ],
       "phrasal_verbs": [
-        {"phrase": "be up to", "meaning_fa": "در حال برنامه ریزی بودن"}
+        {
+          "phrase": "be up to",
+          "meaning_fa": "در حال برنامه ریزی بودن",
+          "example": "What are you up to this weekend?"
+        },
+        {
+          "phrase": "be over",
+          "meaning_fa": "تمام شدن",
+          "example": "The class will be over at 4 PM."
+        }
+      ],
+      "phrases": [
+        {
+          "phrase": "to be or not to be",
+          "meaning_fa": "بودن یا نبودن",
+          "context": "famous Shakespeare quote"
+        }
       ]
     },
+    
     {
       "id": 2,
-      "word": "have",
-      "meaning_fa": "داشتن",
-      "level": "A1",
+      "word": "am",
+      "meaning_fa": "هستم",
       "examples": [
-        "I have a book. - من یک کتاب دارم.",
-        "Have a good day! - روز خوبی داشته باشی!"
+        {
+          "en": "I am a student.",
+          "fa": "من یک دانش‌آموز هستم.",
+          "tts_text": "I am a student"
+        },
+        {
+          "en": "I am happy today.",
+          "fa": "من امروز خوشحال هستم.",
+          "tts_text": "I am happy today"
+        }
       ],
       "collocations": [
-        {"phrase": "have breakfast", "meaning_fa": "صبحانه خوردن"},
-        {"phrase": "have time", "meaning_fa": "وقت داشتن"},
-        {"phrase": "have fun", "meaning_fa": "خوش گذراندن"}
+        {
+          "phrase": "I am",
+          "meaning_fa": "من هستم",
+          "example": "I am here to help you."
+        }
       ],
-      "phrasal_verbs": [
-        {"phrase": "have on", "meaning_fa": "پوشیدن"},
-        {"phrase": "have up", "meaning_fa": "به مهمانی دعوت کردن"}
-      ]
+      "phrasal_verbs": [],
+      "phrases": []
     },
+    
     {
       "id": 3,
-      "word": "do",
-      "meaning_fa": "انجام دادن",
-      "level": "A1",
+      "word": "is",
+      "meaning_fa": "هست",
       "examples": [
-        "I do my homework. - من تکالیفم را انجام می‌دهم.",
-        "Do it now! - همین الان انجامش بده!"
+        {
+          "en": "He is my brother.",
+          "fa": "او برادر من هست.",
+          "tts_text": "He is my brother"
+        },
+        {
+          "en": "This is a book.",
+          "fa": "این یک کتاب هست.",
+          "tts_text": "This is a book"
+        }
       ],
       "collocations": [
-        {"phrase": "do homework", "meaning_fa": "تکلیف انجام دادن"},
-        {"phrase": "do well", "meaning_fa": "خوب عمل کردن"}
+        {
+          "phrase": "he is",
+          "meaning_fa": "او هست",
+          "example": "He is a good person."
+        },
+        {
+          "phrase": "she is",
+          "meaning_fa": "او هست",
+          "example": "She is a doctor."
+        },
+        {
+          "phrase": "it is",
+          "meaning_fa": "آن هست",
+          "example": "It is raining."
+        }
       ],
-      "phrasal_verbs": [
-        {"phrase": "do up", "meaning_fa": "بستن (دکمه)"},
-        {"phrase": "do over", "meaning_fa": "دوباره انجام دادن"}
+      "phrasal_verbs": [],
+      "phrases": [
+        {
+          "phrase": "that is",
+          "meaning_fa": "یعنی",
+          "example": "I like fruits, that is, apples and oranges."
+        }
       ]
     },
+    
     {
       "id": 4,
-      "word": "go",
-      "meaning_fa": "رفتن",
-      "level": "A1",
+      "word": "are",
+      "meaning_fa": "هستید / هستند",
       "examples": [
-        "I go to school. - من به مدرسه می‌روم.",
-        "Let's go! - بیا بریم!"
+        {
+          "en": "You are my friend.",
+          "fa": "تو دوست من هستی.",
+          "tts_text": "You are my friend"
+        },
+        {
+          "en": "We are students.",
+          "fa": "ما دانش‌آموز هستیم.",
+          "tts_text": "We are students"
+        }
       ],
       "collocations": [
-        {"phrase": "go home", "meaning_fa": "به خانه رفتن"},
-        {"phrase": "go shopping", "meaning_fa": "خرید رفتن"}
+        {
+          "phrase": "you are",
+          "meaning_fa": "شما هستید",
+          "example": "You are welcome here."
+        },
+        {
+          "phrase": "we are",
+          "meaning_fa": "ما هستیم",
+          "example": "We are going to the park."
+        },
+        {
+          "phrase": "they are",
+          "meaning_fa": "آنها هستند",
+          "example": "They are coming tomorrow."
+        }
       ],
-      "phrasal_verbs": [
-        {"phrase": "go on", "meaning_fa": "ادامه دادن"},
-        {"phrase": "go out", "meaning_fa": "بیرون رفتن"}
+      "phrasal_verbs": [],
+      "phrases": [
+        {
+          "phrase": "how are you",
+          "meaning_fa": "حال شما چطور است",
+          "example": "Hello, how are you today?"
+        }
       ]
     },
+    
     {
       "id": 5,
-      "word": "make",
-      "meaning_fa": "ساختن",
-      "level": "A1",
+      "word": "have",
+      "meaning_fa": "داشتن",
       "examples": [
-        "I make breakfast. - من صبحانه درست می‌کنم.",
-        "Make a cake. - یک کیک درست کن."
+        {
+          "en": "I have two sisters.",
+          "fa": "من دو خواهر دارم.",
+          "tts_text": "I have two sisters"
+        },
+        {
+          "en": "She has a red car.",
+          "fa": "او یک ماشین قرمز دارد.",
+          "tts_text": "She has a red car"
+        }
       ],
       "collocations": [
-        {"phrase": "make a decision", "meaning_fa": "تصمیم گرفتن"},
-        {"phrase": "make money", "meaning_fa": "پول درآوردن"}
+        {
+          "phrase": "have breakfast",
+          "meaning_fa": "صبحانه خوردن",
+          "example": "I have breakfast at 7 AM."
+        },
+        {
+          "phrase": "have time",
+          "meaning_fa": "وقت داشتن",
+          "example": "Do you have time to talk?"
+        },
+        {
+          "phrase": "have fun",
+          "meaning_fa": "خوش گذراندن",
+          "example": "Have fun at the party!"
+        }
       ],
       "phrasal_verbs": [
-        {"phrase": "make up", "meaning_fa": "ساختگی / آشتی کردن"},
-        {"phrase": "make out", "meaning_fa": "تشخیص دادن"}
+        {
+          "phrase": "have to",
+          "meaning_fa": "مجبور بودن",
+          "example": "I have to go now."
+        },
+        {
+          "phrase": "have on",
+          "meaning_fa": "پوشیدن",
+          "example": "What do you have on today?"
+        }
+      ],
+      "phrases": [
+        {
+          "phrase": "have a good day",
+          "meaning_fa": "روز خوبی داشته باشید",
+          "example": "Goodbye, have a good day!"
+        }
+      ]
+    },
+    
+    {
+      "id": 6,
+      "word": "has",
+      "meaning_fa": "دارد",
+      "examples": [
+        {
+          "en": "He has a big house.",
+          "fa": "او یک خانه بزرگ دارد.",
+          "tts_text": "He has a big house"
+        },
+        {
+          "en": "The cat has green eyes.",
+          "fa": "گربه چشم‌های سبز دارد.",
+          "tts_text": "The cat has green eyes"
+        }
+      ],
+      "collocations": [
+        {
+          "phrase": "has to",
+          "meaning_fa": "مجبور است",
+          "example": "She has to finish her work."
+        },
+        {
+          "phrase": "has got",
+          "meaning_fa": "دارد",
+          "example": "He has got a new phone."
+        }
+      ],
+      "phrasal_verbs": [],
+      "phrases": []
+    },
+    
+    {
+      "id": 7,
+      "word": "do",
+      "meaning_fa": "انجام دادن",
+      "examples": [
+        {
+          "en": "I do my homework every day.",
+          "fa": "من هر روز تکالیفم را انجام می‌دهم.",
+          "tts_text": "I do my homework every day"
+        },
+        {
+          "en": "What do you do?",
+          "fa": "شغل شما چیست؟",
+          "tts_text": "What do you do"
+        }
+      ],
+      "collocations": [
+        {
+          "phrase": "do homework",
+          "meaning_fa": "تکلیف انجام دادن",
+          "example": "I need to do my homework."
+        },
+        {
+          "phrase": "do well",
+          "meaning_fa": "خوب عمل کردن",
+          "example": "She always does well in exams."
+        },
+        {
+          "phrase": "do business",
+          "meaning_fa": "تجارت کردن",
+          "example": "They do business with China."
+        }
+      ],
+      "phrasal_verbs": [
+        {
+          "phrase": "do up",
+          "meaning_fa": "بستن (دکمه)",
+          "example": "Do up your coat, it's cold."
+        },
+        {
+          "phrase": "do over",
+          "meaning_fa": "دوباره انجام دادن",
+          "example": "I need to do over this work."
+        }
+      ],
+      "phrases": [
+        {
+          "phrase": "how do you do",
+          "meaning_fa": "حال شما چطور است (رسمی)",
+          "example": "Nice to meet you, how do you do?"
+        }
+      ]
+    },
+    
+    {
+      "id": 8,
+      "word": "does",
+      "meaning_fa": "انجام می‌دهد",
+      "examples": [
+        {
+          "en": "She does her work carefully.",
+          "fa": "او کارش را با دقت انجام می‌دهد.",
+          "tts_text": "She does her work carefully"
+        },
+        {
+          "en": "What does he do?",
+          "fa": "شغل او چیست؟",
+          "tts_text": "What does he do"
+        }
+      ],
+      "collocations": [
+        {
+          "phrase": "does not",
+          "meaning_fa": "نمی‌کند",
+          "example": "He does not like coffee."
+        }
+      ],
+      "phrasal_verbs": [],
+      "phrases": []
+    },
+    
+    {
+      "id": 9,
+      "word": "work",
+      "meaning_fa": "کار کردن",
+      "examples": [
+        {
+          "en": "I work in a hospital.",
+          "fa": "من در یک بیمارستان کار می‌کنم.",
+          "tts_text": "I work in a hospital"
+        },
+        {
+          "en": "This machine works well.",
+          "fa": "این ماشین خوب کار می‌کند.",
+          "tts_text": "This machine works well"
+        }
+      ],
+      "collocations": [
+        {
+          "phrase": "work hard",
+          "meaning_fa": "سخت کار کردن",
+          "example": "He works hard every day."
+        },
+        {
+          "phrase": "at work",
+          "meaning_fa": "در محل کار",
+          "example": "My father is at work now."
+        },
+        {
+          "phrase": "work together",
+          "meaning_fa": "با هم کار کردن",
+          "example": "Let's work together on this project."
+        }
+      ],
+      "phrasal_verbs": [
+        {
+          "phrase": "work out",
+          "meaning_fa": "ورزش کردن / حل کردن",
+          "example": "I work out at the gym every morning."
+        },
+        {
+          "phrase": "work on",
+          "meaning_fa": "روی چیزی کار کردن",
+          "example": "She is working on a new book."
+        }
+      ],
+      "phrases": [
+        {
+          "phrase": "work in progress",
+          "meaning_fa": "کار در حال انجام",
+          "example": "This painting is still work in progress."
+        }
+      ]
+    },
+    
+    {
+      "id": 10,
+      "word": "go",
+      "meaning_fa": "رفتن",
+      "examples": [
+        {
+          "en": "I go to school by bus.",
+          "fa": "من با اتوبوس به مدرسه می‌روم.",
+          "tts_text": "I go to school by bus"
+        },
+        {
+          "en": "Let's go shopping!",
+          "fa": "بیا خرید برویم!",
+          "tts_text": "Let's go shopping"
+        }
+      ],
+      "collocations": [
+        {
+          "phrase": "go home",
+          "meaning_fa": "به خانه رفتن",
+          "example": "I want to go home now."
+        },
+        {
+          "phrase": "go shopping",
+          "meaning_fa": "خرید رفتن",
+          "example": "We go shopping every Saturday."
+        },
+        {
+          "phrase": "go crazy",
+          "meaning_fa": "دیوانه شدن",
+          "example": "This noise makes me go crazy!"
+        }
+      ],
+      "phrasal_verbs": [
+        {
+          "phrase": "go on",
+          "meaning_fa": "ادامه دادن",
+          "example": "Please go on with your story."
+        },
+        {
+          "phrase": "go out",
+          "meaning_fa": "بیرون رفتن",
+          "example": "Let's go out for dinner tonight."
+        }
+      ],
+      "phrases": [
+        {
+          "phrase": "go for it",
+          "meaning_fa": "تلاش کن / برو جلو",
+          "example": "If you want to try, just go for it!"
+        }
+      ]
+    },
+    
+    {
+      "id": 11,
+      "word": "come",
+      "meaning_fa": "آمدن",
+      "examples": [
+        {
+          "en": "Come here, please.",
+          "fa": "لطفاً به اینجا بیا.",
+          "tts_text": "Come here please"
+        },
+        {
+          "en": "They come from Iran.",
+          "fa": "آنها از ایران می‌آیند.",
+          "tts_text": "They come from Iran"
+        }
+      ],
+      "collocations": [
+        {
+          "phrase": "come back",
+          "meaning_fa": "برگشتن",
+          "example": "When will you come back?"
+        },
+        {
+          "phrase": "come in",
+          "meaning_fa": "وارد شدن",
+          "example": "Please come in and sit down."
+        },
+        {
+          "phrase": "come first",
+          "meaning_fa": "اول شدن",
+          "example": "In this family, children come first."
+        }
+      ],
+      "phrasal_verbs": [
+        {
+          "phrase": "come across",
+          "meaning_fa": "به طور اتفاقی پیدا کردن",
+          "example": "I came across an old friend yesterday."
+        },
+        {
+          "phrase": "come up with",
+          "meaning_fa": "پیدا کردن (ایده)",
+          "example": "She came up with a great idea."
+        }
+      ],
+      "phrases": [
+        {
+          "phrase": "come what may",
+          "meaning_fa": "هرچه پیش آید",
+          "example": "I will support you, come what may."
+        }
+      ]
+    },
+    
+    {
+      "id": 12,
+      "word": "get",
+      "meaning_fa": "گرفتن / شدن",
+      "examples": [
+        {
+          "en": "I get up at 6 o'clock.",
+          "fa": "من ساعت ۶ بیدار می‌شوم.",
+          "tts_text": "I get up at six o'clock"
+        },
+        {
+          "en": "Can you get me a coffee?",
+          "fa": "می‌توانی برایم یک قهوه بگیری؟",
+          "tts_text": "Can you get me a coffee"
+        }
+      ],
+      "collocations": [
+        {
+          "phrase": "get ready",
+          "meaning_fa": "آماده شدن",
+          "example": "Get ready, we're leaving in 5 minutes."
+        },
+        {
+          "phrase": "get married",
+          "meaning_fa": "ازدواج کردن",
+          "example": "They will get married next month."
+        },
+        {
+          "phrase": "get angry",
+          "meaning_fa": "عصبانی شدن",
+          "example": "Don't get angry, it was a mistake."
+        }
+      ],
+      "phrasal_verbs": [
+        {
+          "phrase": "get up",
+          "meaning_fa": "بیدار شدن",
+          "example": "I get up early every day."
+        },
+        {
+          "phrase": "get on",
+          "meaning_fa": "سوار شدن",
+          "example": "Get on the bus quickly!"
+        }
+      ],
+      "phrases": [
+        {
+          "phrase": "get well soon",
+          "meaning_fa": "زود خوب شوید",
+          "example": "I heard you're sick, get well soon!"
+        }
+      ]
+    },
+    
+    {
+      "id": 13,
+      "word": "make",
+      "meaning_fa": "ساختن",
+      "examples": [
+        {
+          "en": "She makes delicious cakes.",
+          "fa": "او کیک‌های خوشمزه درست می‌کند.",
+          "tts_text": "She makes delicious cakes"
+        },
+        {
+          "en": "Make a decision, please.",
+          "fa": "لطفاً یک تصمیم بگیر.",
+          "tts_text": "Make a decision please"
+        }
+      ],
+      "collocations": [
+        {
+          "phrase": "make a decision",
+          "meaning_fa": "تصمیم گرفتن",
+          "example": "We need to make a decision today."
+        },
+        {
+          "phrase": "make money",
+          "meaning_fa": "پول درآوردن",
+          "example": "He makes money by selling cars."
+        },
+        {
+          "phrase": "make friends",
+          "meaning_fa": "دوست پیدا کردن",
+          "example": "It's easy to make friends here."
+        }
+      ],
+      "phrasal_verbs": [
+        {
+          "phrase": "make up",
+          "meaning_fa": "ساختگی / آشتی کردن",
+          "example": "Don't make up stories, tell the truth."
+        },
+        {
+          "phrase": "make out",
+          "meaning_fa": "تشخیص دادن",
+          "example": "I can't make out what he's saying."
+        }
+      ],
+      "phrases": [
+        {
+          "phrase": "make sense",
+          "meaning_fa": "معنی داشتن / منطقی بودن",
+          "example": "Your idea doesn't make sense."
+        }
+      ]
+    },
+    
+    {
+      "id": 14,
+      "word": "use",
+      "meaning_fa": "استفاده کردن",
+      "examples": [
+        {
+          "en": "I use my phone to call friends.",
+          "fa": "من از تلفنم برای تماس با دوستان استفاده می‌کنم.",
+          "tts_text": "I use my phone to call friends"
+        },
+        {
+          "en": "Can I use your pen?",
+          "fa": "می‌توانم از خودکارت استفاده کنم؟",
+          "tts_text": "Can I use your pen"
+        }
+      ],
+      "collocations": [
+        {
+          "phrase": "use it",
+          "meaning_fa": "از آن استفاده کردن",
+          "example": "This tool is good, you can use it."
+        },
+        {
+          "phrase": "can use",
+          "meaning_fa": "می‌تواند استفاده کند",
+          "example": "Anyone can use this library."
+        },
+        {
+          "phrase": "use for",
+          "meaning_fa": "برای چیزی استفاده کردن",
+          "example": "I use this bag for school."
+        }
+      ],
+      "phrasal_verbs": [
+        {
+          "phrase": "use up",
+          "meaning_fa": "تمام کردن / مصرف کردن",
+          "example": "Don't use up all the milk."
+        }
+      ],
+      "phrases": [
+        {
+          "phrase": "in use",
+          "meaning_fa": "در حال استفاده",
+          "example": "This computer is in use now."
+        }
+      ]
+    },
+    
+    {
+      "id": 15,
+      "word": "need",
+      "meaning_fa": "نیاز داشتن",
+      "examples": [
+        {
+          "en": "I need water.",
+          "fa": "من به آب نیاز دارم.",
+          "tts_text": "I need water"
+        },
+        {
+          "en": "We need to go now.",
+          "fa": "ما باید الآن برویم.",
+          "tts_text": "We need to go now"
+        }
+      ],
+      "collocations": [
+        {
+          "phrase": "need to",
+          "meaning_fa": "نیاز به",
+          "example": "You need to study more."
+        },
+        {
+          "phrase": "need help",
+          "meaning_fa": "کمک نیاز داشتن",
+          "example": "Do you need help with that?"
+        },
+        {
+          "phrase": "don't need",
+          "meaning_fa": "نیاز ندارم",
+          "example": "I don't need your advice."
+        }
+      ],
+      "phrasal_verbs": [],
+      "phrases": [
+        {
+          "phrase": "in need",
+          "meaning_fa": "محتاج / نیازمند",
+          "example": "We should help people in need."
+        }
+      ]
+    },
+    
+    {
+      "id": 16,
+      "word": "want",
+      "meaning_fa": "خواستن",
+      "examples": [
+        {
+          "en": "I want coffee.",
+          "fa": "من قهوه می‌خواهم.",
+          "tts_text": "I want coffee"
+        },
+        {
+          "en": "She wants to be a doctor.",
+          "fa": "او می‌خواهد دکتر شود.",
+          "tts_text": "She wants to be a doctor"
+        }
+      ],
+      "collocations": [
+        {
+          "phrase": "want to",
+          "meaning_fa": "خواستن که",
+          "example": "I want to learn English."
+        },
+        {
+          "phrase": "I want",
+          "meaning_fa": "من می‌خواهم",
+          "example": "I want a new phone."
+        },
+        {
+          "phrase": "want it",
+          "meaning_fa": "آن را می‌خواهم",
+          "example": "If you want it, take it."
+        }
+      ],
+      "phrasal_verbs": [],
+      "phrases": [
+        {
+          "phrase": "for want of",
+          "meaning_fa": "به دلیل کمبود",
+          "example": "The plan failed for want of money."
+        }
+      ]
+    },
+    
+    {
+      "id": 17,
+      "word": "like",
+      "meaning_fa": "دوست داشتن",
+      "examples": [
+        {
+          "en": "I like apples.",
+          "fa": "من سیب دوست دارم.",
+          "tts_text": "I like apples"
+        },
+        {
+          "en": "She likes to read books.",
+          "fa": "او دوست دارد کتاب بخواند.",
+          "tts_text": "She likes to read books"
+        }
+      ],
+      "collocations": [
+        {
+          "phrase": "like to",
+          "meaning_fa": "دوست داشتن که",
+          "example": "I like to walk in the park."
+        },
+        {
+          "phrase": "I like",
+          "meaning_fa": "من دوست دارم",
+          "example": "I like your new dress."
+        },
+        {
+          "phrase": "like it",
+          "meaning_fa": "آن را دوست دارم",
+          "example": "Do you like it here?"
+        }
+      ],
+      "phrasal_verbs": [],
+      "phrases": [
+        {
+          "phrase": "look like",
+          "meaning_fa": "شبیه بودن",
+          "example": "You look like your mother."
+        }
+      ]
+    },
+    
+    {
+      "id": 18,
+      "word": "love",
+      "meaning_fa": "دوست داشتن",
+      "examples": [
+        {
+          "en": "I love my family.",
+          "fa": "من خانواده‌ام را دوست دارم.",
+          "tts_text": "I love my family"
+        },
+        {
+          "en": "She loves chocolate.",
+          "fa": "او شکلات دوست دارد.",
+          "tts_text": "She loves chocolate"
+        }
+      ],
+      "collocations": [
+        {
+          "phrase": "love to",
+          "meaning_fa": "عاشق بودن که",
+          "example": "I love to travel."
+        },
+        {
+          "phrase": "I love",
+          "meaning_fa": "من دوست دارم",
+          "example": "I love this song."
+        },
+        {
+          "phrase": "love you",
+          "meaning_fa": "دوستت دارم",
+          "example": "Good night, love you!"
+        }
+      ],
+      "phrasal_verbs": [],
+      "phrases": [
+        {
+          "phrase": "love at first sight",
+          "meaning_fa": "عشق در نگاه اول",
+          "example": "It was love at first sight when they met."
+        }
+      ]
+    },
+    
+    {
+      "id": 19,
+      "word": "help",
+      "meaning_fa": "کمک کردن",
+      "examples": [
+        {
+          "en": "Can you help me?",
+          "fa": "می‌توانی به من کمک کنی؟",
+          "tts_text": "Can you help me"
+        },
+        {
+          "en": "This book helps my English.",
+          "fa": "این کتاب به انگلیسی من کمک می‌کند.",
+          "tts_text": "This book helps my English"
+        }
+      ],
+      "collocations": [
+        {
+          "phrase": "help with",
+          "meaning_fa": "کمک کردن در",
+          "example": "Can you help with the cleaning?"
+        },
+        {
+          "phrase": "can help",
+          "meaning_fa": "می‌تواند کمک کند",
+          "example": "I can help you tomorrow."
+        },
+        {
+          "phrase": "need help",
+          "meaning_fa": "کمک نیاز داشتن",
+          "example": "She needs help with her homework."
+        }
+      ],
+      "phrasal_verbs": [
+        {
+          "phrase": "help out",
+          "meaning_fa": "کمک کردن",
+          "example": "Can you help out in the kitchen?"
+        }
+      ],
+      "phrases": [
+        {
+          "phrase": "help yourself",
+          "meaning_fa": "خودتان بردارید",
+          "example": "There's food on the table, help yourself!"
+        }
+      ]
+    },
+    
+    {
+      "id": 20,
+      "word": "try",
+      "meaning_fa": "تلاش کردن",
+      "examples": [
+        {
+          "en": "Try this cake, it's delicious.",
+          "fa": "این کیک را امتحان کن، خوشمزه است.",
+          "tts_text": "Try this cake it's delicious"
+        },
+        {
+          "en": "I will try to come early.",
+          "fa": "سعی می‌کنم زود بیایم.",
+          "tts_text": "I will try to come early"
+        }
+      ],
+      "collocations": [
+        {
+          "phrase": "try to",
+          "meaning_fa": "سعی کردن که",
+          "example": "Try to be on time."
+        },
+        {
+          "phrase": "try it",
+          "meaning_fa": "آن را امتحان کن",
+          "example": "This tea is good, try it."
+        },
+        {
+          "phrase": "try again",
+          "meaning_fa": "دوباره تلاش کن",
+          "example": "Don't give up, try again."
+        }
+      ],
+      "phrasal_verbs": [
+        {
+          "phrase": "try on",
+          "meaning_fa": "پوشیدن برای امتحان",
+          "example": "You should try on these shoes."
+        },
+        {
+          "phrase": "try out",
+          "meaning_fa": "امتحان کردن",
+          "example": "I want to try out this new game."
+        }
+      ],
+      "phrases": [
+        {
+          "phrase": "give it a try",
+          "meaning_fa": "یکبار امتحان کن",
+          "example": "You might like it, give it a try."
+        }
       ]
     }
   ]
-}
+        }
