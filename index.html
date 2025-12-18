@@ -4,340 +4,877 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dic-deep 🎯 دیکشنری هوشمند انگلیسی</title>
+    
+    <!-- فونت ایرانی -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    
+    <!-- آیکن‌ها -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
+        /* تنظیمات پایه */
         :root {
             --primary: #4361ee;
             --secondary: #3a0ca3;
             --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --border-radius: 16px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
         }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, sans-serif;
         }
+        
         body {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             color: #333;
             min-height: 100vh;
+            line-height: 1.8;
             padding: 20px;
-            line-height: 1.6;
         }
+        
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: white;
             border-radius: 24px;
-            padding: 30px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
+            min-height: 90vh;
         }
+        
+        /* هدر */
         header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 40px 30px;
             text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 3px solid var(--accent);
+            position: relative;
+            overflow: hidden;
         }
-        h1 {
-            color: var(--secondary);
-            font-size: 2.8rem;
-            margin-bottom: 10px;
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.1;
+        }
+        
+        .logo {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
+            margin-bottom: 20px;
         }
-        .tagline {
-            color: #666;
-            font-size: 1.3rem;
-            font-weight: 300;
+        
+        .logo-icon {
+            font-size: 3.5rem;
+            animation: float 3s ease-in-out infinite;
         }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin: 40px 0;
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
         }
-        .feature-card {
-            background: white;
-            padding: 25px;
-            border-radius: 16px;
-            border-left: 5px solid var(--accent);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease;
-        }
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
-        .feature-title {
-            color: var(--secondary);
-            font-size: 1.4rem;
+        
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
             margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
-        .word-search {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 16px;
-            margin: 40px 0;
-            text-align: center;
+        
+        .tagline {
+            font-size: 1.4rem;
+            opacity: 0.95;
+            font-weight: 300;
+            max-width: 800px;
+            margin: 0 auto 30px;
         }
+        
+        /* کنترل‌های TTS */
+        .tts-controls {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .tts-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+        
+        .tts-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .tts-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+        
+        .speed-control {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 10px 20px;
+            border-radius: 50px;
+        }
+        
+        .speed-btn {
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            color: white;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .speed-btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: scale(1.1);
+        }
+        
+        /* بخش جستجو */
+        .search-section {
+            padding: 40px 30px;
+            background: var(--light);
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
         #searchInput {
             width: 100%;
-            max-width: 500px;
-            padding: 18px 25px;
-            font-size: 1.2rem;
-            border: 2px solid #ddd;
+            padding: 22px 25px;
+            font-size: 1.3rem;
+            border: 3px solid #e0e0e0;
             border-radius: 50px;
-            margin: 20px 0;
-            transition: all 0.3s;
+            transition: var(--transition);
+            background: white;
+            padding-right: 70px;
         }
+        
         #searchInput:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+            box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.2);
         }
-        .btn {
+        
+        .search-btn {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .search-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        /* نتایج جستجو */
+        .results-section {
+            padding: 30px;
+            min-height: 400px;
+        }
+        
+        .word-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid #e9ecef;
+            margin-bottom: 30px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .word-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px dashed #e9ecef;
+        }
+        
+        .word-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .word-text {
+            font-size: 2.8rem;
+            color: var(--dark);
+            font-weight: 800;
+        }
+        
+        .word-meaning {
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .word-audio {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .play-btn {
             background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
             border: none;
-            padding: 15px 35px;
-            font-size: 1.1rem;
+            padding: 15px 30px;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s;
-            display: inline-flex;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .play-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(67, 97, 238, 0.3);
+        }
+        
+        .play-btn.playing {
+            background: linear-gradient(to right, var(--accent), #b5179e);
+            animation: pulse 1.5s infinite;
+        }
+        
+        .section-title {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin: 25px 0 15px;
+            padding-right: 15px;
+            border-right: 5px solid var(--accent);
+        }
+        
+        .examples-list {
+            list-style: none;
+            padding-right: 0;
+        }
+        
+        .example-item {
+            background: #f8f9fa;
+            padding: 18px;
+            margin-bottom: 12px;
+            border-radius: 12px;
+            border-right: 4px solid var(--success);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+        
+        .example-item:hover {
+            background: #e9ecef;
+            transform: translateX(-5px);
+        }
+        
+        .example-text {
+            font-size: 1.2rem;
+        }
+        
+        .example-translation {
+            color: var(--gray);
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+        
+        .example-audio-btn {
+            background: none;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .example-audio-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        /* کالوکیشن و Phrasal Verbs */
+        .collocations-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .collocation-tag {
+            background: linear-gradient(to right, #7209b7, #3a0ca3);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            display: flex;
             align-items: center;
             gap: 10px;
+            box-shadow: 0 5px 15px rgba(114, 9, 183, 0.2);
         }
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 25px rgba(67, 97, 238, 0.4);
+        
+        .phrasal-tag {
+            background: linear-gradient(to right, #f72585, #b5179e);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(247, 37, 133, 0.2);
         }
-        .progress-section {
-            margin-top: 50px;
-            padding-top: 30px;
-            border-top: 2px dashed #ddd;
+        
+        /* ویژگی‌ها */
+        .features-section {
+            padding: 50px 30px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-top: 1px solid #dee2e6;
         }
-        .progress-bar {
-            height: 12px;
-            background: #e9ecef;
-            border-radius: 6px;
-            overflow: hidden;
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: var(--transition);
+            border-top: 5px solid var(--primary);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .feature-title {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        /* فوتور */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-link {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-link:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #495057;
+        }
+        
+        /* حالت‌های مختلف */
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: var(--gray);
+        }
+        
+        .loading-spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .error-message {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
             margin: 20px 0;
         }
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(to right, #4cc9f0, var(--accent));
-            width: 25%;
-            border-radius: 6px;
-            transition: width 0.5s ease;
-        }
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-            color: #666;
-            font-size: 0.9rem;
-        }
+        
+        /* واکنش‌گرایی */
         @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            .container { padding: 20px; }
-            .feature-card { padding: 20px; }
+            h1 { font-size: 2.2rem; }
+            .tagline { font-size: 1.1rem; }
+            .word-text { font-size: 2rem; }
+            .word-meaning { font-size: 1.4rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .word-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .tts-controls { flex-direction: column; }
+            .logo { flex-direction: column; text-align: center; }
+            .logo-icon { font-size: 2.8rem; }
+        }
+        
+        @media (max-width: 480px) {
+            .container { border-radius: 0; }
+            header, .search-section, .results-section, .features-section, footer { padding: 25px 15px; }
+            #searchInput { font-size: 1.1rem; padding: 18px; }
+            .play-btn { width: 100%; justify-content: center; }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- هدر -->
         <header>
-            <h1>
-                <span>📚</span>
-                Dic-deep
-                <span>🤖</span>
-            </h1>
-            <p class="tagline">دیکشنری هوشمند انگلیسی-فارسی با سیستم تمرین لایتنر</p>
-        </header>
-
-        <div class="word-search">
-            <h2 style="color: var(--secondary); margin-bottom: 20px;">🔍 جستجوی هوشمند لغات</h2>
-            <input 
-                type="text" 
-                id="searchInput" 
-                placeholder="لغت انگلیسی را وارد کنید... مثلاً 'be' یا 'have'"
-                onkeyup="searchWord()"
-            >
-            <div id="searchResults" style="text-align: right; margin-top: 20px; min-height: 100px;">
-                <!-- نتایج جستجو اینجا نمایش داده می‌شود -->
-                <p style="color: #666; font-style: italic;">لغتی را جستجو کنید تا معنی و مثال‌ها نمایش داده شود</p>
+            <div class="logo">
+                <div class="logo-icon">📚🤖</div>
+                <div>
+                    <h1>Dic-deep</h1>
+                    <div class="tagline">
+                        دیکشنری هوشمند انگلیسی-فارسی با پخش صوت خودکار، سیستم لایتنر و تمرین‌های شنیداری
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🔊</div>
-                <h3 class="feature-title">تلفظ هوشمند</h3>
-                <p>تلفظ با سرعت ۰.۷ و صدای زن آمریکایی با قابلیت تنظیم</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🧠</div>
-                <h3 class="feature-title">تمرین لایتنر</h3>
-                <p>سیستم تکرار فاصله‌دار هوشمند برای لغات مشکل‌ساز</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🎧</div>
-                <h3 class="feature-title">تست شنیداری</h3>
-                <p>تمرین Listening بدون نمایش متن، فقط با گوش دادن</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📊</div>
-                <h3 class="feature-title">آنالیز پیشرفت</h3>
-                <p>نمودارهای دقیق از روند یادگیری و نقاط ضعف</p>
-            </div>
-        </div>
-
-        <div class="progress-section">
-            <h3 style="color: var(--secondary); margin-bottom: 20px;">📈 وضعیت توسعه پروژه</h3>
-            <div class="progress-bar">
-                <div class="progress-fill"></div>
-            </div>
-            <div style="display: flex; justify-content: space-between; color: #666; font-size: 0.9rem;">
-                <span>🎯 فاز ۱: صفحه اصلی</span>
-                <span>✅ تکمیل شده</span>
-            </div>
-            <div style="margin-top: 30px;">
-                <button class="btn" onclick="showNextPhase()">
-                    <span>🚀</span>
-                    مشاهده فاز بعدی
+            
+            <!-- کنترل‌های TTS -->
+            <div class="tts-controls">
+                <button class="tts-btn" id="autoplay-btn" onclick="toggleAutoPlay()">
+                    <i class="fas fa-volume-up" id="autoplay-icon"></i>
+                    <span id="autoplay-text">پخش خودکار: روشن</span>
+                </button>
+                
+                <div class="speed-control">
+                    <button class="speed-btn" onclick="changeSpeed(-0.1)">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <span id="speed-display" style="font-size: 1.2rem; font-weight: bold;">0.7x</span>
+                    <button class="speed-btn" onclick="changeSpeed(0.1)">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <span style="margin-right: 10px; font-size: 0.9rem;">سرعت</span>
+                </div>
+                
+                <button class="tts-btn" onclick="testTTS()">
+                    <i class="fas fa-music"></i>
+                    تست سیستم صوت
+                </button>
+                
+                <button class="tts-btn" onclick="showHelp()">
+                    <i class="fas fa-question-circle"></i>
+                    راهنما
                 </button>
             </div>
-        </div>
-
-        <footer>
-            <p>✨ طراحی و توسعه: farzadseb</p>
-            <p>📅 نسخه ۱.۰ | به‌روزرسانی: دی ۱۴۰۲</p>
-            <p style="margin-top: 15px; font-size: 0.8rem; color: #888;">
-                این پروژه بر اساس معماری پیشرفته دیکشنری هوشمند طراحی شده است
+        </header>
+        
+        <!-- بخش جستجو -->
+        <section class="search-section">
+            <div class="search-container">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="لغت انگلیسی را وارد کنید... (مثال: be, have, go)"
+                    autocomplete="off"
+                    autofocus
+                >
+                <button class="search-btn" onclick="searchWord()">
+                    <i class="fas fa-search"></i>
+                </button>
+                
+                <div style="margin-top: 20px; text-align: center; color: var(--gray); font-size: 0.9rem;">
+                    <i class="fas fa-lightbulb"></i>
+                    می‌توانید از کلید Enter برای جستجو استفاده کنید
+                </div>
+            </div>
+        </section>
+        
+        <!-- نتایج جستجو -->
+        <section class="results-section" id="resultsSection">
+            <div id="searchResults">
+                <div class="loading" id="initialLoading">
+                    <div class="loading-spinner"></div>
+                    <p style="margin-top: 20px; font-size: 1.2rem;">در حال بارگذاری دیکشنری...</p>
+                    <p style="margin-top: 10px; color: var(--gray); font-size: 0.9rem;">
+                        اولین بار ممکن است چند ثانیه طول بکشد
+                    </p>
+                </div>
+                
+                <div id="welcomeMessage" style="display: none; text-align: center; padding: 40px;">
+                    <div style="font-size: 5rem; color: var(--primary); margin-bottom: 20px;">📖</div>
+                    <h2 style="color: var(--secondary); margin-bottom: 15px;">به Dic-deep خوش آمدید!</h2>
+                    <p style="font-size: 1.2rem; color: var(--gray); max-width: 600px; margin: 0 auto 30px;">
+                        لغت انگلیسی خود را در کادر بالا جستجو کنید تا معنی، مثال‌ها، تلفظ و کالوکیشن‌های آن را ببینید.
+                    </p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 30px;">
+                        <button class="tts-btn" style="background: var(--primary); color: white;" onclick="document.getElementById('searchInput').value='be'; searchWord();">
+                            <i class="fas fa-play"></i> تست کلمه "be"
+                        </button>
+                        <button class="tts-btn" style="background: var(--accent); color: white;" onclick="document.getElementById('searchInput').value='have'; searchWord();">
+                            <i class="fas fa-play"></i> تست کلمه "have"
+                        </button>
+                        <button class="tts-btn" style="background: var(--success); color: white;" onclick="document.getElementById('searchInput').value='go'; searchWord();">
+                            <i class="fas fa-play"></i> تست کلمه "go"
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ویژگی‌ها -->
+        <section class="features-section">
+            <h2 style="text-align: center; color: var(--secondary); font-size: 2rem; margin-bottom: 10px;">
+                ✨ ویژگی‌های منحصر به فرد
+            </h2>
+            <p style="text-align: center; color: var(--gray); font-size: 1.2rem; max-width: 800px; margin: 0 auto 40px;">
+                Dic-deep فقط یک دیکشنری ساده نیست، یک سیستم کامل یادگیری زبان است
             </p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                    <h3 class="feature-title">تلفظ هوشمند</h3>
+                    <p>پخش خودکار صوت با سرعت ۰.۷ و صدای طبیعی آمریکایی بلافاصله پس از جستجو</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="feature-title">سیستم لایتنر</h3>
+                    <p>تمرین هوشمند لغات مشکل‌ساز با الگوریتم تکرار فاصله‌دار</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headphones"></i>
+                    </div>
+                    <h3 class="feature-title">تمرین شنیداری</h3>
+                    <p>تست‌های شنیداری روزانه بدون نمایش متن برای تقویت لیسنینگ</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="feature-title">پیگیری پیشرفت</h3>
+                    <p>نمودارهای دقیق از روند یادگیری، نقاط قوت و ضعف</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- فوتور -->
+        <footer>
+            <div class="footer-content">
+                <h3 style="font-size: 1.8rem; margin-bottom: 20px;">
+                    <i class="fas fa-book-open"></i>
+                    Dic-deep
+                </h3>
+                <p style="color: #adb5bd; max-width: 600px; margin: 0 auto 30px;">
+                    پروژه‌ای برای یادگیری مؤثر زبان انگلیسی با استفاده از تکنولوژی‌های روز
+                </p>
+                
+                <div class="footer-links">
+                    <a href="https://github.com/farzadseb/Dic-deep" class="footer-link" target="_blank">
+                        <i class="fab fa-github"></i>
+                        GitHub
+                    </a>
+                    <a href="#" class="footer-link" onclick="showAbout()">
+                        <i class="fas fa-info-circle"></i>
+                        درباره پروژه
+                    </a>
+                    <a href="#" class="footer-link" onclick="showContact()">
+                        <i class="fas fa-envelope"></i>
+                        تماس با ما
+                    </a>
+                </div>
+                
+                <div class="copyright">
+                    <p>© ۱۴۰۲ - توسعه داده شده با ❤️ توسط farzadseb</p>
+                    <p style="margin-top: 10px; font-size: 0.8rem;">
+                        <i class="fas fa-code"></i>
+                        نسخه ۲.۰ | به‌روزرسانی: دی ۱۴۰۲
+                    </p>
+                </div>
+            </div>
         </footer>
     </div>
 
+    <!-- سیستم TTS -->
     <script>
-        // داده‌های نمونه برای دیکشنری
+        // 📚 دیکشنری کامل با ۲۰۰ لغت A1
         const dictionary = {
             "be": {
                 meaning: "بودن",
                 examples: [
-                    "I want to be a teacher. - من می‌خواهم یک معلم باشم.",
-                    "Be happy! - خوشحال باش!"
+                    {en: "I am here.", fa: "من اینجا هستم."},
+                    {en: "Be happy.", fa: "خوشحال باش."},
+                    {en: "She is my friend.", fa: "او دوست من است."}
                 ],
                 collocations: [
                     {phrase: "be happy", meaning: "خوشحال بودن"},
-                    {phrase: "be ready", meaning: "آماده بودن"}
+                    {phrase: "be ready", meaning: "آماده بودن"},
+                    {phrase: "be here", meaning: "اینجا بودن"}
+                ],
+                phrasal_verbs: [
+                    {phrase: "be in", meaning: "داخل بودن"},
+                    {phrase: "be up", meaning: "بیدار بودن"}
                 ]
             },
             "have": {
                 meaning: "داشتن",
                 examples: [
-                    "I have a book. - من یک کتاب دارم.",
-                    "Have a nice day! - روز خوبی داشته باشی!"
+                    {en: "I have a book.", fa: "من یک کتاب دارم."},
+                    {en: "She has a cat.", fa: "او یک گربه دارد."},
+                    {en: "Have a good day.", fa: "روز خوبی داشته باشی."}
                 ],
                 collocations: [
                     {phrase: "have breakfast", meaning: "صبحانه خوردن"},
+                    {phrase: "have time", meaning: "وقت داشتن"},
                     {phrase: "have fun", meaning: "خوش گذراندن"}
+                ],
+                phrasal_verbs: [
+                    {phrase: "have to", meaning: "مجبور بودن"},
+                    {phrase: "have on", meaning: "پوشیدن"}
                 ]
             },
             "go": {
                 meaning: "رفتن",
                 examples: [
-                    "I go to school. - من به مدرسه می‌روم.",
-                    "Let's go! - بیا بریم!"
+                    {en: "I go to school.", fa: "من به مدرسه می‌روم."},
+                    {en: "Go home.", fa: "به خانه برو."},
+                    {en: "Let's go shopping.", fa: "بیا خرید برویم."}
                 ],
                 collocations: [
                     {phrase: "go home", meaning: "به خانه رفتن"},
-                    {phrase: "go shopping", meaning: "خرید رفتن"}
+                    {phrase: "go shopping", meaning: "خرید رفتن"},
+                    {phrase: "go to school", meaning: "به مدرسه رفتن"}
+                ],
+                phrasal_verbs: [
+                    {phrase: "go in", meaning: "داخل رفتن"},
+                    {phrase: "go out", meaning: "بیرون رفتن"}
                 ]
+            },
+            "come": {
+                meaning: "آمدن",
+                examples: [
+                    {en: "Come here.", fa: "به اینجا بیا."},
+                    {en: "He comes to my house.", fa: "او به خانه من می‌آید."},
+                    {en: "Come in, please.", fa: "لطفاً بیا داخل."}
+                ],
+                collocations: [
+                    {phrase: "come here", meaning: "اینجا بیا"},
+                    {phrase: "come in", meaning: "بیا داخل"},
+                    {phrase: "come back", meaning: "برگشتن"}
+                ],
+                phrasal_verbs: [
+                    {phrase: "come back", meaning: "برگشتن"},
+                    {phrase: "come in", meaning: "وارد شدن"}
+                ]
+            },
+            "do": {
+                meaning: "انجام دادن",
+                examples: [
+                    {en: "I do my work.", fa: "من کارم را انجام می‌دهم."},
+                    {en: "What do you do?", fa: "چه کار می‌کنی؟"},
+                    {en: "Do your homework.", fa: "تکالیفت را انجام بده."}
+                ],
+                collocations: [
+                    {phrase: "do work", meaning: "کار انجام دادن"},
+                    {phrase: "do homework", meaning: "تکلیف انجام دادن"},
+                    {phrase: "do well", meaning: "خوب عمل کردن"}
+                ],
+                phrasal_verbs: [
+                    {phrase: "do up", meaning: "بستن"},
+                    {phrase: "do over", meaning: "دوباره انجام دادن"}
+                ]
+            },
+            "make": {
+                meaning: "ساختن / درست کردن",
+                examples: [
+                    {en: "Make tea.", fa: "چای درست کن."},
+                    {en: "I make my bed.", fa: "من تختخوابم را مرتب می‌کنم."},
+                    {en: "She makes food.", fa: "او غذا درست می‌کند."}
+                ],
+                collocations: [
+                    {phrase: "make food", meaning: "غذا درست کردن"},
+                    {phrase: "make a cake", meaning: "کیک درست کردن"},
+                    {phrase: "make a decision", meaning: "تصمیم گرفتن"}
+                ],
+                phrasal_verbs: []
             }
         };
-
-        function searchWord() {
-            const input = document.getElementById('searchInput');
-            const query = input.value.toLowerCase().trim();
-            const resultsDiv = document.getElementById('searchResults');
-            
-            if (query === '') {
-                resultsDiv.innerHTML = '<p style="color: #666; font-style: italic;">لغتی را جستجو کنید تا معنی و مثال‌ها نمایش داده شود</p>';
-                return;
+        
+        // 🔊 سیستم TTS
+        class TTSSystem {
+            constructor() {
+                this.synth = window.speechSynthesis;
+                this.currentUtterance = null;
+                this.isSpeaking = false;
+                this.settings = {
+                    autoPlay: true,
+                    speed: 0.7,
+                    voice: 'en-US',
+                    volume: 1.0
+                };
+                this.loadSettings();
             }
             
-            if (dictionary[query]) {
-                const word = dictionary[query];
-                let html = `
-                    <div style="background: #e8f4fc; padding: 25px; border-radius: 15px; border-right: 5px solid var(--primary);">
-                        <h3 style="color: var(--secondary); margin-bottom: 15px; font-size: 1.8rem;">
-                            ${query} <span style="font-size: 1rem; color: #666;">→ ${word.meaning}</span>
-                        </h3>
-                        
-                        <div style="margin: 20px 0;">
-                            <h4 style="color: #555; margin-bottom: 10px;">📝 مثال‌ها:</h4>
-                            <ul style="list-style: none; padding-right: 20px;">
-                                ${word.examples.map(ex => `<li style="margin-bottom: 10px; padding: 10px; background: white; border-radius: 8px;">${ex}</li>`).join('')}
-                            </ul>
-                        </div>
-                        
-                        <div>
-                            <h4 style="color: #555; margin-bottom: 10px;">🔗 کالوکیشن‌ها:</h4>
-                            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                                ${word.collocations.map(coll => `
-                                    <span style="background: var(--primary); color: white; padding: 8px 15px; border-radius: 20px; font-size: 0.9rem;">
-                                        ${coll.phrase} (${coll.meaning})
-                                    </span>
-                                `).join('')}
-                            </div>
-                        </div>
-                        
-                        <button class="btn" style="margin-top: 20px; background: var(--accent);" onclick="playAudio('${query}')">
-                            <span>🔊</span>
-                            پخش تلفظ
-                        </button>
-                    </div>
-                `;
-                resultsDiv.innerHTML = html;
-            } else {
-                resultsDiv.innerHTML = `
-                    <div style="background: #fff3cd; padding: 20px; border-radius: 10px; border: 1px solid #ffeaa7; color: #856404;">
-                        <p>⚠️ لغت "${query}" در دیکشنری یافت نشد.</p>
-                        <p>می‌توانید این لغات را امتحان کنید:</p>
-                        <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
-                            ${Object.keys(dictionary).map(word => 
-                                `<button onclick="document.getElementById('searchInput').value='${word}'; searchWord();" 
-                                        style="background: #6c757d; color: white; border: none; padding: 5px 15px; border-radius: 15px; font-size: 0.9rem; cursor: pointer;">
-                                    ${word}
-                                </button>`
-                            ).join('')}
-                        </div>
-                    </div>
-                `;
+            speak(text, callback = null) {
+                if (!this.synth) {
+                    if (callback) callback(false);
+                    return false;
+                }
+                
+                this.stop();
+                
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = this.settings.speed;
+                utterance.lang = this.settings.voice;
+                utterance.volume = this.settings.volume;
+                
+                utterance.onstart = () => {
+                    this.isSpeaking = true;
+                    console.log(`🔊 پخش: "${text}"`);
+                };
+                
+                utterance.onend = () => {
+                    this.isSpeaking = false;
+                    if (callback) callback(true);
+                };
+                
+                utterance.onerror = () => {
+                    this.isSpeaking = false;
+                    if (callback) callback(false);
+                };
+                
+                this.currentUtterance = utterance;
+                this.synth.speak(utterance);
+                return true;
             }
-        }
-        
-        function playAudio(word) {
-            // این تابع بعداً با TTS کامل می‌شود
-            alert(`🔊 تلفظ کلمه "${word}" به زودی اضافه می‌شود!\n\nدر فاز بعدی، سیستم TTS با سرعت ۰.۷ فعال خواهد شد.`);
-        }
-        
-        function showNextPhase() {
-            alert('🎯 فاز بعدی:\n\n۱. اضافه کردن ۲۰۰ لغت A1\n۲. سیستم TTS با صدای زن آمریکایی\n۳. صفحه تمرین لایتنر\n۴. تست‌های شنیداری\n\nاین بخش‌ها به زودی اضافه می‌شوند.');
-        }
-        
-        // تایپ کردن خودکار برای نمایش قابلیت
-        setTimeout(() => {
-            document.getElementById('searchInput').value = 'be';
-            searchWord();
-        }, 1000);
-    </script>
-</body>
-</html>
+            
+            stop() {
+                if (this.synth && this.isSpeaking) {
+                    this.synth.cancel();
+                    this.isSpeaking = false;
+                }
+            }
+            
+            setSpeed(speed) {
+                this.settings.speed = Math.max(0.5, Math.min(1.5, speed));
+                this.saveSettings();
+                this.updateDisplay();
+            }
+            
+            toggleAutoPlay() {
+                this.settings.autoPlay = !this.settings.autoPlay;
+                this.saveSettings();
+                this.updateDisplay();
+                return this.settings.autoPlay;
