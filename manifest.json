@@ -1,0 +1,101 @@
+{
+  "name": "Dic-deep Dictionary",
+  "short_name": "Dic-deep",
+  "description": "دیکشنری هوشمند انگلیسی با سیستم لایتنر، مسابقه و گزارش تلگرامی",
+  "start_url": "/Dic-deep/",
+  "display": "standalone",
+  "background_color": "#4361ee",
+  "theme_color": "#4361ee",
+  "orientation": "portrait",
+  "scope": "/Dic-deep/",
+  "lang": "fa",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3209/3209265.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3209/3209265.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3209/3209265.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3209/3209265.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3209/3209265.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3209/3209265.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3209/3209265.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3209/3209265.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "جستجوی لغت",
+      "short_name": "جستجو",
+      "description": "جستجوی سریع لغت انگلیسی",
+      "url": "/Dic-deep/?page=dictionary",
+      "icons": [{ "src": "https://cdn-icons-png.flaticon.com/512/3917/3917132.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "تست روزانه",
+      "short_name": "تست",
+      "description": "تست لغات امروز",
+      "url": "/Dic-deep/?page=practice",
+      "icons": [{ "src": "https://cdn-icons-png.flaticon.com/512/2917/2917633.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "مسابقه",
+      "short_name": "مسابقه",
+      "description": "مسابقه با کاربران دیگر",
+      "url": "/Dic-deep/?page=competition",
+      "icons": [{ "src": "https://cdn-icons-png.flaticon.com/512/3142/3142481.png", "sizes": "96x96" }]
+    }
+  ],
+  "categories": ["education", "productivity", "utilities"],
+  "screenshots": [
+    {
+      "src": "https://via.placeholder.com/640x320/4361ee/ffffff?text=Dic-deep+Screenshot+1",
+      "sizes": "640x320",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "https://via.placeholder.com/320x640/4361ee/ffffff?text=Dic-deep+Screenshot+2",
+      "sizes": "320x640",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ]
+}
