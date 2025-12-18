@@ -1,281 +1,266 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="fa">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>Dic-deep - دیکشنری</title>
-    <style>
-        body {
-            font-family: Tahoma, Arial;
-            margin: 0;
-            padding: 20px;
-            background: #f0f2f5;
-            text-align: center;
-        }
-        
-        .header {
-            background: #4361ee;
-            color: white;
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-        }
-        
-        h1 {
-            margin: 0;
-            font-size: 32px;
-        }
-        
-        .search-box {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            margin: 0 auto 30px;
-            max-width: 600px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        #searchInput {
-            width: 100%;
-            padding: 15px;
-            font-size: 18px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-        }
-        
-        .search-btn {
-            background: #4361ee;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            font-size: 18px;
-            cursor: pointer;
-            width: 100%;
-        }
-        
-        .results {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .word-card {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            text-align: right;
-        }
-        
-        .word-title {
-            font-size: 36px;
-            color: #1a1a2e;
-            margin: 0 0 10px 0;
-        }
-        
-        .word-meaning {
-            font-size: 24px;
-            color: #4361ee;
-            margin: 0 0 20px 0;
-        }
-        
-        .audio-btn {
-            background: #4cc9f0;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-bottom: 20px;
-        }
-        
-        .example {
-            background: #f8f9fa;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 10px;
-            border-right: 4px solid #4cc9f0;
-            text-align: right;
-        }
-        
-        .footer {
-            background: #1a1a2e;
-            color: white;
-            padding: 30px;
-            border-radius: 15px;
-            margin-top: 40px;
-        }
-        
-        .error {
-            background: #ffeaa7;
-            color: #856404;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-        
-        .test-btn {
-            background: #f72585;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin: 5px;
-            border-radius: 20px;
-            cursor: pointer;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dic-deep - فرهنگ لغت عمیق</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="header">
-        <h1>📚 Dic-deep</h1>
-        <p>دیکشنری انگلیسی به فارسی</p>
-    </div>
-    
-    <div class="search-box">
-        <input 
-            type="text" 
-            id="searchInput" 
-            placeholder="لغت انگلیسی را وارد کنید..."
-        >
-        <button class="search-btn" onclick="searchWord()">
-            🔍 جستجو
-        </button>
-        
-        <div style="margin-top: 15px;">
-            <button class="test-btn" onclick="testWord('be')">be</button>
-            <button class="test-btn" onclick="testWord('have')">have</button>
-            <button class="test-btn" onclick="testWord('go')">go</button>
-            <button class="test-btn" onclick="testWord('come')">come</button>
-        </div>
-    </div>
-    
-    <div class="results" id="results">
-        <p>یک لغت جستجو کنید</p>
-    </div>
-    
-    <div class="footer">
-        <p>ساخته شده با ❤️</p>
-        <p>Dic-deep - نسخه ۲.۰</p>
+    <div class="container">
+        <!-- هدر -->
+        <header class="header">
+            <div class="repo-header">
+                <div class="repo-title">
+                    <h1><i class="fas fa-book"></i> Dic-deep</h1>
+                    <span class="repo-badge public">Public</span>
+                </div>
+                <div class="repo-actions">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-code-branch"></i> Code
+                    </button>
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-star"></i> Star
+                    </button>
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-code-fork"></i> Fork
+                    </button>
+                </div>
+            </div>
+            
+            <nav class="tabs">
+                <a href="#" class="tab active">
+                    <i class="fas fa-code"></i> Code
+                </a>
+                <a href="#" class="tab">
+                    <i class="fas fa-exclamation-circle"></i> Issues <span class="badge">0</span>
+                </a>
+                <a href="#" class="tab">
+                    <i class="fas fa-code-pull-request"></i> Pull requests <span class="badge">0</span>
+                </a>
+                <a href="#" class="tab">
+                    <i class="fas fa-play-circle"></i> Actions
+                </a>
+            </nav>
+        </header>
+
+        <!-- نوار کناری -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3><i class="fas fa-info-circle"></i> About</h3>
+                <p>یک فرهنگ لغت عمیق و پیشرفته برای یادگیری زبان انگلیسی</p>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <i class="far fa-star"></i>
+                        <span>0 stars</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-code-branch"></i>
+                        <span>0 forks</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="far fa-eye"></i>
+                        <span>0 watching</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3><i class="fas fa-network-wired"></i> Branch</h3>
+                <div class="branch-info">
+                    <div class="branch-selector">
+                        <i class="fas fa-code-branch"></i>
+                        <select>
+                            <option>main</option>
+                        </select>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-tag"></i>
+                        <span>0 Tags</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3><i class="fas fa-history"></i> Releases</h3>
+                <p class="no-releases">No releases published</p>
+                <button class="btn btn-outline">
+                    <i class="fas fa-tag"></i> Create a new release
+                </button>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3><i class="fas fa-users"></i> Contributors</h3>
+                <div class="contributor">
+                    <div class="avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="contributor-info">
+                        <strong>Farzadseb</strong>
+                        <span class="time">latest commit 9 minutes ago</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- محتوای اصلی -->
+        <main class="main-content">
+            <div class="content-header">
+                <div class="breadcrumb">
+                    <a href="#"><i class="fas fa-folder"></i> Dic-deep</a>
+                    <span>/</span>
+                    <a href="#" class="active">main</a>
+                </div>
+                
+                <div class="file-actions">
+                    <button class="btn btn-outline">
+                        <i class="fas fa-history"></i> History
+                    </button>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                </div>
+            </div>
+
+            <div class="file-list">
+                <!-- فایل CSS -->
+                <div class="file-item">
+                    <div class="file-icon">
+                        <i class="fab fa-css3-alt css-icon"></i>
+                    </div>
+                    <div class="file-info">
+                        <a href="#" class="file-name">style.css</a>
+                        <span class="file-meta">فایل استایل اصلی پروژه</span>
+                    </div>
+                    <div class="file-commit">
+                        <span class="commit-time">9 minutes ago</span>
+                    </div>
+                </div>
+                
+                <!-- فایل JavaScript -->
+                <div class="file-item">
+                    <div class="file-icon">
+                        <i class="fab fa-js-square js-icon"></i>
+                    </div>
+                    <div class="file-info">
+                        <a href="#" class="file-name">script.js</a>
+                        <span class="file-meta">فایل اسکریپت پروژه</span>
+                    </div>
+                    <div class="file-commit">
+                        <span class="commit-time">1 hour ago</span>
+                    </div>
+                </div>
+                
+                <!-- فایل JSON -->
+                <div class="file-item">
+                    <div class="file-icon">
+                        <i class="fas fa-database json-icon"></i>
+                    </div>
+                    <div class="file-info">
+                        <a href="#" class="file-name">Dictionary.json</a>
+                        <span class="file-meta">دیتابیس لغات و معانی</span>
+                    </div>
+                    <div class="file-commit">
+                        <span class="commit-time">2 hours ago</span>
+                    </div>
+                </div>
+                
+                <!-- فایل HTML -->
+                <div class="file-item">
+                    <div class="file-icon">
+                        <i class="fab fa-html5 html-icon"></i>
+                    </div>
+                    <div class="file-info">
+                        <a href="#" class="file-name active">index.html</a>
+                        <span class="file-meta">صفحه اصلی پروژه</span>
+                    </div>
+                    <div class="file-commit">
+                        <span class="commit-time">30 minutes ago</span>
+                    </div>
+                </div>
+                
+                <!-- فایل README -->
+                <div class="file-item">
+                    <div class="file-icon">
+                        <i class="fas fa-book readme-icon"></i>
+                    </div>
+                    <div class="file-info">
+                        <a href="#" class="file-name">README.md</a>
+                        <span class="file-meta">مستندات پروژه</span>
+                    </div>
+                    <div class="file-commit">
+                        <span class="commit-time">2 hours ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- بخش README -->
+            <div class="readme-section">
+                <div class="readme-header">
+                    <h2><i class="fas fa-book"></i> README.md</h2>
+                </div>
+                <div class="readme-content">
+                    <h1>Dic-deep - فرهنگ لغت عمیق</h1>
+                    <p>یک پروژه فرهنگ لغت انگلیسی به فارسی با قابلیت‌های پیشرفته</p>
+                    
+                    <h2>🛠️ ویژگی‌ها</h2>
+                    <ul>
+                        <li>جستجوی سریع و هوشمند لغات</li>
+                        <li>نمایش تلفظ لغات</li>
+                        <li>مثال‌های کاربردی برای هر لغت</li>
+                        <li>سیستم لایتنر برای یادگیری</li>
+                        <li>رابط کاربری فارسی و ریسپانسیو</li>
+                    </ul>
+                    
+                    <h2>📁 ساختار پروژه</h2>
+                    <pre><code>dic-deep/
+├── index.html
+├── style.css
+├── script.js
+├── Dictionary.json
+└── README.md</code></pre>
+                    
+                    <h2>🚀 شروع به کار</h2>
+                    <p>کافیست فایل index.html را در مرورگر باز کنید.</p>
+                    
+                    <h2>🤝 مشارکت</h2>
+                    <p>از مشارکت شما استقبال می‌کنیم!</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- فوتر -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4><i class="fas fa-user"></i> توسعه‌دهنده</h4>
+                    <p>Farzadseb</p>
+                    <a href="https://github.com/Farzade" class="github-link">
+                        <i class="fab fa-github"></i> github.com/Farzade
+                    </a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4><i class="fas fa-code"></i> تکنولوژی‌ها</h4>
+                    <div class="tech-tags">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">JSON</span>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4><i class="fas fa-copyright"></i> مجوز</h4>
+                    <p>MIT License</p>
+                    <p class="copyright">© 2023 Dic-deep. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
     </div>
 
-    <script>
-        // دیکشنری
-        const dictionary = {
-            "be": {
-                meaning: "بودن",
-                examples: [
-                    "I am here. - من اینجا هستم.",
-                    "Be happy. - خوشحال باش.",
-                    "She is my friend. - او دوست من است."
-                ]
-            },
-            "have": {
-                meaning: "داشتن",
-                examples: [
-                    "I have a book. - من یک کتاب دارم.",
-                    "She has a cat. - او یک گربه دارد.",
-                    "Have a good day. - روز خوبی داشته باشی."
-                ]
-            },
-            "go": {
-                meaning: "رفتن",
-                examples: [
-                    "I go to school. - من به مدرسه می‌روم.",
-                    "Go home. - به خانه برو.",
-                    "Let's go shopping. - بیا خرید برویم."
-                ]
-            },
-            "come": {
-                meaning: "آمدن",
-                examples: [
-                    "Come here. - به اینجا بیا.",
-                    "Come in, please. - لطفاً بیا داخل.",
-                    "He comes to my house. - او به خانه من می‌آید."
-                ]
-            }
-        };
-        
-        // جستجوی لغت
-        function searchWord() {
-            const input = document.getElementById('searchInput');
-            const word = input.value.toLowerCase().trim();
-            const resultsDiv = document.getElementById('results');
-            
-            if (!word) {
-                resultsDiv.innerHTML = '<div class="error">لطفاً یک لغت وارد کنید</div>';
-                return;
-            }
-            
-            if (dictionary[word]) {
-                const data = dictionary[word];
-                
-                let examplesHTML = '';
-                data.examples.forEach(example => {
-                    const parts = example.split(' - ');
-                    examplesHTML += `
-                        <div class="example">
-                            <div style="font-weight: bold;">${parts[0]}</div>
-                            <div>${parts[1]}</div>
-                        </div>
-                    `;
-                });
-                
-                resultsDiv.innerHTML = `
-                    <div class="word-card">
-                        <div class="word-title">${word}</div>
-                        <div class="word-meaning">${data.meaning}</div>
-                        
-                        <button class="audio-btn" onclick="playAudio('${word}')">
-                            🔊 پخش تلفظ
-                        </button>
-                        
-                        <h3>مثال‌ها:</h3>
-                        ${examplesHTML}
-                    </div>
-                `;
-                
-                // پخش صوت
-                playAudio(word);
-                
-            } else {
-                resultsDiv.innerHTML = `
-                    <div class="error">
-                        لغت "${word}" پیدا نشد
-                        <div style="margin-top: 10px;">
-                            <button class="test-btn" onclick="testWord('be')">be</button>
-                            <button class="test-btn" onclick="testWord('have')">have</button>
-                            <button class="test-btn" onclick="testWord('go')">go</button>
-                        </div>
-                    </div>
-                `;
-            }
-        }
-        
-        // پخش صوت
-        function playAudio(text) {
-            if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.rate = 0.7;
-                utterance.lang = 'en-US';
-                window.speechSynthesis.speak(utterance);
-            }
-        }
-        
-        // تست سریع
-        function testWord(word) {
-            document.getElementById('searchInput').value = word;
-            searchWord();
-        }
-        
-        // فعال کردن Enter
-        document.getElementById('searchInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                searchWord();
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
