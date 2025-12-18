@@ -1,0 +1,29 @@
+// دیتابیس اصلی لغات انگلیسی
+const DICTIONARY_DB = {
+    "hello": {
+        word: "hello",
+        phonetic: "/həˈloʊ/",
+        meanings: [
+            {
+                partOfSpeech: "interjection",
+                persian: "سلام، درود",
+                english: "used as a greeting or to begin a phone conversation",
+                examples: [
+                    {
+                        english: "Hello, how are you?",
+                        persian: "سلام، حالتون چطوره؟"
+                    },
+                    {
+                        english: "She said hello and smiled.",
+                        persian: "او سلام کرد و لبخند زد."
+                    }
+                ]
+            }
+        ],
+        collocations: [
+            "say hello",
+            "hello there",
+            "hello everyone"
+        ],
+        phrasalVerbs: [],
+        synonyms: ["hi", "greetings", "hey"],
