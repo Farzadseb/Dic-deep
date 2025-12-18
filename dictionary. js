@@ -1,724 +1,476 @@
-// دیتابیس کامل لغات A1 با جزئیات
+// دیتابیس ۵۰ لغت اول A1 با تعاریف ساده
 const DICTIONARY_DB = {
-    // 1-10: افعال پایه
     "be": {
         word: "be",
-        phonetic: "/biː/",
-        level: "A1",
-        meanings: [
-            {
-                partOfSpeech: "verb",
-                persian: "بودن",
-                english: "to exist or live",
-                examples: [
-                    {
-                        english: "I want to be a doctor.",
-                        persian: "من می‌خواهم دکتر باشم."
-                    },
-                    {
-                        english: "Be happy!",
-                        persian: "خوشحال باش!"
-                    }
-                ]
-            }
-        ],
-        collocations: [
-            "be happy",
-            "be ready",
-            "be sure",
-            "be careful",
-            "be quiet"
-        ],
-        phrasalVerbs: [
-            {
-                verb: "be up to",
-                persian: "در حال انجام کاری بودن",
-                example: "What are you up to? (داری چیکار می‌کنی؟)"
-            }
-        ],
-        synonyms: ["exist", "live"],
-        frequency: 10
+        persian: "بودن",
+        english: "to exist",
+        examples: ["I am a student.", "She is happy."],
+        collocations: ["be good", "be here", "be happy"],
+        phrasalVerbs: [{verb: "be up", meaning: "بیدار بودن", example: "I am up at 7 AM."}],
+        phrases: [{phrase: "be careful", meaning: "مراقب باش", example: "Be careful on the road."}],
+        level: "A1"
     },
-
     "have": {
         word: "have",
-        phonetic: "/hæv/",
-        level: "A1",
-        meanings: [
-            {
-                partOfSpeech: "verb",
-                persian: "داشتن",
-                english: "to possess or own something",
-                examples: [
-                    {
-                        english: "I have a car.",
-                        persian: "من یک ماشین دارم."
-                    },
-                    {
-                        english: "She has three brothers.",
-                        persian: "او سه برادر دارد."
-                    }
-                ]
-            }
-        ],
-        collocations: [
-            "have a car",
-            "have time",
-            "have breakfast",
-            "have fun",
-            "have a problem"
-        ],
-        phrasalVerbs: [
-            {
-                verb: "have to",
-                persian: "مجبور بودن",
-                example: "I have to go now. (الان باید برم.)"
-            },
-            {
-                verb: "have on",
-                persian: "پوشیدن",
-                example: "What do you have on today? (امروز چی پوشیدی؟)"
-            }
-        ],
-        synonyms: ["possess", "own"],
-        frequency: 10
+        persian: "داشتن",
+        english: "to own",
+        examples: ["I have a book.", "They have a car."],
+        collocations: ["have a car", "have time", "have food"],
+        phrasalVerbs: [{verb: "have to", meaning: "باید", example: "I have to go."}],
+        phrases: [{phrase: "have fun", meaning: "خوش بگذره", example: "Have fun at the party!"}],
+        level: "A1"
     },
-
     "do": {
         word: "do",
-        phonetic: "/duː/",
-        level: "A1",
-        meanings: [
-            {
-                partOfSpeech: "verb",
-                persian: "انجام دادن",
-                english: "to perform an action or activity",
-                examples: [
-                    {
-                        english: "What are you doing?",
-                        persian: "داری چیکار می‌کنی؟"
-                    },
-                    {
-                        english: "I do my homework every day.",
-                        persian: "من هر روز تکالیفم را انجام می‌دهم."
-                    }
-                ]
-            }
-        ],
-        collocations: [
-            "do homework",
-            "do exercise",
-            "do business",
-            "do your best",
-            "do nothing"
-        ],
-        phrasalVerbs: [
-            {
-                verb: "do up",
-                persian: "بستن (دکمه)",
-                example: "Do up your coat. (کفت را ببند.)"
-            },
-            {
-                verb: "do without",
-                persian: "بدون چیزی سر کردن",
-                example: "I can do without coffee. (می‌تونم بدون قهوه سر کنم.)"
-            }
-        ],
-        synonyms: ["perform", "execute"],
-        frequency: 10
+        persian: "انجام دادن",
+        english: "to act",
+        examples: ["What do you do?", "I do my work."],
+        collocations: ["do work", "do homework", "do exercise"],
+        phrasalVerbs: [{verb: "do up", meaning: "بستن", example: "Do up your shoes."}],
+        phrases: [{phrase: "do well", meaning: "خوب عمل کردن", example: "Do well on your test."}],
+        level: "A1"
     },
-
-    "work": {
-        word: "work",
-        phonetic: "/wɜːrk/",
-        level: "A1",
-        meanings: [
-            {
-                partOfSpeech: "verb",
-                persian: "کار کردن",
-                english: "to do a job or activity",
-                examples: [
-                    {
-                        english: "I work from 9 to 5.",
-                        persian: "من از ۹ تا ۵ کار می‌کنم."
-                    },
-                    {
-                        english: "She works in a bank.",
-                        persian: "او در یک بانک کار می‌کند."
-                    }
-                ]
-            },
-            {
-                partOfSpeech: "noun",
-                persian: "کار",
-                english: "activity involving mental or physical effort",
-                examples: [
-                    {
-                        english: "I have a lot of work to do.",
-                        persian: "کار زیادی دارم انجام بدهم."
-                    }
-                ]
-            }
-        ],
-        collocations: [
-            "work hard",
-            "work late",
-            "work from home",
-            "work environment",
-            "work experience"
-        ],
-        phrasalVerbs: [
-            {
-                verb: "work out",
-                persian: "ورزش کردن / حل کردن",
-                example: "I work out at the gym. (من در باشگاه ورزش می‌کنم.)"
-            },
-            {
-                verb: "work on",
-                persian: "روی چیزی کار کردن",
-                example: "I'm working on a new project. (روی یه پروژه جدید کار می‌کنم.)"
-            }
-        ],
-        synonyms: ["job", "labor", "employment"],
-        frequency: 9
-    },
-
     "go": {
         word: "go",
-        phonetic: "/ɡoʊ/",
-        level: "A1",
-        meanings: [
-            {
-                partOfSpeech: "verb",
-                persian: "رفتن",
-                english: "to move or travel somewhere",
-                examples: [
-                    {
-                        english: "I go to school every day.",
-                        persian: "من هر روز به مدرسه می‌روم."
-                    },
-                    {
-                        english: "Let's go to the park.",
-                        persian: "بیا بریم پارک."
-                    }
-                ]
-            }
-        ],
-        collocations: [
-            "go home",
-            "go shopping",
-            "go to school",
-            "go crazy",
-            "go online"
-        ],
+        persian: "رفتن",
+        english: "to move",
+        examples: ["I go to school.", "Let's go home."],
+        collocations: ["go home", "go to school", "go shopping"],
         phrasalVerbs: [
-            {
-                verb: "go on",
-                persian: "ادامه دادن",
-                example: "Please go on with your story. (لطفاً ادامه قصه‌ات رو بده.)"
-            },
-            {
-                verb: "go out",
-                persian: "بیرون رفتن",
-                example: "We go out every Friday. (ما هر جمعه بیرون می‌ریم.)"
-            },
-            {
-                verb: "go up",
-                persian: "بالا رفتن",
-                example: "Prices go up every year. (قیمت‌ها هر سال بالا می‌ره.)"
-            }
+            {verb: "go on", meaning: "ادامه دادن", example: "Please go on."},
+            {verb: "go out", meaning: "بیرون رفتن", example: "We go out every Friday."}
         ],
-        synonyms: ["move", "travel", "leave"],
-        frequency: 10
+        phrases: [{phrase: "go away", meaning: "برو", example: "Go away and leave me alone."}],
+        level: "A1"
     },
-
-    // 11-20: ادامه افعال
     "come": {
         word: "come",
-        phonetic: "/kʌm/",
-        level: "A1",
-        meanings: [
-            {
-                partOfSpeech: "verb",
-                persian: "آمدن",
-                english: "to move towards the speaker or a place",
-                examples: [
-                    {
-                        english: "Come here, please.",
-                        persian: "لطفاً اینجا بیا."
-                    },
-                    {
-                        english: "She comes to work by bus.",
-                        persian: "او با اتوبوس به سر کار می‌آید."
-                    }
-                ]
-            }
-        ],
-        collocations: [
-            "come here",
-            "come back",
-            "come home",
-            "come soon",
-            "come with me"
-        ],
+        persian: "آمدن",
+        english: "to move here",
+        examples: ["Come here, please.", "She comes to work."],
+        collocations: ["come here", "come home", "come with me"],
         phrasalVerbs: [
-            {
-                verb: "come from",
-                persian: "اهل جایی بودن",
-                example: "I come from Iran. (من اهل ایرانم.)"
-            },
-            {
-                verb: "come back",
-                persian: "برگشتن",
-                example: "Come back soon! (زود برگرد!)"
-            },
-            {
-                verb: "come up",
-                persian: "پیش آمدن",
-                example: "Something came up. (یه چیزی پیش اومد.)"
-            }
+            {verb: "come from", meaning: "اهل جایی بودن", example: "I come from Iran."},
+            {verb: "come back", meaning: "برگشتن", example: "Come back soon!"}
         ],
-        synonyms: ["arrive", "approach"],
-        frequency: 9
+        phrases: [{phrase: "come on", meaning: "زود باش", example: "Come on, we're late!"}],
+        level: "A1"
     },
-
     "get": {
         word: "get",
-        phonetic: "/ɡet/",
-        level: "A1",
-        meanings: [
-            {
-                partOfSpeech: "verb",
-                persian: "گرفتن / شدن",
-                english: "to receive, obtain, or become",
-                examples: [
-                    {
-                        english: "I get a lot of emails.",
-                        persian: "من ایمیل زیادی دریافت می‌کنم."
-                    },
-                    {
-                        english: "It's getting dark.",
-                        persian: "دارد تاریک می‌شود."
-                    }
-                ]
-            }
-        ],
-        collocations: [
-            "get ready",
-            "get married",
-            "get better",
-            "get a job",
-            "get home"
-        ],
+        persian: "گرفتن / شدن",
+        english: "to receive or become",
+        examples: ["I get a letter.", "It gets dark."],
+        collocations: ["get ready", "get a job", "get home"],
         phrasalVerbs: [
-            {
-                verb: "get up",
-                persian: "بلند شدن",
-                example: "I get up at 7 AM. (من ساعت ۷ صبح بلند می‌شم.)"
-            },
-            {
-                verb: "get on",
-                persian: "سوار شدن",
-                example: "Get on the bus. (سوار اتوبوس شو.)"
-            },
-            {
-                verb: "get off",
-                persian: "پیاده شدن",
-                example: "Get off at the next station. (ایستگاه بعدی پیاده شو.)"
-            }
+            {verb: "get up", meaning: "بلند شدن", example: "I get up at 7."},
+            {verb: "get on", meaning: "سوار شدن", example: "Get on the bus."}
         ],
-        synonyms: ["receive", "obtain", "become"],
-        frequency: 10
+        phrases: [{phrase: "get lost", meaning: "گم شدن", example: "I get lost in the city."}],
+        level: "A1"
     },
-
     "make": {
         word: "make",
-        phonetic: "/meɪk/",
-        level: "A1",
-        meanings: [
-            {
-                partOfSpeech: "verb",
-                persian: "ساختن",
-                english: "to create or produce something",
-                examples: [
-                    {
-                        english: "She makes beautiful cakes.",
-                        persian: "او کیک‌های زیبایی می‌سازد."
-                    },
-                    {
-                        english: "I need to make a decision.",
-                        persian: "من باید یک تصمیم بگیرم."
-                    }
-                ]
-            }
-        ],
-        collocations: [
-            "make money",
-            "make friends",
-            "make dinner",
-            "make progress",
-            "make sure"
-        ],
-        phrasalVerbs: [
-            {
-                verb: "make up",
-                persian: "ساختن / جبران کردن",
-                example: "I made up a story. (یه داستان ساختم.)"
-            },
-            {
-                verb: "make out",
-                persian: "تشخیص دادن",
-                example: "I can't make out the words. (نمی‌تونم کلمات رو تشخیص بدم.)"
-            }
-        ],
-        synonyms: ["create", "produce", "build"],
-        frequency: 9
+        persian: "ساختن",
+        english: "to create",
+        examples: ["She makes food.", "I make a plan."],
+        collocations: ["make food", "make money", "make friends"],
+        phrasalVerbs: [{verb: "make up", meaning: "ساختن (داستان)", example: "He makes up stories."}],
+        phrases: [{phrase: "make sense", meaning: "منطقی بودن", example: "That makes sense."}],
+        level: "A1"
     },
-
-    "need": {
-        word: "need",
-        phonetic: "/niːd/",
-        level: "A1",
-        meanings: [
-            {
-                partOfSpeech: "verb",
-                persian: "نیاز داشتن",
-                english: "to require something because it is essential",
-                examples: [
-                    {
-                        english: "I need some help.",
-                        persian: "من به کمی کمک نیاز دارم."
-                    },
-                    {
-                        english: "You need to study more.",
-                        persian: "تو باید بیشتر درس بخوانی."
-                    }
-                ]
-            }
-        ],
-        collocations: [
-            "need help",
-            "need time",
-            "need money",
-            "need to know",
-            "special needs"
-        ],
-        synonyms: ["require", "want"],
-        frequency: 8
+    "know": {
+        word: "know",
+        persian: "دانستن",
+        english: "to have information",
+        examples: ["I know him.", "Do you know the answer?"],
+        collocations: ["know someone", "know the answer", "know English"],
+        phrases: [{phrase: "I don't know", meaning: "نمی‌دانم", example: "I don't know where it is."}],
+        level: "A1"
     },
-
+    "think": {
+        word: "think",
+        persian: "فکر کردن",
+        english: "to use your mind",
+        examples: ["I think so.", "What do you think?"],
+        collocations: ["think about", "think so", "think fast"],
+        phrasalVerbs: [{verb: "think over", meaning: "در مورد چیزی فکر کردن", example: "Think over my offer."}],
+        phrases: [{phrase: "I think so", meaning: "فکر می‌کنم آره", example: "Is it good? I think so."}],
+        level: "A1"
+    },
+    "say": {
+        word: "say",
+        persian: "گفتن",
+        english: "to speak words",
+        examples: ["She says hello.", "What did you say?"],
+        collocations: ["say hello", "say something", "say no"],
+        phrases: [{phrase: "that is to say", meaning: "یعنی", example: "He is smart, that is to say, he learns fast."}],
+        level: "A1"
+    },
+    "see": {
+        word: "see",
+        persian: "دیدن",
+        english: "to use your eyes",
+        examples: ["I see a bird.", "See you tomorrow."],
+        collocations: ["see you", "see a movie", "see the doctor"],
+        phrasalVerbs: [{verb: "see to", meaning: "رسیدگی کردن", example: "I'll see to the problem."}],
+        phrases: [{phrase: "I see", meaning: "متوجه شدم", example: "Oh, I see what you mean."}],
+        level: "A1"
+    },
     "want": {
         word: "want",
-        phonetic: "/wɑːnt/",
-        level: "A1",
-        meanings: [
-            {
-                partOfSpeech: "verb",
-                persian: "خواستن",
-                english: "to desire or wish for something",
-                examples: [
-                    {
-                        english: "I want a cup of coffee.",
-                        persian: "من یک فنجان قهوه می‌خواهم."
-                    },
-                    {
-                        english: "She wants to learn English.",
-                        persian: "او می‌خواهد انگلیسی یاد بگیرد."
-                    }
-                ]
-            }
-        ],
-        collocations: [
-            "want to go",
-            "want more",
-            "want it now",
-            "want something",
-            "want someone"
-        ],
-        synonyms: ["desire", "wish", "crave"],
-        frequency: 9
+        persian: "خواستن",
+        english: "to desire",
+        examples: ["I want water.", "She wants to learn."],
+        collocations: ["want to go", "want something", "want help"],
+        phrases: [{phrase: "I want to", meaning: "می‌خواهم", example: "I want to learn English."}],
+        level: "A1"
     },
-
-    // اضافه کردن 10 لغت نمونه دیگر برای تست
+    "like": {
+        word: "like",
+        persian: "دوست داشتن",
+        english: "to enjoy",
+        examples: ["I like apples.", "She likes music."],
+        collocations: ["like to", "like it", "like someone"],
+        phrases: [{phrase: "would like", meaning: "مایل بودن", example: "I would like some tea."}],
+        level: "A1"
+    },
+    "work": {
+        word: "work",
+        persian: "کار کردن",
+        english: "to do a job",
+        examples: ["I work every day.", "She works hard."],
+        collocations: ["work hard", "work here", "work with"],
+        phrasalVerbs: [
+            {verb: "work out", meaning: "ورزش کردن", example: "I work out at the gym."},
+            {verb: "work on", meaning: "روی چیزی کار کردن", example: "I work on my English."}
+        ],
+        phrases: [{phrase: "work of art", meaning: "اثر هنری", example: "This painting is a work of art."}],
+        level: "A1"
+    },
+    "need": {
+        word: "need",
+        persian: "نیاز داشتن",
+        english: "to require",
+        examples: ["I need help.", "You need to study."],
+        collocations: ["need help", "need time", "need money"],
+        phrases: [{phrase: "in need", meaning: "نیازمند", example: "We help people in need."}],
+        level: "A1"
+    },
+    "live": {
+        word: "live",
+        persian: "زندگی کردن",
+        english: "to have life",
+        examples: ["I live in Tehran.", "They live happily."],
+        collocations: ["live here", "live with", "live well"],
+        phrasalVerbs: [{verb: "live on", meaning: "زندگی کردن با", example: "We live on rice and bread."}],
+        phrases: [{phrase: "live and learn", meaning: "زندگی کنیم و یاد بگیریم", example: "You made a mistake? Live and learn!"}],
+        level: "A1"
+    },
     "time": {
         word: "time",
-        phonetic: "/taɪm/",
-        level: "A1",
-        meanings: [
-            {
-                partOfSpeech: "noun",
-                persian: "زمان",
-                english: "the indefinite continued progress of existence",
-                examples: [
-                    {
-                        english: "What time is it?",
-                        persian: "ساعت چنده؟"
-                    },
-                    {
-                        english: "I don't have much time.",
-                        persian: "من وقت زیادی ندارم."
-                    }
-                ]
-            }
-        ],
-        collocations: [
-            "spend time",
-            "waste time",
-            "save time",
-            "free time",
-            "on time"
-        ],
+        persian: "زمان",
+        english: "minutes, hours, days",
+        examples: ["What time is it?", "I have no time."],
+        collocations: ["have time", "spend time", "save time"],
         phrases: [
-            {
-                phrase: "in time",
-                persian: "به موقع",
-                example: "We arrived just in time. (ما دقیقاً به موقع رسیدیم.)"
-            },
-            {
-                phrase: "from time to time",
-                persian: "گاهی اوقات",
-                example: "I visit them from time to time. (گاهی بهشون سر می‌زنم.)"
-            }
+            {phrase: "on time", meaning: "سر وقت", example: "Please be on time."},
+            {phrase: "from time to time", meaning: "گاهی", example: "I visit them from time to time."}
         ],
-        synonyms: ["duration", "period", "moment"],
-        frequency: 10
+        level: "A1"
     },
-
     "people": {
         word: "people",
-        phonetic: "/ˈpiːpəl/",
-        level: "A1",
-        meanings: [
-            {
-                partOfSpeech: "noun",
-                persian: "مردم",
-                english: "human beings in general",
-                examples: [
-                    {
-                        english: "Many people were at the park.",
-                        persian: "مردم زیادی در پارک بودند."
-                    },
-                    {
-                        english: "Young people like new technology.",
-                        persian: "جوان‌ها تکنولوژی جدید را دوست دارند."
-                    }
-                ]
-            }
-        ],
-        collocations: [
-            "old people",
-            "young people",
-            "local people",
-            "important people",
-            "people say"
-        ],
-        synonyms: ["persons", "humans", "individuals"],
-        frequency: 9
+        persian: "مردم",
+        english: "persons",
+        examples: ["Many people are here.", "Young people like music."],
+        collocations: ["many people", "young people", "old people"],
+        phrases: [{phrase: "people say", meaning: "مردم می‌گویند", example: "People say it's a good school."}],
+        level: "A1"
     },
-
     "good": {
         word: "good",
-        phonetic: "/ɡʊd/",
-        level: "A1",
-        meanings: [
-            {
-                partOfSpeech: "adjective",
-                persian: "خوب",
-                english: "of a favorable character or tendency",
-                examples: [
-                    {
-                        english: "She is a good student.",
-                        persian: "او دانش‌آموز خوبی است."
-                    },
-                    {
-                        english: "This is good news.",
-                        persian: "این خبر خوبی است."
-                    }
-                ]
-            }
+        persian: "خوب",
+        english: "nice, not bad",
+        examples: ["She is a good student.", "This is good food."],
+        collocations: ["good morning", "good idea", "good job"],
+        phrases: [{phrase: "good for you", meaning: "آفرین", example: "You passed the test? Good for you!"}],
+        level: "A1"
+    },
+    "day": {
+        word: "day",
+        persian: "روز",
+        english: "24 hours",
+        examples: ["I work every day.", "Have a good day!"],
+        collocations: ["every day", "good day", "long day"],
+        phrases: [
+            {phrase: "day after day", meaning: "هر روز", example: "Day after day, I study English."},
+            {phrase: "one day", meaning: "یک روز", example: "One day, I will visit Paris."}
         ],
-        collocations: [
-            "good morning",
-            "good idea",
-            "good job",
-            "good luck",
-            "good friend"
-        ],
-        synonyms: ["excellent", "fine", "great"],
-        antonyms: ["bad", "poor"],
-        frequency: 10
+        level: "A1"
+    },
+    "hello": {
+        word: "hello",
+        persian: "سلام",
+        english: "greeting",
+        examples: ["Hello, how are you?", "She says hello."],
+        collocations: ["say hello", "hello there", "hello everyone"],
+        phrases: [],
+        level: "A1"
     }
 };
 
-// تابع جستجوی لغت
+// تابع جستجوی ساده‌شده
 function searchWord(word) {
     const wordLower = word.toLowerCase().trim();
     
+    // جستجوی مستقیم
     if (DICTIONARY_DB[wordLower]) {
         return DICTIONARY_DB[wordLower];
     }
     
     // جستجوی مشابه
-    const similarWords = findSimilarWords(wordLower);
+    const similarWords = [];
+    for (const key in DICTIONARY_DB) {
+        if (key.startsWith(wordLower) || wordLower.startsWith(key)) {
+            similarWords.push({
+                word: key,
+                meaning: DICTIONARY_DB[key].persian
+            });
+        }
+    }
+    
     if (similarWords.length > 0) {
         return {
             word: wordLower,
-            suggestions: similarWords,
-            message: "لغت یافت نشد، آیا منظور شما یکی از این‌هاست؟"
+            suggestions: similarWords.slice(0, 3),
+            message: "آیا منظور شما یکی از این‌هاست؟"
         };
     }
     
     return null;
 }
 
-// پیدا کردن کلمات مشابه
-function findSimilarWords(word) {
-    const similar = [];
-    const wordLength = word.length;
+// تابع نمایش نتایج در HTML
+function displayWordResult(wordData) {
+    const resultsArea = document.getElementById('resultsArea');
+    if (!resultsArea) return;
     
-    for (const dictWord in DICTIONARY_DB) {
-        if (
-            dictWord.startsWith(word) ||
-            dictWord.includes(word) ||
-            word.includes(dictWord) ||
-            calculateSimilarity(word, dictWord) > 0.7
-        ) {
-            similar.push({
-                word: dictWord,
-                meaning: DICTIONARY_DB[dictWord].meanings[0].persian
-            });
+    if (wordData.suggestions) {
+        // نمایش پیشنهادات
+        let suggestionsHtml = wordData.suggestions.map(s => `
+            <div class="suggestion-item" onclick="selectSuggestion('${s.word}')">
+                <strong>${s.word}</strong>
+                <span>${s.meaning}</span>
+                <i class="fas fa-arrow-left"></i>
+            </div>
+        `).join('');
+        
+        resultsArea.innerHTML = `
+            <div class="suggestions-container">
+                <h3>${wordData.message}</h3>
+                <div class="suggestions-list">
+                    ${suggestionsHtml}
+                </div>
+            </div>
+        `;
+        return;
+    }
+    
+    // نمایش کامل لغت
+    const word = wordData.word;
+    const persian = wordData.persian;
+    const english = wordData.english;
+    const examples = wordData.examples || [];
+    const collocations = wordData.collocations || [];
+    const phrasalVerbs = wordData.phrasalVerbs || [];
+    const phrases = wordData.phrases || [];
+    
+    // ساخت HTML
+    let examplesHtml = '';
+    if (examples.length > 0) {
+        examplesHtml = examples.map(ex => `
+            <div class="example-item">
+                <div class="example-en">${ex}</div>
+            </div>
+        `).join('');
+    }
+    
+    let collocationsHtml = '';
+    if (collocations.length > 0) {
+        collocationsHtml = `
+            <div class="section">
+                <h4><i class="fas fa-link"></i> کالوکیشن‌ها</h4>
+                <div class="tags">
+                    ${collocations.map(coll => `
+                        <span class="tag">${coll}</span>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    }
+    
+    let phrasalVerbsHtml = '';
+    if (phrasalVerbs.length > 0) {
+        phrasalVerbsHtml = `
+            <div class="section">
+                <h4><i class="fas fa-random"></i> افعال مرکب</h4>
+                ${phrasalVerbs.map(pv => `
+                    <div class="phrasal-verb">
+                        <strong>${pv.verb}</strong>
+                        <span>${pv.meaning}</span>
+                        <div class="example">مثال: ${pv.example}</div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+    
+    let phrasesHtml = '';
+    if (phrases.length > 0) {
+        phrasesHtml = `
+            <div class="section">
+                <h4><i class="fas fa-quote-right"></i> عبارات</h4>
+                ${phrases.map(ph => `
+                    <div class="phrase">
+                        <strong>${ph.phrase}</strong>
+                        <span>${ph.meaning}</span>
+                        <div class="example">مثال: ${ph.example}</div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+    
+    resultsArea.innerHTML = `
+        <div class="word-card">
+            <div class="word-header">
+                <h2 class="word">${word}</h2>
+                <button class="play-btn" onclick="playWordSound('${word}')">
+                    <i class="fas fa-volume-up"></i> پخش صوت
+                </button>
+            </div>
             
-            if (similar.length >= 5) break;
+            <div class="word-info">
+                <div class="meaning">
+                    <strong>فارسی:</strong> ${persian}
+                </div>
+                <div class="definition">
+                    <strong>تعریف انگلیسی:</strong> ${english}
+                </div>
+            </div>
+            
+            ${examplesHtml ? `
+            <div class="section">
+                <h4><i class="fas fa-comment"></i> مثال‌ها</h4>
+                <div class="examples">${examplesHtml}</div>
+            </div>` : ''}
+            
+            ${collocationsHtml}
+            ${phrasalVerbsHtml}
+            ${phrasesHtml}
+            
+            <div class="word-footer">
+                <span class="level">سطح: ${wordData.level}</span>
+                <button class="save-btn" onclick="addToLeitner('${word}')">
+                    <i class="far fa-star"></i> ذخیره در لایتنر
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+// تابع انتخاب پیشنهاد
+function selectSuggestion(word) {
+    document.getElementById('wordInput').value = word;
+    searchAndDisplay(word);
+}
+
+// تابع جستجو و نمایش
+function searchAndDisplay(word) {
+    const result = searchWord(word);
+    if (result) {
+        displayWordResult(result);
+        
+        // پخش صوت
+        if (window.TTSSystem && window.TTSSystem.isEnabled) {
+            window.TTSSystem.speakWord(word);
         }
+    } else {
+        document.getElementById('resultsArea').innerHTML = `
+            <div class="no-results">
+                <i class="fas fa-search"></i>
+                <h3>لغت "${word}" یافت نشد</h3>
+                <p>مطمئن باشید املای آن درست است.</p>
+            </div>
+        `;
     }
-    
-    return similar;
 }
 
-// محاسبه شباهت بین کلمات
-function calculateSimilarity(word1, word2) {
-    const longer = word1.length > word2.length ? word1 : word2;
-    const shorter = word1.length > word2.length ? word2 : word1;
-    
-    if (longer.length === 0) return 1.0;
-    
-    return (longer.length - editDistance(longer, shorter)) / parseFloat(longer.length);
+// تابع افزودن به لایتنر
+function addToLeitner(word) {
+    const wordData = searchWord(word);
+    if (wordData && window.LeitnerSystem) {
+        window.LeitnerSystem.addWord(word, wordData.persian, wordData.examples);
+        alert(`"${word}" به لایتنر اضافه شد!`);
+    }
 }
 
-// فاصله ادیت
-function editDistance(word1, word2) {
-    word1 = word1.toLowerCase();
-    word2 = word2.toLowerCase();
+// تابع پخش صوت
+function playWordSound(word) {
+    if (window.TTSSystem) {
+        window.TTSSystem.speakWord(word);
+    }
+}
+
+// اتصال به جستجو در صفحه
+document.addEventListener('DOMContentLoaded', function() {
+    const searchBtn = document.getElementById('searchBtn');
+    const wordInput = document.getElementById('wordInput');
     
-    const costs = [];
-    for (let i = 0; i <= word1.length; i++) {
-        let lastValue = i;
-        for (let j = 0; j <= word2.length; j++) {
-            if (i === 0) {
-                costs[j] = j;
-            } else if (j > 0) {
-                let newValue = costs[j - 1];
-                if (word1.charAt(i - 1) !== word2.charAt(j - 1)) {
-                    newValue = Math.min(Math.min(newValue, lastValue), costs[j]) + 1;
-                }
-                costs[j - 1] = lastValue;
-                lastValue = newValue;
+    if (searchBtn && wordInput) {
+        searchBtn.addEventListener('click', function() {
+            const word = wordInput.value.trim();
+            if (word) {
+                searchAndDisplay(word);
             }
-        }
-        if (i > 0) costs[word2.length] = lastValue;
-    }
-    return costs[word2.length];
-}
-
-// گرفتن لیست تمام لغات
-function getAllWords() {
-    return Object.keys(DICTIONARY_DB).map(word => ({
-        word: word,
-        meaning: DICTIONARY_DB[word].meanings[0].persian,
-        level: DICTIONARY_DB[word].level,
-        frequency: DICTIONARY_DB[word].frequency
-    }));
-}
-
-// گرفتن لغات بر اساس سطح
-function getWordsByLevel(level) {
-    return Object.keys(DICTIONARY_DB)
-        .filter(word => DICTIONARY_DB[word].level === level)
-        .map(word => ({
-            word: word,
-            meaning: DICTIONARY_DB[word].meanings[0].persian
-        }));
-}
-
-// گرفتن لغات پرتکرار
-function getCommonWords(limit = 50) {
-    return Object.keys(DICTIONARY_DB)
-        .map(word => ({
-            word: word,
-            frequency: DICTIONARY_DB[word].frequency || 5,
-            meaning: DICTIONARY_DB[word].meanings[0].persian
-        }))
-        .sort((a, b) => b.frequency - a.frequency)
-        .slice(0, limit);
-}
-
-// گرفتن لغات تصادفی برای تست
-function getRandomWords(count = 10) {
-    const words = Object.keys(DICTIONARY_DB);
-    const randomWords = [];
-    
-    for (let i = 0; i < Math.min(count, words.length); i++) {
-        const randomIndex = Math.floor(Math.random() * words.length);
-        randomWords.push({
-            word: words[randomIndex],
-            meaning: DICTIONARY_DB[words[randomIndex]].meanings[0].persian,
-            level: DICTIONARY_DB[words[randomIndex]].level
+        });
+        
+        wordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const word = wordInput.value.trim();
+                if (word) {
+                    searchAndDisplay(word);
+                }
+            }
         });
     }
     
-    return randomWords;
-}
+    // نمایش پیام خوش‌آمد
+    const resultsArea = document.getElementById('resultsArea');
+    if (resultsArea && !resultsArea.innerHTML) {
+        resultsArea.innerHTML = `
+            <div class="welcome-card">
+                <i class="fas fa-language"></i>
+                <h3>به دیکشنری A1 خوش آمدید!</h3>
+                <p>یک لغت انگلیسی جستجو کنید (مثل: hello, go, have)</p>
+                <div class="suggestions">
+                    <button onclick="searchAndDisplay('hello')">hello</button>
+                    <button onclick="searchAndDisplay('go')">go</button>
+                    <button onclick="searchAndDisplay('have')">have</button>
+                    <button onclick="searchAndDisplay('good')">good</button>
+                </div>
+            </div>
+        `;
+    }
+});
 
-// گرفتن لغات با کالوکیشن خاص
-function getWordsWithCollocation(collocation) {
-    return Object.keys(DICTIONARY_DB)
-        .filter(word => 
-            DICTIONARY_DB[word].collocations && 
-            DICTIONARY_DB[word].collocations.some(c => c.toLowerCase().includes(collocation.toLowerCase()))
-        )
-        .map(word => ({
-            word: word,
-            collocations: DICTIONARY_DB[word].collocations.filter(c => 
-                c.toLowerCase().includes(collocation.toLowerCase())
-            )
-        }));
-}
+// صادر کردن توابع به window
+window.searchWord = searchWord;
+window.displayWordResult = displayWordResult;
+window.selectSuggestion = selectSuggestion;
+window.searchAndDisplay = searchAndDisplay;
+window.addToLeitner = addToLeitner;
+window.playWordSound = playWordSound;
 
-// گرفتن تمام لغات با جزئیات
-function getCompleteDictionary() {
-    return DICTIONARY_DB;
-}
-
-// تعداد کل لغات
-function getTotalWordCount() {
-    return Object.keys(DICTIONARY_DB).length;
-}
-
-// صادر کردن توابع
-window.DictionaryDB = {
-    searchWord,
-    getAllWords,
-    getWordsByLevel,
-    getCommonWords,
-    getRandomWords,
-    getWordsWithCollocation,
-    getCompleteDictionary,
-    getTotalWordCount,
-    findSimilarWords,
-    DICTIONARY_DB
-};
-
-// لاگ برای تست
-console.log("📘 DictionaryDB loaded successfully!");
-console.log(`Total words: ${getTotalWordCount()}`);
-console.log("Available functions: searchWord, getAllWords, getRandomWords, etc.");
+console.log("📘 Dictionary loaded with " + Object.keys(DICTIONARY_DB).length + " A1 words");
