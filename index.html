@@ -1,206 +1,256 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فرهنگ لغت انگلیسی به فارسی</title>
+    <title>farzadseb.github.io | Dic-deep</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <!-- هدر جستجو -->
-        <header class="search-header">
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="جستجوی کلمه انگلیسی..." id="searchInput">
-                <button class="search-btn">جستجو</button>
+        <!-- هدر اصلی -->
+        <header class="main-header">
+            <div class="repo-info">
+                <div class="repo-title-section">
+                    <h1 class="repo-title">farzadseb.github.io</h1>
+                    <div class="repo-subtitle">
+                        <h2><i class="fas fa-book"></i> Dic-deep 📖</h2>
+                        <span class="repo-status">Public</span>
+                    </div>
+                </div>
+                
+                <div class="repo-actions">
+                    <button class="action-btn code-btn">
+                        <i class="fas fa-code"></i> Code
+                    </button>
+                    <button class="action-btn">
+                        <i class="far fa-dot-circle"></i> Issues <span class="badge">0</span>
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-code-pull-request"></i> Pull requests <span class="badge">0</span>
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-play"></i> Actions
+                    </button>
+                </div>
             </div>
-            <h1 class="page-title">جستجوي ألف</h1>
         </header>
 
-        <!-- کلمات سریع -->
-        <div class="quick-words">
-            <div class="word-tag" data-word="come">
-                <span class="en-word">come</span>
-                <span class="copy-btn">نسخ</span>
-            </div>
-            <div class="word-tag" data-word="go">
-                <span class="en-word">go</span>
-                <span class="copy-btn">نسخ</span>
-            </div>
-            <div class="word-tag" data-word="have">
-                <span class="en-word">have</span>
-                <span class="copy-btn">نسخ</span>
-            </div>
-            <div class="word-tag" data-word="be">
-                <span class="en-word">be</span>
-                <span class="copy-btn">نسخ</span>
-            </div>
+        <!-- محتوای اصلی -->
+        <div class="content-wrapper">
+            <!-- سایدبار -->
+            <aside class="sidebar">
+                <!-- درباره -->
+                <section class="sidebar-section about-section">
+                    <h3><i class="fas fa-info-circle"></i> About ❤</h3>
+                    <p>یک فرهنگ لغت عمیق و پیشرفته برای یادگیری زبان انگلیسی</p>
+                    
+                    <div class="repo-stats">
+                        <div class="stat-item">
+                            <i class="far fa-star"></i>
+                            <span>stars <strong>0</strong></span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-code-branch"></i>
+                            <span>forks <strong>0</strong></span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="far fa-eye"></i>
+                            <span>watching <strong>0</strong></span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- برنچ -->
+                <section class="sidebar-section">
+                    <h3><i class="fas fa-code-branch"></i> Branch 💀️</h3>
+                    <div class="branch-info">
+                        <div class="current-branch">
+                            <i class="fas fa-check"></i>
+                            <span>main</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-tag"></i>
+                            <span>Tags <strong>0</strong></span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ریلیزها -->
+                <section class="sidebar-section">
+                    <h3><i class="fas fa-tag"></i> Releases ❤</h3>
+                    <p class="no-release">No releases published</p>
+                    <button class="release-btn">
+                        <i class="fas fa-plus"></i> Create a new release
+                    </button>
+                </section>
+
+                <!-- مشارکت کنندگان -->
+                <section class="sidebar-section">
+                    <h3><i class="fas fa-users"></i> Contributors 💀️</h3>
+                    <div class="contributor-card">
+                        <div class="contributor-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="contributor-details">
+                            <strong>Farzadseb</strong>
+                            <span class="commit-info">latest commit 9 minutes ago</span>
+                            <span class="branch-info">
+                                <i class="fas fa-folder"></i> Dic-deep / main
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="file-actions">
+                        <button class="file-action-btn">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                        <button class="file-action-btn">
+                            <i class="fas fa-history"></i> History
+                        </button>
+                    </div>
+                </section>
+            </aside>
+
+            <!-- محتوای اصلی -->
+            <main class="main-content">
+                <!-- لیست فایل‌ها -->
+                <div class="files-section">
+                    <div class="files-header">
+                        <h3><i class="fas fa-folder-open"></i> Project Files</h3>
+                    </div>
+                    
+                    <div class="files-list">
+                        <!-- فایل CSS -->
+                        <div class="file-item css-file">
+                            <div class="file-icon">
+                                <i class="fab fa-css3-alt"></i>
+                            </div>
+                            <div class="file-details">
+                                <h4>Main style file</h4>
+                                <p class="file-name">style.css</p>
+                            </div>
+                            <div class="file-time">9 minutes ago</div>
+                        </div>
+
+                        <!-- فایل JS -->
+                        <div class="file-item js-file">
+                            <div class="file-icon">
+                                <i class="fab fa-js"></i>
+                            </div>
+                            <div class="file-details">
+                                <h4>Project script file</h4>
+                                <p class="file-name">script.js</p>
+                            </div>
+                            <div class="file-time">1 hour ago</div>
+                        </div>
+
+                        <!-- فایل JSON -->
+                        <div class="file-item json-file">
+                            <div class="file-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="file-details">
+                                <h4>Words database</h4>
+                                <p class="file-name">Dictionary.json</p>
+                            </div>
+                            <div class="file-time">2 hours ago</div>
+                        </div>
+
+                        <!-- فایل HTML -->
+                        <div class="file-item html-file">
+                            <div class="file-icon">
+                                <i class="fab fa-html5"></i>
+                            </div>
+                            <div class="file-details">
+                                <h4>Main page</h4>
+                                <p class="file-name">index.html</p>
+                            </div>
+                            <div class="file-time">30 minutes ago</div>
+                        </div>
+
+                        <!-- فایل README -->
+                        <div class="file-item readme-file">
+                            <div class="file-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="file-details">
+                                <h4>Project documentation</h4>
+                                <p class="file-name">README.md</p>
+                            </div>
+                            <div class="file-time">2 hours ago</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- بخش README -->
+                <section class="readme-section">
+                    <div class="readme-header">
+                        <h3><i class="fas fa-book-open"></i> README.md 📖</h3>
+                    </div>
+                    
+                    <div class="readme-content">
+                        <h1>Dic-deep - Deep Dictionary</h1>
+                        <p class="lead">An advanced English to Persian dictionary with powerful features</p>
+                        
+                        <div class="features-grid">
+                            <div class="feature">
+                                <i class="fas fa-search"></i>
+                                <h4>Smart Search</h4>
+                                <p>Fast and accurate English/Persian word search</p>
+                            </div>
+                            
+                            <div class="feature">
+                                <i class="fas fa-volume-up"></i>
+                                <h4>Accurate Pronunciation</h4>
+                                <p>Correct pronunciation with IPA phonetic symbols</p>
+                            </div>
+                            
+                            <div class="feature">
+                                <i class="fas fa-comment-alt"></i>
+                                <h4>Usage Examples</h4>
+                                <p>Real-world examples for each word</p>
+                            </div>
+                            
+                            <div class="feature">
+                                <i class="fas fa-brain"></i>
+                                <h4>Leitner System</h4>
+                                <p>Effective learning with Leitner method</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
         </div>
 
-        <!-- محتوای اصلی -->
-        <main class="dictionary-content">
-            <!-- کلمه be -->
-            <div class="word-card active" id="word-be">
-                <div class="word-header">
-                    <h2 class="english-word">be</h2>
-                    <div class="word-info">
-                        <span class="persian-word">بودن</span>
-                        <span class="pronunciation">حكم للفظ</span>
-                    </div>
-                </div>
-
-                <div class="examples-section">
-                    <h3><i class="fas fa-chevron-down"></i> مثال:</h3>
-                    
-                    <div class="example-item">
-                        <div class="example-header">
-                            <span class="example-number">1</span>
-                            <span class="example-type">جمله انگلیسی</span>
-                        </div>
-                        <div class="example-text english-example">. I am here</div>
-                        <div class="example-text persian-example">من اینجا هستم.</div>
-                    </div>
-
-                    <div class="example-item">
-                        <div class="example-header">
-                            <span class="example-number">2</span>
-                            <span class="example-type">دستور</span>
-                        </div>
-                        <div class="example-text english-example">.Be happy</div>
-                        <div class="example-text persian-example">خوشحال باش.</div>
-                    </div>
-
-                    <div class="example-item">
-                        <div class="example-header">
-                            <span class="example-number">3</span>
-                            <span class="example-type">جمله انگلیسی</span>
-                        </div>
-                        <div class="example-text english-example">.She is my friend</div>
-                        <div class="example-text persian-example">او دوست من است.</div>
-                    </div>
-                </div>
-
-                <div class="word-footer">
-                    <div class="note">
-                        <i class="fas fa-info-circle"></i>
-                        <span>* ویتکرهها (اشکال مختلف فعل): am, is, are, was, were, been</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- کلمه come -->
-            <div class="word-card" id="word-come">
-                <div class="word-header">
-                    <h2 class="english-word">come</h2>
-                    <div class="word-info">
-                        <span class="persian-word">آمدن</span>
-                        <span class="pronunciation">/kʌm/</span>
-                    </div>
-                </div>
-
-                <div class="examples-section">
-                    <h3><i class="fas fa-chevron-down"></i> مثال:</h3>
-                    
-                    <div class="example-item">
-                        <div class="example-header">
-                            <span class="example-number">1</span>
-                            <span class="example-type">جمله انگلیسی</span>
-                        </div>
-                        <div class="example-text english-example">.Come here, please</div>
-                        <div class="example-text persian-example">لطفا به اینجا بیا.</div>
-                    </div>
-
-                    <div class="example-item">
-                        <div class="example-header">
-                            <span class="example-number">2</span>
-                            <span class="example-type">جمله انگلیسی</span>
-                        </div>
-                        <div class="example-text english-example">.Winter is coming</div>
-                        <div class="example-text persian-example">زمستان در راه است.</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- کلمه go -->
-            <div class="word-card" id="word-go">
-                <div class="word-header">
-                    <h2 class="english-word">go</h2>
-                    <div class="word-info">
-                        <span class="persian-word">رفتن</span>
-                        <span class="pronunciation">/ɡoʊ/</span>
-                    </div>
-                </div>
-
-                <div class="examples-section">
-                    <h3><i class="fas fa-chevron-down"></i> مثال:</h3>
-                    
-                    <div class="example-item">
-                        <div class="example-header">
-                            <span class="example-number">1</span>
-                            <span class="example-type">جمله انگلیسی</span>
-                        </div>
-                        <div class="example-text english-example">.I go to school every day</div>
-                        <div class="example-text persian-example">من هر روز به مدرسه می‌روم.</div>
-                    </div>
-
-                    <div class="example-item">
-                        <div class="example-header">
-                            <span class="example-number">2</span>
-                            <span class="example-type">جمله انگلیسی</span>
-                        </div>
-                        <div class="example-text english-example">.Let's go to the cinema</div>
-                        <div class="example-text persian-example">بیا بریم سینما.</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- کلمه have -->
-            <div class="word-card" id="word-have">
-                <div class="word-header">
-                    <h2 class="english-word">have</h2>
-                    <div class="word-info">
-                        <span class="persian-word">داشتن</span>
-                        <span class="pronunciation">/hæv/</span>
-                    </div>
-                </div>
-
-                <div class="examples-section">
-                    <h3><i class="fas fa-chevron-down"></i> مثال:</h3>
-                    
-                    <div class="example-item">
-                        <div class="example-header">
-                            <span class="example-number">1</span>
-                            <span class="example-type">جمله انگلیسی</span>
-                        </div>
-                        <div class="example-text english-example">.I have a car</div>
-                        <div class="example-text persian-example">من یک ماشین دارم.</div>
-                    </div>
-
-                    <div class="example-item">
-                        <div class="example-header">
-                            <span class="example-number">2</span>
-                            <span class="example-type">جمله انگلیسی</span>
-                        </div>
-                        <div class="example-text english-example">.She has two brothers</div>
-                        <div class="example-text persian-example">او دو برادر دارد.</div>
-                    </div>
-                </div>
-            </div>
-        </main>
-
         <!-- فوتر -->
-        <footer class="dictionary-footer">
-            <p>فرهنگ لغت انگلیسی به فارسی | ساده و کاربردی</p>
-            <div class="footer-links">
-                <a href="#"><i class="fas fa-book"></i> لغات بیشتر</a>
-                <a href="#"><i class="fas fa-download"></i> دانلود</a>
-                <a href="#"><i class="fas fa-info-circle"></i> راهنما</a>
+        <footer class="main-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4><i class="fas fa-copyright"></i> 2023 farzadseb.github.io</h4>
+                    <p>An open-source project for learning English</p>
+                </div>
+                
+                <div class="footer-section">
+                    <div class="tech-stack">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">JSON</span>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <a href="https://github.com/farzadseb" class="github-link">
+                        <i class="fab fa-github"></i> farzadseb
+                    </a>
+                </div>
             </div>
         </footer>
     </div>
 
     <script src="script.js"></script>
 </body>
-                            </html>
+                    </html>
