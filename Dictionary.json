@@ -1,20 +1,101 @@
 {
-  "name": "Dic-deep",
-  "description": "دیکشنری هوشمند انگلیسی-فارسی با تمرین هوشمند",
-  "version": "1.0.0",
+  "metadata": {
+    "name": "Dic-deep",
+    "version": "1.0",
+    "language": "en-fa",
+    "description": "دیکشنری هوشمند انگلیسی-فارسی با سیستم تمرین لایتنر",
+    "created_date": "2024-01-15"
+  },
   "words": [
     {
+      "id": 1,
       "word": "be",
       "meaning_fa": "بودن",
+      "level": "A1",
       "examples": [
-        "I want to be a teacher. - من می‌خواهم یک معلم باشم."
+        "I want to be a teacher. - من می‌خواهم یک معلم باشم.",
+        "Be happy! - خوشحال باش!"
       ],
       "collocations": [
         {"phrase": "be happy", "meaning_fa": "خوشحال بودن"},
-        {"phrase": "be ready", "meaning_fa": "آماده بودن"}
+        {"phrase": "be ready", "meaning_fa": "آماده بودن"},
+        {"phrase": "be careful", "meaning_fa": "مواظب بودن"}
       ],
       "phrasal_verbs": [
         {"phrase": "be up to", "meaning_fa": "در حال برنامه ریزی بودن"}
+      ]
+    },
+    {
+      "id": 2,
+      "word": "have",
+      "meaning_fa": "داشتن",
+      "level": "A1",
+      "examples": [
+        "I have a book. - من یک کتاب دارم.",
+        "Have a good day! - روز خوبی داشته باشی!"
+      ],
+      "collocations": [
+        {"phrase": "have breakfast", "meaning_fa": "صبحانه خوردن"},
+        {"phrase": "have time", "meaning_fa": "وقت داشتن"},
+        {"phrase": "have fun", "meaning_fa": "خوش گذراندن"}
+      ],
+      "phrasal_verbs": [
+        {"phrase": "have on", "meaning_fa": "پوشیدن"},
+        {"phrase": "have up", "meaning_fa": "به مهمانی دعوت کردن"}
+      ]
+    },
+    {
+      "id": 3,
+      "word": "do",
+      "meaning_fa": "انجام دادن",
+      "level": "A1",
+      "examples": [
+        "I do my homework. - من تکالیفم را انجام می‌دهم.",
+        "Do it now! - همین الان انجامش بده!"
+      ],
+      "collocations": [
+        {"phrase": "do homework", "meaning_fa": "تکلیف انجام دادن"},
+        {"phrase": "do well", "meaning_fa": "خوب عمل کردن"}
+      ],
+      "phrasal_verbs": [
+        {"phrase": "do up", "meaning_fa": "بستن (دکمه)"},
+        {"phrase": "do over", "meaning_fa": "دوباره انجام دادن"}
+      ]
+    },
+    {
+      "id": 4,
+      "word": "go",
+      "meaning_fa": "رفتن",
+      "level": "A1",
+      "examples": [
+        "I go to school. - من به مدرسه می‌روم.",
+        "Let's go! - بیا بریم!"
+      ],
+      "collocations": [
+        {"phrase": "go home", "meaning_fa": "به خانه رفتن"},
+        {"phrase": "go shopping", "meaning_fa": "خرید رفتن"}
+      ],
+      "phrasal_verbs": [
+        {"phrase": "go on", "meaning_fa": "ادامه دادن"},
+        {"phrase": "go out", "meaning_fa": "بیرون رفتن"}
+      ]
+    },
+    {
+      "id": 5,
+      "word": "make",
+      "meaning_fa": "ساختن",
+      "level": "A1",
+      "examples": [
+        "I make breakfast. - من صبحانه درست می‌کنم.",
+        "Make a cake. - یک کیک درست کن."
+      ],
+      "collocations": [
+        {"phrase": "make a decision", "meaning_fa": "تصمیم گرفتن"},
+        {"phrase": "make money", "meaning_fa": "پول درآوردن"}
+      ],
+      "phrasal_verbs": [
+        {"phrase": "make up", "meaning_fa": "ساختگی / آشتی کردن"},
+        {"phrase": "make out", "meaning_fa": "تشخیص دادن"}
       ]
     }
   ]
