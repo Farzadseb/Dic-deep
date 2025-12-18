@@ -6,57 +6,60 @@
     <title>farzadseb.github.io | Dic-deep</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <!-- هدر اصلی -->
-        <header class="main-header">
-            <div class="repo-info">
-                <div class="repo-title-section">
-                    <h1 class="repo-title">farzadseb.github.io</h1>
-                    <div class="repo-subtitle">
-                        <h2><i class="fas fa-book"></i> Dic-deep 📖</h2>
-                        <span class="repo-status">Public</span>
-                    </div>
-                </div>
-                
-                <div class="repo-actions">
-                    <button class="action-btn code-btn">
-                        <i class="fas fa-code"></i> Code
-                    </button>
-                    <button class="action-btn">
-                        <i class="far fa-dot-circle"></i> Issues <span class="badge">0</span>
-                    </button>
-                    <button class="action-btn">
-                        <i class="fas fa-code-pull-request"></i> Pull requests <span class="badge">0</span>
-                    </button>
-                    <button class="action-btn">
-                        <i class="fas fa-play"></i> Actions
-                    </button>
+        <header class="header">
+            <div class="repo-header">
+                <h1 class="repo-name">farzadseb.github.io</h1>
+                <h2 class="project-title">
+                    <i class="fas fa-book"></i> Dic-deep
+                </h2>
+                <div class="repo-status">
+                    <span class="public-badge">Public</span>
                 </div>
             </div>
+
+            <!-- نوار اقدامات -->
+            <nav class="actions-nav">
+                <button class="nav-btn active">
+                    <i class="fas fa-code"></i> Code
+                </button>
+                <button class="nav-btn">
+                    <i class="fas fa-exclamation-circle"></i> Issues <span class="count">0</span>
+                </button>
+                <button class="nav-btn">
+                    <i class="fas fa-code-pull-request"></i> Pull requests <span class="count">0</span>
+                </button>
+                <button class="nav-btn">
+                    <i class="fas fa-play"></i> Actions
+                </button>
+            </nav>
         </header>
 
         <!-- محتوای اصلی -->
-        <div class="content-wrapper">
+        <div class="main-content">
             <!-- سایدبار -->
             <aside class="sidebar">
                 <!-- درباره -->
-                <section class="sidebar-section about-section">
-                    <h3><i class="fas fa-info-circle"></i> About ❤</h3>
-                    <p>یک فرهنگ لغت عمیق و پیشرفته برای یادگیری زبان انگلیسی</p>
-                    
-                    <div class="repo-stats">
-                        <div class="stat-item">
+                <section class="card">
+                    <h3 class="card-title">
+                        <i class="fas fa-info-circle"></i> About 🔴
+                    </h3>
+                    <p class="card-text">
+                        یک فرهنگ لغت عمیق و پیشرفته برای یادگیری زبان انگلیسی
+                    </p>
+                    <div class="stats">
+                        <div class="stat">
                             <i class="far fa-star"></i>
                             <span>stars <strong>0</strong></span>
                         </div>
-                        <div class="stat-item">
+                        <div class="stat">
                             <i class="fas fa-code-branch"></i>
                             <span>forks <strong>0</strong></span>
                         </div>
-                        <div class="stat-item">
+                        <div class="stat">
                             <i class="far fa-eye"></i>
                             <span>watching <strong>0</strong></span>
                         </div>
@@ -64,14 +67,16 @@
                 </section>
 
                 <!-- برنچ -->
-                <section class="sidebar-section">
-                    <h3><i class="fas fa-code-branch"></i> Branch 💀️</h3>
+                <section class="card">
+                    <h3 class="card-title">
+                        <i class="fas fa-code-branch"></i> Branch 🔴
+                    </h3>
                     <div class="branch-info">
-                        <div class="current-branch">
+                        <div class="branch">
                             <i class="fas fa-check"></i>
                             <span>main</span>
                         </div>
-                        <div class="stat-item">
+                        <div class="stat">
                             <i class="fas fa-tag"></i>
                             <span>Tags <strong>0</strong></span>
                         </div>
@@ -79,8 +84,10 @@
                 </section>
 
                 <!-- ریلیزها -->
-                <section class="sidebar-section">
-                    <h3><i class="fas fa-tag"></i> Releases ❤</h3>
+                <section class="card">
+                    <h3 class="card-title">
+                        <i class="fas fa-tag"></i> Releases 🔴
+                    </h3>
                     <p class="no-release">No releases published</p>
                     <button class="release-btn">
                         <i class="fas fa-plus"></i> Create a new release
@@ -88,99 +95,122 @@
                 </section>
 
                 <!-- مشارکت کنندگان -->
-                <section class="sidebar-section">
-                    <h3><i class="fas fa-users"></i> Contributors 💀️</h3>
-                    <div class="contributor-card">
-                        <div class="contributor-avatar">
+                <section class="card">
+                    <h3 class="card-title">
+                        <i class="fas fa-users"></i> Contributors 🔴
+                    </h3>
+                    <div class="contributor">
+                        <div class="avatar">
                             <i class="fas fa-user"></i>
                         </div>
-                        <div class="contributor-details">
+                        <div class="contributor-info">
                             <strong>Farzadseb</strong>
-                            <span class="commit-info">latest commit 9 minutes ago</span>
-                            <span class="branch-info">
+                            <span class="commit-time">latest commit 9 minutes ago</span>
+                            <span class="branch-path">
                                 <i class="fas fa-folder"></i> Dic-deep / main
                             </span>
                         </div>
                     </div>
-                    
-                    <div class="file-actions">
-                        <button class="file-action-btn">
+                    <div class="contributor-actions">
+                        <button class="action-btn small">
                             <i class="fas fa-download"></i> Download
                         </button>
-                        <button class="file-action-btn">
+                        <button class="action-btn small">
                             <i class="fas fa-history"></i> History
                         </button>
                     </div>
                 </section>
             </aside>
 
-            <!-- محتوای اصلی -->
-            <main class="main-content">
-                <!-- لیست فایل‌ها -->
-                <div class="files-section">
-                    <div class="files-header">
-                        <h3><i class="fas fa-folder-open"></i> Project Files</h3>
+            <!-- محتوای مرکزی -->
+            <main class="content">
+                <!-- هدر فایل‌ها -->
+                <div class="files-header">
+                    <h3><i class="fas fa-folder-open"></i> Project Files</h3>
+                    <div class="file-actions">
+                        <button class="btn outline">
+                            <i class="fas fa-download"></i> Download ZIP
+                        </button>
+                        <button class="btn outline">
+                            <i class="fas fa-copy"></i> Copy Path
+                        </button>
                     </div>
-                    
-                    <div class="files-list">
-                        <!-- فایل CSS -->
-                        <div class="file-item css-file">
-                            <div class="file-icon">
-                                <i class="fab fa-css3-alt"></i>
-                            </div>
-                            <div class="file-details">
-                                <h4>Main style file</h4>
-                                <p class="file-name">style.css</p>
-                            </div>
-                            <div class="file-time">9 minutes ago</div>
-                        </div>
+                </div>
 
-                        <!-- فایل JS -->
-                        <div class="file-item js-file">
-                            <div class="file-icon">
-                                <i class="fab fa-js"></i>
-                            </div>
-                            <div class="file-details">
-                                <h4>Project script file</h4>
-                                <p class="file-name">script.js</p>
-                            </div>
-                            <div class="file-time">1 hour ago</div>
+                <!-- لیست فایل‌ها -->
+                <div class="files-container">
+                    <!-- فایل CSS -->
+                    <div class="file-item">
+                        <div class="file-icon">
+                            <i class="fab fa-css3-alt"></i>
                         </div>
-
-                        <!-- فایل JSON -->
-                        <div class="file-item json-file">
-                            <div class="file-icon">
-                                <i class="fas fa-database"></i>
-                            </div>
-                            <div class="file-details">
-                                <h4>Words database</h4>
-                                <p class="file-name">Dictionary.json</p>
-                            </div>
-                            <div class="file-time">2 hours ago</div>
+                        <div class="file-details">
+                            <h4>Main style file</h4>
+                            <p class="filename">style.css</p>
+                            <p class="description">CSS styles for the entire project</p>
                         </div>
-
-                        <!-- فایل HTML -->
-                        <div class="file-item html-file">
-                            <div class="file-icon">
-                                <i class="fab fa-html5"></i>
-                            </div>
-                            <div class="file-details">
-                                <h4>Main page</h4>
-                                <p class="file-name">index.html</p>
-                            </div>
-                            <div class="file-time">30 minutes ago</div>
+                        <div class="file-meta">
+                            <span class="time">9 minutes ago</span>
                         </div>
+                    </div>
 
-                        <!-- فایل README -->
-                        <div class="file-item readme-file">
-                            <div class="file-icon">
-                                <i class="fas fa-book"></i>
-                            </div>
-                            <div class="file-details">
-                                <h4>Project documentation</h4>
-                                <p class="file-name">README.md</p>
-                            </div>
-                            <div class="file-time">2 hours ago</div>
+                    <!-- فایل JS -->
+                    <div class="file-item">
+                        <div class="file-icon">
+                            <i class="fab fa-js"></i>
+                        </div>
+                        <div class="file-details">
+                            <h4>Project script file</h4>
+                            <p class="filename">script.js</p>
+                            <p class="description">JavaScript functionality</p>
+                        </div>
+                        <div class="file-meta">
+                            <span class="time">1 hour ago</span>
+                        </div>
+                    </div>
+
+                    <!-- فایل JSON -->
+                    <div class="file-item">
+                        <div class="file-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="file-details">
+                            <h4>Dictionary database</h4>
+                            <p class="filename">dictionary.json</p>
+                            <p class="description">Word database with meanings</p>
+                        </div>
+                        <div class="file-meta">
+                            <span class="time">2 hours ago</span>
+                        </div>
+                    </div>
+
+                    <!-- فایل HTML -->
+                    <div class="file-item">
+                        <div class="file-icon">
+                            <i class="fab fa-html5"></i>
+                        </div>
+                        <div class="file-details">
+                            <h4>Main HTML file</h4>
+                            <p class="filename">index.html</p>
+                            <p class="description">Main project page</p>
+                        </div>
+                        <div class="file-meta">
+                            <span class="time">30 minutes ago</span>
+                        </div>
+                    </div>
+
+                    <!-- فایل README -->
+                    <div class="file-item">
+                        <div class="file-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="file-details">
+                            <h4>Documentation</h4>
+                            <p class="filename">README.md</p>
+                            <p class="description">Project documentation</p>
+                        </div>
+                        <div class="file-meta">
+                            <span class="time">2 hours ago</span>
                         </div>
                     </div>
                 </div>
@@ -188,36 +218,35 @@
                 <!-- بخش README -->
                 <section class="readme-section">
                     <div class="readme-header">
-                        <h3><i class="fas fa-book-open"></i> README.md 📖</h3>
+                        <h3><i class="fas fa-book-open"></i> README.md</h3>
                     </div>
-                    
                     <div class="readme-content">
-                        <h1>Dic-deep - Deep Dictionary</h1>
-                        <p class="lead">An advanced English to Persian dictionary with powerful features</p>
+                        <h1>Dic-deep Dictionary</h1>
+                        <p class="lead">An advanced English-Persian dictionary with intelligent features.</p>
                         
-                        <div class="features-grid">
+                        <div class="features">
                             <div class="feature">
                                 <i class="fas fa-search"></i>
-                                <h4>Smart Search</h4>
-                                <p>Fast and accurate English/Persian word search</p>
+                                <div>
+                                    <h4>Smart Search</h4>
+                                    <p>Find words instantly with intelligent search algorithm.</p>
+                                </div>
                             </div>
                             
                             <div class="feature">
                                 <i class="fas fa-volume-up"></i>
-                                <h4>Accurate Pronunciation</h4>
-                                <p>Correct pronunciation with IPA phonetic symbols</p>
+                                <div>
+                                    <h4>Pronunciation</h4>
+                                    <p>Listen to correct pronunciation of words.</p>
+                                </div>
                             </div>
                             
                             <div class="feature">
                                 <i class="fas fa-comment-alt"></i>
-                                <h4>Usage Examples</h4>
-                                <p>Real-world examples for each word</p>
-                            </div>
-                            
-                            <div class="feature">
-                                <i class="fas fa-brain"></i>
-                                <h4>Leitner System</h4>
-                                <p>Effective learning with Leitner method</p>
+                                <div>
+                                    <h4>Examples</h4>
+                                    <p>See real-world examples for each word.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -226,25 +255,20 @@
         </div>
 
         <!-- فوتر -->
-        <footer class="main-footer">
+        <footer class="footer">
             <div class="footer-content">
-                <div class="footer-section">
-                    <h4><i class="fas fa-copyright"></i> 2023 farzadseb.github.io</h4>
-                    <p>An open-source project for learning English</p>
-                </div>
-                
-                <div class="footer-section">
-                    <div class="tech-stack">
-                        <span class="tech-tag">HTML5</span>
-                        <span class="tech-tag">CSS3</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">JSON</span>
-                    </div>
-                </div>
-                
-                <div class="footer-section">
-                    <a href="https://github.com/farzadseb" class="github-link">
-                        <i class="fab fa-github"></i> farzadseb
+                <p class="copyright">
+                    © 2023 farzadseb.github.io • Open Source Project
+                </p>
+                <div class="footer-links">
+                    <a href="#">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="#">
+                        <i class="fas fa-question-circle"></i> Help
+                    </a>
+                    <a href="#">
+                        <i class="fas fa-code"></i> Source
                     </a>
                 </div>
             </div>
@@ -253,4 +277,4 @@
 
     <script src="script.js"></script>
 </body>
-                    </html>
+</html>
