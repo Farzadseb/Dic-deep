@@ -1,210 +1,340 @@
 <!DOCTYPE html>
-<html lang="fa" dir="ltr">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dic-deep | English-Persian Dictionary</title>
-    <link rel="stylesheet" href="style.css">
+    <title>دیکشنری هوشمند انگلیسی | Dic-deep</title>
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4361ee">
+    
+    <!-- Fonts & Icons -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="container">
-        <!-- هدر اصلی -->
-        <header class="header">
-            <div class="repo-info">
-                <h1 class="repo-name">farzadseb.github.io</h1>
-                <div class="title-section">
-                    <h2>
-                        <i class="fas fa-book"></i> Dic-deep
-                    </h2>
-                    <span class="badge">Public</span>
+<body class="day-mode">
+    
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loader">
+            <i class="fas fa-book-open fa-spin"></i>
+            <h2>در حال بارگذاری دیکشنری هوشمند...</h2>
+            <p>لطفاً چند لحظه صبر کنید</p>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo-area">
+                <i class="fas fa-brain logo-icon"></i>
+                <div class="logo-text">
+                    <h1>Dic-deep</h1>
+                    <p>دیکشنری هوشمند انگلیسی</p>
+                </div>
+            </div>
+            
+            <div class="header-controls">
+                <!-- Theme Toggle -->
+                <div class="control-group">
+                    <button id="themeToggle" class="control-btn" title="تغییر تم">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <span class="control-label">تم</span>
+                </div>
+                
+                <!-- Sound Toggle -->
+                <div class="control-group">
+                    <button id="soundToggle" class="control-btn sound-active" title="خاموش/روشن صدا">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <span class="control-label">صدا</span>
+                </div>
+                
+                <!-- Profile -->
+                <div class="control-group">
+                    <button id="profileBtn" class="control-btn" title="پروفایل کاربری">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <span class="control-label">پروفایل</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <button class="nav-item active" data-page="dictionary">
+                <i class="fas fa-search"></i>
+                <span>جستجو</span>
+            </button>
+            <button class="nav-item" data-page="practice">
+                <i class="fas fa-brain"></i>
+                <span>تمرین</span>
+            </button>
+            <button class="nav-item" data-page="leitner">
+                <i class="fas fa-layer-group"></i>
+                <span>لایتنر</span>
+            </button>
+            <button class="nav-item" data-page="competition">
+                <i class="fas fa-trophy"></i>
+                <span>مسابقه</span>
+            </button>
+            <button class="nav-item" data-page="reports">
+                <i class="fas fa-chart-bar"></i>
+                <span>گزارش</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        
+        <!-- Dictionary Section -->
+        <section id="dictionarySection" class="page active">
+            <div class="section-header">
+                <h2><i class="fas fa-search"></i> جستجوی لغت</h2>
+                <div class="search-stats">
+                    <span class="stat-badge">
+                        <i class="fas fa-database"></i>
+                        <span id="wordCount">۵,۰۰۰+</span> لغت
+                    </span>
                 </div>
             </div>
 
-            <!-- تب‌های ناوبری -->
-            <nav class="tabs">
-                <a href="#" class="tab active">
-                    <i class="fas fa-code"></i> Code
-                </a>
-                <a href="#" class="tab">
-                    <i class="fas fa-exclamation-circle"></i> Issues <span>0</span>
-                </a>
-                <a href="#" class="tab">
-                    <i class="fas fa-code-pull-request"></i> Pull requests <span>0</span>
-                </a>
-                <a href="#" class="tab">
-                    <i class="fas fa-play"></i> Actions
-                </a>
-            </nav>
-        </header>
-
-        <!-- محتوای اصلی -->
-        <div class="main-content">
-            <!-- سایدبار -->
-            <aside class="sidebar">
-                <!-- درباره -->
-                <div class="card">
-                    <h3><i class="fas fa-info-circle"></i> About</h3>
-                    <p>A deep and advanced dictionary for learning English</p>
-                    
-                    <div class="stats">
-                        <div class="stat">
-                            <i class="far fa-star"></i>
-                            <span>Stars: <strong>0</strong></span>
-                        </div>
-                        <div class="stat">
-                            <i class="fas fa-code-branch"></i>
-                            <span>Forks: <strong>0</strong></span>
-                        </div>
-                        <div class="stat">
-                            <i class="far fa-eye"></i>
-                            <span>Watching: <strong>0</strong></span>
-                        </div>
+            <!-- Search Box -->
+            <div class="search-container">
+                <div class="search-box-wrapper">
+                    <div class="search-input-group">
+                        <input type="text" 
+                               id="wordInput" 
+                               class="search-input"
+                               placeholder="لغت انگلیسی را وارد کنید..."
+                               autocomplete="off"
+                               autofocus>
+                        <button id="searchBtn" class="search-button">
+                            <i class="fas fa-search"></i>
+                            جستجو
+                        </button>
+                    </div>
+                    <div class="search-options">
+                        <label class="checkbox-option">
+                            <input type="checkbox" id="autoPlaySound" checked>
+                            <span>پخش خودکار صوت</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" id="autoSave" checked>
+                            <span>ذخیره خودکار در لایتنر</span>
+                        </label>
                     </div>
                 </div>
 
-                <!-- برنچ -->
-                <div class="card">
-                    <h3><i class="fas fa-code-branch"></i> Branch</h3>
-                    <div class="branch">
-                        <i class="fas fa-check"></i>
-                        <span>main</span>
+                <!-- Quick Suggestions -->
+                <div class="quick-suggestions">
+                    <span>پیشنهاد سریع:</span>
+                    <button class="suggestion-tag" data-word="hello">Hello</button>
+                    <button class="suggestion-tag" data-word="computer">Computer</button>
+                    <button class="suggestion-tag" data-word="beautiful">Beautiful</button>
+                    <button class="suggestion-tag" data-word="development">Development</button>
+                </div>
+            </div>
+
+            <!-- Results Area -->
+            <div id="resultsArea" class="results-area">
+                <div class="welcome-card">
+                    <div class="welcome-icon">
+                        <i class="fas fa-language"></i>
                     </div>
-                    <div class="stat">
-                        <i class="fas fa-tag"></i>
-                        <span>Tags: <strong>0</strong></span>
+                    <h3>به Dic-deep خوش آمدید! 🎯</h3>
+                    <p>یک دیکشنری هوشمند با قابلیت‌های پیشرفته:</p>
+                    <ul class="features-list">
+                        <li><i class="fas fa-volume-up"></i> تلفظ با صدای آمریکایی</li>
+                        <li><i class="fas fa-brain"></i> سیستم لایتنر هوشمند</li>
+                        <li><i class="fas fa-trophy"></i> مسابقه زنده با کاربران</li>
+                        <li><i class="fas fa-chart-line"></i> گزارش پیشرفت در تلگرام</li>
+                        <li><i class="fas fa-sun"></i> حالت شب و روز</li>
+                    </ul>
+                    <p class="tip">💡 لغت مورد نظر خود را جستجو کنید یا از پیشنهادات سریع استفاده نمایید.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practice Section -->
+        <section id="practiceSection" class="page">
+            <div class="section-header">
+                <h2><i class="fas fa-brain"></i> تمرین روزانه</h2>
+                <div class="practice-stats">
+                    <div class="stat-card">
+                        <i class="fas fa-calendar-day"></i>
+                        <div>
+                            <div class="stat-value" id="todayTests">۰</div>
+                            <div class="stat-label">تست امروز</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-star"></i>
+                        <div>
+                            <div class="stat-value" id="totalStars">۰</div>
+                            <div class="stat-label">ستاره‌ها</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-fire"></i>
+                        <div>
+                            <div class="stat-value" id="streakDays">۰</div>
+                            <div class="stat-label">روز متوالی</div>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- ریلیز -->
-                <div class="card">
-                    <h3><i class="fas fa-tag"></i> Releases</h3>
-                    <p class="muted">No releases published</p>
-                    <button class="btn">
-                        <i class="fas fa-plus"></i> Create new release
+            <div id="practiceContainer" class="practice-container">
+                <!-- Daily Tests Will Load Here -->
+            </div>
+        </section>
+
+        <!-- Leitner Section -->
+        <section id="leitnerSection" class="page">
+            <div class="section-header">
+                <h2><i class="fas fa-layer-group"></i> سیستم لایتنر</h2>
+                <div class="leitner-controls">
+                    <button id="reviewNowBtn" class="btn-primary">
+                        <i class="fas fa-play-circle"></i> شروع مرور
+                    </button>
+                    <button id="addCustomWord" class="btn-secondary">
+                        <i class="fas fa-plus"></i> افزودن لغت
                     </button>
                 </div>
+            </div>
 
-                <!-- مشارکت کننده -->
-                <div class="card">
-                    <h3><i class="fas fa-users"></i> Contributor</h3>
-                    <div class="contributor">
-                        <div class="avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="info">
-                            <strong>Farzadseb</strong>
-                            <small>Latest commit 9 minutes ago</small>
-                        </div>
-                    </div>
+            <div class="leitner-info">
+                <div class="info-card">
+                    <h4><i class="fas fa-info-circle"></i> نحوه کار سیستم لایتنر</h4>
+                    <p>لغات در ۷ دسته مختلف قرار می‌گیرند و بر اساس زمان‌بندی هوشمند تکرار می‌شوند.</p>
                 </div>
-            </aside>
+            </div>
 
-            <!-- محتوای اصلی -->
-            <main class="content">
-                <!-- فایل‌ها -->
-                <div class="files-section">
-                    <div class="section-header">
-                        <h3><i class="fas fa-folder-open"></i> Project Files</h3>
-                    </div>
+            <div id="leitnerContainer" class="leitner-container">
+                <!-- Leitner Boxes Will Load Here -->
+            </div>
+        </section>
 
-                    <div class="files-list">
-                        <!-- فایل 1 -->
-                        <div class="file">
-                            <div class="file-icon">
-                                <i class="fab fa-css3-alt"></i>
-                            </div>
-                            <div class="file-info">
-                                <h4>Main style file</h4>
-                                <p class="filename">style.css</p>
-                            </div>
-                            <div class="file-time">9 minutes ago</div>
-                        </div>
-
-                        <!-- فایل 2 -->
-                        <div class="file">
-                            <div class="file-icon">
-                                <i class="fab fa-js"></i>
-                            </div>
-                            <div class="file-info">
-                                <h4>Project script</h4>
-                                <p class="filename">script.js</p>
-                            </div>
-                            <div class="file-time">1 hour ago</div>
-                        </div>
-
-                        <!-- فایل 3 -->
-                        <div class="file">
-                            <div class="file-icon">
-                                <i class="fas fa-database"></i>
-                            </div>
-                            <div class="file-info">
-                                <h4>Dictionary data</h4>
-                                <p class="filename">dictionary.json</p>
-                            </div>
-                            <div class="file-time">2 hours ago</div>
-                        </div>
-
-                        <!-- فایل 4 -->
-                        <div class="file">
-                            <div class="file-icon">
-                                <i class="fab fa-html5"></i>
-                            </div>
-                            <div class="file-info">
-                                <h4>Main page</h4>
-                                <p class="filename">index.html</p>
-                            </div>
-                            <div class="file-time">30 minutes ago</div>
-                        </div>
-
-                        <!-- فایل 5 -->
-                        <div class="file">
-                            <div class="file-icon">
-                                <i class="fas fa-book"></i>
-                            </div>
-                            <div class="file-info">
-                                <h4>Documentation</h4>
-                                <p class="filename">README.md</p>
-                            </div>
-                            <div class="file-time">2 hours ago</div>
-                        </div>
-                    </div>
+        <!-- Competition Section -->
+        <section id="competitionSection" class="page">
+            <div class="section-header">
+                <h2><i class="fas fa-trophy"></i> مسابقه زنده</h2>
+                <div class="competition-status">
+                    <span class="status-badge" id="competitionStatus">
+                        <i class="fas fa-wifi"></i> آنلاین
+                    </span>
                 </div>
+            </div>
 
-                <!-- README -->
-                <div class="readme-section">
-                    <div class="section-header">
-                        <h3><i class="fas fa-book-open"></i> README.md</h3>
-                    </div>
-                    
-                    <div class="readme-content">
-                        <h1>Dic-deep Dictionary</h1>
-                        <p class="description">An intelligent English-Persian dictionary project</p>
-                        
-                        <div class="features">
-                            <div class="feature">
-                                <i class="fas fa-search"></i>
-                                <h4>Smart Search</h4>
-                                <p>Quick and accurate word search</p>
-                            </div>
-                            
-                            <div class="feature">
-                                <i class="fas fa-volume-up"></i>
-                                <h4>Pronunciation</h4>
-                                <p>Audio pronunciation for words</p>
-                            </div>
-                        </div>
-                    </div>
+            <div class="competition-options">
+                <div class="option-card">
+                    <i class="fas fa-users"></i>
+                    <h4>مسابقه با کاربران</h4>
+                    <p>با زبان‌آموزان دیگر رقابت کنید</p>
+                    <button id="findPlayerBtn" class="btn-competition">
+                        پیدا کردن حریف
+                    </button>
                 </div>
-            </main>
+                
+                <div class="option-card">
+                    <i class="fas fa-robot"></i>
+                    <h4>مسابقه با هوش مصنوعی</h4>
+                    <p>تمرین با AI (شانس برد: ۸۰٪)</p>
+                    <button id="aiCompetitionBtn" class="btn-competition ai">
+                        شروع با AI
+                    </button>
+                </div>
+            </div>
+
+            <div id="competitionContainer" class="competition-container">
+                <!-- Competition Area -->
+            </div>
+        </section>
+
+        <!-- Reports Section -->
+        <section id="reportsSection" class="page">
+            <div class="section-header">
+                <h2><i class="fas fa-chart-bar"></i> گزارش‌های پیشرفت</h2>
+                <div class="report-actions">
+                    <button id="sendTelegramReport" class="btn-telegram">
+                        <i class="fab fa-telegram"></i> ارسال به تلگرام
+                    </button>
+                    <button id="exportReportBtn" class="btn-secondary">
+                        <i class="fas fa-download"></i> ذخیره PDF
+                    </button>
+                </div>
+            </div>
+
+            <div id="reportsContainer" class="reports-container">
+                <!-- Charts and Reports -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Audio Player (Hidden) -->
+    <audio id="ttsPlayer" preload="auto" style="display: none;"></audio>
+
+    <!-- Modals -->
+    <div id="wordModal" class="modal">
+        <div class="modal-content">
+            <!-- Word Details -->
         </div>
-
-        <!-- فوتر -->
-        <footer class="footer">
-            <p>© 2023 Dic-deep Project | Open Source</p>
-        </footer>
     </div>
 
-    <script src="script.js"></script>
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <!-- Profile -->
+        </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notificationContainer"></div>
+
+    <!-- Contact Fred Modal -->
+    <div id="contactModal" class="modal contact-modal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="contact-content">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <h3>برای پیشرفت بیشتر نیاز به مربی دارید؟</h3>
+                <p>استاد Fred با ۱۰ سال سابقه تدریس زبان انگلیسی آماده کمک به شماست.</p>
+                
+                <div class="contact-methods">
+                    <a href="tel:09017708544" class="contact-btn phone">
+                        <i class="fas fa-phone"></i>
+                        تماس: ۰۹۰۱۷۷۰۸۵۴۴
+                    </a>
+                    <a href="https://wa.me/989017708544" class="contact-btn whatsapp" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        واتساپ
+                    </a>
+                    <a href="tg://resolve?domain=fred_teacher" class="contact-btn telegram">
+                        <i class="fab fa-telegram"></i>
+                        تلگرام
+                    </a>
+                </div>
+                
+                <p class="contact-note">📞 پس از ۵ تست رایگان، برای ادامه یادگیری تماس بگیرید.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="dictionary.js"></script>
+    <script src="tts.js"></script>
+    <script src="leitner.js"></script>
+    <script src="telegram.js"></script>
+    <script src="competition.js"></script>
+    <script src="tests.js"></script>
+    <script src="app.js"></script>
 </body>
-                            </html>
+                </html>
