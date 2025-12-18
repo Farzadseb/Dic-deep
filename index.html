@@ -878,3 +878,385 @@
                 this.saveSettings();
                 this.updateDisplay();
                 return this.settings.autoPlay;
+            }
+            
+            isAvailable() {
+                return !!window.speechSynthesis;
+            }
+            
+            saveSettings() {
+                localStorage.setItem('dicdeep-tts-settings', JSON.stringify(this.settings));
+            }
+            
+            loadSettings() {
+                const saved = localStorage.getItem('dicdeep-tts-settings');
+                if (saved) {
+                    Object.assign(this.settings, JSON.parse(saved));
+                }
+                this.updateDisplay();
+            }
+            
+            updateDisplay() {
+                const speedDisplay = document.getElementById('speed-display');
+                if (speedDisplay) {
+                    speedDisplay.textContent = this.settings.speed.toFixed(1) + 'x';
+                }
+                
+                const autoplayBtn = document.getElementById('autoplay-btn');
+                const autoplayIcon = document.getElementById('autoplay-icon');
+                const autoplayText = document.getElementById('autoplay-text');
+                
+                if (autoplayBtn && autoplayIcon && autoplayText) {
+                    if (this.settings.autoPlay) {
+                        autoplayIcon.className = 'fas fa-volume-up';
+                        autoplayText.textContent = 'پخش خودکار: روشن';
+                        autoplayBtn.classList.add('active');
+                    } else {
+                        autoplayIcon.className = 'fas fa-volume-mute';
+                        autoplayText.textContent = 'پخش خودکار: خاموش';
+                        autoplayBtn.classList.remove('active');
+                    }
+                }
+            }
+        }
+        
+        // ایجاد نمونه TTS
+        const tts = new TTSSystem();
+        
+        // 🎯 توابع اصلی
+        function searchWord() {
+            const input = document.getElementById('searchInput');
+            const word = input.value.toLowerCase().trim();
+            const resultsDiv = document.getElementById('searchResults');
+            
+            if (!word) {
+                showError('لطفاً یک لغت انگلیسی وارد کنید');
+                return;
+            }
+            
+            // پنهان کردن پیام خوش‌آمدگویی
+            document.getElementById('welcomeMessage').style.display = 'none';
+            document.getElementById('initialLoading').style.display = 'none';
+            
+            if (dictionary[word]) {
+                displayWord(word, dictionary[word]);
+                
+                // پخش خودکار اگر فعال باشد
+                if (tts.settings.autoPlay) {
+                    setTimeout(() => {
+                        playWordAudio(word);
+                    }, 300);
+                }
+            } else {
+                showWordNotFound(word);
+            }
+        }
+        
+        function displayWord(word, data) {
+            const resultsDiv = document.getElementById('searchResults');
+            
+            // ایجاد مثال‌ها
+            let examplesHTML = '';
+            data.examples.forEach((example, index) => {
+                examplesHTML += `
+                    <div class="example-item">
+                        <div>
+                            <div class="example-text">${example.en}</div>
+                            <div class="example-translation">${example.fa}</div>
+                        </div>
+                        <button class="example-audio-btn" onclick="playExampleAudio('${example.en.replace(/'/g, "\\'")}')" title="پخش مثال">
+                            <i class="fas fa-play"></i>
+                        </button>
+                    </div>
+                `;
+            });
+            
+            // ایجاد کالوکیشن‌ها
+            let collocationsHTML = '';
+            if (data.collocations && data.collocations.length > 0) {
+                data.collocations.forEach(coll => {
+                    collocationsHTML += `
+                        <div class="collocation-tag">
+                            <i class="fas fa-link"></i>
+                            ${coll.phrase} (${coll.meaning})
+                        </div>
+                    `;
+                });
+            }
+            
+            // ایجاد phrasal verbs
+            let phrasalHTML = '';
+            if (data.phrasal_verbs && data.phrasal_verbs.length > 0) {
+                data.phrasal_verbs.forEach(ph => {
+                    phrasalHTML += `
+                        <div class="phrasal-tag">
+                            <i class="fas fa-bolt"></i>
+                            ${ph.phrase} (${ph.meaning})
+                        </div>
+                    `;
+                });
+            }
+            
+            // HTML نهایی
+            const html = `
+                <div class="word-card">
+                    <div class="word-header">
+                        <div class="word-title">
+                            <div>
+                                <div class="word-text">${word}</div>
+                                <div class="word-meaning">${data.meaning}</div>
+                            </div>
+                        </div>
+                        <div class="word-audio">
+                            <button class="play-btn" onclick="playWordAudio('${word}')" id="play-${word}">
+                                <i class="fas fa-play-circle"></i>
+                                پخش تلفظ
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <h3 class="section-title">
+                        <i class="fas fa-comment-dots"></i>
+                        مثال‌ها
+                    </h3>
+                    <div class="examples-list">
+                        ${examplesHTML}
+                    </div>
+                    
+                    ${collocationsHTML ? `
+                        <h3 class="section-title">
+                            <i class="fas fa-link"></i>
+                            کالوکیشن‌ها
+                        </h3>
+                        <div class="collocations-container">
+                            ${collocationsHTML}
+                        </div>
+                    ` : ''}
+                    
+                    ${phrasalHTML ? `
+                        <h3 class="section-title">
+                            <i class="fas fa-bolt"></i>
+                            Phrasal Verbs
+                        </h3>
+                        <div class="collocations-container">
+                            ${phrasalHTML}
+                        </div>
+                    ` : ''}
+                    
+                    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px dashed #dee2e6; text-align: center; color: var(--gray); font-size: 0.9rem;">
+                        <i class="fas fa-info-circle"></i>
+                        سطح: A1 | این لغت در بانک اطلاعاتی ۲۰۰ لغت ضروری انگلیسی قرار دارد
+                    </div>
+                </div>
+            `;
+            
+            resultsDiv.innerHTML = html;
+        }
+        
+        function showWordNotFound(word) {
+            const resultsDiv = document.getElementById('searchResults');
+            const suggestions = Object.keys(dictionary).slice(0, 6);
+            
+            const html = `
+                <div class="error-message">
+                    <h3 style="color: #856404; margin-bottom: 15px;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        لغت "${word}" یافت نشد
+                    </h3>
+                    <p style="margin-bottom: 20px;">این لغت در دیکشنری فعلی موجود نیست. می‌توانید این لغات را امتحان کنید:</p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
+                        ${suggestions.map(w => `
+                            <button class="tts-btn" style="background: var(--primary); color: white;" 
+                                    onclick="document.getElementById('searchInput').value='${w}'; searchWord();">
+                                <i class="fas fa-search"></i>
+                                ${w}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            resultsDiv.innerHTML = html;
+        }
+        
+        function showError(message) {
+            const resultsDiv = document.getElementById('searchResults');
+            resultsDiv.innerHTML = `
+                <div class="error-message">
+                    <i class="fas fa-exclamation-circle"></i>
+                    ${message}
+                </div>
+            `;
+        }
+        
+        // 🔊 توابع صوتی
+        function playWordAudio(word) {
+            if (!tts.isAvailable()) {
+                alert('مرورگر شما از قابلیت Text-to-Speech پشتیبانی نمی‌کند. لطفاً از Chrome یا Edge استفاده کنید.');
+                return;
+            }
+            
+            const button = document.getElementById(`play-${word}`);
+            if (button) {
+                button.innerHTML = '<i class="fas fa-pause-circle"></i> در حال پخش...';
+                button.classList.add('playing');
+            }
+            
+            const success = tts.speak(word, (success) => {
+                if (button) {
+                    button.innerHTML = '<i class="fas fa-play-circle"></i> پخش مجدد';
+                    button.classList.remove('playing');
+                }
+            });
+            
+            if (!success) {
+                if (button) {
+                    button.innerHTML = '<i class="fas fa-play-circle"></i> خطا در پخش';
+                    button.classList.remove('playing');
+                }
+            }
+        }
+        
+        function playExampleAudio(text) {
+            tts.speak(text);
+        }
+        
+        // 🎛️ کنترل‌های TTS
+        function toggleAutoPlay() {
+            tts.toggleAutoPlay();
+        }
+        
+        function changeSpeed(delta) {
+            tts.setSpeed(tts.settings.speed + delta);
+        }
+        
+        function testTTS() {
+            if (tts.isAvailable()) {
+                tts.speak('Welcome to Dic-deep dictionary');
+                showNotification('✅ سیستم صوت فعال است!', 'success');
+            } else {
+                showNotification('❌ سیستم صوت در مرورگر شما فعال نیست', 'error');
+            }
+        }
+        
+        // 📱 توابع کمکی
+        function showNotification(message, type = 'info') {
+            const colors = {
+                success: '#4CAF50',
+                error: '#F44336',
+                info: '#2196F3'
+            };
+            
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: ${colors[type] || colors.info};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+                z-index: 10000;
+                animation: slideDown 0.3s ease;
+                max-width: 90%;
+                text-align: center;
+            `;
+            
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                ${message}
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideUp 0.3s ease';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+        
+        function showHelp() {
+            alert(`📖 راهنمای استفاده از Dic-deep:
+
+1. لغت انگلیسی را در کادر جستجو وارد کنید
+2. Enter بزنید یا روی دکمه 🔍 کلیک کنید
+3. معنی، مثال‌ها و تلفظ لغت نمایش داده می‌شود
+4. صوت به طور خودکار با سرعت ۰.۷ پخش می‌شود
+5. برای پخش مثال‌ها روی دکمه 🔊 کنار هر مثال کلیک کنید
+6. می‌توانید پخش خودکار را خاموش یا سرعت را تغییر دهید
+
+لغات موجود: be, have, go, come, do, make`);
+        }
+        
+        function showAbout() {
+            alert(`ℹ️ درباره Dic-deep:
+
+Dic-deep یک دیکشنری هوشمند انگلیسی-فارسی است که با تکنولوژی‌های مدرن طراحی شده است.
+
+ویژگی‌های اصلی:
+• پخش خودکار صوت با TTS
+• بانک اطلاعاتی ۲۰۰ لغت ضروری A1
+• سیستم لایتنر برای تمرین هوشمند
+• تمرین‌های شنیداری
+• طراحی واکنش‌گرا و مدرن
+
+نسخه: ۲.۰
+توسعه‌دهنده: farzadseb
+تاریخ: دی ۱۴۰۲`);
+        }
+        
+        function showContact() {
+            alert(`📞 تماس با ما:
+
+• GitHub: https://github.com/farzadseb/Dic-deep
+• ایمیل: در دسترس در صفحه GitHub
+
+اگر پیشنهاد، انتقاد یا مشکل فنی دارید، از طریق GitHub با ما در ارتباط باشید.`);
+        }
+        
+        // 🚀 شروع برنامه
+        window.addEventListener('DOMContentLoaded', () => {
+            // پنهان کردن loading اولیه بعد از ۲ ثانیه
+            setTimeout(() => {
+                document.getElementById('initialLoading').style.display = 'none';
+                document.getElementById('welcomeMessage').style.display = 'block';
+            }, 1500);
+            
+            // فعال کردن جستجو با Enter
+            document.getElementById('searchInput').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    searchWord();
+                }
+            });
+            
+            // نمایش وضعیت TTS
+            if (!tts.isAvailable()) {
+                document.getElementById('autoplay-btn').style.opacity = '0.6';
+                document.getElementById('autoplay-btn').title = 'TTS در مرورگر شما پشتیبانی نمی‌شود';
+            }
+            
+            console.log('🎉 Dic-deep بارگذاری شد!');
+            console.log('🔊 سیستم TTS:', tts.isAvailable() ? 'فعال' : 'غیرفعال');
+            console.log('📚 تعداد لغات:', Object.keys(dictionary).length);
+        });
+        
+        // اضافه کردن استایل‌های انیمیشن برای notification
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideDown {
+                from { transform: translate(-50%, -100%); opacity: 0; }
+                to { transform: translate(-50%, 0); opacity: 1; }
+            }
+            @keyframes slideUp {
+                from { transform: translate(-50%, 0); opacity: 1; }
+                to { transform: translate(-50%, -100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+                    </html>
