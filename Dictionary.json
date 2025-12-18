@@ -1,0 +1,21 @@
+{
+  "name": "Dic-deep",
+  "description": "دیکشنری هوشمند انگلیسی-فارسی با تمرین هوشمند",
+  "version": "1.0.0",
+  "words": [
+    {
+      "word": "be",
+      "meaning_fa": "بودن",
+      "examples": [
+        "I want to be a teacher. - من می‌خواهم یک معلم باشم."
+      ],
+      "collocations": [
+        {"phrase": "be happy", "meaning_fa": "خوشحال بودن"},
+        {"phrase": "be ready", "meaning_fa": "آماده بودن"}
+      ],
+      "phrasal_verbs": [
+        {"phrase": "be up to", "meaning_fa": "در حال برنامه ریزی بودن"}
+      ]
+    }
+  ]
+}
