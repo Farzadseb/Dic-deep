@@ -1,41 +1,377 @@
-/* فایل اصلی استایل */
-:root {
-    --primary: #4361ee;
-    --secondary: #3a0ca3;
-    --accent: #f72585;
-    --success: #4cc9f0;
-    --warning: #f8961e;
-    --dark: #1a1a2e;
-    --light: #f8f9fa;
-    --gray: #6c757d;
-    --border-radius: 16px;
-    --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
-}
-
+/* استایل ساده فرهنگ لغت */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Vazirmatn', 'Segoe UI', Tahoma, sans-serif;
+    font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     color: #333;
+    line-height: 1.6;
+    direction: rtl;
     min-height: 100vh;
-    line-height: 1.8;
-    padding: 20px;
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 800px;
     margin: 0 auto;
-    background: white;
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
-    min-height: 90vh;
+    padding: 20px;
 }
 
-/* ادامه استایل‌ها... */
+/* هدر */
+.search-header {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.search-box i {
+    color: #666;
+    font-size: 20px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: border 0.3s;
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: #4a6cf7;
+}
+
+.search-btn {
+    background: #4a6cf7;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.search-btn:hover {
+    background: #3a5ce5;
+}
+
+.page-title {
+    color: #2d3748;
+    font-size: 24px;
+    text-align: center;
+    padding: 10px 0;
+    border-bottom: 2px solid #4a6cf7;
+    display: inline-block;
+    margin: 0 auto;
+    display: block;
+}
+
+/* کلمات سریع */
+.quick-words {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+
+.word-tag {
+    background: white;
+    padding: 12px 20px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    min-width: 120px;
+    justify-content: space-between;
+}
+
+.word-tag:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.en-word {
+    font-weight: bold;
+    font-size: 18px;
+    color: #2d3748;
+}
+
+.copy-btn {
+    background: #e8f4ff;
+    color: #4a6cf7;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.copy-btn:hover {
+    background: #d4e7ff;
+}
+
+/* کارت لغت */
+.dictionary-content {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.word-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+.word-card.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.word-header {
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.english-word {
+    font-size: 36px;
+    color: #2d3748;
+    margin-bottom: 10px;
+}
+
+.word-info {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.persian-word {
+    font-size: 24px;
+    color: #4a5568;
+    background: #f8f9fa;
+    padding: 8px 15px;
+    border-radius: 8px;
+    border-right: 4px solid #4a6cf7;
+}
+
+.pronunciation {
+    color: #718096;
+    font-style: italic;
+    font-size: 18px;
+}
+
+/* بخش مثال‌ها */
+.examples-section {
+    margin-top: 20px;
+}
+
+.examples-section h3 {
+    color: #4a5568;
+    margin-bottom: 20px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.examples-section h3 i {
+    transition: transform 0.3s;
+}
+
+.example-item {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-right: 3px solid #cbd5e0;
+}
+
+.example-header {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.example-number {
+    background: #4a6cf7;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.example-type {
+    color: #718096;
+    font-size: 14px;
+}
+
+.example-text {
+    padding: 8px 0;
+    font-size: 18px;
+}
+
+.english-example {
+    color: #2d3748;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.persian-example {
+    color: #4a5568;
+    padding-right: 15px;
+    border-right: 2px solid #e2e8f0;
+}
+
+/* فوتر کارت */
+.word-footer {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.note {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #718096;
+    font-size: 15px;
+    background: #f7fafc;
+    padding: 15px;
+    border-radius: 10px;
+    border-right: 3px solid #ecc94b;
+}
+
+.note i {
+    color: #ecc94b;
+    font-size: 18px;
+}
+
+/* فوتر صفحه */
+.dictionary-footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 25px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.dictionary-footer p {
+    color: #4a5568;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: #4a6cf7;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: all 0.3s;
+    background: #f0f4ff;
+}
+
+.footer-links a:hover {
+    background: #4a6cf7;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* ریسپانسیو */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .search-box {
+        flex-direction: column;
+    }
+    
+    .quick-words {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .word-tag {
+        min-width: auto;
+        justify-content: space-between;
+    }
+    
+    .english-word {
+        font-size: 28px;
+    }
+    
+    .persian-word {
+        font-size: 20px;
+    }
+    
+    .word-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .footer-links {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-header {
+        padding: 15px;
+    }
+    
+    .word-card {
+        padding: 20px;
+    }
+    
+    .example-item {
+        padding: 15px;
+    }
+    
+    .example-text {
+        font-size: 16px;
+    }
+    }
