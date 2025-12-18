@@ -1,12 +1,14 @@
-// اسکریپت برای Dic-deep
+// اسکریپت ساده و تمیز
 document.addEventListener('DOMContentLoaded', function() {
-    // تعامل با دکمه‌ها
-    const actionButtons = document.querySelectorAll('.action-btn');
+    // تعامل با دکمه‌های ناوبری
+    const navButtons = document.querySelectorAll('.nav-btn');
     
-    actionButtons.forEach(button => {
+    navButtons.forEach(button => {
         button.addEventListener('click', function() {
-            const text = this.textContent.trim();
-            alert(`Clicked: ${text}`);
+            // حذف کلاس active از همه دکمه‌ها
+            navButtons.forEach(btn => btn.classList.remove('active'));
+            // اضافه کردن کلاس active به دکمه کلیک شده
+            this.classList.add('active');
         });
     });
 
@@ -14,61 +16,82 @@ document.addEventListener('DOMContentLoaded', function() {
     const fileItems = document.querySelectorAll('.file-item');
     
     fileItems.forEach(item => {
-        item.addEventListener('click', function(e) {
-            if (e.target.closest('.file-action-btn')) return;
+        item.addEventListener('click', function() {
+            const fileName = this.querySelector('.filename').textContent;
             
-            const fileName = this.querySelector('.file-name').textContent;
-            const fileType = fileName.split('.').pop();
-            
-            // ایجاد انیمیشن انتخاب
-            this.style.backgroundColor = 'rgba(45, 164, 78, 0.1)';
-            this.style.borderColor = 'var(--primary-color)';
+            // انیمیشن انتخاب
+            this.style.transform = 'translateX(4px)';
+            this.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.1)';
             
             setTimeout(() => {
-                this.style.backgroundColor = '';
-                this.style.borderColor = '';
-            }, 500);
+                this.style.transform = '';
+                this.style.boxShadow = '';
+            }, 300);
             
-            console.log(`Selected: ${fileName} (${fileType.toUpperCase()})`);
+            console.log(`Selected file: ${fileName}`);
         });
     });
 
-    // دکمه‌های سایدبار
+    // دکمه ایجاد ریلیز جدید
     const releaseBtn = document.querySelector('.release-btn');
     if (releaseBtn) {
         releaseBtn.addEventListener('click', function() {
-            const modal = document.createElement('div');
-            modal.innerHTML = `
-                <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000;">
-                    <div style="background: white; padding: 30px; border-radius: 12px; max-width: 400px; width: 90%;">
-                        <h3 style="margin-bottom: 15px;">Create New Release</h3>
-                        <p style="margin-bottom: 20px; color: var(--text-secondary);">This feature is under development.</p>
-                        <button onclick="this.closest('div').remove()" style="padding: 8px 20px; background: var(--primary-color); color: white; border: none; border-radius: 6px; cursor: pointer;">Close</button>
-                    </div>
-                </div>
-            `;
-            document.body.appendChild(modal);
+            alert('Create New Release feature will be available soon!');
         });
     }
 
-    // تغییر تم (تاریک/روشن)
-    const themeToggle = document.createElement('button');
-    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-    themeToggle.style.position = 'fixed';
-    themeToggle.style.bottom = '20px';
-    themeToggle.style.right = '20px';
-    themeToggle.style.padding = '12px';
-    themeToggle.style.background = 'var(--primary-color)';
-    themeToggle.style.color = 'white';
-    themeToggle.style.border = 'none';
-    themeToggle.style.borderRadius = '50%';
-    themeToggle.style.cursor = 'pointer';
-    themeToggle.style.zIndex = '100';
+    // دکمه دانلود
+    const downloadBtn = document.querySelector('.contributor-actions .action-btn:first-child');
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', function() {
+            alert('Download feature is under development!');
+        });
+    }
+
+    // بروزرسانی زمان‌ها
+    function updateTimes() {
+        const times = document.querySelectorAll('.time');
+        const now = new Date();
+        
+        times.forEach(timeElement => {
+            const hoursAgo = Math.floor(Math.random() * 5);
+            if (hoursAgo === 0) {
+                timeElement.textContent = 'just now';
+            } else if (hoursAgo === 1) {
+                timeElement.textContent = '1 hour ago';
+            } else {
+                timeElement.textContent = `${hoursAgo} hours ago`;
+            }
+        });
+    }
     
-    themeToggle.addEventListener('click', function() {
-        document.body.classList.toggle('dark-theme');
+    // بروزرسانی زمان هر 30 ثانیه
+    setInterval(updateTimes, 30000);
+
+    // تغییر تم ساده
+    const themeBtn = document.createElement('button');
+    themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
+    themeBtn.className = 'theme-toggle';
+    themeBtn.style.position = 'fixed';
+    themeBtn.style.bottom = '20px';
+    themeBtn.style.right = '20px';
+    themeBtn.style.background = 'var(--primary)';
+    themeBtn.style.color = 'white';
+    themeBtn.style.border = 'none';
+    themeBtn.style.borderRadius = '50%';
+    themeBtn.style.width = '50px';
+    themeBtn.style.height = '50px';
+    themeBtn.style.cursor = 'pointer';
+    themeBtn.style.zIndex = '1000';
+    themeBtn.style.display = 'flex';
+    themeBtn.style.alignItems = 'center';
+    themeBtn.style.justifyContent = 'center';
+    themeBtn.style.fontSize = '20px';
+    
+    themeBtn.addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
         const icon = this.querySelector('i');
-        if (document.body.classList.contains('dark-theme')) {
+        if (document.body.classList.contains('dark-mode')) {
             icon.classList.remove('fa-moon');
             icon.classList.add('fa-sun');
         } else {
@@ -77,45 +100,38 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    document.body.appendChild(themeToggle);
+    document.body.appendChild(themeBtn);
 
     // استایل تم تاریک
-    const darkThemeStyle = document.createElement('style');
-    darkThemeStyle.textContent = `
-        .dark-theme {
-            --background-color: #0d1117;
-            --surface-color: #161b22;
-            --border-color: #30363d;
+    const darkModeStyle = document.createElement('style');
+    darkModeStyle.textContent = `
+        .dark-mode {
+            --background: #0d1117;
+            --surface: #161b22;
+            --border: #30363d;
             --text-primary: #c9d1d9;
             --text-secondary: #8b949e;
             --text-muted: #6e7681;
+            --secondary: #21262d;
         }
         
-        .dark-theme .sidebar-section,
-        .dark-theme .files-section,
-        .dark-theme .readme-section {
-            background-color: var(--surface-color);
+        .dark-mode .card,
+        .dark-mode .files-container,
+        .dark-mode .readme-section {
+            background: var(--surface);
         }
         
-        .dark-theme .file-item:hover {
-            background-color: rgba(255, 255, 255, 0.05);
+        .dark-mode .header {
+            background: linear-gradient(135deg, var(--surface) 0%, #0d1117 100%);
         }
         
-        .dark-theme .feature {
-            background-color: rgba(255, 255, 255, 0.05);
+        .dark-mode .btn {
+            background: var(--surface);
+        }
+        
+        .dark-mode .file-item:hover {
+            background: rgba(255, 255, 255, 0.05);
         }
     `;
-    document.head.appendChild(darkThemeStyle);
-
-    // بارگذاری دیتای فایل‌ها
-    function updateFileTimes() {
-        const fileTimes = document.querySelectorAll('.file-time');
-        const times = ['just now', '1 hour ago', '2 hours ago', '30 minutes ago', '2 hours ago'];
-        
-        fileTimes.forEach((timeElement, index) => {
-            timeElement.textContent = times[index];
-        });
-    }
-    
-    updateFileTimes();
+    document.head.appendChild(darkModeStyle);
 });
