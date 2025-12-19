@@ -1,262 +1,212 @@
-class DictionaryModule {
-    constructor(app) {
-        this.app = app;
-        this.dictionary = this.createDictionary();
-    }
-    
-    init() {
-        console.log('📚 Dictionary Module Initialized');
-        this.setupEventListeners();
-        this.updateStats();
-        this.loadSampleWords();
-    }
-    
-    // دیتابیس لغات
-    createDictionary() {
-        return {
-            'hello': {
-                word: 'hello',
-                persian: 'سلام',
-                english: 'a greeting when you meet someone',
-                examples: ['Hello, how are you?', 'She said hello to everyone.'],
-                collocations: ['say hello', 'hello there', 'hello everyone'],
-                phrases: [{ phrase: 'Hello there!', meaning: 'سلام! (رسمی‌تر)', example: 'Hello there! How have you been?' }],
-                level: 'A1'
-            },
-            'good': {
-                word: 'good',
-                persian: 'خوب',
-                english: 'of a high quality or standard',
-                examples: ['This is good food.', 'He is a good teacher.'],
-                collocations: ['good morning', 'good idea', 'good job', 'good friend'],
-                phrases: [{ phrase: 'good for you', meaning: 'آفرین', example: 'You passed the exam? Good for you!' }],
-                level: 'A1'
-            },
-            'go': {
-                word: 'go',
-                persian: 'رفتن',
-                english: 'to move or travel to a place',
-                examples: ['I go to school every day.', 'Let\'s go to the park.'],
-                collocations: ['go home', 'go to school', 'go shopping', 'go crazy'],
-                phrasalVerbs: [
-                    { verb: 'go on', meaning: 'ادامه دادن', example: 'Please go on with your story.' },
-                    { verb: 'go out', meaning: 'بیرون رفتن', example: 'We go out every Friday.' }
-                ],
-                phrases: [
-                    { phrase: 'go ahead', meaning: 'برو جلو', example: 'Can I use your phone? Go ahead!' },
-                    { phrase: 'go away', meaning: 'برو', example: 'Go away and leave me alone.' }
-                ],
-                level: 'A1'
-            }
-            // ... لغات بیشتر
-        };
-    }
-    
-    setupEventListeners() {
-        // جستجو
-        const searchBtn = document.getElementById('searchBtn');
-        const wordInput = document.getElementById('wordInput');
-        
-        if (searchBtn && wordInput) {
-            searchBtn.addEventListener('click', () => this.searchWord());
-            
-            wordInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    this.searchWord();
-                }
-            });
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FredDic Pro - Master Final</title>
+    <style>
+        :root {
+            --bg: #f0f2f5; --shadow: 10px 10px 20px #d1d9e6, -10px -10px 20px #ffffff;
+            --text: #1a1a1a; --blue: #0044cc; --red: #cc0000; --green: #008800;
         }
+        [data-theme="dark"] {
+            --bg: #121212; --shadow: 8px 8px 16px #000, -8px -8px 16px #2a2a2a;
+            --text: #ffffff; --blue: #4d94ff; --red: #ff4d4d; --green: #33ff99;
+        }
+        body { background: var(--bg); font-family: sans-serif; margin: 0; padding: 15px; color: var(--text); direction: rtl; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        .app { width: 100%; max-width: 480px; padding-bottom: 140px; }
         
-        // پیشنهادات سریع
-        document.querySelectorAll('.suggestion-tag').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const word = e.currentTarget.dataset.word;
-                wordInput.value = word;
-                this.searchWord();
-            });
+        /* هدر */
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; direction: ltr; }
+        .circle-btn { width: 60px; height: 60px; border-radius: 18px; border: none; background: var(--bg); box-shadow: var(--shadow); cursor: pointer; font-size: 28px; display: flex; align-items: center; justify-content: center; color: var(--text); outline: none; }
+        h1 { font-size: 26px; color: var(--blue); margin: 0; font-weight: 900; }
+
+        /* جستجو */
+        .search-area { display: flex; gap: 10px; margin-bottom: 15px; direction: ltr; }
+        input#wordInput { flex: 1; padding: 18px; border-radius: 22px; border: none; background: var(--bg); box-shadow: inset 5px 5px 10px #d1d9e6; font-size: 28px; font-weight: bold; outline: none; color: var(--text); text-align: center; }
+
+        /* کادر اصلی معنی (ارتفاع بهینه) */
+        #resultCard, #quizArea { display: none; width: 100%; }
+        .main-card { background: var(--bg); border-radius: 30px; padding: 10px; box-shadow: var(--shadow); text-align: center; margin-bottom: 15px; min-height: 85px; display: flex; flex-direction: column; justify-content: center; }
+        #wordTitle { font-size: 45px; margin: 0; color: var(--blue); text-transform: uppercase; cursor: pointer; }
+        #txtFarsiMain { font-size: 28px; color: var(--red); font-weight: bold; display: block; }
+
+        /* کالوکیشن‌ها و فریزال‌ورب‌ها */
+        .info-card { background: var(--bg); border-radius: 25px; padding: 18px; box-shadow: var(--shadow); margin-bottom: 15px; text-align: left; direction: ltr; border-left: 10px solid var(--blue); }
+        .big-item { 
+            font-size: 32px; /* انگلیسی 1.5 برابر */
+            font-weight: 900; 
+            display: block; 
+            padding: 12px 0; 
+            border-bottom: 1px solid rgba(128,128,128,0.1); 
+            cursor: pointer; 
+            line-height: 1.1;
+        }
+        .big-item i { 
+            font-size: 48px; /* معنی 2.25 برابر */
+            color: var(--green); 
+            font-style: normal; 
+            display: block; 
+            margin-top: 5px; 
+            font-weight: 900; 
+            direction: rtl; 
+            text-align: right;
+            line-height: 1.2;
+        }
+
+        /* دکمه‌ها و نوار وضعیت */
+        .btn-group { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+        .btn-lg { width: 100%; padding: 18px; border-radius: 22px; border: none; color: white; font-weight: 900; font-size: 22px; cursor: pointer; }
+        .status-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg); padding: 15px; display: flex; justify-content: space-around; font-size: 22px; font-weight: 900; box-shadow: 0 -8px 25px rgba(0,0,0,0.1); border-radius: 35px 35px 0 0; z-index: 100; }
+    </style>
+</head>
+<body>
+
+<div class="app">
+    <div class="header">
+        <button class="circle-btn" onclick="toggleTheme()">🌓</button>
+        <h1 id="userLabel">FredDic</h1>
+        <button class="circle-btn" onclick="toggleMute()" id="muteBtn">🔊</button>
+    </div>
+
+    <div class="search-area">
+        <input type="text" id="wordInput" placeholder="English / فارسی" onkeypress="if(event.key==='Enter') handleSearch()">
+        <button class="circle-btn" onclick="handleSearch()">🔍</button>
+    </div>
+
+    <div id="resultCard">
+        <div class="main-card">
+            <h2 id="wordTitle" onclick="speak(this.innerText)"></h2>
+            <span id="txtFarsiMain"></span>
+        </div>
+        <div class="info-card"><span style="font-size:16px; font-weight:900; color:var(--blue)">🔗 COLLOCATIONS</span><div id="colList"></div></div>
+        <div class="info-card" style="border-left-color: var(--red);"><span style="font-size:16px; font-weight:900; color:var(--red)">💡 PHRASAL VERBS</span><div id="phrList"></div></div>
+    </div>
+
+    <div id="quizArea" class="main-card">
+        <h3 id="qText" style="font-size: 26px;"></h3>
+        <div id="qOpts"></div>
+    </div>
+
+    <div class="btn-group">
+        <button class="btn-lg" style="background: var(--green);" onclick="openLeitner()">🗂 لایتنر <span id="countL">(0)</span></button>
+        <button class="btn-lg" style="background: #e67e22;" onclick="startQuiz()">📝 تست روزانه</button>
+        <button class="btn-lg" style="background: #6366f1;" onclick="loginUser()">👤 ورود کاربر</button>
+    </div>
+</div>
+
+<div class="status-bar">
+    <span>⭐ <span id="stars">0</span></span>
+    <span>🏆 <span id="cups">0</span></span>
+    <span>📝 <span id="tests">0</span></span>
+</div>
+
+<script>
+    const BOT_TOKEN = '8553224514:AAG0XXzA8da55jCGXnzStP-0IxHhnfkTPRw';
+    const CHAT_ID = '96991859';
+
+    // دیتابیس هوشمند
+    const pdcsDb = {
+        "get": { f: "گرفتن - رسیدن", col: ["get married - ازدواج کردن", "get ready - آماده شدن", "get a job - پیدا کردن شغل"], phr: ["get up - بیدار شدن", "get in - وارد شدن"] },
+        "take": { f: "برداشتن - بردن", col: ["take a photo - عکس گرفتن", "take a break - استراحت کردن"], phr: ["take off - بلند شدن", "take care - مراقبت کردن"] },
+        "go": { f: "رفتن", col: ["go home - رفتن به خانه", "go shopping - خرید رفتن"], phr: ["go on - ادامه دادن", "go out - بیرون رفتن"] }
+    };
+
+    let leitner = JSON.parse(localStorage.getItem('leitner')) || [];
+    let stats = JSON.parse(localStorage.getItem('stats')) || { s: 0, c: 0, t: 0 };
+    let user = localStorage.getItem('user') || "FredDic";
+    let isMuted = false;
+
+    // گزارش‌دهی هوشمند (فقط در صورت اتصال به اینترنت)
+    function sendReport() {
+        if (!navigator.onLine) return;
+        const msg = `📊 FredDic Status\n👤 User: ${user}\n⭐ Score: ${stats.s}\n🏆 Cups: ${stats.c}\n📝 Tests: ${stats.t}`;
+        fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(msg)}`).catch(()=>{});
+    }
+
+    function updateUI() {
+        document.getElementById('countL').innerText = "(" + (leitner.length || 0) + ")";
+        document.getElementById('stars').innerText = stats.s || 0;
+        document.getElementById('cups').innerText = stats.c || 0;
+        document.getElementById('tests').innerText = stats.t || 0;
+        document.getElementById('userLabel').innerText = user;
+    }
+
+    // صوت آفلاین
+    function speak(t) {
+        if(isMuted) return;
+        const englishPart = t.split(' - ')[0].trim();
+        window.speechSynthesis.cancel();
+        const m = new SpeechSynthesisUtterance(englishPart);
+        m.lang = 'en-US'; m.rate = 0.8;
+        window.speechSynthesis.speak(m);
+    }
+
+    function handleSearch() {
+        const val = document.getElementById('wordInput').value.toLowerCase().trim();
+        if(!val) return;
+        let found = Object.keys(pdcsDb).find(k => k === val || pdcsDb[k].f.includes(val) || pdcsDb[k].phr.some(p => p.includes(val)) || pdcsDb[k].col.some(c => c.includes(val)));
+        if(found) showResult(found); else alert("empty");
+    }
+
+    function showResult(word) {
+        const data = pdcsDb[word];
+        document.getElementById('quizArea').style.display = 'none';
+        document.getElementById('resultCard').style.display = 'block';
+        document.getElementById('wordTitle').innerText = word;
+        document.getElementById('txtFarsiMain').innerText = data.f;
+        const mapper = item => {
+            const [en, fa] = item.split(' - ');
+            return `<div class="big-item" onclick="speak('${en}')">🔹 ${en} <i>${fa}</i></div>`;
+        };
+        document.getElementById('colList').innerHTML = data.col.map(mapper).join('');
+        document.getElementById('phrList').innerHTML = data.phr.map(mapper).join('');
+        speak(word);
+    }
+
+    function openLeitner() {
+        if(leitner.length > 0) showResult(leitner[0]); else alert("empty");
+    }
+
+    function loginUser() {
+        const n = prompt("نام شما:");
+        if(n) { user = n; localStorage.setItem('user', n); updateUI(); sendReport(); }
+    }
+
+    function startQuiz() {
+        document.getElementById('resultCard').style.display = 'none';
+        document.getElementById('quizArea').style.display = 'block';
+        const words = Object.keys(pdcsDb);
+        const qWord = words[Math.floor(Math.random() * words.length)];
+        document.getElementById('qText').innerText = "معنی " + qWord.toUpperCase() + "؟";
+        const options = [pdcsDb[qWord].f, "خوابیدن", "نوشتن", "دویدن"].sort(() => Math.random() - 0.5);
+        const optDiv = document.getElementById('qOpts');
+        optDiv.innerHTML = '';
+        options.forEach(o => {
+            const b = document.createElement('button');
+            b.style.cssText = "width:100%; padding:15px; margin-bottom:10px; border-radius:15px; border:none; background:var(--bg); box-shadow:var(--shadow); font-size:24px; font-weight:bold; color:var(--text); cursor:pointer;";
+            b.innerText = o;
+            b.onclick = () => {
+                if(o === pdcsDb[qWord].f) { stats.s += 10; stats.t += 1; }
+                else { if(!leitner.includes(qWord)) { leitner.push(qWord); localStorage.setItem('leitner', JSON.stringify(leitner)); } }
+                localStorage.setItem('stats', JSON.stringify(stats));
+                updateUI(); sendReport(); startQuiz();
+            };
+            optDiv.appendChild(b);
         });
     }
-    
-    async searchWord() {
-        const input = document.getElementById('wordInput');
-        const word = input.value.trim().toLowerCase();
-        
-        if (!word) {
-            this.app.modules.ui.showNotification('لطفاً یک لغت وارد کنید', 'error');
-            input.focus();
-            return;
-        }
-        
-        this.showLoadingState('در حال جستجو...');
-        
-        try {
-            let result = this.dictionary[word];
-            
-            if (!result) {
-                for (const key in this.dictionary) {
-                    if (key.startsWith(word) || word.startsWith(key)) {
-                        result = {
-                            original: word,
-                            found: this.dictionary[key],
-                            message: 'آیا منظور شما این است؟'
-                        };
-                        break;
-                    }
-                }
-            }
-            
-            if (!result) {
-                this.showNoResults(word);
-                return;
-            }
-            
-            this.displayWordResult(result);
-            
-            if (this.app.soundEnabled) {
-                this.speakWord(result.word || result.found?.word || word);
-            }
-            
-            if (document.getElementById('autoSave')?.checked) {
-                this.app.modules.leitner.addWord(result);
-            }
-            
-            this.app.userData.wordsLearned++;
-            this.app.saveUserData();
-            this.updateStats();
-            
-            this.app.modules.ui.showNotification(`لغت "${word}" پیدا شد!`, 'success');
-            
-        } catch (error) {
-            console.error('Search error:', error);
-            this.app.modules.ui.showNotification('خطا در جستجو، لطفاً دوباره تلاش کنید', 'error');
-        }
+
+    function toggleTheme() {
+        const c = document.documentElement.getAttribute('data-theme');
+        document.documentElement.setAttribute('data-theme', c === "dark" ? "light" : "dark");
     }
-    
-    speakWord(word) {
-        if ('speechSynthesis' in window) {
-            const utterance = new SpeechSynthesisUtterance(word);
-            utterance.lang = 'en-US';
-            utterance.rate = 0.7;
-            speechSynthesis.speak(utterance);
-        }
+
+    function toggleMute() {
+        isMuted = !isMuted;
+        document.getElementById('muteBtn').innerText = isMuted ? "🔇" : "🔊";
     }
-    
-    showLoadingState(message) {
-        const resultsArea = document.getElementById('resultsArea');
-        if (!resultsArea) return;
-        
-        resultsArea.innerHTML = `
-            <div class="loading-state">
-                <i class="fas fa-spinner fa-spin"></i>
-                <p>${message}</p>
-            </div>
-        `;
-    }
-    
-    displayWordResult(wordData) {
-        const resultsArea = document.getElementById('resultsArea');
-        if (!resultsArea) return;
-        
-        if (wordData.found) {
-            const suggestion = wordData.found;
-            resultsArea.innerHTML = `
-                <div class="suggestions-container">
-                    <h3>${wordData.message}</h3>
-                    <div class="suggestion-item" onclick="app.modules.dictionary.searchWordDirect('${suggestion.word}')">
-                        <strong>${suggestion.word}</strong>
-                        <span>${suggestion.persian}</span>
-                        <i class="fas fa-arrow-left"></i>
-                    </div>
-                </div>
-            `;
-            return;
-        }
-        
-        // ... کد نمایش کامل لغت
-        const word = wordData.word;
-        const persian = wordData.persian;
-        const english = wordData.english;
-        
-        resultsArea.innerHTML = `
-            <div class="word-card">
-                <div class="word-header">
-                    <h2>${word}</h2>
-                    <button class="play-btn" onclick="app.modules.dictionary.speakWord('${word}')">
-                        <i class="fas fa-volume-up"></i> پخش صوت
-                    </button>
-                </div>
-                
-                <div class="word-info">
-                    <div class="meaning">
-                        <strong>فارسی:</strong> ${persian}
-                    </div>
-                    <div class="meaning">
-                        <strong>تعریف انگلیسی:</strong> ${english}
-                    </div>
-                </div>
-                
-                <div class="word-footer">
-                    <span class="level">سطح: ${wordData.level || 'A1'}</span>
-                    <button class="save-btn" onclick="app.modules.leitner.addWord(app.modules.dictionary.getCurrentWord())">
-                        <i class="far fa-star"></i> ذخیره در لایتنر
-                    </button>
-                </div>
-            </div>
-        `;
-    }
-    
-    searchWordDirect(word) {
-        document.getElementById('wordInput').value = word;
-        this.searchWord();
-    }
-    
-    getCurrentWord() {
-        const input = document.getElementById('wordInput');
-        return input ? input.value.trim() : '';
-    }
-    
-    showNoResults(word) {
-        const resultsArea = document.getElementById('resultsArea');
-        if (!resultsArea) return;
-        
-        resultsArea.innerHTML = `
-            <div class="no-results">
-                <i class="fas fa-search"></i>
-                <h3>لغت "${word}" یافت نشد</h3>
-                <p>این لغات موجود هستند:</p>
-                <div class="suggestions">
-                    <button onclick="app.modules.dictionary.searchWordDirect('hello')">hello</button>
-                    <button onclick="app.modules.dictionary.searchWordDirect('good')">good</button>
-                    <button onclick="app.modules.dictionary.searchWordDirect('go')">go</button>
-                </div>
-            </div>
-        `;
-    }
-    
-    updateStats() {
-        const countElement = document.getElementById('wordCount');
-        if (countElement) {
-            countElement.textContent = Object.keys(this.dictionary).length + '+';
-        }
-    }
-    
-    loadSampleWords() {
-        const suggestionsContainer = document.querySelector('.suggestions');
-        if (suggestionsContainer && suggestionsContainer.children.length === 0) {
-            const sampleWords = ['hello', 'good', 'go', 'have', 'time'];
-            
-            sampleWords.forEach(word => {
-                const btn = document.createElement('button');
-                btn.className = 'suggestion-tag';
-                btn.dataset.word = word;
-                btn.textContent = word;
-                btn.addEventListener('click', (e) => {
-                    const word = e.currentTarget.dataset.word;
-                    document.getElementById('wordInput').value = word;
-                    this.searchWord();
-                });
-                suggestionsContainer.appendChild(btn);
-            });
-        }
-    }
-}
+
+    updateUI();
+</script>
+</body>
+</html>
