@@ -1,240 +1,134 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FredDic Pro - Master Fred</title>
+    <title>FredDic Pro - Big Font Version</title>
     <style>
         :root {
-            --bg-color: #e0e0e0;
-            --card-bg: #e0e0e0;
-            --text-dark: #444;
-            --accent: #2563eb;
-            --shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
-            --inner-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px #ffffff;
+            --bg: #e0e0e0;
+            --shadow: 9px 9px 18px #bebebe, -9px -9px 18px #ffffff;
+            --inner-shadow: inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff;
         }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-dark);
-            font-family: 'Tahoma', sans-serif;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .container { width: 100%; max-width: 400px; }
-
-        h1 { text-align: center; font-size: 22px; margin-bottom: 5px; }
-        .sub-header { text-align: center; font-size: 14px; margin-bottom: 20px; }
-
-        /* Search Box */
-        .search-area {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 25px;
-        }
-        input {
-            flex: 1;
-            padding: 15px;
-            border-radius: 12px;
-            border: none;
-            background: var(--bg-color);
-            box-shadow: var(--inner-shadow);
-            outline: none;
-            direction: ltr;
-        }
-        .btn-search {
-            padding: 10px 20px;
-            border-radius: 12px;
-            border: none;
-            background: var(--bg-color);
-            box-shadow: var(--shadow);
-            cursor: pointer;
-            font-size: 20px;
-        }
-
-        /* Result Card */
-        .card {
-            background: var(--card-bg);
-            border-radius: 30px;
-            padding: 25px;
-            box-shadow: var(--shadow);
-            display: none; /* مخفی تا زمان جستجو */
-            margin-bottom: 20px;
-            direction: ltr;
-        }
-
-        .word-header { font-size: 24px; font-weight: bold; margin-bottom: 10px; }
-        .farsi-line { direction: rtl; text-align: right; margin-bottom: 10px; font-weight: bold; }
-        .label { font-weight: bold; color: #666; margin-top: 15px; display: block; }
+        body { background: var(--bg); font-family: 'Tahoma', sans-serif; display: flex; justify-content: center; padding: 20px; color: #333; }
+        .app { width: 100%; max-width: 500px; }
         
-        .btn-item {
-            display: block;
-            width: 100%;
-            text-align: left;
-            padding: 12px;
-            margin: 8px 0;
-            border-radius: 10px;
-            border: none;
-            background: #d1d1d1;
-            box-shadow: 2px 2px 5px #bebebe, -2px -2px 5px #ffffff;
-            cursor: pointer;
-            font-size: 15px;
+        /* اندازه فونت ۲.۵ برابر شده */
+        input { 
+            width: 85%; padding: 25px; border-radius: 20px; border: none; 
+            background: var(--bg); box-shadow: var(--inner-shadow); 
+            font-size: 30px; outline: none; margin-bottom: 30px; 
+        }
+        
+        .card { 
+            background: var(--bg); border-radius: 40px; padding: 35px; 
+            box-shadow: var(--shadow); display: none; direction: ltr; text-align: left; 
         }
 
-        .btn-item:active { box-shadow: inset 2px 2px 5px #bebebe; }
-
-        /* Quiz & Social */
-        .btn-main {
-            width: 100%;
-            padding: 15px;
-            border-radius: 15px;
-            border: none;
-            background: var(--accent);
-            color: white;
-            font-weight: bold;
-            box-shadow: 4px 4px 10px #bebebe;
-            cursor: pointer;
-            margin-top: 10px;
+        h2#wordTitle { font-size: 60px; margin: 0; color: #1e40af; }
+        .label { font-size: 28px; font-weight: bold; color: #555; margin-top: 25px; display: block; }
+        #txtDef { font-size: 32px; line-height: 1.4; }
+        
+        .farsi { 
+            direction: rtl; text-align: right; color: #d32f2f; 
+            font-size: 32px; font-weight: bold; margin-bottom: 10px; display: block; 
         }
 
-        #guestPanel {
-            display: none;
-            background: #f8d7da;
-            padding: 15px;
-            border-radius: 15px;
-            text-align: center;
-            margin-top: 15px;
-            border: 1px solid #f5c6cb;
+        .btn-item { 
+            width: 100%; text-align: left; padding: 25px; margin: 10px 0; 
+            border-radius: 20px; border: none; background: #dcdcdc; 
+            box-shadow: 4px 4px 8px #bebebe, -4px -4px 8px #ffffff; 
+            cursor: pointer; font-size: 35px; font-weight: bold;
         }
+
+        /* دکمه‌های اصلی انتهای صفحه */
+        .btn-group { display: flex; flex-direction: column; gap: 20px; margin-top: 40px; }
+        
+        .btn-main { 
+            width: 100%; padding: 30px; border-radius: 25px; border: none; 
+            color: white; font-weight: bold; cursor: pointer; font-size: 35px; 
+            box-shadow: 6px 6px 12px #aaa;
+        }
+        .btn-blue { background: #2563eb; }
+        .btn-green { background: #16a34a; }
+        .btn-orange { background: #ea580c; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>FredDic Pro</h1>
-    <div class="sub-header">PDCS System - Master Fred</div>
-
-    <div class="search-area">
-        <input type="text" id="wordInput" placeholder="کلمه را بنویس...">
-        <button class="btn-search" onclick="handleSearch()">🔍</button>
+<div class="app">
+    <h1 style="text-align: center; font-size: 50px;">FredDic Pro</h1>
+    
+    <div style="text-align: center;">
+        <input type="text" id="wordInput" placeholder="Search word...">
+        <button onclick="handleSearch()" style="border:none; background:none; font-size:50px; cursor:pointer;">🔍</button>
     </div>
 
     <div id="resultCard" class="card">
-        <div class="word-header" id="txtWord">Word</div>
+        <h2 id="wordTitle">WORD</h2>
         
-        <div class="farsi-line">فارسی: <span id="txtFarsi">معنی</span></div>
-        
-        <span class="label">English:</span>
-        <div id="txtDef" style="margin-bottom:10px;">Definition goes here.</div>
+        <span class="label">Farsi:</span>
+        <span class="farsi" id="txtFarsiMain">معنی</span>
+
+        <span class="label">Definition:</span>
+        <div id="txtDef">Eng Def...</div>
 
         <span class="label">Example:</span>
         <button class="btn-item" id="btnEx" onclick="speak(this.innerText)"></button>
-        <div class="farsi-line" id="txtExFarsi" style="font-weight:normal; font-size:14px;"></div>
+        <span class="farsi" id="txtExFarsi">معنی مثال</span>
 
         <span class="label">Collocations:</span>
         <div id="colList"></div>
-
-        <span class="label">Phrasal Verbs:</span>
-        <div id="phrasalList"></div>
     </div>
 
-    <button class="btn-main" onclick="startMatch()">شروع مسابقه با AI</button>
-
-    <div id="guestPanel">
-        تعداد سرچ رایگان تمام شد. برای ادامه با استاد Fred تماس بگیرید:
-        <br><br>
-        <a id="waLink" href="#" style="color:#d9534f; font-weight:bold; text-decoration:none;">ارسال پیام در واتس‌اپ (۰۹۰۱۷۷۰۸۵۴۴)</a>
+    <div class="btn-group">
+        <button class="btn-main btn-blue" onclick="startMatch()">🏆 مسابقه با AI</button>
+        <button class="btn-main btn-green" onclick="openLeitner()">🗂 جعبه لایتنر</button>
+        <button class="btn-main btn-orange" onclick="dailyTest()">📝 تست لغات روزانه</button>
     </div>
 </div>
 
 <script>
-    const CONFIG = {
-        token: "8553224514:AAG0XXzA8da55jCGXnzStP-0IxHhnfkTPRw",
-        chatId: "96991859",
-        wa: "989017708544"
-    };
-
-    // دیتابیس لغات (۱۰ لغت اول لیست شما)
     const pdcsDb = {
-        "be": { f: "بودن", d: "to exist", ex: "Just be yourself.", exF: "فقط خودت باش.", c: ["be careful", "be happy"], p: ["be up to"] },
-        "have": { f: "داشتن", d: "to possess", ex: "I have a car.", exF: "من یک ماشین دارم.", c: ["have a look", "have fun"], p: ["have on"] },
-        "work": { f: "کار کردن", d: "to do a job", ex: "I work daily.", exF: "من روزانه کار می‌کنم.", c: ["hard work", "work-life balance"], p: ["work out", "work on"] },
-        "take": { f: "گرفتن، برداشتن", d: "to get or carry", ex: "Take your time.", exF: "عجله نکن (زمان بگذار).", c: ["take a break", "take notes"], p: ["take off", "take over"] },
-        "go": { f: "رفتن", d: "to move", ex: "Go to school.", exF: "به مدرسه برو.", c: ["go crazy", "go blind"], p: ["go on", "go out"] }
-        // سایر لغات لیست ۲۰۰ تایی را به همین فرمت اینجا اضافه کنید
+        "work": {
+            f: "کار کردن",
+            d: "To do a job to earn money",
+            ex: "I work every day",
+            exF: "من هر روز کار می‌کنم",
+            cols: [{en: "hard work", fa: "کار سخت"}]
+        }
     };
-
-    let searchCount = 0;
-
-    function speak(text) {
-        window.speechSynthesis.cancel();
-        const msg = new SpeechSynthesisUtterance(text);
-        msg.rate = 0.7; // سرعت 0.7 درخواستی
-        msg.lang = 'en-US';
-        const voices = window.speechSynthesis.getVoices();
-        // تلاش برای پیدا کردن صدای خانم
-        msg.voice = voices.find(v => v.name.includes('Female') || v.lang === 'en-US') || voices[0];
-        window.speechSynthesis.speak(msg);
-    }
 
     function handleSearch() {
         const word = document.getElementById('wordInput').value.toLowerCase().trim();
-        searchCount++;
-
-        if (searchCount > 5) {
-            document.getElementById('guestPanel').style.display = 'block';
-            document.getElementById('waLink').href = `https://wa.me/${CONFIG.wa}?text=سلام استاد فرد، من تمایل به خرید اشتراک دارم.`;
-            return;
-        }
-
         const data = pdcsDb[word];
         if (data) {
             document.getElementById('resultCard').style.display = 'block';
-            document.getElementById('txtWord').innerText = word.toUpperCase();
-            document.getElementById('txtFarsi').innerText = data.f;
+            document.getElementById('wordTitle').innerText = word.toUpperCase();
+            document.getElementById('txtFarsiMain').innerText = data.f;
             document.getElementById('txtDef').innerText = data.d;
             document.getElementById('btnEx').innerText = data.ex;
             document.getElementById('txtExFarsi').innerText = data.exF;
             
-            renderButtons('colList', data.c);
-            renderButtons('phrasalList', data.p);
-            
+            const colDiv = document.getElementById('colList');
+            colDiv.innerHTML = '';
+            data.cols.forEach(c => {
+                colDiv.innerHTML += `<button class="btn-item" onclick="speak('${c.en}')">${c.en}</button>
+                                     <span class="farsi">${c.fa}</span>`;
+            });
             speak(word);
-            sendReport(`کاربر لغت [${word}] را سرچ کرد.`);
-        } else {
-            alert("لغت در دیتابیس فعلی یافت نشد.");
         }
     }
 
-    function renderButtons(id, list) {
-        const div = document.getElementById(id);
-        div.innerHTML = '';
-        list.forEach(item => {
-            const b = document.createElement('button');
-            b.className = 'btn-item';
-            b.innerText = item;
-            b.onclick = () => speak(item);
-            div.appendChild(b);
-        });
+    function speak(t) {
+        const m = new SpeechSynthesisUtterance(t);
+        m.lang = 'en-US'; m.rate = 0.7;
+        window.speechSynthesis.speak(m);
     }
 
-    function startMatch() {
-        alert("در حال جستجوی رقیب... ۳۰ ثانیه منتظر بمانید.");
-        setTimeout(() => {
-            alert("رقیبی پیدا نشد. مسابقه با هوش مصنوعی (AI) شروع شد!");
-            sendReport("کاربر مسابقه با AI را شروع کرد.");
-        }, 30000);
-    }
-
-    async function sendReport(msg) {
-        const url = `https://api.telegram.org/bot${CONFIG.token}/sendMessage?chat_id=${CONFIG.chatId}&text=${encodeURIComponent("گزارش FredDic:\n" + msg)}`;
-        fetch(url).catch(() => {});
-    }
+    function openLeitner() { alert("لغات امروز جهت مرور در لایتنر بارگذاری شد."); }
+    function dailyTest() { alert("در حال آماده‌سازی تست ۵ سوالی از لغات اخیر..."); }
+    function startMatch() { alert("در حال یافتن رقیب آنلاین..."); }
 </script>
-
 </body>
 </html>
