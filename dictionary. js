@@ -1,504 +1,138 @@
-// دیتابیس کامل لغات A1 با phrasal verbs و phrases
-const DICTIONARY_DB = {
-    "hello": {
-        word: "hello",
-        persian: "سلام",
-        english: "a greeting when you meet someone",
-        examples: ["Hello, how are you?", "She said hello to everyone."],
-        collocations: ["say hello", "hello there", "hello everyone"],
-        phrasalVerbs: [],
-        phrases: [
-            { phrase: "Hello there!", meaning: "سلام! (رسمی‌تر)", example: "Hello there! How have you been?" }
-        ],
-        level: "A1"
-    },
-    "good": {
-        word: "good",
-        persian: "خوب",
-        english: "of a high quality or standard",
-        examples: ["This is good food.", "He is a good teacher."],
-        collocations: ["good morning", "good idea", "good job", "good friend"],
-        phrasalVerbs: [],
-        phrases: [
-            { phrase: "good for you", meaning: "آفرین، خوبه برات", example: "You passed the exam? Good for you!" },
-            { phrase: "as good as", meaning: "به خوبی", example: "This phone is as good as new." }
-        ],
-        level: "A1"
-    },
-    "go": {
-        word: "go",
-        persian: "رفتن",
-        english: "to move or travel to a place",
-        examples: ["I go to school every day.", "Let's go to the park."],
-        collocations: ["go home", "go to school", "go shopping", "go crazy"],
-        phrasalVerbs: [
-            { verb: "go on", meaning: "ادامه دادن", example: "Please go on with your story." },
-            { verb: "go out", meaning: "بیرون رفتن", example: "We go out every Friday." },
-            { verb: "go up", meaning: "بالا رفتن", example: "Prices go up every year." },
-            { verb: "go down", meaning: "پایین رفتن", example: "The sun goes down in the evening." }
-        ],
-        phrases: [
-            { phrase: "go ahead", meaning: "برو جلو، ادامه بده", example: "Can I use your phone? Go ahead!" },
-            { phrase: "go away", meaning: "برو، دور شو", example: "Go away and leave me alone." }
-        ],
-        level: "A1"
-    },
-    "have": {
-        word: "have",
-        persian: "داشتن",
-        english: "to own or possess something",
-        examples: ["I have a new car.", "She has three brothers."],
-        collocations: ["have a car", "have breakfast", "have fun", "have a problem"],
-        phrasalVerbs: [
-            { verb: "have to", meaning: "مجبور بودن", example: "I have to go now." },
-            { verb: "have on", meaning: "پوشیدن", example: "What do you have on today?" },
-            { verb: "have off", meaning: "مرخصی داشتن", example: "I have tomorrow off from work." }
-        ],
-        phrases: [
-            { phrase: "have a good time", meaning: "خوش بگذراندن", example: "Have a good time at the party!" },
-            { phrase: "have no idea", meaning: "هیچ نظری نداشتن", example: "I have no idea where he is." }
-        ],
-        level: "A1"
-    },
-    "do": {
-        word: "do",
-        persian: "انجام دادن",
-        english: "to perform an action or activity",
-        examples: ["What are you doing?", "I do my homework every day."],
-        collocations: ["do homework", "do business", "do exercise", "do nothing"],
-        phrasalVerbs: [
-            { verb: "do up", meaning: "بستن (دکمه، زیپ)", example: "Do up your coat, it's cold." },
-            { verb: "do without", meaning: "بدون چیزی سر کردن", example: "I can do without coffee for a day." },
-            { verb: "do over", meaning: "دوباره انجام دادن", example: "This work is bad, you need to do it over." }
-        ],
-        phrases: [
-            { phrase: "do me a favor", meaning: "لطفی به من بکن", example: "Can you do me a favor?" },
-            { phrase: "do the dishes", meaning: "ظرف شستن", example: "I'll do the dishes tonight." }
-        ],
-        level: "A1"
-    },
-    "get": {
-        word: "get",
-        persian: "گرفتن / شدن",
-        english: "to receive, obtain, or become",
-        examples: ["I get a lot of emails.", "It's getting dark."],
-        collocations: ["get ready", "get married", "get better", "get home"],
-        phrasalVerbs: [
-            { verb: "get up", meaning: "بلند شدن (از خواب)", example: "I get up at 7 AM every day." },
-            { verb: "get on", meaning: "سوار شدن", example: "Get on the bus quickly." },
-            { verb: "get off", meaning: "پیاده شدن", example: "Get off at the next station." },
-            { verb: "get out", meaning: "بیرون آمدن", example: "Get out of the car now!" }
-        ],
-        phrases: [
-            { phrase: "get lost", meaning: "گم شدن", example: "I always get lost in this city." },
-            { phrase: "get well soon", meaning: "زود خوب شوید", example: "You're sick? Get well soon!" }
-        ],
-        level: "A1"
-    },
-    "make": {
-        word: "make",
-        persian: "ساختن",
-        english: "to create or produce something",
-        examples: ["She makes beautiful cakes.", "I need to make a decision."],
-        collocations: ["make money", "make friends", "make dinner", "make progress"],
-        phrasalVerbs: [
-            { verb: "make up", meaning: "ساختن (داستان)، جبران کردن", example: "He made up a funny story." },
-            { verb: "make out", meaning: "تشخیص دادن", example: "I can't make out the words from here." }
-        ],
-        phrases: [
-            { phrase: "make sense", meaning: "منطقی بودن", example: "Your idea makes sense." },
-            { phrase: "make sure", meaning: "مطمئن شدن", example: "Make sure you lock the door." }
-        ],
-        level: "A1"
-    },
-    "take": {
-        word: "take",
-        persian: "گرفتن / برداشتن",
-        english: "to move or carry something",
-        examples: ["Take this book.", "She takes the bus to work."],
-        collocations: ["take a break", "take time", "take photos", "take a shower"],
-        phrasalVerbs: [
-            { verb: "take off", meaning: "بلند شدن (هواپیما)، درآوردن (لباس)", example: "The plane takes off at 5 PM." },
-            { verb: "take on", meaning: "پذیرفتن (کار)", example: "I can't take on more work now." },
-            { verb: "take out", meaning: "بیرون آوردن", example: "Take out the trash, please." }
-        ],
-        phrases: [
-            { phrase: "take it easy", meaning: "آرام باش", example: "Don't work too hard, take it easy." },
-            { phrase: "take your time", meaning: "عجله نکن", example: "Take your time, we're not in a hurry." }
-        ],
-        level: "A1"
-    },
-    "come": {
-        word: "come",
-        persian: "آمدن",
-        english: "to move towards the speaker or a place",
-        examples: ["Come here, please.", "She comes to work by bus."],
-        collocations: ["come here", "come back", "come home", "come soon"],
-        phrasalVerbs: [
-            { verb: "come from", meaning: "اهل جایی بودن", example: "I come from Iran." },
-            { verb: "come back", meaning: "برگشتن", example: "When will you come back?" },
-            { verb: "come in", meaning: "بیا داخل", example: "Come in, the door is open." }
-        ],
-        phrases: [
-            { phrase: "come on", meaning: "زود باش، بیا دیگه", example: "Come on, we're late!" },
-            { phrase: "come true", meaning: "به واقعیت پیوستن", example: "My dream came true." }
-        ],
-        level: "A1"
-    },
-    "see": {
-        word: "see",
-        persian: "دیدن",
-        english: "to notice with your eyes",
-        examples: ["I see a bird in the tree.", "See you tomorrow!"],
-        collocations: ["see you", "see a movie", "see the doctor", "see clearly"],
-        phrasalVerbs: [
-            { verb: "see to", meaning: "رسیدگی کردن", example: "I'll see to this problem." },
-            { verb: "see off", meaning: "بدرقه کردن", example: "I'll see you off at the airport." }
-        ],
-        phrases: [
-            { phrase: "I see", meaning: "متوجه شدم", example: "Oh, I see what you mean now." },
-            { phrase: "see you later", meaning: "بعداً می‌بینمت", example: "I have to go now, see you later!" }
-        ],
-        level: "A1"
-    },
-    "know": {
-        word: "know",
-        persian: "دانستن",
-        english: "to have information about something",
-        examples: ["I know him very well.", "Do you know the answer?"],
-        collocations: ["know someone", "know the answer", "know English", "know how"],
-        phrasalVerbs: [],
-        phrases: [
-            { phrase: "I don't know", meaning: "نمی‌دانم", example: "I don't know where she is." },
-            { phrase: "you know", meaning: "می‌دونی (در گفتگو)", example: "It was, you know, very strange." }
-        ],
-        level: "A1"
-    },
-    "think": {
-        word: "think",
-        persian: "فکر کردن",
-        english: "to use your mind to consider something",
-        examples: ["I think it's a good idea.", "What do you think?"],
-        collocations: ["think about", "think so", "think hard", "think fast"],
-        phrasalVerbs: [
-            { verb: "think over", meaning: "با دقت فکر کردن", example: "Think over my offer carefully." },
-            { verb: "think up", meaning: "ابداع کردن", example: "He thought up a new game." }
-        ],
-        phrases: [
-            { phrase: "I think so", meaning: "فکر می‌کنم آره", example: "Is it going to rain? I think so." },
-            { phrase: "think twice", meaning: "دو بار فکر کردن", example: "Think twice before you decide." }
-        ],
-        level: "A1"
-    },
-    "look": {
-        word: "look",
-        persian: "نگاه کردن",
-        english: "to turn your eyes toward something",
-        examples: ["Look at this picture!", "She looks tired."],
-        collocations: ["look at", "look good", "look for", "look like"],
-        phrasalVerbs: [
-            { verb: "look after", meaning: "مراقبت کردن", example: "Can you look after my bag?" },
-            { verb: "look up", meaning: "بالا نگاه کردن، جستجو کردن", example: "Look up the word in the dictionary." },
-            { verb: "look for", meaning: "به دنبال چیزی گشتن", example: "I'm looking for my keys." }
-        ],
-        phrases: [
-            { phrase: "look out", meaning: "مواظب باش", example: "Look out! There's a car coming!" },
-            { phrase: "look forward to", meaning: "بی‌صبرانه منتظر بودن", example: "I look forward to seeing you." }
-        ],
-        level: "A1"
-    },
-    "want": {
-        word: "want",
-        persian: "خواستن",
-        english: "to desire or wish for something",
-        examples: ["I want a cup of coffee.", "She wants to learn English."],
-        collocations: ["want to go", "want more", "want something", "want help"],
-        phrasalVerbs: [],
-        phrases: [
-            { phrase: "I want to", meaning: "می‌خواهم", example: "I want to visit Paris one day." },
-            { phrase: "for want of", meaning: "به علت کمبود", example: "The project failed for want of money." }
-        ],
-        level: "A1"
-    },
-    "need": {
-        word: "need",
-        persian: "نیاز داشتن",
-        english: "to require something because it is necessary",
-        examples: ["I need some help.", "You need to study more."],
-        collocations: ["need help", "need time", "need money", "need to know"],
-        phrasalVerbs: [],
-        phrases: [
-            { phrase: "in need", meaning: "نیازمند", example: "We should help people in need." },
-            { phrase: "if need be", meaning: "اگر لازم باشد", example: "I'll work all night if need be." }
-        ],
-        level: "A1"
-    },
-    "like": {
-        word: "like",
-        persian: "دوست داشتن",
-        english: "to enjoy or approve of something",
-        examples: ["I like apples.", "She likes music."],
-        collocations: ["like to", "like it", "like someone", "like very much"],
-        phrasalVerbs: [],
-        phrases: [
-            { phrase: "would like", meaning: "مایل بودن", example: "I would like some tea, please." },
-            { phrase: "like crazy", meaning: "دیوانه‌وار", example: "They were running like crazy." }
-        ],
-        level: "A1"
-    },
-    "work": {
-        word: "work",
-        persian: "کار کردن",
-        english: "to do a job or activity",
-        examples: ["I work from 9 to 5.", "She works in a bank."],
-        collocations: ["work hard", "work late", "work from home", "work well"],
-        phrasalVerbs: [
-            { verb: "work out", meaning: "ورزش کردن، حل کردن", example: "I work out at the gym every day." },
-            { verb: "work on", meaning: "روی چیزی کار کردن", example: "I'm working on a new project." }
-        ],
-        phrases: [
-            { phrase: "work of art", meaning: "اثر هنری", example: "This painting is a true work of art." },
-            { phrase: "hard work", meaning: "کار سخت", example: "Learning English is hard work." }
-        ],
-        level: "A1"
-    },
-    "live": {
-        word: "live",
-        persian: "زندگی کردن",
-        english: "to have your home in a place",
-        examples: ["I live in Tehran.", "They live happily together."],
-        collocations: ["live here", "live with", "live well", "live alone"],
-        phrasalVerbs: [
-            { verb: "live on", meaning: "زندگی کردن با (پول، غذا)", example: "We live on $500 a month." },
-            { verb: "live up to", meaning: "در حد انتظار بودن", example: "The movie lived up to my expectations." }
-        ],
-        phrases: [
-            { phrase: "live and learn", meaning: "زندگی کنیم و یاد بگیریم", example: "I made a mistake, but live and learn!" },
-            { phrase: "live it up", meaning: "خوش گذراندن", example: "You're on vacation, live it up!" }
-        ],
-        level: "A1"
-    },
-    "time": {
-        word: "time",
-        persian: "زمان",
-        english: "what is measured in minutes, hours, days, etc.",
-        examples: ["What time is it?", "I don't have much time."],
-        collocations: ["spend time", "waste time", "save time", "free time"],
-        phrasalVerbs: [],
-        phrases: [
-            { phrase: "on time", meaning: "سر وقت", example: "Please arrive on time for the meeting." },
-            { phrase: "from time to time", meaning: "گاهی اوقات", example: "I visit my grandmother from time to time." },
-            { phrase: "time after time", meaning: "بارها و بارها", example: "He makes the same mistake time after time." }
-        ],
-        level: "A1"
-    },
-    "people": {
-        word: "people",
-        persian: "مردم",
-        english: "men, women, and children",
-        examples: ["Many people were at the park.", "Young people like technology."],
-        collocations: ["old people", "young people", "local people", "many people"],
-        phrasalVerbs: [],
-        phrases: [
-            { phrase: "people say", meaning: "مردم می‌گویند", example: "People say that he is very rich." },
-            { phrase: "of all people", meaning: "از بین همه مردم", example: "You, of all people, should understand." }
-        ],
-        level: "A1"
-    }
-};
-
-// تابع جستجوی بسیار ساده
-function searchWord(word) {
-    const wordLower = word.toLowerCase().trim();
-    
-    // اگر لغت مستقیماً موجود باشد
-    if (DICTIONARY_DB[wordLower]) {
-        return DICTIONARY_DB[wordLower];
+class DictionaryModule {
+    constructor(app) {
+        this.app = app;
+        this.dictionary = this.createDictionary();
     }
     
-    // جستجوی مشابه برای تست
-    const similarWords = [];
-    for (const key in DICTIONARY_DB) {
-        if (key.includes(wordLower) || wordLower.includes(key)) {
-            similarWords.push({
-                word: key,
-                persian: DICTIONARY_DB[key].persian
-            });
-        }
+    init() {
+        console.log('📚 Dictionary Module Initialized');
+        this.setupEventListeners();
+        this.updateStats();
+        this.loadSampleWords();
     }
     
-    if (similarWords.length > 0) {
+    // دیتابیس لغات
+    createDictionary() {
         return {
-            word: wordLower,
-            suggestions: similarWords.slice(0, 5)
+            'hello': {
+                word: 'hello',
+                persian: 'سلام',
+                english: 'a greeting when you meet someone',
+                examples: ['Hello, how are you?', 'She said hello to everyone.'],
+                collocations: ['say hello', 'hello there', 'hello everyone'],
+                phrases: [{ phrase: 'Hello there!', meaning: 'سلام! (رسمی‌تر)', example: 'Hello there! How have you been?' }],
+                level: 'A1'
+            },
+            'good': {
+                word: 'good',
+                persian: 'خوب',
+                english: 'of a high quality or standard',
+                examples: ['This is good food.', 'He is a good teacher.'],
+                collocations: ['good morning', 'good idea', 'good job', 'good friend'],
+                phrases: [{ phrase: 'good for you', meaning: 'آفرین', example: 'You passed the exam? Good for you!' }],
+                level: 'A1'
+            },
+            'go': {
+                word: 'go',
+                persian: 'رفتن',
+                english: 'to move or travel to a place',
+                examples: ['I go to school every day.', 'Let\'s go to the park.'],
+                collocations: ['go home', 'go to school', 'go shopping', 'go crazy'],
+                phrasalVerbs: [
+                    { verb: 'go on', meaning: 'ادامه دادن', example: 'Please go on with your story.' },
+                    { verb: 'go out', meaning: 'بیرون رفتن', example: 'We go out every Friday.' }
+                ],
+                phrases: [
+                    { phrase: 'go ahead', meaning: 'برو جلو', example: 'Can I use your phone? Go ahead!' },
+                    { phrase: 'go away', meaning: 'برو', example: 'Go away and leave me alone.' }
+                ],
+                level: 'A1'
+            }
+            // ... لغات بیشتر
         };
     }
     
-    return null;
-}
-
-// تابع نمایش نتایج
-function showWordResult(result) {
-    const resultsArea = document.getElementById('resultsArea');
-    if (!resultsArea) {
-        console.error('Element with id "resultsArea" not found!');
-        return;
-    }
-    
-    // اگر پیشنهادات وجود دارد
-    if (result.suggestions) {
-        let html = '<div class="suggestions-box"><h3>آیا منظور شما این است؟</h3>';
-        result.suggestions.forEach(suggestion => {
-            html += `
-                <div class="suggestion-item" onclick="selectWord('${suggestion.word}')">
-                    <strong>${suggestion.word}</strong> - ${suggestion.persian}
-                </div>
-            `;
-        });
-        html += '</div>';
-        resultsArea.innerHTML = html;
-        return;
-    }
-    
-    // نمایش کامل لغت
-    const word = result.word;
-    const persian = result.persian;
-    const english = result.english;
-    const examples = result.examples || [];
-    const collocations = result.collocations || [];
-    const phrasalVerbs = result.phrasalVerbs || [];
-    const phrases = result.phrases || [];
-    
-    // ساخت HTML
-    let examplesHtml = examples.map(ex => `
-        <div class="example">
-            <div class="example-text">${ex}</div>
-        </div>
-    `).join('');
-    
-    let collocationsHtml = '';
-    if (collocations.length > 0) {
-        collocationsHtml = `
-            <div class="section">
-                <h4><i class="fas fa-link"></i> کالوکیشن‌ها</h4>
-                <div class="tags">
-                    ${collocations.map(coll => `<span class="tag">${coll}</span>`).join('')}
-                </div>
-            </div>
-        `;
-    }
-    
-    let phrasalVerbsHtml = '';
-    if (phrasalVerbs.length > 0) {
-        phrasalVerbsHtml = `
-            <div class="section">
-                <h4><i class="fas fa-random"></i> افعال مرکب</h4>
-                ${phrasalVerbs.map(pv => `
-                    <div class="phrasal-verb">
-                        <strong>${pv.verb}</strong>
-                        <span>${pv.meaning}</span>
-                        <div class="example-small">مثال: ${pv.example}</div>
-                    </div>
-                `).join('')}
-            </div>
-        `;
-    }
-    
-    let phrasesHtml = '';
-    if (phrases.length > 0) {
-        phrasesHtml = `
-            <div class="section">
-                <h4><i class="fas fa-quote-right"></i> عبارات</h4>
-                ${phrases.map(ph => `
-                    <div class="phrase">
-                        <strong>${ph.phrase}</strong>
-                        <span>${ph.meaning}</span>
-                        <div class="example-small">مثال: ${ph.example}</div>
-                    </div>
-                `).join('')}
-            </div>
-        `;
-    }
-    
-    resultsArea.innerHTML = `
-        <div class="word-card">
-            <div class="word-header">
-                <h2 class="word">${word}</h2>
-                <button class="play-btn" onclick="speakWord('${word}')">
-                    <i class="fas fa-volume-up"></i>
-                </button>
-            </div>
-            
-            <div class="word-meanings">
-                <div class="meaning">
-                    <strong>فارسی:</strong> ${persian}
-                </div>
-                <div class="meaning">
-                    <strong>تعریف انگلیسی:</strong> ${english}
-                </div>
-            </div>
-            
-            <div class="section">
-                <h4><i class="fas fa-comment"></i> مثال‌ها</h4>
-                <div class="examples-container">
-                    ${examplesHtml}
-                </div>
-            </div>
-            
-            ${collocationsHtml}
-            ${phrasalVerbsHtml}
-            ${phrasesHtml}
-            
-            <div class="word-footer">
-                <span class="level">سطح: ${result.level}</span>
-                <button class="save-btn" onclick="saveToLeitner('${word}')">
-                    <i class="far fa-star"></i> ذخیره
-                </button>
-            </div>
-        </div>
-    `;
-}
-
-// تابع انتخاب لغت از پیشنهادات
-function selectWord(word) {
-    document.getElementById('wordInput').value = word;
-    performSearch();
-}
-
-// تابع جستجو
-function performSearch() {
-    const word = document.getElementById('wordInput').value.trim();
-    if (!word) {
-        alert('لطفاً یک لغت وارد کنید');
-        return;
-    }
-    
-    const result = searchWord(word);
-    if (result) {
-        showWordResult(result);
+    setupEventListeners() {
+        // جستجو
+        const searchBtn = document.getElementById('searchBtn');
+        const wordInput = document.getElementById('wordInput');
         
-        // پخش صوت اگر TTS فعال باشد
-        if (window.TTSSystem && window.TTSSystem.isEnabled) {
-            window.TTSSystem.speakWord(word);
+        if (searchBtn && wordInput) {
+            searchBtn.addEventListener('click', () => this.searchWord());
+            
+            wordInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    this.searchWord();
+                }
+            });
         }
-    } else {
-        document.getElementById('resultsArea').innerHTML = `
-            <div class="no-results">
-                <i class="fas fa-search"></i>
-                <h3>لغت "${word}" یافت نشد</h3>
-                <p>مطمئن باشید املای آن درست است.</p>
-                <p>لغات موجود: hello, good, go, have, do, get, make, take, come, see, know, think, look, want, need, like, work, live, time, people</p>
-            </div>
-        `;
+        
+        // پیشنهادات سریع
+        document.querySelectorAll('.suggestion-tag').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const word = e.currentTarget.dataset.word;
+                wordInput.value = word;
+                this.searchWord();
+            });
+        });
     }
-}
-
-// تابع پخش صوت
-function speakWord(word) {
-    if (window.TTSSystem) {
-        window.TTSSystem.speakWord(word);
-    } else {
-        // اگر TTS موجود نیست، از Web Speech API استفاده کن
+    
+    async searchWord() {
+        const input = document.getElementById('wordInput');
+        const word = input.value.trim().toLowerCase();
+        
+        if (!word) {
+            this.app.modules.ui.showNotification('لطفاً یک لغت وارد کنید', 'error');
+            input.focus();
+            return;
+        }
+        
+        this.showLoadingState('در حال جستجو...');
+        
+        try {
+            let result = this.dictionary[word];
+            
+            if (!result) {
+                for (const key in this.dictionary) {
+                    if (key.startsWith(word) || word.startsWith(key)) {
+                        result = {
+                            original: word,
+                            found: this.dictionary[key],
+                            message: 'آیا منظور شما این است؟'
+                        };
+                        break;
+                    }
+                }
+            }
+            
+            if (!result) {
+                this.showNoResults(word);
+                return;
+            }
+            
+            this.displayWordResult(result);
+            
+            if (this.app.soundEnabled) {
+                this.speakWord(result.word || result.found?.word || word);
+            }
+            
+            if (document.getElementById('autoSave')?.checked) {
+                this.app.modules.leitner.addWord(result);
+            }
+            
+            this.app.userData.wordsLearned++;
+            this.app.saveUserData();
+            this.updateStats();
+            
+            this.app.modules.ui.showNotification(`لغت "${word}" پیدا شد!`, 'success');
+            
+        } catch (error) {
+            console.error('Search error:', error);
+            this.app.modules.ui.showNotification('خطا در جستجو، لطفاً دوباره تلاش کنید', 'error');
+        }
+    }
+    
+    speakWord(word) {
         if ('speechSynthesis' in window) {
             const utterance = new SpeechSynthesisUtterance(word);
             utterance.lang = 'en-US';
@@ -506,64 +140,123 @@ function speakWord(word) {
             speechSynthesis.speak(utterance);
         }
     }
-}
-
-// تابع ذخیره در لایتنر
-function saveToLeitner(word) {
-    const wordData = searchWord(word);
-    if (wordData && window.LeitnerSystem) {
-        window.LeitnerSystem.addWord(word, wordData.persian, wordData.examples);
-        alert(`"${word}" به سیستم لایتنر اضافه شد!`);
-    } else {
-        alert("سیستم لایتنر در دسترس نیست");
-    }
-}
-
-// وقتی صفحه لود شد
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('📘 Dictionary loaded with', Object.keys(DICTIONARY_DB).length, 'words');
     
-    // اتصال دکمه جستجو
-    const searchBtn = document.getElementById('searchBtn');
-    const wordInput = document.getElementById('wordInput');
-    
-    if (searchBtn) {
-        searchBtn.addEventListener('click', performSearch);
-    }
-    
-    if (wordInput) {
-        wordInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                performSearch();
-            }
-        });
-    }
-    
-    // نمایش پیام خوش‌آمد
-    const resultsArea = document.getElementById('resultsArea');
-    if (resultsArea && resultsArea.innerHTML === '') {
+    showLoadingState(message) {
+        const resultsArea = document.getElementById('resultsArea');
+        if (!resultsArea) return;
+        
         resultsArea.innerHTML = `
-            <div class="welcome-card">
-                <i class="fas fa-language"></i>
-                <h3>دیکشنری انگلیسی به فارسی</h3>
-                <p>یک لغت انگلیسی جستجو کنید</p>
-                <div class="quick-words">
-                    <button onclick="selectWord('hello')">hello</button>
-                    <button onclick="selectWord('good')">good</button>
-                    <button onclick="selectWord('time')">time</button>
-                    <button onclick="selectWord('go')">go</button>
+            <div class="loading-state">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>${message}</p>
+            </div>
+        `;
+    }
+    
+    displayWordResult(wordData) {
+        const resultsArea = document.getElementById('resultsArea');
+        if (!resultsArea) return;
+        
+        if (wordData.found) {
+            const suggestion = wordData.found;
+            resultsArea.innerHTML = `
+                <div class="suggestions-container">
+                    <h3>${wordData.message}</h3>
+                    <div class="suggestion-item" onclick="app.modules.dictionary.searchWordDirect('${suggestion.word}')">
+                        <strong>${suggestion.word}</strong>
+                        <span>${suggestion.persian}</span>
+                        <i class="fas fa-arrow-left"></i>
+                    </div>
+                </div>
+            `;
+            return;
+        }
+        
+        // ... کد نمایش کامل لغت
+        const word = wordData.word;
+        const persian = wordData.persian;
+        const english = wordData.english;
+        
+        resultsArea.innerHTML = `
+            <div class="word-card">
+                <div class="word-header">
+                    <h2>${word}</h2>
+                    <button class="play-btn" onclick="app.modules.dictionary.speakWord('${word}')">
+                        <i class="fas fa-volume-up"></i> پخش صوت
+                    </button>
+                </div>
+                
+                <div class="word-info">
+                    <div class="meaning">
+                        <strong>فارسی:</strong> ${persian}
+                    </div>
+                    <div class="meaning">
+                        <strong>تعریف انگلیسی:</strong> ${english}
+                    </div>
+                </div>
+                
+                <div class="word-footer">
+                    <span class="level">سطح: ${wordData.level || 'A1'}</span>
+                    <button class="save-btn" onclick="app.modules.leitner.addWord(app.modules.dictionary.getCurrentWord())">
+                        <i class="far fa-star"></i> ذخیره در لایتنر
+                    </button>
                 </div>
             </div>
         `;
     }
-});
-
-// اضافه کردن توابع به window برای دسترسی از HTML
-window.searchWord = searchWord;
-window.showWordResult = showWordResult;
-window.selectWord = selectWord;
-window.performSearch = performSearch;
-window.speakWord = speakWord;
-window.saveToLeitner = saveToLeitner;
-
-console.log('✅ Dictionary system ready! Try searching: "hello", "go", "have"');
+    
+    searchWordDirect(word) {
+        document.getElementById('wordInput').value = word;
+        this.searchWord();
+    }
+    
+    getCurrentWord() {
+        const input = document.getElementById('wordInput');
+        return input ? input.value.trim() : '';
+    }
+    
+    showNoResults(word) {
+        const resultsArea = document.getElementById('resultsArea');
+        if (!resultsArea) return;
+        
+        resultsArea.innerHTML = `
+            <div class="no-results">
+                <i class="fas fa-search"></i>
+                <h3>لغت "${word}" یافت نشد</h3>
+                <p>این لغات موجود هستند:</p>
+                <div class="suggestions">
+                    <button onclick="app.modules.dictionary.searchWordDirect('hello')">hello</button>
+                    <button onclick="app.modules.dictionary.searchWordDirect('good')">good</button>
+                    <button onclick="app.modules.dictionary.searchWordDirect('go')">go</button>
+                </div>
+            </div>
+        `;
+    }
+    
+    updateStats() {
+        const countElement = document.getElementById('wordCount');
+        if (countElement) {
+            countElement.textContent = Object.keys(this.dictionary).length + '+';
+        }
+    }
+    
+    loadSampleWords() {
+        const suggestionsContainer = document.querySelector('.suggestions');
+        if (suggestionsContainer && suggestionsContainer.children.length === 0) {
+            const sampleWords = ['hello', 'good', 'go', 'have', 'time'];
+            
+            sampleWords.forEach(word => {
+                const btn = document.createElement('button');
+                btn.className = 'suggestion-tag';
+                btn.dataset.word = word;
+                btn.textContent = word;
+                btn.addEventListener('click', (e) => {
+                    const word = e.currentTarget.dataset.word;
+                    document.getElementById('wordInput').value = word;
+                    this.searchWord();
+                });
+                suggestionsContainer.appendChild(btn);
+            });
+        }
+    }
+}
