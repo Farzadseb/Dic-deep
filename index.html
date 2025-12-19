@@ -3,52 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FredDic Pro - Big Font Version</title>
+    <title>FredDic Pro - Optimized Version</title>
     <style>
         :root {
             --bg: #e0e0e0;
-            --shadow: 9px 9px 18px #bebebe, -9px -9px 18px #ffffff;
-            --inner-shadow: inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff;
+            --shadow: 7px 7px 14px #bebebe, -7px -7px 14px #ffffff;
+            --inner-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px #ffffff;
         }
-        body { background: var(--bg); font-family: 'Tahoma', sans-serif; display: flex; justify-content: center; padding: 20px; color: #333; }
-        .app { width: 100%; max-width: 500px; }
+        body { background: var(--bg); font-family: 'Tahoma', sans-serif; display: flex; justify-content: center; padding: 15px; color: #333; }
+        .app { width: 100%; max-width: 400px; }
         
-        /* اندازه فونت ۲.۵ برابر شده */
+        /* اصلاح اندازه سرچ */
+        .search-area { display: flex; gap: 10px; margin-bottom: 20px; align-items: center; }
         input { 
-            width: 85%; padding: 25px; border-radius: 20px; border: none; 
+            flex: 1; padding: 18px; border-radius: 15px; border: none; 
             background: var(--bg); box-shadow: var(--inner-shadow); 
-            font-size: 30px; outline: none; margin-bottom: 30px; 
+            font-size: 20px; outline: none; direction: ltr;
         }
-        
+        .search-btn {
+            background: var(--bg); border: none; box-shadow: var(--shadow);
+            border-radius: 15px; padding: 15px; cursor: pointer; font-size: 22px;
+        }
+
+        /* کارت نتایج */
         .card { 
-            background: var(--bg); border-radius: 40px; padding: 35px; 
+            background: var(--bg); border-radius: 30px; padding: 25px; 
             box-shadow: var(--shadow); display: none; direction: ltr; text-align: left; 
         }
 
-        h2#wordTitle { font-size: 60px; margin: 0; color: #1e40af; }
-        .label { font-size: 28px; font-weight: bold; color: #555; margin-top: 25px; display: block; }
-        #txtDef { font-size: 32px; line-height: 1.4; }
+        h2#wordTitle { font-size: 40px; margin: 0; color: #1e40af; text-transform: uppercase; }
+        .label { font-size: 20px; font-weight: bold; color: #666; margin-top: 15px; display: block; }
+        #txtDef { font-size: 22px; line-height: 1.3; color: #444; }
         
         .farsi { 
             direction: rtl; text-align: right; color: #d32f2f; 
-            font-size: 32px; font-weight: bold; margin-bottom: 10px; display: block; 
+            font-size: 24px; font-weight: bold; margin-bottom: 8px; display: block; 
         }
 
         .btn-item { 
-            width: 100%; text-align: left; padding: 25px; margin: 10px 0; 
-            border-radius: 20px; border: none; background: #dcdcdc; 
-            box-shadow: 4px 4px 8px #bebebe, -4px -4px 8px #ffffff; 
-            cursor: pointer; font-size: 35px; font-weight: bold;
+            width: 100%; text-align: left; padding: 18px; margin: 8px 0; 
+            border-radius: 15px; border: none; background: #dcdcdc; 
+            box-shadow: 3px 3px 6px #bebebe, -3px -3px 6px #ffffff; 
+            cursor: pointer; font-size: 22px; font-weight: bold;
         }
 
-        /* دکمه‌های اصلی انتهای صفحه */
-        .btn-group { display: flex; flex-direction: column; gap: 20px; margin-top: 40px; }
-        
+        /* دکمه‌های پایینی */
+        .btn-group { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
         .btn-main { 
-            width: 100%; padding: 30px; border-radius: 25px; border: none; 
-            color: white; font-weight: bold; cursor: pointer; font-size: 35px; 
-            box-shadow: 6px 6px 12px #aaa;
+            width: 100%; padding: 20px; border-radius: 20px; border: none; 
+            color: white; font-weight: bold; cursor: pointer; font-size: 24px; 
+            box-shadow: 5px 5px 10px #aaa; transition: 0.2s;
         }
+        .btn-main:active { transform: scale(0.98); }
         .btn-blue { background: #2563eb; }
         .btn-green { background: #16a34a; }
         .btn-orange { background: #ea580c; }
@@ -57,25 +63,26 @@
 <body>
 
 <div class="app">
-    <h1 style="text-align: center; font-size: 50px;">FredDic Pro</h1>
+    <h1 style="text-align: center; font-size: 32px; margin-bottom: 10px;">FredDic Pro</h1>
+    <p style="text-align: center; margin-top: 0; color: #666;">PDCS English System</p>
     
-    <div style="text-align: center;">
-        <input type="text" id="wordInput" placeholder="Search word...">
-        <button onclick="handleSearch()" style="border:none; background:none; font-size:50px; cursor:pointer;">🔍</button>
+    <div class="search-area">
+        <input type="text" id="wordInput" placeholder="Enter word...">
+        <button class="search-btn" onclick="handleSearch()">🔍</button>
     </div>
 
     <div id="resultCard" class="card">
-        <h2 id="wordTitle">WORD</h2>
+        <h2 id="wordTitle"></h2>
         
         <span class="label">Farsi:</span>
-        <span class="farsi" id="txtFarsiMain">معنی</span>
+        <span class="farsi" id="txtFarsiMain"></span>
 
         <span class="label">Definition:</span>
-        <div id="txtDef">Eng Def...</div>
+        <div id="txtDef"></div>
 
         <span class="label">Example:</span>
         <button class="btn-item" id="btnEx" onclick="speak(this.innerText)"></button>
-        <span class="farsi" id="txtExFarsi">معنی مثال</span>
+        <span class="farsi" id="txtExFarsi"></span>
 
         <span class="label">Collocations:</span>
         <div id="colList"></div>
@@ -89,22 +96,29 @@
 </div>
 
 <script>
+    // توکن و چت آیدی شما برای گزارش
+    const CONFIG = {
+        token: "8553224514:AAG0XXzA8da55jCGXnzStP-0IxHhnfkTPRw",
+        chatId: "96991859"
+    };
+
+    // دیتابیس لغات (حتماً کلمات را با حروف کوچک بنویسید)
     const pdcsDb = {
-        "work": {
-            f: "کار کردن",
-            d: "To do a job to earn money",
-            ex: "I work every day",
-            exF: "من هر روز کار می‌کنم",
-            cols: [{en: "hard work", fa: "کار سخت"}]
-        }
+        "be": { f: "بودن", d: "To exist or live", ex: "Just be yourself", exF: "فقط خودت باش", cols: [{en: "be careful", fa: "مواظب باش"}] },
+        "have": { f: "داشتن", d: "To possess or hold", ex: "I have a dream", exF: "من یک رویا دارم", cols: [{en: "have a look", fa: "نگاهی انداختن"}] },
+        "work": { f: "کار کردن", d: "To do a job", ex: "I work every day", exF: "من هر روز کار می‌کنم", cols: [{en: "hard work", fa: "کار سخت"}] },
+        "take": { f: "گرفتن / برداشتن", d: "To get or carry", ex: "Take your time", exF: "عجله نکن", cols: [{en: "take a break", fa: "استراحت کردن"}] },
+        "go": { f: "رفتن", d: "To move to a place", ex: "Go home now", exF: "الان برو خونه", cols: [{en: "go crazy", fa: "دیوانه شدن"}] }
     };
 
     function handleSearch() {
-        const word = document.getElementById('wordInput').value.toLowerCase().trim();
+        const wordInput = document.getElementById('wordInput');
+        const word = wordInput.value.toLowerCase().trim();
         const data = pdcsDb[word];
+        
         if (data) {
             document.getElementById('resultCard').style.display = 'block';
-            document.getElementById('wordTitle').innerText = word.toUpperCase();
+            document.getElementById('wordTitle').innerText = word;
             document.getElementById('txtFarsiMain').innerText = data.f;
             document.getElementById('txtDef').innerText = data.d;
             document.getElementById('btnEx').innerText = data.ex;
@@ -116,19 +130,30 @@
                 colDiv.innerHTML += `<button class="btn-item" onclick="speak('${c.en}')">${c.en}</button>
                                      <span class="farsi">${c.fa}</span>`;
             });
+            
             speak(word);
+            sendReport(`کاربر لغت [${word}] را جستجو کرد.`);
+        } else {
+            alert("لغت در دیتابیس یافت نشد. (نمونه‌های فعال: be, have, work, take, go)");
         }
     }
 
     function speak(t) {
+        window.speechSynthesis.cancel();
         const m = new SpeechSynthesisUtterance(t);
-        m.lang = 'en-US'; m.rate = 0.7;
+        m.lang = 'en-US'; 
+        m.rate = 0.7;
         window.speechSynthesis.speak(m);
     }
 
-    function openLeitner() { alert("لغات امروز جهت مرور در لایتنر بارگذاری شد."); }
-    function dailyTest() { alert("در حال آماده‌سازی تست ۵ سوالی از لغات اخیر..."); }
-    function startMatch() { alert("در حال یافتن رقیب آنلاین..."); }
+    async function sendReport(msg) {
+        const url = `https://api.telegram.org/bot${CONFIG.token}/sendMessage?chat_id=${CONFIG.chatId}&text=${encodeURIComponent(msg)}`;
+        fetch(url).catch(e => console.log("Report error"));
+    }
+
+    function openLeitner() { alert("در حال انتقال به جعبه لایتنر..."); }
+    function dailyTest() { alert("تست ۵ سوالی امروز آماده شد."); }
+    function startMatch() { alert("۳۰ ثانیه برای یافتن رقیب صبر کنید..."); }
 </script>
 </body>
 </html>
