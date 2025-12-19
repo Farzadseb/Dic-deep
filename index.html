@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FredDic Pro - Master Fred</title>
+    <title>FredDic Pro</title>
     <style>
         :root {
             --bg: #e0e0e0;
@@ -18,7 +18,7 @@
         }
         .app { width: 100%; max-width: 450px; }
         
-        h1.main-head { text-align: center; font-size: 50px; margin-bottom: 20px; color: #222; }
+        h1.main-head { text-align: center; font-size: 50px; margin-bottom: 25px; color: #222; }
 
         .search-area { display: flex; gap: 10px; margin-bottom: 25px; }
         input { 
@@ -58,14 +58,13 @@
         .btn-green { background: #16a34a; }
         .btn-orange { background: #ea580c; }
 
-        /* استایل گزینه‌های تست با قابلیت تغییر رنگ */
         .quiz-option { 
             background: white; padding: 22px; border-radius: 15px; cursor: pointer; 
             text-align: center; font-size: 35px; margin-bottom: 15px; 
-            box-shadow: var(--shadow); transition: background 0.3s;
+            box-shadow: var(--shadow); transition: 0.3s;
         }
-        .correct-ans { background-color: #c8e6c9 !important; } /* سبز کم‌رنگ */
-        .wrong-ans { background-color: #ffcdd2 !important; }   /* قرمز کم‌رنگ */
+        .correct-ans { background-color: #c8e6c9 !important; } 
+        .wrong-ans { background-color: #ffcdd2 !important; }
     </style>
 </head>
 <body>
@@ -79,11 +78,11 @@
     </div>
 
     <div id="resultCard">
-        <h2 id="wordTitle">WORD</h2>
-        <span class="farsi-text" id="txtFarsiMain">معنی اصلی</span>
+        <h2 id="wordTitle"></h2>
+        <span class="farsi-text" id="txtFarsiMain"></span>
         
         <span class="label">Definition:</span>
-        <div id="txtDef">Definition...</div>
+        <div id="txtDef"></div>
         
         <span class="label">Example:</span>
         <button class="btn-item" id="btnEx" onclick="speak(this.innerText)"></button>
@@ -116,11 +115,6 @@
             f: "گرفتن", d: "To get or carry", ex: "Take a photo", exF: "عکس بگیر", 
             c: [{en: "take a break", fa: "استراحت کردن"}, {en: "take a risk", fa: "ریسک کردن"}],
             p: [{en: "take off", fa: "بلند شدن هواپیما"}, {en: "take over", fa: "کنترل چیزی را گرفتن"}]
-        },
-        "go": { 
-            f: "رفتن", d: "To move", ex: "Go home", exF: "برو خونه", 
-            c: [{en: "go crazy", fa: "دیوانه شدن"}, {en: "go blind", fa: "کور شدن"}],
-            p: [{en: "go on", fa: "ادامه دادن"}, {en: "go out", fa: "بیرون رفتن"}]
         }
     };
 
@@ -140,7 +134,6 @@
             document.getElementById('btnEx').innerText = data.ex;
             document.getElementById('txtExFarsi').innerText = data.exF;
             
-            // نمایش کالوکیشن‌ها
             const cols = document.getElementById('colArea');
             cols.innerHTML = '<span class="label">Collocations:</span>';
             data.c.forEach(i => {
@@ -148,16 +141,15 @@
                                    <span class="farsi-text" style="font-size:32px; font-weight:normal;">${i.fa}</span>`;
             });
 
-            // نمایش افعال عبارتی
-            const phrasals = document.getElementById('phrasalArea');
-            phrasals.innerHTML = '<span class="label">Phrasal Verbs:</span>';
+            const phrs = document.getElementById('phrasalArea');
+            phrs.innerHTML = '<span class="label">Phrasal Verbs:</span>';
             data.p.forEach(i => {
-                phrasals.innerHTML += `<button class="btn-item" onclick="speak('${i.en}')">${i.en}</button>
-                                       <span class="farsi-text" style="font-size:32px; font-weight:normal;">${i.fa}</span>`;
+                phrs.innerHTML += `<button class="btn-item" onclick="speak('${i.en}')">${i.en}</button>
+                                   <span class="farsi-text" style="font-size:32px; font-weight:normal;">${i.fa}</span>`;
             });
 
             speak(val);
-        } else { alert("لغت یافت نشد."); }
+        }
     }
 
     function speak(t) {
@@ -172,14 +164,11 @@
         const keys = Object.keys(pdcsDb);
         const qKey = keys[Math.floor(Math.random() * keys.length)];
         const correct = pdcsDb[qKey].f;
-        
         document.getElementById('quizArea').style.display = 'block';
         document.getElementById('quizQuestion').innerText = `معنی "${qKey.toUpperCase()}"؟`;
-        
         const opts = [correct, "خوابیدن", "پریدن", "دویدن"].sort(() => Math.random() - 0.5);
         const optArea = document.getElementById('quizOptions');
         optArea.innerHTML = '';
-        
         opts.forEach(o => {
             const div = document.createElement('div');
             div.className = 'quiz-option';
@@ -187,14 +176,10 @@
             div.onclick = function() {
                 if(o === correct) {
                     this.classList.add('correct-ans');
-                    setTimeout(() => { alert("✅ درست!"); startDailyTest(); }, 500);
+                    setTimeout(() => { startDailyTest(); }, 600);
                 } else {
                     this.classList.add('wrong-ans');
-                    setTimeout(() => { 
-                        alert(`❌ غلط! ${qKey} به لایتنر رفت.`); 
-                        saveToL(qKey); 
-                        startDailyTest(); 
-                    }, 500);
+                    setTimeout(() => { saveToL(qKey); startDailyTest(); }, 600);
                 }
             };
             optArea.appendChild(div);
@@ -215,8 +200,7 @@
         handleSearch();
     }
 
-    function startMatch() { alert("Searching for opponent..."); }
+    function startMatch() { alert("Searching..."); }
 </script>
-
 </body>
 </html>
