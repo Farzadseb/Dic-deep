@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FredDic Pro - Final Stable</title>
+    <title>FredDic Pro - Advanced Edition</title>
     <style>
         :root {
             --bg: #e0e0e0; --shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
@@ -13,48 +13,44 @@
             --bg: #2d2d2d; --shadow: 8px 8px 16px #1a1a1a, -8px -8px 16px #404040;
             --text: #eee; --blue: #60a5fa; --red: #f87171;
         }
-        body { background: var(--bg); font-family: -apple-system, sans-serif; margin: 0; padding: 10px; color: var(--text); direction: rtl; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; }
+        body { background: var(--bg); font-family: -apple-system, sans-serif; margin: 0; padding: 10px; color: var(--text); direction: rtl; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
         .app { width: 100%; max-width: 450px; padding-bottom: 100px; }
         
-        /* هدر */
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; direction: ltr; width: 100%; }
-        .circle-btn { width: 50px; height: 50px; border-radius: 50%; border: none; background: var(--bg); box-shadow: var(--shadow); cursor: pointer; font-size: 22px; color: var(--text); display: flex; align-items: center; justify-content: center; outline: none; }
-        h1 { font-size: 30px; margin: 0; color: var(--blue); font-weight: 900; }
-
-        /* باکس سرچ */
-        .search-area { display: flex; gap: 10px; margin-bottom: 20px; direction: ltr; width: 100%; }
-        input#wordInput { flex: 1; padding: 15px; border-radius: 20px; border: none; background: var(--bg); box-shadow: inset 5px 5px 10px #bebebe; font-size: 28px; outline: none; color: var(--text); text-align: center; }
-
-        /* کارت نتایج */
-        #resultCard { 
-            background: var(--bg); border-radius: 30px; padding: 25px; 
-            box-shadow: var(--shadow); display: none; margin-bottom: 20px; 
-            text-align: center; direction: ltr; width: 100%; box-sizing: border-box;
-        }
-        #wordTitle { font-size: 50px; margin: 0; color: var(--blue); text-transform: uppercase; cursor: pointer; }
-        #txtFarsiMain { font-size: 40px; color: var(--red); font-weight: bold; display: block; margin: 10px 0; direction: rtl; }
-        #txtDef { font-size: 24px; line-height: 1.4; color: var(--text); margin-top: 10px; }
-        .clickable-word { cursor: pointer; color: var(--blue); text-decoration: underline dotted; margin: 0 2px; display: inline-block; }
-
-        /* دکمه‌های اصلی */
-        .btn-group { display: flex; flex-direction: column; gap: 15px; width: 100%; margin-top: 10px; }
-        .btn-main { width: 100%; padding: 18px; border-radius: 25px; border: none; color: white; font-weight: bold; cursor: pointer; font-size: 22px; box-shadow: 4px 4px 10px rgba(0,0,0,0.2); transition: 0.2s; }
-        .btn-main:active { transform: scale(0.98); }
-        .btn-green { background: #16a34a; } .btn-orange { background: #ea580c; } .btn-blue { background: #6366f1; }
-
-        /* کوییز */
-        #quizArea { background: var(--bg); border-radius: 30px; padding: 25px; box-shadow: var(--shadow); display: none; width: 100%; box-sizing: border-box; margin-bottom: 20px; }
-        .quiz-option { background: var(--bg); color: var(--text); padding: 15px; border-radius: 18px; cursor: pointer; text-align: center; font-size: 28px; margin-bottom: 12px; box-shadow: var(--shadow); }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; direction: ltr; width: 100%; }
+        .circle-btn { width: 48px; height: 48px; border-radius: 50%; border: none; background: var(--bg); box-shadow: var(--shadow); cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; color: var(--text); }
         
-        /* نوار وضعیت پایین */
+        .search-area { display: flex; gap: 10px; margin-bottom: 15px; direction: ltr; }
+        input#wordInput { flex: 1; padding: 15px; border-radius: 20px; border: none; background: var(--bg); box-shadow: inset 4px 4px 8px #bebebe; font-size: 25px; outline: none; color: var(--text); text-align: center; }
+
+        /* کارت اصلی نتایج */
+        #resultCard { 
+            background: var(--bg); border-radius: 25px; padding: 20px; 
+            box-shadow: var(--shadow); display: none; margin-bottom: 20px; 
+            text-align: center; direction: ltr;
+        }
+        #wordTitle { font-size: 45px; margin: 0; color: var(--blue); text-transform: uppercase; cursor: pointer; }
+        #txtFarsiMain { font-size: 35px; color: var(--red); font-weight: bold; display: block; margin: 10px 0; direction: rtl; }
+        
+        /* بخش‌های جدید کالوکیشن و فریزال‌ورب */
+        .extra-section { 
+            margin-top: 15px; padding: 15px; border-radius: 20px; 
+            background: var(--bg); box-shadow: inset 3px 3px 6px #bebebe; 
+            text-align: left; direction: ltr;
+        }
+        .section-title { font-weight: bold; color: var(--blue); border-bottom: 1px solid #ccc; margin-bottom: 8px; display: block; font-size: 18px; }
+        .item-list { font-size: 20px; line-height: 1.6; color: var(--text); }
+        .clickable-item { cursor: pointer; color: var(--text); display: block; padding: 4px 0; border-bottom: 1px dashed #bbb; }
+        .clickable-item:hover { color: var(--blue); }
+
+        .btn-group { display: flex; flex-direction: column; gap: 12px; width: 100%; }
+        .btn-main { width: 100%; padding: 16px; border-radius: 20px; border: none; color: white; font-weight: bold; cursor: pointer; font-size: 20px; box-shadow: 4px 4px 10px rgba(0,0,0,0.1); }
+        
         .bottom-nav { 
             position: fixed; bottom: 0; left: 0; right: 0; 
-            background: var(--bg); box-shadow: 0 -5px 20px rgba(0,0,0,0.1); 
-            display: flex; justify-content: space-around; padding: 15px; 
-            font-size: 18px; font-weight: bold; border-top-left-radius: 25px; border-top-right-radius: 25px; z-index: 1000;
+            background: var(--bg); box-shadow: 0 -4px 10px rgba(0,0,0,0.1); 
+            display: flex; justify-content: space-around; padding: 12px; 
+            font-size: 16px; font-weight: bold; border-radius: 20px 20px 0 0;
         }
-
-        .ad-box { background: #fffbeb; border: 2px dashed #f59e0b; padding: 20px; border-radius: 25px; color: #92400e; text-align: center; margin-top: 10px; display: none; width: 100%; box-sizing: border-box; }
     </style>
 </head>
 <body>
@@ -62,37 +58,34 @@
 <div class="app">
     <div class="header">
         <button class="circle-btn" onclick="toggleTheme()">🌓</button>
-        <h1>FredDic Pro</h1>
+        <h1 style="font-size: 24px; color: var(--blue);">FredDic Pro</h1>
         <button class="circle-btn" onclick="toggleMute()" id="muteBtn">🔊</button>
     </div>
 
     <div class="search-area">
-        <input type="text" id="wordInput" placeholder="جستجو..." onkeypress="if(event.key==='Enter') handleSearch()">
+        <input type="text" id="wordInput" placeholder="جستجوی لغت..." onkeypress="if(event.key==='Enter') handleSearch()">
         <button class="circle-btn" onclick="handleSearch()">🔍</button>
     </div>
 
     <div id="resultCard">
         <h2 id="wordTitle" onclick="speak(this.innerText)"></h2>
         <span id="txtFarsiMain"></span>
-        <div id="txtDef"></div>
-    </div>
+        
+        <div class="extra-section" id="colSection">
+            <span class="section-title">🔗 Collocations:</span>
+            <div id="colList" class="item-list"></div>
+        </div>
 
-    <div id="quizArea">
-        <div id="motivationTxt" style="color:#16a34a; font-weight:bold; margin-bottom:10px; text-align:center;"></div>
-        <h3 id="quizQuestion" style="font-size:28px; margin-bottom:20px; text-align:center;"></h3>
-        <div id="quizOptions"></div>
-    </div>
-
-    <div id="adBox" class="ad-box">
-        <p style="font-size:18px; margin:0;">آموزش مستقیم با <b>استاد Fred</b></p>
-        <p style="font-size:24px; font-weight:bold; margin:10px 0;">09017708544</p>
-        <button class="btn-main" style="background:#25d366;" onclick="contactWhatsApp()">💬 پیام در واتس‌اپ</button>
+        <div class="extra-section" id="phrSection">
+            <span class="section-title">💡 Phrasal Verbs:</span>
+            <div id="phrList" class="item-list"></div>
+        </div>
     </div>
 
     <div class="btn-group">
-        <button class="btn-main btn-green" onclick="practiceLeitner()">🗂 لایتنر (<span id="countL">0</span>)</button>
-        <button class="btn-main btn-orange" id="btnDailyTest" onclick="startDailyTest()">📝 شروع تست روزانه</button>
-        <button class="btn-main btn-blue" onclick="loginUser()">👤 ورود کاربر</button>
+        <button class="btn-main" style="background:#16a34a" onclick="practiceLeitner()">🗂 لایتنر (<span id="countL">0</span>)</button>
+        <button class="btn-main" style="background:#ea580c" onclick="startDailyTest()">📝 شروع تست روزانه</button>
+        <button class="btn-main" style="background:#6366f1" onclick="loginUser()">👤 ورود کاربر</button>
     </div>
 </div>
 
@@ -103,20 +96,26 @@
 </div>
 
 <script>
-    const TG_TOKEN = "8553224514:AAG0XXzA8da55jCGXnzStP-0IxHhnfkTPRw";
-    const TG_CHAT_ID = "96991859";
-
+    // دیتابیس غنی شده با کالوکیشن و فریزال‌ورب
     const pdcsDb = {
-        "go": { f: "رفتن", d: "Move from one place to another" },
-        "get": { f: "گرفتن / به دست آوردن", d: "To receive or reach something" },
-        "take": { f: "برداشتن / بردن", d: "To carry something with you" },
-        "come": { f: "آمدن", d: "To move toward the speaker" },
-        "eat": { f: "خوردن", d: "To put food into the mouth" }
+        "get": { 
+            f: "گرفتن / رسیدن", 
+            col: ["get married", "get ready", "get a job"], 
+            phr: ["get up (بیدار شدن)", "get in (وارد شدن)", "get along (ساختن با کسی)"] 
+        },
+        "take": { 
+            f: "برداشتن / بردن", 
+            col: ["take a photo", "take a shower", "take a break"], 
+            phr: ["take off (بلند شدن هواپیما)", "take out (بیرون بردن)", "take care (مراقبت کردن)"] 
+        },
+        "go": { 
+            f: "رفتن", 
+            col: ["go home", "go shopping", "go crazy"], 
+            phr: ["go on (ادامه دادن)", "go out (بیرون رفتن)", "go away (دور شدن)"] 
+        }
     };
 
-    // مقداردهی اولیه متغیرها با اطمینان از عدم وجود undefined
-    let currentUser = localStorage.getItem('fred_user') || "Guest";
-    let stats = JSON.parse(localStorage.getItem('fred_stats')) || { stars: 0, cups: 0, total: 0, daily: 0 };
+    let stats = JSON.parse(localStorage.getItem('fred_stats')) || { stars: 0, cups: 0, total: 0 };
     let leitner = JSON.parse(localStorage.getItem('leitner')) || [];
     let isMuted = localStorage.getItem('isMuted') === 'true';
 
@@ -139,107 +138,36 @@
         document.getElementById('muteBtn').innerText = isMuted ? "🔇" : "🔊";
     }
 
-    function updateUI() {
-        // اطمینان از اینکه همیشه عدد نمایش داده می‌شود
-        document.getElementById('userStars').innerText = stats.stars || 0;
-        document.getElementById('userCups').innerText = stats.cups || 0;
-        document.getElementById('totalTests').innerText = stats.total || 0;
-        document.getElementById('countL').innerText = (leitner && leitner.length) ? leitner.length : 0;
-        document.getElementById('muteBtn').innerText = isMuted ? "🔇" : "🔊";
-        
-        if(currentUser === "Guest" && (stats.daily || 0) >= 5) {
-            document.getElementById('adBox').style.display = 'block';
-            document.getElementById('btnDailyTest').style.display = 'none';
-        }
-    }
-
     function handleSearch() {
         const val = document.getElementById('wordInput').value.toLowerCase().trim();
-        if(!val) return;
-        document.getElementById('resultCard').style.display = 'none';
-        document.getElementById('quizArea').style.display = 'none';
-
-        if(/[آ-ی]/.test(val)) {
-            let matches = Object.keys(pdcsDb).filter(key => pdcsDb[key].f.includes(val));
-            if(matches.length > 0) showResult(matches[0]);
-            else alert("پیدا نشد");
-        } else {
-            if(pdcsDb[val]) showResult(val);
-            else alert("Word not found");
-        }
+        if(pdcsDb[val]) showResult(val);
+        else alert("لغت پیدا نشد. (get, take, go را تست کنید)");
     }
 
     function showResult(word) {
-        document.getElementById('resultCard').style.display = 'block';
         const data = pdcsDb[word];
+        document.getElementById('resultCard').style.display = 'block';
         document.getElementById('wordTitle').innerText = word;
         document.getElementById('txtFarsiMain').innerText = data.f;
-        
-        // تبدیل تعریف به کلمات صوتی
-        const defWords = data.d.split(' ');
-        const defHTML = defWords.map(w => `<span class="clickable-word" onclick="speak('${w.replace(/[^a-zA-Z]/g, "")}')">${w}</span>`).join(' ');
-        document.getElementById('txtDef').innerHTML = defHTML;
-        
+
+        // بارگذاری کالوکیشن‌ها
+        const colList = document.getElementById('colList');
+        colList.innerHTML = data.col.map(item => `<span class="clickable-item" onclick="speak('${item}')">🔹 ${item}</span>`).join('');
+
+        // بارگذاری فریزال‌ورب‌ها
+        const phrList = document.getElementById('phrList');
+        phrList.innerHTML = data.phr.map(item => `<span class="clickable-item" onclick="speak('${item.split('(')[0]}')">🔸 ${item}</span>`).join('');
+
         speak(word);
     }
 
-    function startDailyTest() {
-        if(currentUser === "Guest" && stats.daily >= 5) return;
-        document.getElementById('resultCard').style.display = 'none';
-        document.getElementById('quizArea').style.display = 'block';
-        
-        const keys = Object.keys(pdcsDb);
-        const qKey = keys[Math.floor(Math.random() * keys.length)];
-        const correct = pdcsDb[qKey].f;
-        
-        document.getElementById('quizQuestion').innerHTML = `Meaning of "<span class="clickable-word" onclick="speak('${qKey}')">${qKey.toUpperCase()}</span>"?`;
-        
-        const opts = [correct, "خوابیدن", "پریدن", "نوشتن"].sort(() => Math.random() - 0.5);
-        const optArea = document.getElementById('quizOptions');
-        optArea.innerHTML = '';
-
-        opts.forEach(o => {
-            const div = document.createElement('div');
-            div.className = 'quiz-option';
-            div.innerText = o;
-            div.onclick = function() {
-                stats.total = (stats.total || 0) + 1;
-                if(currentUser === "Guest") stats.daily = (stats.daily || 0) + 1;
-                
-                if(o === correct) {
-                    stats.stars = (stats.stars || 0) + 10;
-                    if(stats.stars % 50 === 0) stats.cups = (stats.cups || 0) + 1;
-                    speak("Correct");
-                } else {
-                    speak("Wrong");
-                    if(!leitner.includes(qKey)) {
-                        leitner.push(qKey);
-                        localStorage.setItem('leitner', JSON.stringify(leitner));
-                    }
-                }
-                localStorage.setItem('fred_stats', JSON.stringify(stats));
-                updateUI();
-                setTimeout(startDailyTest, 1000);
-            };
-            optArea.appendChild(div);
-        });
+    function updateUI() {
+        document.getElementById('userStars').innerText = stats.stars;
+        document.getElementById('userCups').innerText = stats.cups;
+        document.getElementById('totalTests').innerText = stats.total;
+        document.getElementById('countL').innerText = leitner.length;
     }
 
-    function practiceLeitner() {
-        if(!leitner || leitner.length === 0) return alert("لایتنر خالی است");
-        showResult(leitner[0]);
-    }
-
-    function contactWhatsApp() {
-        window.open(`https://wa.me/989017708544?text=سلام استاد Fred، من مایل به یادگیری هستم.`);
-    }
-
-    function loginUser() {
-        let n = prompt("نام شما:");
-        if(n) { currentUser = n; localStorage.setItem('fred_user', n); updateUI(); }
-    }
-
-    // اجرای اولیه برای نمایش درست اعداد
     updateUI();
 </script>
 </body>
