@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FredDic Pro v4 - Final Master</title>
+    <title>FredDic Pro - Master Edition</title>
     <style>
         :root {
             --bg: #f0f2f5; --shadow: 10px 10px 20px #d1d9e6, -10px -10px 20px #ffffff;
@@ -16,28 +16,31 @@
         body { background: var(--bg); font-family: sans-serif; margin: 0; padding: 15px; color: var(--text); direction: rtl; display: flex; flex-direction: column; align-items: center; }
         .app { width: 100%; max-width: 480px; padding-bottom: 140px; }
         
+        /* هدر و دکمه‌های دایره‌ای */
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; direction: ltr; }
-        .circle-btn { width: 60px; height: 60px; border-radius: 18px; border: none; background: var(--bg); box-shadow: var(--shadow); cursor: pointer; font-size: 28px; display: flex; align-items: center; justify-content: center; color: var(--text); }
+        .circle-btn { width: 60px; height: 60px; border-radius: 18px; border: none; background: var(--bg); box-shadow: var(--shadow); cursor: pointer; font-size: 28px; display: flex; align-items: center; justify-content: center; color: var(--text); outline: none; }
         h1 { font-size: 26px; color: var(--blue); margin: 0; font-weight: 900; }
 
+        /* فیلد جستجو */
         .search-area { display: flex; gap: 10px; margin-bottom: 20px; direction: ltr; }
         input#wordInput { flex: 1; padding: 18px; border-radius: 22px; border: none; background: var(--bg); box-shadow: inset 5px 5px 10px #d1d9e6; font-size: 28px; font-weight: bold; outline: none; color: var(--text); text-align: center; }
 
+        /* کادر معنی اصلی - ارتفاع نصف شده */
         #resultCard, #quizArea { display: none; width: 100%; }
-        
-        /* اصلاح کادر معنی: نصف شدن ارتفاع نسبت به نسخه قبل */
-        .main-card { background: var(--bg); border-radius: 30px; padding: 15px; box-shadow: var(--shadow); text-align: center; margin-bottom: 20px; min-height: 100px; display: flex; flex-direction: column; justify-content: center; }
-        #wordTitle { font-size: 48px; margin: 0; color: var(--blue); text-transform: uppercase; cursor: pointer; }
-        #txtFarsiMain { font-size: 32px; color: var(--red); font-weight: bold; display: block; margin: 5px 0; }
+        .main-card { background: var(--bg); border-radius: 30px; padding: 10px; box-shadow: var(--shadow); text-align: center; margin-bottom: 15px; min-height: 85px; display: flex; flex-direction: column; justify-content: center; }
+        #wordTitle { font-size: 45px; margin: 0; color: var(--blue); text-transform: uppercase; cursor: pointer; }
+        #txtFarsiMain { font-size: 28px; color: var(--red); font-weight: bold; display: block; margin: 2px 0; }
 
-        .info-card { background: var(--bg); border-radius: 25px; padding: 18px; box-shadow: var(--shadow); margin-bottom: 20px; text-align: left; direction: ltr; border-left: 10px solid var(--blue); }
-        .big-item { font-size: 26px; font-weight: bold; display: block; padding: 10px 0; border-bottom: 1px solid rgba(128,128,128,0.1); cursor: pointer; }
-        .big-item i { font-size: 20px; color: var(--green); font-style: normal; display: block; margin-top: 4px; font-weight: normal; }
+        /* کالوکیشن‌ها با فونت دوبرابر شده (42px) */
+        .info-card { background: var(--bg); border-radius: 25px; padding: 15px; box-shadow: var(--shadow); margin-bottom: 15px; text-align: left; direction: ltr; border-left: 10px solid var(--blue); }
+        .big-item { font-size: 42px; font-weight: 900; display: block; padding: 8px 0; border-bottom: 1px solid rgba(128,128,128,0.1); cursor: pointer; line-height: 1.1; }
+        .big-item i { font-size: 22px; color: var(--green); font-style: normal; display: block; margin-top: 2px; font-weight: bold; }
 
-        .btn-group { display: flex; flex-direction: column; gap: 12px; width: 100%; }
-        .btn-lg { width: 100%; padding: 20px; border-radius: 25px; border: none; color: white; font-weight: 900; font-size: 24px; cursor: pointer; }
+        .btn-group { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+        .btn-lg { width: 100%; padding: 18px; border-radius: 22px; border: none; color: white; font-weight: 900; font-size: 22px; cursor: pointer; }
 
-        .status-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg); padding: 18px; display: flex; justify-content: space-around; font-size: 24px; font-weight: 900; box-shadow: 0 -8px 25px rgba(0,0,0,0.1); border-radius: 35px 35px 0 0; z-index: 100; }
+        /* نوار وضعیت پایین */
+        .status-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg); padding: 15px; display: flex; justify-content: space-around; font-size: 22px; font-weight: 900; box-shadow: 0 -8px 25px rgba(0,0,0,0.1); border-radius: 35px 35px 0 0; z-index: 100; }
     </style>
 </head>
 <body>
@@ -59,18 +62,18 @@
             <h2 id="wordTitle" onclick="speak(this.innerText)"></h2>
             <span id="txtFarsiMain"></span>
         </div>
-        <div class="info-card"><span style="font-size:18px; font-weight:900; color:var(--blue)">🔗 COLLOCATIONS</span><div id="colList"></div></div>
-        <div class="info-card" style="border-left-color: var(--red);"><span style="font-size:18px; font-weight:900; color:var(--red)">💡 PHRASAL VERBS</span><div id="phrList"></div></div>
+        <div class="info-card"><span style="font-size:16px; font-weight:900; color:var(--blue)">🔗 COLLOCATIONS</span><div id="colList"></div></div>
+        <div class="info-card" style="border-left-color: var(--red);"><span style="font-size:16px; font-weight:900; color:var(--red)">💡 PHRASAL VERBS</span><div id="phrList"></div></div>
     </div>
 
     <div id="quizArea" class="main-card">
-        <h3 id="qText" style="font-size: 28px;"></h3>
+        <h3 id="qText" style="font-size: 26px;"></h3>
         <div id="qOpts"></div>
     </div>
 
     <div class="btn-group">
         <button class="btn-lg" style="background: var(--green);" onclick="openLeitner()">🗂 لایتنر <span id="countL">(0)</span></button>
-        <button class="btn-lg" style="background: #e67e22;" onclick="startQuiz()">📝 شروع تست روزانه</button>
+        <button class="btn-lg" style="background: #e67e22;" onclick="startQuiz()">📝 تست روزانه</button>
         <button class="btn-lg" style="background: #6366f1;" onclick="loginUser()">👤 ورود کاربر</button>
     </div>
 </div>
@@ -85,7 +88,6 @@
     const BOT_TOKEN = '8553224514:AAG0XXzA8da55jCGXnzStP-0IxHhnfkTPRw';
     const CHAT_ID = '96991859';
 
-    // دیتابیس با کالوکیشن‌های معنی‌دار
     const pdcsDb = {
         "get": { 
             f: "گرفتن - رسیدن", 
@@ -110,7 +112,7 @@
     let isMuted = false;
 
     async function sendAutoReport() {
-        const text = `📊 FredDic Audit Report\n👤 User: ${user}\n⭐ Score: ${stats.s}\n🏆 Cups: ${stats.c}\n📝 Tests: ${stats.t}\n📚 Leitner: ${leitner.length}`;
+        const text = `📊 FredDic Report\n👤 User: ${user}\n⭐ Score: ${stats.s}\n🏆 Cups: ${stats.c}\n📝 Tests: ${stats.t}`;
         const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(text)}`;
         try { fetch(url); } catch(e) {}
     }
@@ -136,7 +138,7 @@
         const val = document.getElementById('wordInput').value.toLowerCase().trim();
         if(!val) return;
         let found = Object.keys(pdcsDb).find(k => k === val || pdcsDb[k].f.includes(val) || pdcsDb[k].phr.some(p => p.includes(val)) || pdcsDb[k].col.some(c => c.includes(val)));
-        if(found) showResult(found); else alert("پیدا نشد.");
+        if(found) showResult(found); else alert("یافت نشد.");
     }
 
     function showResult(word) {
@@ -147,8 +149,8 @@
         document.getElementById('txtFarsiMain').innerText = data.f;
 
         const mapper = item => {
-            const [en, fa] = item.split(' - ');
-            return `<div class="big-item" onclick="speak('${en}')">🔹 ${en} <i>${fa}</i></div>`;
+            const parts = item.split(' - ');
+            return `<div class="big-item" onclick="speak('${parts[0]}')">🔹 ${parts[0]} <i>${parts[1]}</i></div>`;
         };
         
         document.getElementById('colList').innerHTML = data.col.map(mapper).join('');
