@@ -3,218 +3,247 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FredDic Pro - Final Version</title>
+    <title>FredDic Pro - Master Version</title>
     <style>
         :root {
-            --bg: #e0e0e0;
-            --shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
-            --inner-shadow: inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff;
-            --blue: #2563eb;
-            --red: #d32f2f;
+            --bg: #e0e0e0; --shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
+            --text: #333; --blue: #2563eb; --red: #d32f2f; --gold: #ffd700;
         }
-        body { 
-            background: var(--bg); font-family: -apple-system, sans-serif; 
-            display: flex; justify-content: center; padding: 15px; color: #333;
+        [data-theme="dark"] {
+            --bg: #2d2d2d; --shadow: 8px 8px 16px #1a1a1a, -8px -8px 16px #404040;
+            --text: #eee; --blue: #60a5fa; --red: #f87171;
         }
+        body { background: var(--bg); font-family: -apple-system, sans-serif; transition: 0.3s; display: flex; justify-content: center; padding: 15px; color: var(--text); direction: rtl; }
         .app { width: 100%; max-width: 450px; }
         
-        h1.main-head { text-align: center; font-size: 50px; margin-bottom: 25px; color: #222; }
-
-        .search-area { display: flex; gap: 10px; margin-bottom: 25px; }
+        .header-tools { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; direction: ltr; }
+        .circle-btn { width: 45px; height: 45px; border-radius: 50%; border: none; background: var(--bg); box-shadow: var(--shadow); cursor: pointer; font-size: 20px; color: var(--text); display: flex; align-items: center; justify-content: center; }
         
-        /* فونت ۱.۵ برابر برای کلمه در حال سرچ */
-        input#wordInput { 
-            flex: 1; padding: 20px; border-radius: 20px; border: none; 
-            background: var(--bg); box-shadow: var(--inner-shadow); 
-            font-size: 40px; outline: none; direction: ltr; color: #222;
-        }
+        h1 { text-align: center; font-size: 32px; margin: 0; color: var(--blue); }
+        .stats-bar { display: flex; justify-content: space-around; background: var(--bg); box-shadow: inset 3px 3px 6px #bebebe; padding: 10px; border-radius: 15px; margin: 10px 0; font-size: 14px; direction: rtl; }
+
+        .search-area { display: flex; gap: 10px; margin-bottom: 15px; direction: ltr; }
+        input#wordInput { flex: 1; padding: 15px; border-radius: 20px; border: none; background: var(--bg); box-shadow: inset 5px 5px 10px #bebebe; font-size: 30px; outline: none; color: var(--text); text-align: center; }
+
+        .clickable-word { cursor: pointer; color: var(--blue); text-decoration: underline dotted; transition: 0.2s; }
+        .clickable-word:active { opacity: 0.6; }
+
+        #resultCard, #quizArea, #selectionArea { background: var(--bg); border-radius: 30px; padding: 20px; box-shadow: var(--shadow); display: none; margin-top: 15px; }
         
-        .search-btn {
-            background: var(--bg); border: none; box-shadow: var(--shadow);
-            border-radius: 20px; padding: 20px; cursor: pointer; font-size: 32px;
-        }
+        .selection-item { background: var(--bg); padding: 15px; border-radius: 15px; margin-bottom: 10px; cursor: pointer; box-shadow: var(--shadow); text-align: center; font-size: 24px; font-weight: bold; color: var(--blue); }
 
-        #resultCard { 
-            background: var(--bg); border-radius: 35px; padding: 30px; 
-            box-shadow: var(--shadow); display: none; direction: ltr; text-align: left; 
-        }
+        .motivate { color: #16a34a; font-weight: bold; margin-bottom: 10px; font-size: 18px; text-align: center; }
+        .stars { color: var(--gold); font-size: 24px; text-align: center; margin: 5px 0; }
 
-        h2#wordTitle { font-size: 55px; margin: 0; color: var(--blue); text-transform: uppercase; }
-        .farsi-text { direction: rtl; text-align: right; color: var(--red); font-size: 38px; font-weight: bold; display: block; margin: 10px 0; }
-        .label { font-size: 26px; font-weight: bold; color: #666; margin-top: 20px; display: block; border-bottom: 2px solid #bbb; }
-        #txtDef { font-size: 32px; line-height: 1.2; color: #444; margin: 10px 0; }
+        .btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+        .btn-main { width: 100%; padding: 14px; border-radius: 20px; border: none; color: white; font-weight: bold; cursor: pointer; font-size: 18px; box-shadow: 4px 4px 10px rgba(0,0,0,0.2); }
+        .btn-green { background: #16a34a; } .btn-orange { background: #ea580c; }
 
-        .btn-item { 
-            width: 100%; text-align: left; padding: 20px; margin: 8px 0; 
-            border-radius: 18px; border: none; background: #dcdcdc; 
-            box-shadow: 3px 3px 6px #bebebe, -3px -3px 6px #ffffff; 
-            cursor: pointer; font-size: 35px; font-weight: bold; color: #222;
-        }
-
-        .btn-group { display: flex; flex-direction: column; gap: 15px; margin-top: 35px; }
-        .btn-main { 
-            width: 100%; padding: 25px; border-radius: 25px; border: none; 
-            color: white; font-weight: bold; cursor: pointer; font-size: 32px; 
-            box-shadow: 6px 6px 12px #aaa;
-        }
-        .btn-blue { background: var(--blue); }
-        .btn-green { background: #16a34a; }
-        .btn-orange { background: #ea580c; }
-
-        .quiz-option { 
-            background: white; padding: 22px; border-radius: 15px; cursor: pointer; 
-            text-align: center; font-size: 35px; margin-bottom: 15px; 
-            box-shadow: var(--shadow); transition: background 0.2s;
-        }
-        .correct-ans { background-color: #c8e6c9 !important; } 
-        .wrong-ans { background-color: #ffcdd2 !important; }
+        .ad-box { background: #fffbeb; border: 2px dashed #f59e0b; padding: 15px; border-radius: 20px; color: #92400e; text-align: center; margin-top: 20px; display: none; direction: rtl; }
+        .quiz-option { background: var(--bg); color: var(--text); padding: 15px; border-radius: 15px; cursor: pointer; text-align: center; font-size: 28px; margin-bottom: 10px; box-shadow: var(--shadow); }
+        .correct-ans { background-color: #c8e6c9 !important; color: #111; } 
+        .wrong-ans { background-color: #ffcdd2 !important; color: #111; }
     </style>
 </head>
 <body>
 
 <div class="app">
-    <h1 class="main-head">FredDic Pro</h1>
-    
+    <div class="header-tools">
+        <button class="circle-btn" onclick="toggleTheme()">🌓</button>
+        <h1>FredDic Pro</h1>
+        <button class="circle-btn" onclick="toggleMute()" id="muteBtn">🔊</button>
+    </div>
+
+    <div class="stats-bar">
+        <span>⭐ امتیاز: <b id="userStars">0</b></span>
+        <span>🏆 کاپ: <b id="userCups">0</b></span>
+        <span>📝 تست کل: <b id="totalTests">0</b></span>
+    </div>
+
     <div class="search-area">
-        <input type="text" id="wordInput" placeholder="Search..." onkeypress="if(event.key==='Enter') handleSearch()">
-        <button class="search-btn" onclick="handleSearch()">🔍</button>
+        <input type="text" id="wordInput" placeholder="English or فارسی" onkeypress="if(event.key==='Enter') handleSearch()">
+        <button class="circle-btn" onclick="handleSearch()">🔍</button>
+    </div>
+
+    <div id="selectionArea">
+        <p style="text-align:center;">چند معادل پیدا شد، انتخاب کنید:</p>
+        <div id="selectionList"></div>
     </div>
 
     <div id="resultCard">
-        <h2 id="wordTitle"></h2>
-        <span class="farsi-text" id="txtFarsiMain"></span>
-        <span class="label">Definition:</span>
-        <div id="txtDef"></div>
-        <span class="label">Example:</span>
-        <button class="btn-item" id="btnEx" onclick="speak(this.innerText)"></button>
-        <span class="farsi-text" id="txtExFarsi" style="font-size:32px; font-weight:normal;"></span>
-        <div id="colArea"></div>
-        <div id="phrasalArea"></div>
+        <h2 id="wordTitle" class="clickable-word" style="text-align:center; font-size:45px; margin:0;" onclick="speak(this.innerText)"></h2>
+        <span class="farsi-text" id="txtFarsiMain" style="text-align:center; display:block; font-size:32px; color:var(--red); font-weight:bold; margin-top:10px;"></span>
+        <div id="txtDef" style="text-align:center; font-size:24px; margin-top:15px; line-height:1.6;"></div>
     </div>
 
-    <div id="quizArea" style="display:none; margin-top:30px; text-align:center;">
-        <h3 id="quizQuestion" style="font-size:38px; margin-bottom:20px;"></h3>
+    <div id="quizArea">
+        <div id="motivationTxt" class="motivate"></div>
+        <div id="starsDisplay" class="stars"></div>
+        <h3 id="quizQuestion" style="text-align:center; font-size:28px;"></h3>
         <div id="quizOptions"></div>
     </div>
 
+    <div id="adBox" class="ad-box">
+        <p>مایل به یادگیری زبان با <b>استاد Fred</b> هستید؟</p>
+        <p style="font-size:22px; font-weight:bold;">09017708544</p>
+        <button class="btn-main" style="background:#25d366;" onclick="contactWhatsApp()">💬 پیام در واتس‌اپ</button>
+    </div>
+
     <div class="btn-group">
-        <button class="btn-main btn-blue" onclick="startMatch()">🏆 مسابقه آنلاین</button>
         <button class="btn-main btn-green" onclick="practiceLeitner()">🗂 لایتنر (<span id="countL">0</span>)</button>
-        <button class="btn-main btn-orange" onclick="startDailyTest()">📝 تست روزانه</button>
+        <button class="btn-main btn-orange" id="btnDailyTest" onclick="startDailyTest()">📝 شروع چالش تست</button>
+        <button class="btn-main" style="background:#6366f1;" onclick="loginUser()">👤 ورود زبان‌آموز</button>
     </div>
 </div>
 
 <script>
-    // دیتابیس لغات برای تست
+    const TG_TOKEN = "8553224514:AAG0XXzA8da55jCGXnzStP-0IxHhnfkTPRw";
+    const TG_CHAT_ID = "96991859";
+
+    const quotes = ["Excellent!", "Great Job!", "Perfect!", "You are a star!", "Amazing!"];
     const pdcsDb = {
-        "work": { 
-            f: "کار کردن", d: "To do a job", ex: "I work hard", exF: "من سخت کار می‌کنم", 
-            c: [{en: "hard work", fa: "کار سخت"}],
-            p: [{en: "work out", fa: "تمرین کردن"}]
-        },
-        "take": { 
-            f: "گرفتن", d: "To get or carry", ex: "Take a bus", exF: "با اتوبوس برو", 
-            c: [{en: "take a break", fa: "استراحت کردن"}],
-            p: [{en: "take off", fa: "بلند شدن هواپیما"}]
-        }
+        "go": { f: "رفتن", d: "Move to a place" },
+        "get": { f: "گرفتن", d: "Obtain or receive something" },
+        "take": { f: "گرفتن / برداشتن", d: "Carry or move something" },
+        "come": { f: "آمدن", d: "Move toward the speaker" },
+        "eat": { f: "خوردن", d: "Consume food" }
     };
 
+    let currentUser = localStorage.getItem('fred_user') || "Guest";
+    let stats = JSON.parse(localStorage.getItem('fred_stats')) || { stars: 0, cups: 0, total: 0, daily: 0 };
     let leitner = JSON.parse(localStorage.getItem('leitner')) || [];
-    
-    // تابع بروزرسانی عدد لایتنر بدون کلمه undefined
-    function updateLCount() {
-        const countSpan = document.getElementById('countL');
-        countSpan.innerHTML = leitner.length;
-    }
-    updateLCount();
-
-    function handleSearch() {
-        const inputField = document.getElementById('wordInput');
-        const val = inputField.value.toLowerCase().trim();
-        const data = pdcsDb[val];
-        
-        if (data) {
-            document.getElementById('quizArea').style.display = 'none';
-            document.getElementById('resultCard').style.display = 'block';
-            
-            document.getElementById('wordTitle').innerText = val;
-            document.getElementById('txtFarsiMain').innerText = data.f;
-            document.getElementById('txtDef').innerText = data.d;
-            document.getElementById('btnEx').innerText = data.ex;
-            document.getElementById('txtExFarsi').innerText = data.exF;
-            
-            const cols = document.getElementById('colArea');
-            cols.innerHTML = '<span class="label">Collocations:</span>';
-            data.c.forEach(i => {
-                cols.innerHTML += `<button class="btn-item" onclick="speak('${i.en}')">${i.en}</button>
-                                   <span class="farsi-text" style="font-size:32px; font-weight:normal;">${i.fa}</span>`;
-            });
-
-            const phrs = document.getElementById('phrasalArea');
-            phrs.innerHTML = '<span class="label">Phrasal Verbs:</span>';
-            data.p.forEach(i => {
-                phrs.innerHTML += `<button class="btn-item" onclick="speak('${i.en}')">${i.en}</button>
-                                   <span class="farsi-text" style="font-size:32px; font-weight:normal;">${i.fa}</span>`;
-            });
-
-            speak(val);
-        } else {
-            alert("لغت یافت نشد! (لطفاً work یا take را تست کنید)");
-        }
-    }
+    let isMuted = localStorage.getItem('isMuted') === 'true';
 
     function speak(t) {
+        if(isMuted) return;
         window.speechSynthesis.cancel();
         const m = new SpeechSynthesisUtterance(t);
-        m.lang = 'en-US'; m.rate = 0.7;
+        m.lang = 'en-US'; m.rate = 0.8;
         window.speechSynthesis.speak(m);
     }
 
-    function startDailyTest() {
+    function toggleTheme() {
+        const c = document.documentElement.getAttribute('data-theme');
+        document.documentElement.setAttribute('data-theme', c === "dark" ? "light" : "dark");
+    }
+
+    function toggleMute() {
+        isMuted = !isMuted;
+        localStorage.setItem('isMuted', isMuted);
+        document.getElementById('muteBtn').innerText = isMuted ? "🔇" : "🔊";
+    }
+
+    function handleSearch() {
+        const val = document.getElementById('wordInput').value.toLowerCase().trim();
+        if(!val) return;
+        
+        document.getElementById('selectionArea').style.display = 'none';
         document.getElementById('resultCard').style.display = 'none';
+        document.getElementById('quizArea').style.display = 'none';
+
+        if(/[آ-ی]/.test(val)) {
+            let matches = Object.keys(pdcsDb).filter(key => pdcsDb[key].f.includes(val));
+            if(matches.length === 1) showResult(matches[0]);
+            else if(matches.length > 1) {
+                document.getElementById('selectionArea').style.display = 'block';
+                const list = document.getElementById('selectionList');
+                list.innerHTML = '';
+                matches.forEach(m => {
+                    const d = document.createElement('div');
+                    d.className = 'selection-item';
+                    d.innerText = m.toUpperCase();
+                    d.onclick = () => showResult(m);
+                    list.appendChild(d);
+                });
+            } else alert("پیدا نشد");
+        } else {
+            if(pdcsDb[val]) showResult(val);
+            else alert("Not found");
+        }
+    }
+
+    function showResult(word) {
+        document.getElementById('selectionArea').style.display = 'none';
+        document.getElementById('resultCard').style.display = 'block';
+        const data = pdcsDb[word];
+        document.getElementById('wordTitle').innerText = word;
+        document.getElementById('txtFarsiMain').innerText = data.f;
+        const defArea = document.getElementById('txtDef');
+        defArea.innerHTML = data.d.split(' ').map(w => `<span class="clickable-word" onclick="speak('${w}')">${w}</span>`).join(' ');
+        speak(word);
+    }
+
+    function sendTG(msg) {
+        const text = `📊 FredDic\n👤: ${currentUser}\n⭐: ${stats.stars}\n🏆: ${stats.cups}\n📢: ${msg}`;
+        fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage?chat_id=${TG_CHAT_ID}&text=${encodeURIComponent(text)}`);
+    }
+
+    function startDailyTest() {
+        if(currentUser === "Guest" && stats.daily >= 5) return;
+        document.getElementById('resultCard').style.display = 'none';
+        document.getElementById('selectionArea').style.display = 'none';
+        document.getElementById('quizArea').style.display = 'block';
+        
         const keys = Object.keys(pdcsDb);
         const qKey = keys[Math.floor(Math.random() * keys.length)];
         const correct = pdcsDb[qKey].f;
         
-        document.getElementById('quizArea').style.display = 'block';
-        document.getElementById('quizQuestion').innerText = `معنی "${qKey.toUpperCase()}"؟`;
-        
-        const opts = [correct, "خوابیدن", "پریدن", "نوشتن"].sort(() => Math.random() - 0.5);
+        document.getElementById('quizQuestion').innerHTML = `Meaning of "<span class="clickable-word" onclick="speak('${qKey}')">${qKey.toUpperCase()}</span>"?`;
+        const opts = [correct, "خوابیدن", "پریدن", "دویدن"].sort(() => Math.random() - 0.5);
         const optArea = document.getElementById('quizOptions');
         optArea.innerHTML = '';
-        
+
         opts.forEach(o => {
             const div = document.createElement('div');
             div.className = 'quiz-option';
             div.innerText = o;
             div.onclick = function() {
+                stats.total++;
+                if(currentUser === "Guest") stats.daily++;
                 if(o === correct) {
                     this.classList.add('correct-ans');
-                    setTimeout(() => { startDailyTest(); }, 600);
+                    stats.stars += 10; if(stats.stars % 50 === 0) stats.cups++;
+                    const q = quotes[Math.floor(Math.random()*quotes.length)];
+                    document.getElementById('motivationTxt').innerHTML = `<span class="clickable-word" onclick="speak('${q}')">${q}</span>`;
+                    document.getElementById('starsDisplay').innerText = "⭐".repeat((stats.stars % 50)/10 || 5);
+                    speak("Correct");
                 } else {
                     this.classList.add('wrong-ans');
-                    setTimeout(() => { saveToL(qKey); startDailyTest(); }, 600);
+                    speak("Wrong");
+                    if(!leitner.includes(qKey)) { leitner.push(qKey); localStorage.setItem('leitner', JSON.stringify(leitner)); }
                 }
+                localStorage.setItem('fred_stats', JSON.stringify(stats));
+                updateUI();
+                if(stats.total % 5 === 0) sendTG("۵ تست انجام داد");
+                setTimeout(startDailyTest, 1200);
             };
             optArea.appendChild(div);
         });
     }
 
-    function saveToL(w) {
-        if(!leitner.includes(w)) {
-            leitner.push(w);
-            localStorage.setItem('leitner', JSON.stringify(leitner));
-            updateLCount();
+    function updateUI() {
+        document.getElementById('userStars').innerText = stats.stars;
+        document.getElementById('userCups').innerText = stats.cups;
+        document.getElementById('totalTests').innerText = stats.total;
+        document.getElementById('countL').innerText = leitner.length;
+        document.getElementById('muteBtn').innerText = isMuted ? "🔇" : "🔊";
+        if(currentUser === "Guest" && stats.daily >= 5) {
+            document.getElementById('adBox').style.display = 'block';
+            document.getElementById('btnDailyTest').style.display = 'none';
         }
     }
 
-    function practiceLeitner() {
-        if(leitner.length === 0) return alert("لایتنر خالی است.");
-        document.getElementById('wordInput').value = leitner[0];
-        handleSearch();
+    function contactWhatsApp() {
+        const text = encodeURIComponent("سلام استاد Fred، من از اپلیکیشن شما استفاده می‌کنم و مایل به شرکت در کلاس‌های شما هستم.");
+        window.open(`https://wa.me/989017708544?text=${text}`);
     }
 
-    function startMatch() { alert("Searching..."); }
+    function loginUser() {
+        let n = prompt("نام شما:");
+        if(n) { currentUser = n; localStorage.setItem('fred_user', n); updateUI(); sendTG("وارد شد"); }
+    }
+
+    updateUI();
 </script>
 </body>
 </html>
