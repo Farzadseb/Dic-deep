@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FredDic Pro</title>
+    <title>FredDic Pro - Final Version</title>
     <style>
         :root {
             --bg: #e0e0e0;
@@ -21,11 +21,14 @@
         h1.main-head { text-align: center; font-size: 50px; margin-bottom: 25px; color: #222; }
 
         .search-area { display: flex; gap: 10px; margin-bottom: 25px; }
-        input { 
+        
+        /* فونت ۱.۵ برابر برای کلمه در حال سرچ */
+        input#wordInput { 
             flex: 1; padding: 20px; border-radius: 20px; border: none; 
             background: var(--bg); box-shadow: var(--inner-shadow); 
-            font-size: 28px; outline: none; direction: ltr;
+            font-size: 40px; outline: none; direction: ltr; color: #222;
         }
+        
         .search-btn {
             background: var(--bg); border: none; box-shadow: var(--shadow);
             border-radius: 20px; padding: 20px; cursor: pointer; font-size: 32px;
@@ -61,7 +64,7 @@
         .quiz-option { 
             background: white; padding: 22px; border-radius: 15px; cursor: pointer; 
             text-align: center; font-size: 35px; margin-bottom: 15px; 
-            box-shadow: var(--shadow); transition: 0.3s;
+            box-shadow: var(--shadow); transition: background 0.2s;
         }
         .correct-ans { background-color: #c8e6c9 !important; } 
         .wrong-ans { background-color: #ffcdd2 !important; }
@@ -80,14 +83,11 @@
     <div id="resultCard">
         <h2 id="wordTitle"></h2>
         <span class="farsi-text" id="txtFarsiMain"></span>
-        
         <span class="label">Definition:</span>
         <div id="txtDef"></div>
-        
         <span class="label">Example:</span>
         <button class="btn-item" id="btnEx" onclick="speak(this.innerText)"></button>
         <span class="farsi-text" id="txtExFarsi" style="font-size:32px; font-weight:normal;"></span>
-
         <div id="colArea"></div>
         <div id="phrasalArea"></div>
     </div>
@@ -105,29 +105,38 @@
 </div>
 
 <script>
+    // دیتابیس لغات برای تست
     const pdcsDb = {
         "work": { 
             f: "کار کردن", d: "To do a job", ex: "I work hard", exF: "من سخت کار می‌کنم", 
-            c: [{en: "hard work", fa: "کار سخت"}, {en: "work experience", fa: "تجربه کاری"}],
-            p: [{en: "work out", fa: "تمرین کردن"}, {en: "work on", fa: "روی چیزی کار کردن"}]
+            c: [{en: "hard work", fa: "کار سخت"}],
+            p: [{en: "work out", fa: "تمرین کردن"}]
         },
         "take": { 
-            f: "گرفتن", d: "To get or carry", ex: "Take a photo", exF: "عکس بگیر", 
-            c: [{en: "take a break", fa: "استراحت کردن"}, {en: "take a risk", fa: "ریسک کردن"}],
-            p: [{en: "take off", fa: "بلند شدن هواپیما"}, {en: "take over", fa: "کنترل چیزی را گرفتن"}]
+            f: "گرفتن", d: "To get or carry", ex: "Take a bus", exF: "با اتوبوس برو", 
+            c: [{en: "take a break", fa: "استراحت کردن"}],
+            p: [{en: "take off", fa: "بلند شدن هواپیما"}]
         }
     };
 
     let leitner = JSON.parse(localStorage.getItem('leitner')) || [];
-    function updateLCount() { document.getElementById('countL').innerText = leitner.length; }
+    
+    // تابع بروزرسانی عدد لایتنر بدون کلمه undefined
+    function updateLCount() {
+        const countSpan = document.getElementById('countL');
+        countSpan.innerHTML = leitner.length;
+    }
     updateLCount();
 
     function handleSearch() {
-        const val = document.getElementById('wordInput').value.toLowerCase().trim();
+        const inputField = document.getElementById('wordInput');
+        const val = inputField.value.toLowerCase().trim();
         const data = pdcsDb[val];
+        
         if (data) {
             document.getElementById('quizArea').style.display = 'none';
             document.getElementById('resultCard').style.display = 'block';
+            
             document.getElementById('wordTitle').innerText = val;
             document.getElementById('txtFarsiMain').innerText = data.f;
             document.getElementById('txtDef').innerText = data.d;
@@ -149,6 +158,8 @@
             });
 
             speak(val);
+        } else {
+            alert("لغت یافت نشد! (لطفاً work یا take را تست کنید)");
         }
     }
 
@@ -164,11 +175,14 @@
         const keys = Object.keys(pdcsDb);
         const qKey = keys[Math.floor(Math.random() * keys.length)];
         const correct = pdcsDb[qKey].f;
+        
         document.getElementById('quizArea').style.display = 'block';
         document.getElementById('quizQuestion').innerText = `معنی "${qKey.toUpperCase()}"؟`;
-        const opts = [correct, "خوابیدن", "پریدن", "دویدن"].sort(() => Math.random() - 0.5);
+        
+        const opts = [correct, "خوابیدن", "پریدن", "نوشتن"].sort(() => Math.random() - 0.5);
         const optArea = document.getElementById('quizOptions');
         optArea.innerHTML = '';
+        
         opts.forEach(o => {
             const div = document.createElement('div');
             div.className = 'quiz-option';
