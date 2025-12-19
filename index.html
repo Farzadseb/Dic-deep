@@ -3,146 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FredDic Pro v3</title>
+    <title>FredDic Pro - Balanced Font</title>
     <style>
         :root {
             --bg: #e0e0e0;
             --shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
             --inner-shadow: inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff;
             --blue: #2563eb;
+            --red: #d32f2f;
         }
         body { 
             background: var(--bg); font-family: -apple-system, sans-serif; 
-            display: flex; justify-content: center; padding: 20px; color: #333;
+            display: flex; justify-content: center; padding: 15px; color: #333;
         }
-        .app { width: 100%; max-width: 420px; }
+        .app { width: 100%; max-width: 450px; }
         
+        /* هدر اصلی */
+        h1.main-head { text-align: center; font-size: 55px; margin-bottom: 20px; color: #222; }
+
         /* بخش جستجو */
-        .search-area { display: flex; gap: 12px; margin-bottom: 25px; }
+        .search-area { display: flex; gap: 10px; margin-bottom: 25px; }
         input { 
-            flex: 1; padding: 22px; border-radius: 18px; border: none; 
+            flex: 1; padding: 20px; border-radius: 20px; border: none; 
             background: var(--bg); box-shadow: var(--inner-shadow); 
-            font-size: 24px; outline: none; direction: ltr;
+            font-size: 30px; outline: none; direction: ltr;
         }
         .search-btn {
             background: var(--bg); border: none; box-shadow: var(--shadow);
-            border-radius: 18px; padding: 18px 25px; cursor: pointer; font-size: 28px;
+            border-radius: 20px; padding: 20px; cursor: pointer; font-size: 35px;
         }
 
-        /* کارت نمایش لغت */
+        /* کارت نمایش لغت - فونت‌های یکدست و درشت */
         #resultCard { 
             background: var(--bg); border-radius: 35px; padding: 30px; 
             box-shadow: var(--shadow); display: none; direction: ltr; text-align: left; 
         }
 
-        /* فونت ۱۰۰ برای لغت اصلی */
-        h2#wordTitle { 
-            font-size: 100px; margin: 0; color: var(--blue); 
-            text-transform: uppercase; line-height: 1; word-wrap: break-word;
-        }
+        h2#wordTitle { font-size: 50px; margin: 0; color: var(--blue); text-transform: uppercase; }
         
-        .farsi-main { direction: rtl; text-align: right; color: #d32f2f; font-size: 45px; font-weight: bold; margin-top: 15px; display: block; }
-        .label { font-size: 22px; font-weight: bold; color: #666; margin-top: 25px; display: block; border-bottom: 2px solid #ccc; }
-        #txtDef { font-size: 26px; line-height: 1.3; color: #444; margin-top: 10px; }
+        .farsi-text { direction: rtl; text-align: right; color: var(--red); font-size: 40px; font-weight: bold; display: block; margin: 10px 0; }
+        
+        .label { font-size: 28px; font-weight: bold; color: #666; margin-top: 20px; display: block; border-bottom: 2px solid #bbb; }
+        
+        #txtDef { font-size: 35px; line-height: 1.2; color: #444; margin: 10px 0; }
 
         .btn-item { 
-            width: 100%; text-align: left; padding: 22px; margin: 12px 0; 
+            width: 100%; text-align: left; padding: 22px; margin: 10px 0; 
             border-radius: 18px; border: none; background: #dcdcdc; 
             box-shadow: 4px 4px 8px #bebebe, -4px -4px 8px #ffffff; 
-            cursor: pointer; font-size: 26px; font-weight: bold;
+            cursor: pointer; font-size: 38px; font-weight: bold; color: #222;
         }
-        .farsi-sub { direction: rtl; text-align: right; color: #d32f2f; font-size: 26px; font-weight: bold; display: block; }
 
-        /* دکمه‌های کنترلی پایین */
-        .btn-group { display: flex; flex-direction: column; gap: 15px; margin-top: 40px; }
+        /* دکمه‌های پایینی */
+        .btn-group { display: flex; flex-direction: column; gap: 15px; margin-top: 35px; }
         .btn-main { 
-            width: 100%; padding: 25px; border-radius: 22px; border: none; 
-            color: white; font-weight: bold; cursor: pointer; font-size: 28px; 
+            width: 100%; padding: 25px; border-radius: 25px; border: none; 
+            color: white; font-weight: bold; cursor: pointer; font-size: 35px; 
             box-shadow: 6px 6px 12px #aaa;
         }
         .btn-blue { background: var(--blue); }
         .btn-green { background: #16a34a; }
         .btn-orange { background: #ea580c; }
 
-        /* بخش تست */
-        .quiz-option { background: white; padding: 20px; border-radius: 15px; cursor: pointer; text-align: center; font-size: 28px; margin-bottom: 12px; box-shadow: var(--shadow); }
+        .quiz-option { background: white; padding: 25px; border-radius: 15px; cursor: pointer; text-align: center; font-size: 38px; margin-bottom: 15px; box-shadow: var(--shadow); }
     </style>
 </head>
 <body>
 
 <div class="app">
-    <h1 style="text-align: center; font-size: 40px; margin-bottom: 20px;">FredDic Pro</h1>
+    <h1 class="main-head">FredDic Pro</h1>
     
     <div class="search-area">
-        <input type="text" id="wordInput" placeholder="Write here...">
+        <input type="text" id="wordInput" placeholder="Search..." onkeypress="if(event.key==='Enter') handleSearch()">
         <button class="search-btn" onclick="handleSearch()">🔍</button>
     </div>
 
     <div id="resultCard">
         <h2 id="wordTitle">WORD</h2>
-        <span class="farsi-main" id="txtFarsiMain">معنی</span>
+        <span class="farsi-text" id="txtFarsiMain">معنی اصلی</span>
         
         <span class="label">Definition:</span>
-        <div id="txtDef">Definition text...</div>
+        <div id="txtDef">Definition...</div>
         
         <span class="label">Example:</span>
         <button class="btn-item" id="btnEx" onclick="speak(this.innerText)"></button>
-        <span class="farsi-sub" id="txtExFarsi"></span>
+        <span class="farsi-text" id="txtExFarsi" style="font-size:35px; font-weight:normal;"></span>
 
-        <div id="colList"></div>
+        <div id="colArea"></div>
     </div>
 
     <div id="quizArea" style="display:none; margin-top:30px; text-align:center;">
-        <h3 id="quizQuestion" style="font-size:32px;"></h3>
+        <h3 id="quizQuestion" style="font-size:40px;"></h3>
         <div id="quizOptions"></div>
     </div>
 
     <div class="btn-group">
-        <button class="btn-main btn-blue" onclick="startMatch()">🏆 مسابقه با AI</button>
-        <button class="btn-main btn-green" id="btnLeitner" onclick="practiceLeitner()">🗂 لایتنر (<span id="lCount">0</span>)</button>
+        <button class="btn-main btn-blue" onclick="startMatch()">🏆 مسابقه آنلاین</button>
+        <button class="btn-main btn-green" id="btnL" onclick="practiceLeitner()">🗂 لایتنر (<span id="countL">0</span>)</button>
         <button class="btn-main btn-orange" onclick="startDailyTest()">📝 تست روزانه</button>
     </div>
 </div>
 
 <script>
-    // دیتابیس لغات
     const pdcsDb = {
-        "be": { f: "بودن", d: "To exist", ex: "Be happy", exF: "خوشحال باش", cols: [{en: "be careful", fa: "مواظب باش"}] },
-        "have": { f: "داشتن", d: "To possess", ex: "I have a car", exF: "ماشین دارم", cols: [{en: "have fun", fa: "خوش بگذرون"}] },
-        "work": { f: "کار کردن", d: "To do a job", ex: "I work daily", exF: "هر روز کار می‌کنم", cols: [{en: "hard work", fa: "کار سخت"}] },
-        "take": { f: "گرفتن / برداشتن", d: "To get or carry", ex: "Take your time", exF: "عجله نکن", cols: [{en: "take a break", fa: "استراحت کن"}] },
-        "go": { f: "رفتن", d: "To move", ex: "Go home now", exF: "الان برو خونه", cols: [{en: "go crazy", fa: "دیوانه شدن"}] }
+        "be": { f: "بودن", d: "To exist", ex: "Be kind", exF: "مهربان باش", c: [{en: "be careful", fa: "مواظب باش"}] },
+        "have": { f: "داشتن", d: "To possess", ex: "Have a seat", exF: "بفرما بشین", c: [{en: "have a look", fa: "نگاهی بنداز"}] },
+        "work": { f: "کار کردن", d: "To do a task", ex: "Work hard", exF: "سخت کار کن", c: [{en: "work out", fa: "تمرین کردن"}] },
+        "take": { f: "گرفتن / برداشتن", d: "To carry", ex: "Take a bus", exF: "با اتوبوس برو", c: [{en: "take notes", fa: "یادداشت کردن"}] },
+        "go": { f: "رفتن", d: "To move", ex: "Go ahead", exF: "بفرما (برو جلو)", c: [{en: "go home", fa: "برو خونه"}] }
     };
 
-    let leitnerList = JSON.parse(localStorage.getItem('leitner')) || [];
-    document.getElementById('lCount').innerText = leitnerList.length;
+    let leitner = JSON.parse(localStorage.getItem('leitner')) || [];
+    document.getElementById('countL').innerText = leitner.length;
 
-    // تابع اصلی جستجو
     function handleSearch() {
         const val = document.getElementById('wordInput').value.toLowerCase().trim();
         const data = pdcsDb[val];
-        
         if (data) {
             document.getElementById('quizArea').style.display = 'none';
             document.getElementById('resultCard').style.display = 'block';
-            
             document.getElementById('wordTitle').innerText = val;
             document.getElementById('txtFarsiMain').innerText = data.f;
             document.getElementById('txtDef').innerText = data.d;
             document.getElementById('btnEx').innerText = data.ex;
             document.getElementById('txtExFarsi').innerText = data.exF;
             
-            const colArea = document.getElementById('colList');
-            colArea.innerHTML = '<span class="label">Collocations:</span>';
-            data.cols.forEach(c => {
-                colArea.innerHTML += `<button class="btn-item" onclick="speak('${c.en}')">${c.en}</button>
-                                      <span class="farsi-sub">${c.fa}</span>`;
+            const cols = document.getElementById('colArea');
+            cols.innerHTML = '<span class="label">Collocations:</span>';
+            data.c.forEach(i => {
+                cols.innerHTML += `<button class="btn-item" onclick="speak('${i.en}')">${i.en}</button>
+                                   <span class="farsi-text" style="font-size:35px; font-weight:normal;">${i.fa}</span>`;
             });
-            
             speak(val);
-        } else {
-            alert("لغت یافت نشد! (be, have, work, take, go را امتحان کنید)");
-        }
+        } else { alert("Not found in A1 Core."); }
     }
 
     function speak(t) {
@@ -152,53 +145,46 @@
         window.speechSynthesis.speak(m);
     }
 
-    // تست روزانه
     function startDailyTest() {
         document.getElementById('resultCard').style.display = 'none';
         const keys = Object.keys(pdcsDb);
-        const randomKey = keys[Math.floor(Math.random() * keys.length)];
-        const correct = pdcsDb[randomKey].f;
+        const qKey = keys[Math.floor(Math.random() * keys.length)];
+        const correct = pdcsDb[qKey].f;
         
         document.getElementById('quizArea').style.display = 'block';
-        document.getElementById('quizQuestion').innerText = `معنی "${randomKey.toUpperCase()}"؟`;
+        document.getElementById('quizQuestion').innerText = `معنی "${qKey.toUpperCase()}"؟`;
         
-        const options = [correct, "خوابیدن", "پریدن", "نوشتن"].sort(() => Math.random() - 0.5);
+        const opts = [correct, "خوابیدن", "پریدن", "دویدن"].sort(() => Math.random() - 0.5);
         const optArea = document.getElementById('quizOptions');
         optArea.innerHTML = '';
         
-        options.forEach(o => {
+        opts.forEach(o => {
             const div = document.createElement('div');
             div.className = 'quiz-option';
             div.innerText = o;
             div.onclick = () => {
-                if(o === correct) {
-                    alert("✅ صحیح!");
-                    startDailyTest();
-                } else {
-                    alert(`❌ غلط! لغت ${randomKey} به لایتنر رفت.`);
-                    addToLeitner(randomKey);
-                    startDailyTest();
-                }
+                if(o === correct) { alert("✅ عالی!"); startDailyTest(); }
+                else { alert(`❌ اشتباه! ${qKey} به لایتنر رفت.`); saveL(qKey); startDailyTest(); }
             };
             optArea.appendChild(div);
         });
     }
 
-    function addToLeitner(w) {
-        if(!leitnerList.includes(w)) {
-            leitnerList.push(w);
-            localStorage.setItem('leitner', JSON.stringify(leitnerList));
-            document.getElementById('lCount').innerText = leitnerList.length;
+    function saveL(w) {
+        if(!leitner.includes(w)) {
+            leitner.push(w);
+            localStorage.setItem('leitner', JSON.stringify(leitner));
+            document.getElementById('countL').innerText = leitner.length;
         }
     }
 
     function practiceLeitner() {
-        if(leitnerList.length === 0) return alert("لایتنر خالی است.");
-        document.getElementById('wordInput').value = leitnerList[0];
+        if(leitner.length === 0) return alert("لایتنر خالی است.");
+        document.getElementById('wordInput').value = leitner[0];
         handleSearch();
     }
 
-    function startMatch() { alert("در حال جستجوی رقیب..."); }
+    function startMatch() { alert("Searching for opponent..."); }
 </script>
 
 </body>
