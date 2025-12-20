@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FredDic Pro - Final Edition</title>
+    <title>FredDic Pro - Corrected Edition</title>
     <style>
         :root {
             --bg: #e0e0e0;
             --shd: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
             --inner: inset 6px 6px 12px #bebebe, inset -6px -6px 12px #ffffff;
-            --glow: 0 0 15px rgba(255, 255, 255, 0.8); /* افکت نوری هنگام کلیک */
+            --glow: 0 0 15px rgba(255, 255, 255, 0.9);
             --blue: #2d5bc0;
             --red: #d32f2f;
             --txt: #444;
@@ -24,10 +24,10 @@
 
         .screen { padding: 15px; box-sizing: border-box; min-height: 100vh; }
 
-        /* باکس سرچ - جابجا شده به سمت چپ مطابق تصویر */
+        /* باکس سرچ - جابجا شده به سمت راست */
         .search-container {
             display: flex; align-items: center; gap: 10px; margin: 15px 0;
-            flex-direction: row-reverse; /* جابجایی آیکون و ورودی */
+            direction: rtl; /* برای قرارگیری دکمه در سمت راست */
         }
 
         input {
@@ -42,7 +42,6 @@
             display: flex; align-items: center; justify-content: center;
         }
 
-        /* افکت فشرده شدن با نور ملایم زیر دکمه */
         .neu-btn:active, .content-box:active {
             box-shadow: var(--inner), var(--glow);
             transform: scale(0.97);
@@ -54,43 +53,41 @@
             box-shadow: var(--shd); padding: 25px; margin-bottom: 20px;
         }
 
-        /* کلمات انگلیسی سمت راست، فارسی سمت چپ */
+        /* انگلیسی سمت چپ، فارسی سمت راست */
         .word-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .res-en { color: var(--blue); font-size: 32px; font-weight: 900; order: 2; }
-        .res-fa { color: var(--red); font-size: 20px; font-weight: bold; order: 1; }
+        .res-en { color: var(--blue); font-size: 32px; font-weight: 900; text-transform: uppercase; order: 1; }
+        .res-fa { color: var(--red); font-size: 20px; font-weight: bold; order: 2; }
 
         .label {
             color: var(--label-gray); font-size: 13px; display: block;
-            text-align: right; border-bottom: 1px solid #ccc; margin: 15px 0 8px 0;
+            text-align: left; border-bottom: 1px solid #ccc; margin: 15px 0 8px 0;
+            direction: ltr;
         }
 
-        .def-text { font-size: 17px; text-align: right; direction: ltr; margin-bottom: 10px; color: #555; }
+        .def-text { font-size: 17px; text-align: left; direction: ltr; margin-bottom: 10px; color: #555; }
         
-        /* باکس‌های محتوا (انگلیسی سمت راست) */
+        /* باکس‌های محتوا (تراز شده به سمت چپ برای انگلیسی) */
         .content-box {
             background: var(--bg); border-radius: 18px; padding: 12px 18px;
             box-shadow: var(--shd); font-weight: bold; font-size: 18px;
-            text-align: right; direction: ltr; width: 100%; border: none;
+            text-align: left; direction: ltr; width: 100%; border: none;
             margin-top: 5px; color: #333; cursor: pointer;
         }
 
-        .trans-sub { color: var(--red); font-size: 15px; text-align: right; margin: 6px 0 15px 0; font-weight: 500; }
+        .trans-sub { color: var(--red); font-size: 15px; text-align: left; margin: 6px 0 15px 0; font-weight: 500; direction: rtl; }
 
-        /* دکمه‌های پایین صفحه */
         .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .nav-item {
             padding: 18px; border-radius: 20px; border: none; color: white;
             font-weight: bold; box-shadow: var(--shd); cursor: pointer; font-size: 16px;
         }
 
-        /* دکمه خروج */
         .exit-btn {
             margin: 25px auto; width: 80%; padding: 12px;
             border-radius: 15px; border: 2px solid #ff4444; color: #ff4444;
             background: transparent; font-weight: bold; cursor: pointer;
             box-shadow: var(--shd); transition: 0.3s; display: block;
         }
-        .exit-btn:active { background: #ff4444; color: white; box-shadow: var(--inner); }
     </style>
 </head>
 <body>
@@ -103,8 +100,8 @@
     </div>
 
     <div class="search-container">
+        <input type="text" id="wordInp" placeholder="Type word...">
         <button class="neu-btn" onclick="doSearch()" style="width:48px; height:48px; font-size:20px;">🔍</button>
-        <input type="text" id="wordInp" placeholder="Go...">
     </div>
 
     <div id="resCard" class="card">
@@ -113,20 +110,20 @@
             <div class="res-fa" id="hFa">رفتن</div>
         </div>
 
-        <span class="label">:Definition</span>
+        <span class="label">Definition:</span>
         <div class="def-text" id="hDef">To move from one place to another</div>
 
-        <span class="label">:Example</span>
-        <button class="content-box" onclick="spk()">I go to school</button>
-        <div class="trans-sub">من به مدرسه می‌روم</div>
+        <span class="label">Example:</span>
+        <button class="content-box" id="btnEx" onclick="spk(this.innerText)">I go to school</button>
+        <div class="trans-sub" id="hExFa">من به مدرسه می‌روم</div>
 
-        <span class="label">:Collocations</span>
-        <button class="content-box">go home</button>
-        <div class="trans-sub">به خانه رفتن</div>
+        <span class="label">Collocations:</span>
+        <button class="content-box" id="btnCol" onclick="spk(this.innerText)">go home</button>
+        <div class="trans-sub" id="hColFa">به خانه رفتن</div>
 
-        <span class="label">:Phrasal Verbs</span>
-        <button class="content-box" id="hPhr">go on</button>
-        <div class="trans-sub" id="hPhrFa">ادامه دادن</div>
+        <span class="label">Phrasal Verbs:</span>
+        <button class="content-box" id="btnPhr" onclick="spk(this.innerText)">go on</button>
+        <div class="trans-sub" id="hPhrFa" style="text-align: left;">ادامه دادن</div>
     </div>
 
     <div class="nav-grid">
@@ -160,16 +157,27 @@
             document.getElementById('hEn').innerText = v.toUpperCase();
             document.getElementById('hFa').innerText = word.fa;
             document.getElementById('hDef').innerText = word.def;
-            document.getElementById('hPhr').innerText = word.phr;
+            
+            document.getElementById('btnEx').innerText = word.ex;
+            document.getElementById('hExFa').innerText = word.exFa;
+            
+            document.getElementById('btnCol').innerText = word.col;
+            document.getElementById('hColFa').innerText = word.colFa;
+            
+            document.getElementById('btnPhr').innerText = word.phr;
             document.getElementById('hPhrFa').innerText = word.phrFa;
+            
             spk(v);
         }
     }
 
-    function spk(t) {
+    // تابع پخش صوت اصلاح شده
+    function spk(text) {
+        if (!text) return;
         window.speechSynthesis.cancel();
-        let m = new SpeechSynthesisUtterance(t || "I go to school");
-        m.lang='en-US'; m.rate=0.8;
+        let m = new SpeechSynthesisUtterance(text);
+        m.lang = 'en-US';
+        m.rate = 0.8;
         window.speechSynthesis.speak(m);
     }
 </script>
