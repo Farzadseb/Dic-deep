@@ -3,23 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FredDic Pro - Neumorphic Edition</title>
+    <title>FredDic Pro - Final Edition</title>
     <style>
         :root {
             --bg: #e0e0e0;
             --shd: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
             --inner: inset 6px 6px 12px #bebebe, inset -6px -6px 12px #ffffff;
+            --glow: 0 0 15px rgba(255, 255, 255, 0.8); /* افکت نوری هنگام کلیک */
             --blue: #2d5bc0;
             --red: #d32f2f;
             --txt: #444;
-            --label-gray: #757575;
-        }
-
-        [data-theme="dark"] {
-            --bg: #222;
-            --shd: 6px 6px 12px #111, -3px -3px 10px #333;
-            --inner: inset 4px 4px 8px #111, inset -2px -2px 8px #333;
-            --txt: #eee;
+            --label-gray: #888;
         }
 
         body, html {
@@ -28,137 +22,125 @@
             direction: rtl; color: var(--txt); overflow-x: hidden;
         }
 
-        /* صفحه بندی */
-        .screen {
-            position: fixed; inset: 0; width: 100%; height: 100%;
-            background: var(--bg); padding: 15px; box-sizing: border-box;
-            transition: 0.4s ease; transform: translateX(0); z-index: 10;
-        }
-        .sub-screen { transform: translateX(100%); z-index: 20; }
-        .active { transform: translateX(0); }
+        .screen { padding: 15px; box-sizing: border-box; min-height: 100vh; }
 
-        /* کارت نئومورفیک اصلی */
-        .card {
-            background: var(--bg);
-            border-radius: 35px;
-            box-shadow: var(--shd);
-            padding: 20px;
-            margin-top: 10px;
+        /* باکس سرچ - جابجا شده به سمت چپ مطابق تصویر */
+        .search-container {
+            display: flex; align-items: center; gap: 10px; margin: 15px 0;
+            flex-direction: row-reverse; /* جابجایی آیکون و ورودی */
         }
 
-        /* استایل ورودی متن */
-        .search-box {
-            display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
-        }
         input {
-            flex: 1; height: 45px; border-radius: 15px; border: none;
+            flex: 1; height: 48px; border-radius: 20px; border: none;
             background: var(--bg); box-shadow: var(--inner);
-            padding: 0 15px; outline: none; color: var(--txt); direction: ltr;
+            padding: 0 15px; outline: none; color: var(--txt); direction: ltr; font-size: 16px;
         }
 
-        /* استایل دکمه‌های فشاری */
         .neu-btn {
             background: var(--bg); border: none; border-radius: 15px;
             box-shadow: var(--shd); cursor: pointer; transition: 0.2s;
             display: flex; align-items: center; justify-content: center;
         }
-        .neu-btn:active {
-            box-shadow: var(--inner);
+
+        /* افکت فشرده شدن با نور ملایم زیر دکمه */
+        .neu-btn:active, .content-box:active {
+            box-shadow: var(--inner), var(--glow);
             transform: scale(0.97);
         }
 
-        /* دکمه‌های ناوبری رنگی */
-        .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
-        .nav-item {
-            padding: 15px; border-radius: 18px; border: none; color: white;
-            font-weight: bold; box-shadow: var(--shd); cursor: pointer;
+        /* کارت نمایش محتوا */
+        .card {
+            background: var(--bg); border-radius: 35px;
+            box-shadow: var(--shd); padding: 25px; margin-bottom: 20px;
         }
-        .nav-item:active { transform: translateY(3px); filter: brightness(0.9); }
 
-        /* بخش نمایش کلمه (مطابق عکس شما) */
-        .word-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px; }
-        .res-en { color: var(--blue); font-size: 32px; font-weight: 900; text-transform: uppercase; }
-        .res-fa { color: var(--red); font-size: 18px; font-weight: bold; }
+        /* کلمات انگلیسی سمت راست، فارسی سمت چپ */
+        .word-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .res-en { color: var(--blue); font-size: 32px; font-weight: 900; order: 2; }
+        .res-fa { color: var(--red); font-size: 20px; font-weight: bold; order: 1; }
 
         .label {
-            color: var(--label-gray); font-size: 13px; font-weight: bold;
-            border-bottom: 1px solid #ccc; display: block; margin: 10px 0 5px 0;
+            color: var(--label-gray); font-size: 13px; display: block;
+            text-align: right; border-bottom: 1px solid #ccc; margin: 15px 0 8px 0;
         }
-        .def-text { font-size: 17px; margin-bottom: 10px; text-align: left; direction: ltr; }
+
+        .def-text { font-size: 17px; text-align: right; direction: ltr; margin-bottom: 10px; color: #555; }
         
-        /* باکس‌های فرو رونده محتوا */
+        /* باکس‌های محتوا (انگلیسی سمت راست) */
         .content-box {
-            background: var(--bg); border-radius: 15px; padding: 12px;
-            box-shadow: var(--shd); cursor: pointer; font-weight: bold;
-            text-align: left; direction: ltr; margin-top: 5px;
-            transition: 0.2s; width: 100%; border: none;
+            background: var(--bg); border-radius: 18px; padding: 12px 18px;
+            box-shadow: var(--shd); font-weight: bold; font-size: 18px;
+            text-align: right; direction: ltr; width: 100%; border: none;
+            margin-top: 5px; color: #333; cursor: pointer;
         }
-        .content-box:active { box-shadow: var(--inner); }
 
-        .trans-sub { color: var(--red); font-size: 14px; text-align: left; margin: 5px 0 12px 0; }
+        .trans-sub { color: var(--red); font-size: 15px; text-align: right; margin: 6px 0 15px 0; font-weight: 500; }
 
-        .footer {
-            position: fixed; bottom: 0; left:0; right:0; padding: 15px;
-            display: flex; justify-content: space-around; background: var(--bg);
-            box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
+        /* دکمه‌های پایین صفحه */
+        .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .nav-item {
+            padding: 18px; border-radius: 20px; border: none; color: white;
+            font-weight: bold; box-shadow: var(--shd); cursor: pointer; font-size: 16px;
         }
+
+        /* دکمه خروج */
+        .exit-btn {
+            margin: 25px auto; width: 80%; padding: 12px;
+            border-radius: 15px; border: 2px solid #ff4444; color: #ff4444;
+            background: transparent; font-weight: bold; cursor: pointer;
+            box-shadow: var(--shd); transition: 0.3s; display: block;
+        }
+        .exit-btn:active { background: #ff4444; color: white; box-shadow: var(--inner); }
     </style>
 </head>
 <body>
 
-<div id="home" class="screen">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-        <button class="neu-btn" onclick="toggleTheme()" style="width:40px; height:40px;">🌓</button>
-        <b id="userBadge" style="font-size: 14px;">👤 Guest Mode</b>
-        <button id="muteBtn" class="neu-btn" onclick="toggleMute()" style="width:40px; height:40px;">🔊</button>
+<div class="screen">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+        <button class="neu-btn" style="width:40px; height:40px;">🌓</button>
+        <b style="font-size: 14px;">👤 Guest Mode</b>
+        <button class="neu-btn" style="width:40px; height:40px;">🔊</button>
     </div>
 
-    <div class="search-box">
-        <input type="text" id="wordInp" placeholder="Search (e.g. work, go)...">
-        <button class="neu-btn" onclick="doSearch()" style="width:45px; height:45px; font-size:20px;">🔍</button>
+    <div class="search-container">
+        <button class="neu-btn" onclick="doSearch()" style="width:48px; height:48px; font-size:20px;">🔍</button>
+        <input type="text" id="wordInp" placeholder="Go...">
     </div>
 
-    <div id="resCard" class="card" style="display:none;">
+    <div id="resCard" class="card">
         <div class="word-header">
-            <div class="res-en" id="hEn"></div>
-            <div class="res-fa" id="hFa"></div>
+            <div class="res-en" id="hEn">GO</div>
+            <div class="res-fa" id="hFa">رفتن</div>
         </div>
-        <div id="wordDetails"></div>
+
+        <span class="label">:Definition</span>
+        <div class="def-text" id="hDef">To move from one place to another</div>
+
+        <span class="label">:Example</span>
+        <button class="content-box" onclick="spk()">I go to school</button>
+        <div class="trans-sub">من به مدرسه می‌روم</div>
+
+        <span class="label">:Collocations</span>
+        <button class="content-box">go home</button>
+        <div class="trans-sub">به خانه رفتن</div>
+
+        <span class="label">:Phrasal Verbs</span>
+        <button class="content-box" id="hPhr">go on</button>
+        <div class="trans-sub" id="hPhrFa">ادامه دادن</div>
     </div>
 
     <div class="nav-grid">
-        <button class="nav-item" style="background:#3498db" onclick="navTo('practice')">📝 تمرین</button>
-        <button class="nav-item" style="background:#27ae60" onclick="navTo('leitner')">🗂 لایتنر</button>
-        <button class="nav-item" style="background:#f39c12" onclick="navTo('match')">🎮 مسابقه</button>
-        <button class="nav-item" style="background:#9b59b6" onclick="activateVIP()">💎 VIP</button>
+        <button class="nav-item" style="background:#3498db">📝 تمرین</button>
+        <button class="nav-item" style="background:#27ae60">🗂 لایتنر</button>
+        <button class="nav-item" style="background:#f39c12">🎮 مسابقه</button>
+        <button class="nav-item" style="background:#9b59b6">💎 VIP</button>
     </div>
-</div>
 
-<div id="practice" class="screen sub-screen">
-    <button class="neu-btn" onclick="navBack('practice')" style="width:40px; height:40px; margin-bottom:20px;">←</button>
-    <div class="card">
-        <h2 style="text-align:center;">Daily Practice</h2>
-        <p style="text-align:center; color: #777;">محتوای تمرین در اینجا قرار می‌گیرد.</p>
-    </div>
-</div>
-
-<div class="footer">
-    <span id="clickStat">📝 0/5</span>
-    <span style="font-size:30px;">🏆</span>
-    <span>⭐ <span id="starCount">0</span></span>
+    <button class="exit-btn" onclick="window.close()">خروج از برنامه</button>
 </div>
 
 <script>
     const dictionary = {
-        "work": {
-            fa: "کار کردن",
-            def: "To do a job",
-            ex: "I work hard",
-            exFa: "من سخت کار می‌کنم",
-            col: "hard work",
-            colFa: "کار سخت",
-            phr: "work out"
-        },
         "go": {
             fa: "رفتن",
             def: "To move from one place to another",
@@ -166,70 +148,30 @@
             exFa: "من به مدرسه می‌روم",
             col: "go home",
             colFa: "به خانه رفتن",
-            phr: "go on"
+            phr: "go on",
+            phrFa: "ادامه دادن"
         }
     };
 
-    let db = JSON.parse(localStorage.getItem('fred_neu_v1')) || { 
-        type: 'guest', clicks: 0, stars: 0, leitner: [] 
-    };
-    let isMuted = false;
-
-    function saveDB() { localStorage.setItem('fred_neu_v1', JSON.stringify(db)); updateUI(); }
-    
-    function updateUI() {
-        document.getElementById('userBadge').innerText = db.type === 'student' ? "👨‍🎓 VIP User" : "👤 Guest Mode";
-        document.getElementById('clickStat').innerText = db.type === 'student' ? "📝 ∞" : `📝 ${db.clicks}/5`;
-        document.getElementById('starCount').innerText = db.stars;
-    }
-
     function doSearch() {
-        if(db.type === 'guest' && db.clicks >= 5) { alert("محدودیت کاربر مهمان! لطفا لایسنس تهیه کنید."); return; }
         let v = document.getElementById('wordInp').value.toLowerCase().trim();
         let word = dictionary[v];
-
         if(word) {
-            document.getElementById('resCard').style.display = 'block';
             document.getElementById('hEn').innerText = v.toUpperCase();
             document.getElementById('hFa').innerText = word.fa;
-            
-            document.getElementById('wordDetails').innerHTML = `
-                <span class="label">Definition:</span>
-                <div class="def-text">${word.def}</div>
-
-                <span class="label">Example:</span>
-                <button class="content-box" onclick="spk('${word.ex}')">${word.ex}</button>
-                <div class="trans-sub">${word.exFa}</div>
-
-                <span class="label">Collocations:</span>
-                <button class="content-box" onclick="spk('${word.col}')">${word.col}</button>
-                <div class="trans-sub">${word.colFa}</div>
-
-                <span class="label">Phrasal Verbs:</span>
-                <button class="content-box" onclick="spk('${word.phr}')">${word.phr}</button>
-            `;
+            document.getElementById('hDef').innerText = word.def;
+            document.getElementById('hPhr').innerText = word.phr;
+            document.getElementById('hPhrFa').innerText = word.phrFa;
             spk(v);
-            db.clicks++;
-            saveDB();
-        } else if(v) { alert("کلمه در دیتابیس موجود نیست."); }
+        }
     }
 
-    function spk(t) { 
-        if(!isMuted) { 
-            window.speechSynthesis.cancel(); 
-            let m = new SpeechSynthesisUtterance(t); 
-            m.lang='en-US'; m.rate=0.8; 
-            window.speechSynthesis.speak(m); 
-        } 
+    function spk(t) {
+        window.speechSynthesis.cancel();
+        let m = new SpeechSynthesisUtterance(t || "I go to school");
+        m.lang='en-US'; m.rate=0.8;
+        window.speechSynthesis.speak(m);
     }
-
-    function navTo(id) { document.getElementById(id).classList.add('active'); }
-    function navBack(id) { document.getElementById(id).classList.remove('active'); }
-    function toggleTheme() { document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') === "dark" ? "" : "dark"); }
-    function toggleMute() { isMuted = !isMuted; document.getElementById('muteBtn').innerText = isMuted ? "🔇" : "🔊"; }
-    function activateVIP() { let c = prompt("License Key:"); if(c === "FRED-2025") { db.type='student'; saveDB(); alert("VIP Activated!"); } }
-
-    updateUI();
 </script>
 
 </body>
