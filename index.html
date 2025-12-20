@@ -3,66 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FredDic Pro - Master Edition</title>
+    <title>FredDic Ultimate v1.0</title>
     <style>
-        :root { --bg: #e0e0e0; --shd: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff; --inner: inset 6px 6px 12px #bebebe, inset -6px -6px 12px #ffffff; --blue: #2d5bc0; --red: #d32f2f; --txt: #444; }
-        [data-theme="dark"] { --bg: #1a1c1e; --shd: 6px 6px 12px #0a0a0a, -3px -3px 10px #2a2c2e; --inner: inset 4px 4px 8px #0a0a0a, inset -2px -2px 8px #2a2c2e; --txt: #eee; }
-        body { margin: 0; background: var(--bg); font-family: sans-serif; direction: rtl; color: var(--txt); transition: 0.3s; padding: 15px; }
-        .search-area { position: relative; margin: 20px 0; }
-        .search-box { display: flex; align-items: center; background: var(--bg); box-shadow: var(--inner); border-radius: 20px; padding: 5px 15px; }
+        :root {
+            --bg: #e0e0e0; --shd: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
+            --inner: inset 6px 6px 12px #bebebe, inset -6px -6px 12px #ffffff;
+            --blue: #2d5bc0; --red: #d32f2f; --txt: #444;
+        }
+        [data-theme="dark"] {
+            --bg: #1a1c1e; --shd: 6px 6px 12px #0a0a0a, -3px -3px 10px #2a2c2e;
+            --inner: inset 4px 4px 8px #0a0a0a, inset -2px -2px 8px #2a2c2e; --txt: #eee;
+        }
+
+        body, html { margin: 0; padding: 0; height: 100%; background: var(--bg); font-family: sans-serif; direction: rtl; color: var(--txt); overflow: hidden; }
+        .screen-container { position: relative; width: 100%; height: 100%; }
+        .screen { position: absolute; inset: 0; width: 100%; height: 100%; background: var(--bg); padding: 15px; box-sizing: border-box; transition: transform 0.4s ease; overflow-y: auto; z-index: 10; padding-bottom: 90px; }
+        .sub-screen { transform: translateX(100%); z-index: 20; }
+        .active { transform: translateX(0); }
+
+        /* جستجو */
+        .search-area { position: relative; margin: 15px 0; }
+        .search-box { display: flex; align-items: center; background: var(--bg); box-shadow: var(--inner); border-radius: 20px; padding: 0 15px; gap: 10px; }
         .search-box input { flex: 1; border: none; background: none; height: 48px; outline: none; color: var(--txt); text-align: center; font-size: 16px; direction: ltr; }
-        .suggestions { position: absolute; top: 60px; left: 0; right: 0; background: var(--bg); border-radius: 15px; box-shadow: var(--shd); z-index: 1000; display: none; max-height: 200px; overflow-y: auto; }
-        .suggest-item { padding: 15px; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; text-align: left; direction: ltr; font-weight: bold; }
-        .card { background: var(--bg); border-radius: 35px; box-shadow: var(--shd); padding: 25px; display: none; }
-        .en-main { color: var(--blue); font-size: 32px; font-weight: 900; text-align: left; }
-        .fa-main { color: var(--red); font-size: 22px; font-weight: bold; text-align: right; margin-top: -35px; }
-        .label { font-size: 12px; color: #888; display: block; margin: 15px 0 5px 0; text-align: left; border-bottom: 1px solid #ccc; direction: ltr; }
-        .content-box { background: var(--bg); border-radius: 18px; padding: 12px; box-shadow: var(--shd); font-weight: bold; font-size: 16px; text-align: left; direction: ltr; width: 100%; border: none; margin-top: 5px; color: var(--txt); cursor: pointer; }
-        .trans { color: var(--red); font-size: 13px; text-align: left; margin: 5px 0 10px 0; direction: rtl; }
+        .suggestions { position: absolute; top: 55px; left: 0; right: 0; background: var(--bg); border-radius: 15px; box-shadow: var(--shd); z-index: 1000; display: none; max-height: 200px; overflow-y: auto; }
+        .suggest-item { padding: 12px; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; text-align: left; direction: ltr; font-weight: bold; }
+
+        /* کارت محتوا */
+        .card { background: var(--bg); border-radius: 30px; box-shadow: var(--shd); padding: 20px; margin-bottom: 20px; display: none; }
+        .word-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 15px; }
+        .en-main { color: var(--blue); font-size: 30px; font-weight: 900; }
+        .fa-main { color: var(--red); font-size: 20px; font-weight: bold; }
+        .label { font-size: 11px; color: #888; display: block; margin: 12px 0 4px 0; text-align: left; border-bottom: 1px solid #ccc; direction: ltr; }
+        .content-btn { width: 100%; background: var(--bg); border: none; border-radius: 15px; box-shadow: var(--shd); padding: 12px; font-weight: bold; color: var(--txt); cursor: pointer; text-align: left; direction: ltr; }
+        .trans { color: var(--red); font-size: 13px; margin: 4px 0 12px 0; text-align: left; direction: rtl; }
+
+        /* دکمه‌های ناوبری */
+        .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .nav-btn { padding: 15px; border-radius: 18px; border: none; color: white; font-weight: bold; box-shadow: var(--shd); cursor: pointer; }
+
+        .footer { position: fixed; bottom: 0; left: 0; right: 0; height: 70px; background: var(--bg); display: flex; justify-content: space-around; align-items: center; box-shadow: 0 -5px 15px rgba(0,0,0,0.1); border-radius: 25px 25px 0 0; z-index: 100; }
     </style>
 </head>
 <body>
 
-<div style="display:flex; justify-content:space-between; align-items:center;">
-    <button onclick="toggleTheme()" class="content-box" style="width:45px; height:45px; padding:0;">🌓</button>
-    <b id="status">👤 Guest Mode</b>
-    <button onclick="activateVIP()" class="content-box" style="width:45px; height:45px; padding:0;">💎</button>
-</div>
+<div class="screen-container">
+    <div id="home" class="screen active">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <button onclick="toggleTheme()" class="content-btn" style="width:40px; height:40px; padding:0; text-align:center;">🌓</button>
+            <b id="status">👤 Guest Mode</b>
+            <button onclick="toggleMute()" id="muteBtn" class="content-btn" style="width:40px; height:40px; padding:0; text-align:center;">🔊</button>
+        </div>
 
-<div class="search-area">
-    <div class="search-box">
-        <input type="text" id="wordInp" placeholder="Search (d... or فارسی)" oninput="handleTyping(this.value)">
-        <span>🔍</span>
+        <div class="search-area">
+            <div class="search-box">
+                <input type="text" id="wordInp" placeholder="Search (Eng/Persian)..." oninput="handleTyping(this.value)">
+                <span>🔍</span>
+            </div>
+            <div id="suggestList" class="suggestions"></div>
+        </div>
+
+        <div id="resCard" class="card">
+            <div class="word-header">
+                <div class="en-main" id="hEn"></div>
+                <div class="fa-main" id="hFa"></div>
+            </div>
+            <span class="label">Example:</span>
+            <button class="content-btn" id="btnEx" onclick="spk(this.innerText)"></button>
+            <div class="trans" id="hExFa"></div>
+            <span class="label">Collocations & Phrases:</span>
+            <button class="content-btn" id="btnCol" onclick="spk(this.innerText)"></button>
+            <div class="trans" id="hColFa"></div>
+        </div>
+
+        <div class="nav-grid">
+            <button class="nav-btn" style="background:#3498db" onclick="navTo('practice')">📝 تمرین</button>
+            <button class="nav-btn" style="background:#27ae60" onclick="navTo('leitner')">🗂 لایتنر</button>
+            <button class="nav-btn" style="background:#f39c12" onclick="navTo('match')">🎮 مسابقه</button>
+            <button class="nav-btn" style="background:#9b59b6" onclick="activateVIP()">💎 VIP</button>
+        </div>
     </div>
-    <div id="suggestList" class="suggestions"></div>
+
+    <div id="leitner" class="screen sub-screen">
+        <button class="content-btn" style="width:45px;" onclick="navBack('leitner')">🔙</button>
+        <h2 style="text-align:center;">جعبه لایتنر</h2>
+        <div id="leitnerList"></div>
+    </div>
 </div>
 
-<div id="resCard" class="card">
-    <div class="en-main" id="hEn"></div>
-    <div class="fa-main" id="hFa"></div>
-    
-    <span class="label">Example:</span>
-    <button class="content-box" id="btnEx" onclick="spk(this.innerText)"></button>
-    <div class="trans" id="hExFa"></div>
-
-    <span class="label">Collocations & Phrasal Verbs:</span>
-    <button class="content-box" id="btnCol" onclick="spk(this.innerText)"></button>
-    <div class="trans" id="hColFa"></div>
+<div class="footer">
+    <span id="clicks">📝 0/5</span>
+    <span style="font-size:40px;">🏆</span>
+    <span>⭐ <span id="stars">0</span></span>
 </div>
 
 <script>
     const TG_URL = "https://api.telegram.org/bot8553224514:AAG0XXzA8da55jCGXnzStP-0IxHhnfkTPRw/sendMessage";
     const CHAT_ID = "96991859";
 
-    // دیتابیس ۱۰۰ لغت (نمونه)
     const dictionary = {
-        "be": { fa: "بودن", ex: "Be happy.", exFa: "خوشحال باش.", col: "be careful / be able to", colFa: "مراقب بودن / توانستن" },
-        "do": { fa: "انجام دادن", ex: "Do your best.", exFa: "بهترینت را انجام بده.", col: "do homework / do over", colFa: "مشق نوشتن / تکرار کردن" },
-        "day": { fa: "روز", ex: "Nice day.", exFa: "روز خوبی است.", col: "every day / day off", colFa: "هر روز / روز تعطیل" },
-        "drink": { fa: "نوشیدن", ex: "Drink water.", exFa: "آب بنوش.", col: "soft drink / drink up", colFa: "نوشابه / تا ته نوشیدن" }
+        "be": { fa: "بودن", ex: "Be yourself.", exFa: "خودت باش.", col: "be careful", colFa: "مراقب بودن" },
+        "go": { fa: "رفتن", ex: "I go home.", exFa: "من به خانه می‌روم.", col: "go shopping", colFa: "به خرید رفتن" },
+        "do": { fa: "انجام دادن", ex: "Do it now.", exFa: "الان انجامش بده.", col: "do your best", colFa: "تلاشت را بکن" }
     };
 
-    let db = JSON.parse(localStorage.getItem('fred_final_v40')) || { type: 'guest', clicks: 0 };
+    let db = JSON.parse(localStorage.getItem('fred_master_v1')) || { type: 'guest', clicks: 0, stars: 0, leitner: [] };
+    let isMuted = false;
 
     function handleTyping(val) {
         let list = document.getElementById('suggestList');
@@ -73,7 +118,7 @@
     }
 
     function showWord(w) {
-        if(db.type === 'guest' && db.clicks >= 5) { alert("محدودیت میهمان! کد VIP بزنید."); return; }
+        if(db.type === 'guest' && db.clicks >= 5) { alert("محدودیت میهمان!"); return; }
         let word = dictionary[w];
         document.getElementById('resCard').style.display = 'block';
         document.getElementById('suggestList').style.display = 'none';
@@ -86,14 +131,21 @@
         spk(w);
         db.clicks++;
         saveDB();
-        sendReport(`🔍 Search: ${w} (User: ${db.type})`);
+        sendReport(`🔍 Search: ${w} (${db.clicks}/5)`);
     }
 
-    function saveDB() { localStorage.setItem('fred_final_v40', JSON.stringify(db)); updateUI(); }
-    function updateUI() { document.getElementById('status').innerText = db.type === 'student' ? "👨‍🎓 VIP Mode" : `👤 Guest (${db.clicks}/5)`; }
-    function activateVIP() { if(prompt("Code:") === "FRED-2025") { db.type='student'; saveDB(); } }
-    function spk(t) { window.speechSynthesis.cancel(); let m = new SpeechSynthesisUtterance(t); m.lang='en-US'; window.speechSynthesis.speak(m); }
+    function navTo(id) { document.getElementById(id).classList.add('active'); if(id==='leitner') renderLeitner(); }
+    function navBack(id) { document.getElementById(id).classList.remove('active'); }
+    function saveDB() { localStorage.setItem('fred_master_v1', JSON.stringify(db)); updateUI(); }
+    function updateUI() {
+        document.getElementById('status').innerText = db.type === 'student' ? "👨‍🎓 VIP User" : "👤 Guest Mode";
+        document.getElementById('clicks').innerText = `📝 ${db.type==='student' ? '∞' : db.clicks+'/5'}`;
+        document.getElementById('stars').innerText = db.stars;
+    }
+    function spk(t) { if(!isMuted) { window.speechSynthesis.cancel(); let m = new SpeechSynthesisUtterance(t); m.lang='en-US'; m.rate=0.8; window.speechSynthesis.speak(m); } }
+    function toggleMute() { isMuted = !isMuted; document.getElementById('muteBtn').innerText = isMuted ? "🔇" : "🔊"; }
     function toggleTheme() { document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') === 'dark' ? '' : 'dark'); }
+    function activateVIP() { if(prompt("Code:") === "FRED-2025") { db.type='student'; saveDB(); } }
     async function sendReport(m) { fetch(`${TG_URL}?chat_id=${CHAT_ID}&text=${encodeURIComponent(m)}`).catch(()=>{}); }
     updateUI();
 </script>
