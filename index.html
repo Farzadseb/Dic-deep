@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FredDic Pro - A1 Edition</title>
+    <title>FredDic Pro - Final Verified</title>
     <style>
         :root {
             --bg: #e6ebf1; --card: #e6ebf1;
@@ -18,30 +18,42 @@
             --txt-en: #e8eaed; --blue: #8ab4f8; --red: #f28b82; --green: #81c995;
         }
 
-        body { background: var(--bg); font-family: sans-serif; margin: 0; padding: 10px; direction: rtl; color: var(--txt-en); transition: 0.3s; }
-        .app { width: 100%; max-width: 400px; margin: auto; padding-bottom: 110px; }
+        body { background: var(--bg); font-family: sans-serif; margin: 0; padding: 10px; direction: rtl; color: var(--txt-en); transition: 0.3s; overflow-x: hidden; }
+        .app { width: 100%; max-width: 400px; margin: auto; padding-bottom: 130px; }
 
+        /* هدر */
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .h-btn { width: 45px; height: 45px; border-radius: 12px; border: none; background: var(--bg); box-shadow: var(--shd); cursor: pointer; font-size: 20px; color: var(--txt-en); }
+        .h-btn { width: 50px; height: 50px; border-radius: 15px; border: none; background: var(--bg); box-shadow: var(--shd); cursor: pointer; font-size: 22px; color: var(--txt-en); display: flex; align-items: center; justify-content: center; }
 
-        .search-area { display: flex; gap: 8px; margin-bottom: 20px; direction: rtl; }
-        .search-btn { width: 55px; height: 55px; border-radius: 15px; border: none; background: var(--bg); box-shadow: var(--shd); cursor: pointer; font-size: 22px; }
-        input { flex: 1; height: 55px; border-radius: 15px; border: none; background: var(--bg); box-shadow: var(--inner); padding: 0 15px; font-size: 18px; outline: none; color: var(--txt-en); text-align: left; direction: ltr; }
+        /* باکس سرچ */
+        .search-area { display: flex; gap: 10px; margin-bottom: 25px; direction: rtl; }
+        .search-btn { width: 60px; height: 60px; border-radius: 18px; border: none; background: var(--bg); box-shadow: var(--shd); cursor: pointer; font-size: 24px; }
+        input { flex: 1; height: 60px; border-radius: 18px; border: none; background: var(--bg); box-shadow: var(--inner); padding: 0 20px; font-size: 18px; outline: none; color: var(--txt-en); text-align: left; direction: ltr; }
 
-        .card { background: var(--card); border-radius: 30px; box-shadow: var(--shd); padding: 20px; margin-bottom: 15px; display: none; }
-        .w-en { font-size: 32px; font-weight: 900; color: var(--blue); text-transform: uppercase; text-align: left; direction: ltr; }
-        .w-fa { font-size: 22px; color: var(--red); font-weight: bold; text-align: right; margin: 5px 0 15px 0; }
+        /* کارت نمایش اطلاعات */
+        .card { background: var(--card); border-radius: 35px; box-shadow: var(--shd); padding: 25px; margin-bottom: 20px; display: none; animation: fadeIn 0.4s; }
+        @keyframes fadeIn { from {opacity: 0; transform: translateY(10px);} to {opacity: 1; transform: translateY(0);} }
+        
+        .w-en { font-size: 36px; font-weight: 900; color: var(--blue); text-transform: uppercase; text-align: left; direction: ltr; margin: 0; }
+        .w-fa { font-size: 24px; color: var(--red); font-weight: bold; text-align: right; margin: 8px 0 20px 0; }
 
-        .label { font-size: 16px; font-weight: bold; color: #70757a; margin: 20px 0 8px 0; display: block; text-align: left; direction: ltr; border-bottom: 1px solid rgba(128,128,128,0.2); }
+        .label { font-size: 16px; font-weight: bold; color: #70757a; margin: 25px 0 10px 0; display: block; text-align: left; direction: ltr; border-bottom: 1px solid rgba(128,128,128,0.2); }
 
-        .box { background: var(--bg); border-radius: 18px; box-shadow: var(--shd); padding: 15px; margin-bottom: 12px; cursor: pointer; }
+        /* باکس‌های محتوایی */
+        .box { background: var(--bg); border-radius: 20px; box-shadow: var(--shd); padding: 18px; margin-bottom: 15px; cursor: pointer; transition: 0.2s; }
+        .box:active { box-shadow: var(--inner); transform: scale(0.98); }
         .box-en { font-size: 20px; font-weight: bold; display: block; text-align: left; direction: ltr; color: var(--txt-en); }
-        .box-fa { font-size: 17px; color: var(--green); display: block; text-align: right; direction: rtl; margin-top: 5px; font-weight: bold; }
+        .box-fa { font-size: 18px; color: var(--green); display: block; text-align: right; direction: rtl; margin-top: 6px; font-weight: bold; }
+        .box-ex { font-size: 15px; color: #777; display: block; text-align: left; direction: ltr; margin-top: 8px; font-style: italic; border-left: 3px solid var(--blue); padding-left: 8px; }
 
-        .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .nav-btn { padding: 18px; border-radius: 25px; border: none; color: white; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: var(--shd); }
+        /* دکمه‌های پایین صفحه */
+        .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
+        .nav-btn { padding: 20px; border-radius: 22px; border: none; color: white; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: var(--shd); transition: 0.2s; }
+        .nav-btn:active { transform: translateY(3px); box-shadow: none; }
 
-        .footer { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg); padding: 15px; display: flex; justify-content: space-around; align-items: center; font-size: 22px; font-weight: bold; border-radius: 25px 25px 0 0; box-shadow: 0 -4px 10px rgba(0,0,0,0.05); }
+        /* نوار وضعیت ثابت */
+        .footer { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg); padding: 15px 20px; display: flex; justify-content: space-around; align-items: center; border-radius: 30px 30px 0 0; box-shadow: 0 -5px 15px rgba(0,0,0,0.08); z-index: 100; }
+        .stat-item { display: flex; flex-direction: column; align-items: center; font-size: 18px; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -49,66 +61,79 @@
 <div class="app">
     <div class="header">
         <button class="h-btn" onclick="toggleTheme()">🌓</button>
-        <span style="font-weight: 900;">FredDic Pro</span>
-        <button class="h-btn" onclick="spk(document.getElementById('hEn').innerText)">🔊</button>
+        <span style="font-size: 20px; font-weight: 900; letter-spacing: 1px;">FredDic Pro</span>
+        <button class="h-btn" id="muteBtn" onclick="toggleMute()">🔊</button>
     </div>
 
     <div class="search-area">
         <button class="search-btn" onclick="doSearch()">🔍</button>
-        <input type="text" id="wordInp" placeholder="Search (be, work, have)..." onkeypress="if(event.key==='Enter') doSearch()">
+        <input type="text" id="wordInp" placeholder="Enter a word (A1)..." onkeypress="if(event.key==='Enter') doSearch()">
     </div>
 
     <div id="resCard" class="card">
         <div class="w-en" id="hEn"></div>
         <div class="w-fa" id="hFa"></div>
 
-        <span class="label">Definition (A1):</span>
-        <div class="box"><span class="box-en" id="defE" style="font-weight:normal; font-size:18px;"></span></div>
+        <span class="label">Simple Definition:</span>
+        <div class="box" style="cursor: default;"><span class="box-en" id="defE" style="font-weight:normal; font-size:17px; line-height: 1.5;"></span></div>
 
-        <span class="label">Example:</span>
+        <span class="label">Main Example:</span>
         <div class="box" onclick="spk(document.getElementById('exE').innerText)">
             <span class="box-en" id="exE"></span>
             <span class="box-fa" id="exF" style="color:#888; font-weight:normal;"></span>
         </div>
 
-        <span class="label">Collocations:</span>
+        <span class="label">Collocations & Examples:</span>
         <div id="colA"></div>
 
-        <span class="label">Phrasal Verbs:</span>
+        <span class="label">Phrasal Verbs & Examples:</span>
         <div id="phrA"></div>
     </div>
 
     <div class="nav-grid">
-        <button class="nav-btn" style="background:#4a90e2">📚 کلمات من</button>
+        <button class="nav-btn" style="background:#f39c12" onclick="alert('Daily Test Starting...')">📝 تست روزانه</button>
+        <button class="nav-btn" style="background:#9b59b6" onclick="alert('Searching for opponent...')">🎮 مسابقه آنلاین</button>
         <button class="nav-btn" style="background:#27ae60">🗂 لایتنر (0)</button>
+        <button class="nav-btn" style="background:#e74c3c" onclick="if(confirm('Exit App?')) window.close();">🚪 خروج</button>
     </div>
 </div>
 
 <div class="footer">
-    <span>⭐ 0</span>
-    <span style="font-size: 30px;">🏆</span>
-    <span>📝 0</span>
+    <div class="stat-item">⭐<span>0</span></div>
+    <div style="font-size: 35px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));">🏆</div>
+    <div class="stat-item">📝<span>0</span></div>
 </div>
 
 <script>
+    let isMuted = false;
     const dict = {
         "be": { 
-            f: "بودن", d: "To live or stay in a place.",
-            ex: "I want to be happy. - من می‌خواهم خوشحال باشم.", 
-            col: ["be careful - مراقب بودن", "be quiet - ساکت بودن", "be late - دیر کردن"], 
-            phr: ["be up to - مشغول کاری بودن", "be back - برگشتن", "be over - تمام شدن"] 
+            f: "بودن", d: "To exist or be in a place. (A1)",
+            ex: "I want to be a teacher. - من می‌خواهم یک معلم باشم.", 
+            col: [
+                {t: "be careful - مراقب بودن", x: "Be careful! The water is hot."},
+                {t: "be ready - آماده بودن", x: "Are you ready for school?"},
+                {t: "be happy - خوشحال بودن", x: "I want you to be happy."}
+            ], 
+            phr: [
+                {t: "be back - برگشتن", x: "I will be back in ten minutes."},
+                {t: "be over - تمام شدن", x: "The lesson is over now."},
+                {t: "be up to - مشغول کاری بودن", x: "What are the kids be up to?"}
+            ] 
         },
         "work": { 
-            f: "کار کردن", d: "To do a job for money.",
-            ex: "I work in a school. - من در یک مدرسه کار می‌کنم.", 
-            col: ["hard work - کار سخت", "go to work - سر کار رفتن", "do work - کار انجام دادن"], 
-            phr: ["work out - تمرین کردن", "work on - روی چیزی کار کردن", "work with - با کسی کار کردن"] 
-        },
-        "have": {
-            f: "داشتن", d: "To own something.",
-            ex: "I have a blue car. - من یک ماشین آبی دارم.",
-            col: ["have breakfast - صبحانه خوردن", "have a problem - مشکل داشتن", "have fun - خوش گذراندن"],
-            phr: ["have on - پوشیدن (لباس)", "have back - پس گرفتن", "have over - مهمان داشتن"]
+            f: "کار کردن", d: "To do a job for money or results. (A1)",
+            ex: "My father works in an office. - پدرم در یک اداره کار می‌کند.", 
+            col: [
+                {t: "go to work - سر کار رفتن", x: "I go to work at 8 AM."},
+                {t: "hard work - کار سخت", x: "Learning English is hard work."},
+                {t: "at work - سر کار", x: "Is your mom at work now?"}
+            ], 
+            phr: [
+                {t: "work out - تمرین کردن", x: "I work out at the gym."},
+                {t: "work on - روی چیزی کار کردن", x: "I need to work on my speaking."},
+                {t: "work with - با کسی کار کردن", x: "I like to work with you."}
+            ] 
         }
     };
 
@@ -120,30 +145,48 @@
             document.getElementById('hFa').innerText = "معنی: " + dict[v].f;
             document.getElementById('defE').innerText = dict[v].d;
             let [ee, ef] = dict[v].ex.split(' - ');
-            document.getElementById('exE').innerText = ee; document.getElementById('exF').innerText = ef;
-            const rndr = (list, tid) => {
-                let h = '';
-                list.forEach(i => {
-                    let [en, fa] = i.split(' - ');
-                    h += `<div class="box" onclick="spk('${en}')"><span class="box-en">${en}</span><span class="box-fa">${fa}</span></div>`;
+            document.getElementById('exE').innerText = ee; 
+            document.getElementById('exF').innerText = ef;
+            
+            const renderList = (list, targetId) => {
+                let html = '';
+                list.forEach(item => {
+                    let parts = item.t.split(' - ');
+                    html += `
+                        <div class="box" onclick="spk('${parts[0]}')">
+                            <span class="box-en">${parts[0]}</span>
+                            <span class="box-fa">${parts[1]}</span>
+                            <span class="box-ex">${item.x}</span>
+                        </div>`;
                 });
-                document.getElementById(tid).innerHTML = h;
+                document.getElementById(targetId).innerHTML = html;
             };
-            rndr(dict[v].col, 'colA'); rndr(dict[v].phr, 'phrA');
+            renderList(dict[v].col, 'colA'); 
+            renderList(dict[v].phr, 'phrA');
             spk(v);
-        } else { alert("لغت یافت نشد (مثال: be, work, have)"); }
+        } else { 
+            alert("Word not found in A1 list! (Try 'be' or 'work')"); 
+        }
     }
 
-    function spk(t) {
+    function spk(text) {
+        if(isMuted || !text) return;
         window.speechSynthesis.cancel();
-        let m = new SpeechSynthesisUtterance(t);
-        m.lang = 'en-US'; m.rate = 0.7;
-        window.speechSynthesis.speak(m);
+        let utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.7;
+        window.speechSynthesis.speak(utterance);
+    }
+
+    function toggleMute() {
+        isMuted = !isMuted;
+        document.getElementById('muteBtn').innerText = isMuted ? "🔇" : "🔊";
+        if(isMuted) window.speechSynthesis.cancel();
     }
 
     function toggleTheme() {
-        let c = document.documentElement.getAttribute('data-theme');
-        document.documentElement.setAttribute('data-theme', c === "dark" ? "" : "dark");
+        let current = document.documentElement.getAttribute('data-theme');
+        document.documentElement.setAttribute('data-theme', current === "dark" ? "" : "dark");
     }
 </script>
 </body>
