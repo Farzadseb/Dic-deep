@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>FredDic Ultimate Pro</title>
+    <title>FredDic Elite Final</title>
     <style>
         :root {
             --bg: #e0e0e0; --shd: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
             --inner: inset 6px 6px 12px #bebebe, inset -6px -6px 12px #ffffff;
             --blue: #2d5bc0; --red: #d32f2f; --txt: #444;
         }
+        /* تم شب ملایم (غیر ترسناک) */
         [data-theme="dark"] {
             --bg: #2c2f33; 
             --shd: 6px 6px 12px #1c1e22, -4px -4px 10px #3c4248;
@@ -19,17 +20,17 @@
 
         body, html { margin: 0; padding: 0; height: 100%; width: 100%; background: var(--bg); font-family: sans-serif; direction: rtl; color: var(--txt); overflow: hidden; }
         
-        /* انیمیشن Slide */
+        /* کانتینر انیمیشن Slide */
         .page-container { position: relative; width: 100%; height: 100%; overflow: hidden; }
         .page { 
             position: absolute; inset: 0; padding: 20px; display: flex; flex-direction: column; 
             background: var(--bg); transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
-            z-index: 10; overflow-y: auto; padding-bottom: 100px;
+            z-index: 10; overflow-y: auto; padding-bottom: 90px;
         }
         .sub-page { transform: translateX(100%); z-index: 20; }
         .active { transform: translateX(0); }
 
-        /* جستجو */
+        /* باکس جستجو */
         .search-area { position: relative; margin: 15px 0; }
         .search-box { display: flex; align-items: center; background: var(--bg); box-shadow: var(--inner); border-radius: 25px; padding: 0 15px; }
         .search-box input { flex: 1; border: none; background: none; height: 50px; outline: none; color: var(--txt); text-align: center; font-size: 18px; direction: ltr; }
@@ -42,14 +43,15 @@
         }
         .suggest-item { padding: 15px; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; text-align: left; direction: ltr; font-weight: bold; }
 
-        /* کارت لغت */
+        /* کارت لغت - انگلیسی چپ / فارسی راست */
         .word-card { background: var(--bg); padding: 25px; border-radius: 35px; box-shadow: var(--shd); margin-bottom: 20px; display: none; }
-        .word-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; }
-        .en-title { color: var(--blue); font-size: 32px; font-weight: 900; text-align: left; }
-        .fa-title { color: var(--red); font-size: 24px; font-weight: bold; text-align: right; }
+        .word-row { display: flex; flex-direction: row; justify-content: space-between; align-items: baseline; margin-bottom: 20px; }
+        .en-title { color: var(--blue); font-size: 32px; font-weight: 900; text-align: left; flex: 1; }
+        .fa-title { color: var(--red); font-size: 24px; font-weight: bold; text-align: right; flex: 1; }
 
         .section-label { font-size: 11px; color: #888; text-align: left; direction: ltr; border-bottom: 1px solid #ccc; margin: 10px 0 5px 0; }
         .content-box { background: var(--bg); border-radius: 15px; padding: 15px; box-shadow: var(--shd); cursor: pointer; text-align: left; direction: ltr; width: 100%; border: none; margin-bottom: 5px; color: var(--txt); font-weight: bold; font-size: 16px; }
+        .content-box:active { box-shadow: var(--inner); }
         .fa-sub { color: var(--red); font-size: 13px; text-align: left; direction: rtl; margin-bottom: 12px; }
 
         /* دکمه‌های ناوبری */
@@ -58,9 +60,6 @@
 
         /* فوتر */
         .footer { position: fixed; bottom: 0; left: 0; right: 0; height: 75px; background: var(--bg); display: flex; justify-content: space-around; align-items: center; box-shadow: 0 -5px 15px rgba(0,0,0,0.1); border-radius: 25px 25px 0 0; z-index: 100; }
-        
-        /* پنل VIP داخلی */
-        .vip-modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85%; background: var(--bg); padding: 30px; border-radius: 30px; box-shadow: var(--shd); z-index: 2000; display: none; text-align: center; }
     </style>
 </head>
 <body>
@@ -77,7 +76,7 @@
             <div class="search-area">
                 <div class="search-box">
                     <input type="text" id="wordInp" placeholder="Search (d... / فارسی)" oninput="handleTyping(this.value)">
-                    <span onclick="executeSearch()">🔍</span>
+                    <span>🔍</span>
                 </div>
                 <div id="suggests" class="suggest-list"></div>
             </div>
@@ -89,19 +88,19 @@
                 </div>
                 
                 <span class="section-label">Definition:</span>
-                <button class="content-box" id="hDef" onclick="spk(this.innerText)"></button>
+                <div class="content-box" id="hDef" onclick="spk(this.innerText)"></div>
                 <div class="fa-sub" id="hDefFa"></div>
 
                 <span class="section-label">Example:</span>
-                <button class="content-box" id="hEx" onclick="spk(this.innerText)"></button>
+                <div class="content-box" id="hEx" onclick="spk(this.innerText)"></div>
                 <div class="fa-sub" id="hExFa"></div>
 
                 <span class="section-label">Collocations:</span>
-                <button class="content-box" id="hCol" onclick="spk(this.innerText)"></button>
+                <div class="content-box" id="hCol" onclick="spk(this.innerText)"></div>
                 <div class="fa-sub" id="hColFa"></div>
 
                 <span class="section-label">Phrasal Verbs:</span>
-                <button class="content-box" id="hPhr" onclick="spk(this.innerText)"></button>
+                <div class="content-box" id="hPhr" onclick="spk(this.innerText)"></div>
                 <div class="fa-sub" id="hPhrFa"></div>
             </div>
 
@@ -109,16 +108,15 @@
                 <button class="nav-card" style="background:#3498db" onclick="navTo('practice-page')">📝 تمرین</button>
                 <button class="nav-card" style="background:#27ae60" onclick="navTo('leitner-page')">🗂 لایتنر</button>
                 <button class="nav-card" style="background:#f39c12" onclick="navTo('match-page')">🎮 مسابقه</button>
-                <button class="nav-card" style="background:#e74c3c" onclick="window.close()">🚪 خروج</button>
+                <button class="nav-card" style="background:#e74c3c" onclick="alert('خروج')">🚪 خروج</button>
             </div>
         </div>
-        
+
         <div id="limit-ui" style="display:none; text-align:center; padding:20px;">
             <div style="font-size:60px;">🎓</div>
             <h2 style="color:var(--blue);">فرصت ثبت‌نام!</h2>
-            <p>تست‌های رایگان شما تمام شد. برای ادامه یادگیری و شرکت در کلاس‌های استاد Fred پیام دهید:</p>
-            <button class="nav-card" style="background:#25D366; width:100%; border:none; display:flex; align-items:center; justify-content:center; gap:10px;" 
-                onclick="window.location.href='https://wa.me/989017708544?text=سلام استاد Fred، درخواست شرایط ثبت‌نام در کلاس‌های شما را دارم.'">
+            <p>تست‌های رایگان شما تمام شد. برای ثبت‌نام در کلاس‌های استاد Fred پیام دهید:</p>
+            <button class="nav-card" style="background:#25D366; width:100%; border:none; display:flex; align-items:center; justify-content:center; gap:10px;" onclick="window.location.href='https://wa.me/989017708544?text=سلام استاد Fred عزیز، من مشتاق ثبت نام در کلاس های شما هستم.'">
                 ثبت‌نام در کلاس‌ها
             </button>
         </div>
@@ -131,7 +129,12 @@
 
     <div class="page sub-page" id="leitner-page">
         <button onclick="navBack('leitner-page')" class="content-box" style="width:50px;">🔙</button>
-        <h2 style="text-align:center;">My Leitner Box</h2>
+        <h2 style="text-align:center;">Leitner Box</h2>
+    </div>
+
+    <div class="page sub-page" id="match-page">
+        <button onclick="navBack('match-page')" class="content-box" style="width:50px;">🔙</button>
+        <h2 style="text-align:center;">Word Match Game</h2>
     </div>
 </div>
 
@@ -141,24 +144,25 @@
     <span id="statStar">⭐ 0</span>
 </div>
 
-<div id="vipModal" class="vip-modal">
-    <h3>Enter VIP Code</h3>
-    <div class="search-box"><input type="text" id="vCode" placeholder="Code..."></div>
-    <button class="nav-card" style="background:#27ae60; width:100%; margin-top:20px;" onclick="checkVIP()">Confirm</button>
-    <p onclick="closeVIP()" style="cursor:pointer; margin-top:10px;">Cancel</p>
-</div>
-
 <script>
-    const TG_URL = "https://api.telegram.org/bot8553224514:AAG0XXzA8da55jCGXnzStP-0IxHhnfkTPRw/sendMessage";
-    const CHAT_ID = "96991859";
-
     const dictionary = {
-        "be": { fa: "بودن", def: "To exist.", defFa: "وجود داشتن.", ex: "Be happy.", exFa: "خوشحال باش.", col: "be careful", colFa: "مراقب بودن", phr: "be able to", phrFa: "توانستن" },
-        "go": { fa: "رفتن", def: "To move.", defFa: "حرکت کردن.", ex: "I go home.", exFa: "من به خانه می‌روم.", col: "go shopping", colFa: "به خرید رفتن", phr: "go on", phrFa: "ادامه دادن" },
-        "do": { fa: "انجام دادن", def: "To perform.", defFa: "اجرا کردن.", ex: "Do your best.", exFa: "تلاشت را بکن.", col: "do homework", colFa: "مشق نوشتن", phr: "do over", phrFa: "دوباره انجام دادن" }
+        "be": { 
+            fa: "بودن", 
+            def: "To exist or be in a certain state.", defFa: "وجود داشتن یا در حالتی خاص بودن.",
+            ex: "I want to be a great teacher.", exFa: "من می‌خواهم یک معلم عالی باشم.",
+            col: "be careful / be quiet", colFa: "مراقب بودن / ساکت بودن",
+            phr: "be able to", phrFa: "توانستن" 
+        },
+        "go": { 
+            fa: "رفتن", 
+            def: "To move from one place to another.", defFa: "حرکت از یک مکان به مکان دیگر.",
+            ex: "Let's go to the park together.", exFa: "بیا با هم به پارک برویم.",
+            col: "go home / go shopping", colFa: "به خانه رفتن / به خرید رفتن",
+            phr: "go on / go away", phrFa: "ادامه دادن / دور شدن" 
+        }
     };
 
-    let db = JSON.parse(localStorage.getItem('fred_final_v10')) || { type: 'guest', clicks: 0, stars: 0 };
+    let db = JSON.parse(localStorage.getItem('fred_final_v11')) || { type: 'guest', clicks: 0, stars: 0 };
 
     function handleTyping(v) {
         let list = document.getElementById('suggests');
@@ -184,23 +188,28 @@
         document.getElementById('hPhr').innerText = d.phr;
         document.getElementById('hPhrFa').innerText = d.phrFa;
         spk(w); db.clicks++; save();
-        sendReport(`🔍 Search: ${w} (${db.clicks}/5)`);
     }
 
     function showLimit() { document.getElementById('main-ui').style.display='none'; document.getElementById('limit-ui').style.display='block'; }
     function navTo(id) { document.getElementById(id).classList.add('active'); }
     function navBack(id) { document.getElementById(id).classList.remove('active'); }
     function toggleTheme() { document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') === 'dark' ? '' : 'dark'); }
-    function spk(t) { window.speechSynthesis.cancel(); let m = new SpeechSynthesisUtterance(t); m.lang='en-US'; window.speechSynthesis.speak(m); }
-    function openVIP() { document.getElementById('vipModal').style.display='block'; }
-    function closeVIP() { document.getElementById('vipModal').style.display='none'; }
-    function checkVIP() { if(document.getElementById('vCode').value === "FRED-2025") { db.type='student'; save(); closeVIP(); location.reload(); } }
-    function save() { localStorage.setItem('fred_final_v10', JSON.stringify(db)); updateUI(); }
+    
+    // تنظیم سرعت صوت روی ۰.۵ طبق دستور شما
+    function spk(t) { 
+        window.speechSynthesis.cancel(); 
+        let m = new SpeechSynthesisUtterance(t); 
+        m.lang='en-US'; 
+        m.rate = 0.5; 
+        window.speechSynthesis.speak(m); 
+    }
+
+    function openVIP() { let c = prompt("VIP Code:"); if(c==="FRED-2025") { db.type='student'; save(); location.reload(); } }
+    function save() { localStorage.setItem('fred_final_v11', JSON.stringify(db)); updateUI(); }
     function updateUI() {
         document.getElementById('status').innerText = db.type === 'student' ? "👨‍🎓 VIP Mode" : "👤 Guest Mode";
         document.getElementById('statClick').innerText = `📝 ${db.type === 'student' ? '∞' : db.clicks + '/5'}`;
     }
-    async function sendReport(m) { fetch(`${TG_URL}?chat_id=${CHAT_ID}&text=${encodeURIComponent(m)}`).catch(()=>{}); }
     updateUI();
 </script>
 </body>
