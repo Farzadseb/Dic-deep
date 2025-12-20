@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>FredDic Ultimate Pro</title>
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="data:application/manifest+json,{"display":"standalone","start_url":"/","name":"FredDic Pro"}">
+
+    <title>FredDic Professional</title>
     <style>
         :root {
             --bg: #e0e0e0; --shd: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
@@ -20,16 +26,12 @@
         body, html { margin: 0; padding: 0; height: 100%; width: 100%; background: var(--bg); font-family: sans-serif; direction: rtl; color: var(--txt); overflow: hidden; }
         .page { position: absolute; inset: 0; padding: 20px; display: flex; flex-direction: column; background: var(--bg); overflow-y: auto; padding-bottom: 90px; }
         
-        /* هدر با دکمه Mute و Theme */
         .header-btns { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .icon-btn { width: 50px; height: 50px; border-radius: 15px; border: none; background: var(--bg); box-shadow: var(--shd); cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; color: var(--txt); }
-        .icon-btn:active { box-shadow: var(--inner); }
+        .icon-btn { width: 50px; height: 50px; border-radius: 15px; border: none; background: var(--bg); box-shadow: var(--shd); cursor: pointer; font-size: 20px; color: var(--txt); }
 
-        /* باکس جستجو */
         .search-box { display: flex; align-items: center; background: var(--bg); box-shadow: var(--inner); border-radius: 25px; padding: 0 15px; margin-bottom: 20px; }
         .search-box input { flex: 1; border: none; background: none; height: 50px; outline: none; color: var(--txt); text-align: center; font-size: 18px; direction: ltr; }
 
-        /* کارت لغت: انگلیسی چپ، فارسی راست */
         .word-card { background: var(--bg); padding: 25px; border-radius: 35px; box-shadow: var(--shd); margin-bottom: 20px; display: none; }
         .word-row { display: flex; flex-direction: row; justify-content: space-between; align-items: center; margin-bottom: 20px; direction: ltr; }
         .en-title { color: var(--blue); font-size: 34px; font-weight: 900; text-align: left; }
@@ -38,15 +40,12 @@
         .content-box { background: var(--bg); border-radius: 15px; padding: 15px; box-shadow: var(--shd); cursor: pointer; text-align: left; direction: ltr; width: 100%; border: none; margin-bottom: 15px; color: var(--txt); font-weight: bold; }
         .fa-sub { color: var(--red); font-size: 14px; text-align: left; direction: rtl; margin-top: -10px; margin-bottom: 15px; }
 
-        /* پنل ورود کد کاربر (VIP) */
-        .vip-panel { background: var(--bg); padding: 20px; border-radius: 25px; box-shadow: var(--inner); margin-top: 20px; text-align: center; }
-        .vip-input { width: 80%; padding: 12px; border-radius: 15px; border: none; background: var(--bg); box-shadow: var(--shd); text-align: center; font-weight: bold; margin: 10px 0; outline: none; color: var(--blue); }
+        /* مدال اختصاصی فردیک (جایگزین Alert برای حذف نام سایت) */
+        .custom-alert { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85%; background: var(--bg); box-shadow: var(--shd); border-radius: 25px; padding: 30px; z-index: 2000; text-align: center; display: none; }
 
         .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: auto; }
         .nav-btn { padding: 18px; border-radius: 20px; border: none; color: white; font-weight: bold; box-shadow: var(--shd); cursor: pointer; }
 
-        /* مدال خروج اختصاصی */
-        .modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; background: var(--bg); box-shadow: var(--shd); border-radius: 25px; padding: 30px; z-index: 1000; text-align: center; display: none; }
         .footer { position: fixed; bottom: 0; left: 0; right: 0; height: 70px; background: var(--bg); display: flex; justify-content: space-around; align-items: center; box-shadow: 0 -5px 15px rgba(0,0,0,0.1); border-radius: 20px 20px 0 0; }
     </style>
 </head>
@@ -62,7 +61,7 @@
     <div id="main-ui">
         <div class="search-box">
             <input type="text" id="wordInp" placeholder="Search (d... / فارسی)" oninput="handleTyping(this.value)">
-            <span style="font-size: 20px;">🔍</span>
+            <span>🔍</span>
         </div>
 
         <div id="resCard" class="word-card">
@@ -76,33 +75,27 @@
             <div class="fa-sub" id="hColFa"></div>
         </div>
 
-        <div class="vip-panel" id="vipSection">
-            <small>کد فعال‌سازی لایسنس:</small><br>
-            <input type="text" id="vipCodeInp" class="vip-input" placeholder="- - - - - -">
-            <button onclick="activateVIP()" style="border:none; background:none; color:var(--blue); font-weight:bold; cursor:pointer;">فعال‌سازی 💎</button>
-        </div>
-
-        <div class="nav-grid" style="margin-top:20px;">
-            <button class="nav-btn" style="background:#27ae60" onclick="alert('لایتنر فعال شد')">🗂 لایتنر</button>
-            <button class="nav-btn" style="background:#3498db" onclick="alert('تمرین فعال شد')">📝 تمرین</button>
-            <button class="nav-btn" style="background:#9b59b6" onclick="alert('بخش VIP')">VIP 💎</button>
-            <button class="nav-btn" style="background:#f39c12" onclick="alert('مسابقه فعال شد')">🎮 مسابقه</button>
+        <div class="nav-grid">
+            <button class="nav-btn" style="background:#27ae60" onclick="myAlert('بخش لایتنر فعال شد')">🗂 لایتنر</button>
+            <button class="nav-btn" style="background:#3498db" onclick="myAlert('تمرین فعال شد')">📝 تمرین</button>
+            <button class="nav-btn" style="background:#9b59b6" onclick="myAlert('بخش VIP فعال شد')">VIP 💎</button>
+            <button class="nav-btn" style="background:#f39c12" onclick="myAlert('مسابقه فعال شد')">🎮 مسابقه</button>
             <button class="nav-btn" style="background:#e74c3c; grid-column: span 2;" onclick="showExit()">🚪 خروج از برنامه</button>
         </div>
     </div>
-
-    <div id="limit-ui" style="display:none; text-align:center; padding:30px;">
-        <h2 style="color:var(--blue);">🎓 وقت ثبت‌نام است!</h2>
-        <p>تست‌های رایگان شما تمام شد. برای ادامه یادگیری حرفه‌ای، به واتس‌اپ استاد پیام دهید.</p>
-        <button class="nav-btn" style="background:#25D366; width:100%;" onclick="window.location.href='https://wa.me/989017708544?text=سلام استاد، مشتاق ثبت نام در کلاس هستم.'">پیام به استاد Fred</button>
-    </div>
 </div>
 
-<div id="exitModal" class="modal">
+<div id="msgBox" class="custom-alert">
+    <h3 id="msgTitle" style="color:var(--blue);">FredDic Message</h3>
+    <p id="msgText"></p>
+    <button class="nav-btn" style="background:var(--blue); width:100%;" onclick="closeMsg()">تایید</button>
+</div>
+
+<div id="exitBox" class="custom-alert">
     <h3 style="color:var(--red);">خروج</h3>
     <p>آیا مایل به بستن برنامه هستید؟</p>
     <button class="nav-btn" style="background:#27ae60; width:100%; margin-bottom:10px;" onclick="window.close()">بله</button>
-    <button class="nav-btn" style="background:#888; width:100%;" onclick="hideExit()">خیر</button>
+    <button class="nav-btn" style="background:#888; width:100%;" onclick="closeMsg()">خیر</button>
 </div>
 
 <div class="footer">
@@ -118,16 +111,23 @@
     };
 
     let isMuted = false;
-    let db = JSON.parse(localStorage.getItem('fred_pro')) || { type: 'guest', clicks: 0 };
+    let db = JSON.parse(localStorage.getItem('fred_v13')) || { type: 'guest', clicks: 0 };
 
-    function toggleMute() {
-        isMuted = !isMuted;
-        document.getElementById('muteBtn').innerText = isMuted ? "🔇" : "🔊";
+    function myAlert(txt) {
+        document.getElementById('msgText').innerText = txt;
+        document.getElementById('msgBox').style.display = 'block';
     }
+
+    function closeMsg() {
+        document.getElementById('msgBox').style.display = 'none';
+        document.getElementById('exitBox').style.display = 'none';
+    }
+
+    function showExit() { document.getElementById('exitBox').style.display = 'block'; }
 
     function handleTyping(v) {
         let w = v.toLowerCase();
-        if(db.type === 'guest' && db.clicks >= 5) { showLimit(); return; }
+        if(db.type === 'guest' && db.clicks >= 5) { myAlert('تست‌های رایگان تمام شد. برای ادامه با استاد Fred تماس بگیرید.'); return; }
         if(dictionary[w]) {
             let d = dictionary[w];
             document.getElementById('resCard').style.display = 'block';
@@ -146,29 +146,16 @@
         if(isMuted) return;
         window.speechSynthesis.cancel();
         let m = new SpeechSynthesisUtterance(t);
-        m.lang = 'en-US';
-        m.rate = 0.5;
+        m.rate = 0.5; // سرعت صوت نیم طبق دستور استاد
         window.speechSynthesis.speak(m);
     }
 
-    function activateVIP() {
-        if(document.getElementById('vipCodeInp').value === "FRED-2025") {
-            db.type = 'student';
-            save();
-            alert("لایسنس با موفقیت فعال شد! 💎");
-            location.reload();
-        } else { alert("کد اشتباه است!"); }
-    }
-
-    function showLimit() { document.getElementById('main-ui').style.display='none'; document.getElementById('limit-ui').style.display='block'; }
-    function showExit() { document.getElementById('exitModal').style.display='block'; }
-    function hideExit() { document.getElementById('exitModal').style.display='none'; }
     function toggleTheme() { document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') === 'dark' ? '' : 'dark'); }
-    function save() { localStorage.setItem('fred_pro', JSON.stringify(db)); updateUI(); }
+    function toggleMute() { isMuted = !isMuted; document.getElementById('muteBtn').innerText = isMuted ? "🔇" : "🔊"; }
+    function save() { localStorage.setItem('fred_v13', JSON.stringify(db)); updateUI(); }
     function updateUI() {
         document.getElementById('userStatus').innerText = db.type === 'student' ? "VIP Mode 👨‍🎓" : "Guest Mode 👤";
         document.getElementById('clickStat').innerText = `📝 ${db.type === 'student' ? '∞' : db.clicks + '/5'}`;
-        if(db.type === 'student') document.getElementById('vipSection').style.display = 'none';
     }
     updateUI();
 </script>
