@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>FredDic Ultimate</title>
+    <title>FredDic Ultimate Pro</title>
     <style>
         :root {
             --bg: #e0e0e0; --shd: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
@@ -18,112 +18,116 @@
         }
 
         body, html { margin: 0; padding: 0; height: 100%; width: 100%; background: var(--bg); font-family: sans-serif; direction: rtl; color: var(--txt); overflow: hidden; }
+        .page { position: absolute; inset: 0; padding: 20px; display: flex; flex-direction: column; background: var(--bg); overflow-y: auto; padding-bottom: 90px; }
         
-        .page-container { position: relative; width: 100%; height: 100%; overflow: hidden; }
-        .page { 
-            position: absolute; inset: 0; padding: 20px; display: flex; flex-direction: column; 
-            background: var(--bg); transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
-            z-index: 10; overflow-y: auto; padding-bottom: 90px;
-        }
-        .sub-page { transform: translateX(100%); z-index: 20; }
-        .active { transform: translateX(0); }
+        /* هدر با دکمه Mute و Theme */
+        .header-btns { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .icon-btn { width: 50px; height: 50px; border-radius: 15px; border: none; background: var(--bg); box-shadow: var(--shd); cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; color: var(--txt); }
+        .icon-btn:active { box-shadow: var(--inner); }
 
         /* باکس جستجو */
-        .search-area { position: relative; margin: 15px 0; }
-        .search-box { display: flex; align-items: center; background: var(--bg); box-shadow: var(--inner); border-radius: 25px; padding: 0 15px; }
+        .search-box { display: flex; align-items: center; background: var(--bg); box-shadow: var(--inner); border-radius: 25px; padding: 0 15px; margin-bottom: 20px; }
         .search-box input { flex: 1; border: none; background: none; height: 50px; outline: none; color: var(--txt); text-align: center; font-size: 18px; direction: ltr; }
-        .search-box span { order: -1; font-size: 22px; margin-right: 10px; cursor: pointer; }
 
-        /* اصلاح طلایی چیدمان: انگلیسی چپ، فارسی راست */
+        /* کارت لغت: انگلیسی چپ، فارسی راست */
         .word-card { background: var(--bg); padding: 25px; border-radius: 35px; box-shadow: var(--shd); margin-bottom: 20px; display: none; }
-        .word-row { 
-            display: flex; 
-            flex-direction: row; /* ردیف افقی */
-            justify-content: space-between; /* پخش کردن به دو طرف */
-            align-items: center; 
-            margin-bottom: 20px;
-            direction: ltr; /* اجبار به شروع از چپ برای انگلیسی */
-        }
+        .word-row { display: flex; flex-direction: row; justify-content: space-between; align-items: center; margin-bottom: 20px; direction: ltr; }
         .en-title { color: var(--blue); font-size: 34px; font-weight: 900; text-align: left; }
         .fa-title { color: var(--red); font-size: 26px; font-weight: bold; text-align: right; direction: rtl; }
 
-        .section-label { font-size: 11px; color: #888; text-align: left; direction: ltr; border-bottom: 1px solid #ccc; margin: 10px 0 5px 0; }
-        .content-box { background: var(--bg); border-radius: 15px; padding: 15px; box-shadow: var(--shd); cursor: pointer; text-align: left; direction: ltr; width: 100%; border: none; margin-bottom: 5px; color: var(--txt); font-weight: bold; font-size: 16px; }
-        .fa-sub { color: var(--red); font-size: 13px; text-align: left; direction: rtl; margin-bottom: 12px; }
+        .content-box { background: var(--bg); border-radius: 15px; padding: 15px; box-shadow: var(--shd); cursor: pointer; text-align: left; direction: ltr; width: 100%; border: none; margin-bottom: 15px; color: var(--txt); font-weight: bold; }
+        .fa-sub { color: var(--red); font-size: 14px; text-align: left; direction: rtl; margin-top: -10px; margin-bottom: 15px; }
+
+        /* پنل ورود کد کاربر (VIP) */
+        .vip-panel { background: var(--bg); padding: 20px; border-radius: 25px; box-shadow: var(--inner); margin-top: 20px; text-align: center; }
+        .vip-input { width: 80%; padding: 12px; border-radius: 15px; border: none; background: var(--bg); box-shadow: var(--shd); text-align: center; font-weight: bold; margin: 10px 0; outline: none; color: var(--blue); }
 
         .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: auto; }
-        .nav-card { padding: 18px; border-radius: 22px; border: none; color: white; font-weight: bold; box-shadow: var(--shd); cursor: pointer; text-align: center; }
+        .nav-btn { padding: 18px; border-radius: 20px; border: none; color: white; font-weight: bold; box-shadow: var(--shd); cursor: pointer; }
 
-        /* مدال خروج اختصاصی (بدون پیام GitHub) */
-        .custom-modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; background: var(--bg); box-shadow: var(--shd); border-radius: 25px; padding: 30px; z-index: 3000; text-align: center; display: none; }
-
-        .footer { position: fixed; bottom: 0; left: 0; right: 0; height: 75px; background: var(--bg); display: flex; justify-content: space-around; align-items: center; box-shadow: 0 -5px 15px rgba(0,0,0,0.1); border-radius: 25px 25px 0 0; z-index: 100; }
+        /* مدال خروج اختصاصی */
+        .modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; background: var(--bg); box-shadow: var(--shd); border-radius: 25px; padding: 30px; z-index: 1000; text-align: center; display: none; }
+        .footer { position: fixed; bottom: 0; left: 0; right: 0; height: 70px; background: var(--bg); display: flex; justify-content: space-around; align-items: center; box-shadow: 0 -5px 15px rgba(0,0,0,0.1); border-radius: 20px 20px 0 0; }
     </style>
 </head>
 <body>
 
-<div class="page-container">
-    <div class="page active" id="home-page">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-            <button onclick="toggleTheme()" class="content-box" style="width:45px; height:45px; padding:0; text-align:center;">🌓</button>
-            <b>Guest Mode 👤</b>
-            <button onclick="openVIP()" class="content-box" style="width:45px; height:45px; padding:0; text-align:center;">💎</button>
+<div class="page">
+    <div class="header-btns">
+        <button class="icon-btn" onclick="toggleMute()" id="muteBtn">🔊</button>
+        <b id="userStatus">Guest Mode 👤</b>
+        <button class="icon-btn" onclick="toggleTheme()">🌓</button>
+    </div>
+
+    <div id="main-ui">
+        <div class="search-box">
+            <input type="text" id="wordInp" placeholder="Search (d... / فارسی)" oninput="handleTyping(this.value)">
+            <span style="font-size: 20px;">🔍</span>
         </div>
 
-        <div id="main-ui">
-            <div class="search-area">
-                <div class="search-box">
-                    <input type="text" id="wordInp" placeholder="Search (d... / فارسی)" oninput="handleTyping(this.value)">
-                    <span>🔍</span>
-                </div>
+        <div id="resCard" class="word-card">
+            <div class="word-row">
+                <div class="en-title" id="hEn"></div>
+                <div class="fa-title" id="hFa"></div>
             </div>
-
-            <div id="resCard" class="word-card">
-                <div class="word-row">
-                    <div class="en-title" id="hEn"></div>
-                    <div class="fa-title" id="hFa"></div>
-                </div>
-                
-                <span class="section-label">Example:</span>
-                <div class="content-box" id="hEx" onclick="spk(this.innerText)"></div>
-                <div class="fa-sub" id="hExFa"></div>
-
-                <span class="section-label">Collocations & Phrases:</span>
-                <div class="content-box" id="hCol" onclick="spk(this.innerText)"></div>
-                <div class="fa-sub" id="hColFa"></div>
-            </div>
-
-            <div class="nav-grid">
-                <button class="nav-card" style="background:#3498db" onclick="navTo('practice-page')">📝 تمرین</button>
-                <button class="nav-card" style="background:#27ae60" onclick="navTo('leitner-page')">🗂 لایتنر</button>
-                <button class="nav-card" style="background:#f39c12" onclick="navTo('match-page')">🎮 مسابقه</button>
-                <button class="nav-card" style="background:#e74c3c" onclick="showExit()">🚪 خروج</button>
-            </div>
+            <div class="content-box" id="hEx" onclick="spk(this.innerText)"></div>
+            <div class="fa-sub" id="hExFa"></div>
+            <div class="content-box" id="hCol" onclick="spk(this.innerText)"></div>
+            <div class="fa-sub" id="hColFa"></div>
         </div>
+
+        <div class="vip-panel" id="vipSection">
+            <small>کد فعال‌سازی لایسنس:</small><br>
+            <input type="text" id="vipCodeInp" class="vip-input" placeholder="- - - - - -">
+            <button onclick="activateVIP()" style="border:none; background:none; color:var(--blue); font-weight:bold; cursor:pointer;">فعال‌سازی 💎</button>
+        </div>
+
+        <div class="nav-grid" style="margin-top:20px;">
+            <button class="nav-btn" style="background:#27ae60" onclick="alert('لایتنر فعال شد')">🗂 لایتنر</button>
+            <button class="nav-btn" style="background:#3498db" onclick="alert('تمرین فعال شد')">📝 تمرین</button>
+            <button class="nav-btn" style="background:#9b59b6" onclick="alert('بخش VIP')">VIP 💎</button>
+            <button class="nav-btn" style="background:#f39c12" onclick="alert('مسابقه فعال شد')">🎮 مسابقه</button>
+            <button class="nav-btn" style="background:#e74c3c; grid-column: span 2;" onclick="showExit()">🚪 خروج از برنامه</button>
+        </div>
+    </div>
+
+    <div id="limit-ui" style="display:none; text-align:center; padding:30px;">
+        <h2 style="color:var(--blue);">🎓 وقت ثبت‌نام است!</h2>
+        <p>تست‌های رایگان شما تمام شد. برای ادامه یادگیری حرفه‌ای، به واتس‌اپ استاد پیام دهید.</p>
+        <button class="nav-btn" style="background:#25D366; width:100%;" onclick="window.location.href='https://wa.me/989017708544?text=سلام استاد، مشتاق ثبت نام در کلاس هستم.'">پیام به استاد Fred</button>
     </div>
 </div>
 
-<div id="exitModal" class="custom-modal">
-    <h3 style="color:var(--red);">خروج از برنامه</h3>
-    <p>آیا مایل به بستن دیکشنری هستید؟</p>
-    <button class="nav-card" style="background:#27ae60; width:100%; margin-bottom:10px;" onclick="closeApp()">بله، خروج</button>
-    <button class="nav-card" style="background:#888; width:100%;" onclick="hideExit()">انصراف</button>
+<div id="exitModal" class="modal">
+    <h3 style="color:var(--red);">خروج</h3>
+    <p>آیا مایل به بستن برنامه هستید؟</p>
+    <button class="nav-btn" style="background:#27ae60; width:100%; margin-bottom:10px;" onclick="window.close()">بله</button>
+    <button class="nav-btn" style="background:#888; width:100%;" onclick="hideExit()">خیر</button>
 </div>
 
 <div class="footer">
-    <span>📝 1/5</span>
-    <span style="font-size:40px;">🏆</span>
+    <span id="clickStat">📝 0/5</span>
+    <span style="font-size:35px;">🏆</span>
     <span>⭐ 0</span>
 </div>
 
 <script>
     const dictionary = {
         "be": { fa: "بودن", ex: "Be yourself.", exFa: "خودت باش.", col: "be careful", colFa: "مراقب بودن" },
-        "go": { fa: "رفتن", ex: "Go home now.", exFa: "الان برو خونه.", col: "go shopping", colFa: "خرید رفتن" }
+        "go": { fa: "رفتن", ex: "Go to school.", exFa: "به مدرسه برو.", col: "go home", colFa: "رفتن به خانه" }
     };
+
+    let isMuted = false;
+    let db = JSON.parse(localStorage.getItem('fred_pro')) || { type: 'guest', clicks: 0 };
+
+    function toggleMute() {
+        isMuted = !isMuted;
+        document.getElementById('muteBtn').innerText = isMuted ? "🔇" : "🔊";
+    }
 
     function handleTyping(v) {
         let w = v.toLowerCase();
+        if(db.type === 'guest' && db.clicks >= 5) { showLimit(); return; }
         if(dictionary[w]) {
             let d = dictionary[w];
             document.getElementById('resCard').style.display = 'block';
@@ -134,23 +138,39 @@
             document.getElementById('hCol').innerText = d.col;
             document.getElementById('hColFa').innerText = d.colFa;
             spk(w);
+            if(db.type === 'guest') { db.clicks++; save(); }
         }
     }
 
-    function showExit() { document.getElementById('exitModal').style.display = 'block'; }
-    function hideExit() { document.getElementById('exitModal').style.display = 'none'; }
-    function closeApp() { window.close(); hideExit(); }
-    
-    function toggleTheme() { document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') === 'dark' ? '' : 'dark'); }
-    
-    function spk(t) { 
-        window.speechSynthesis.cancel(); 
-        let m = new SpeechSynthesisUtterance(t); 
-        m.lang='en-US'; m.rate = 0.5; 
-        window.speechSynthesis.speak(m); 
+    function spk(t) {
+        if(isMuted) return;
+        window.speechSynthesis.cancel();
+        let m = new SpeechSynthesisUtterance(t);
+        m.lang = 'en-US';
+        m.rate = 0.5;
+        window.speechSynthesis.speak(m);
     }
 
-    function navTo(id) { alert('بخش ' + id + ' در نسخه ۱۰۰ لغت فعال است.'); }
+    function activateVIP() {
+        if(document.getElementById('vipCodeInp').value === "FRED-2025") {
+            db.type = 'student';
+            save();
+            alert("لایسنس با موفقیت فعال شد! 💎");
+            location.reload();
+        } else { alert("کد اشتباه است!"); }
+    }
+
+    function showLimit() { document.getElementById('main-ui').style.display='none'; document.getElementById('limit-ui').style.display='block'; }
+    function showExit() { document.getElementById('exitModal').style.display='block'; }
+    function hideExit() { document.getElementById('exitModal').style.display='none'; }
+    function toggleTheme() { document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') === 'dark' ? '' : 'dark'); }
+    function save() { localStorage.setItem('fred_pro', JSON.stringify(db)); updateUI(); }
+    function updateUI() {
+        document.getElementById('userStatus').innerText = db.type === 'student' ? "VIP Mode 👨‍🎓" : "Guest Mode 👤";
+        document.getElementById('clickStat').innerText = `📝 ${db.type === 'student' ? '∞' : db.clicks + '/5'}`;
+        if(db.type === 'student') document.getElementById('vipSection').style.display = 'none';
+    }
+    updateUI();
 </script>
 </body>
 </html>
