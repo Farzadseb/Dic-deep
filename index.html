@@ -2,8 +2,10 @@
 <html lang="fa">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FredDic Ultimate v1.0</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>FredDic Ultimate</title>
     <style>
         :root {
             --bg: #e0e0e0; --shd: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
@@ -15,85 +17,164 @@
             --inner: inset 4px 4px 8px #0a0a0a, inset -2px -2px 8px #2a2c2e; --txt: #eee;
         }
 
-        body, html { margin: 0; padding: 0; height: 100%; background: var(--bg); font-family: sans-serif; direction: rtl; color: var(--txt); overflow: hidden; }
-        .screen-container { position: relative; width: 100%; height: 100%; }
-        .screen { position: absolute; inset: 0; width: 100%; height: 100%; background: var(--bg); padding: 15px; box-sizing: border-box; transition: transform 0.4s ease; overflow-y: auto; z-index: 10; padding-bottom: 90px; }
-        .sub-screen { transform: translateX(100%); z-index: 20; }
-        .active { transform: translateX(0); }
+        body, html { 
+            margin: 0; padding: 0; height: 100%; width: 100%;
+            background: var(--bg); font-family: 'Segoe UI', Tahoma, sans-serif; 
+            direction: rtl; color: var(--txt); overflow: hidden;
+        }
 
-        /* جستجو */
-        .search-area { position: relative; margin: 15px 0; }
-        .search-box { display: flex; align-items: center; background: var(--bg); box-shadow: var(--inner); border-radius: 20px; padding: 0 15px; gap: 10px; }
-        .search-box input { flex: 1; border: none; background: none; height: 48px; outline: none; color: var(--txt); text-align: center; font-size: 16px; direction: ltr; }
-        .suggestions { position: absolute; top: 55px; left: 0; right: 0; background: var(--bg); border-radius: 15px; box-shadow: var(--shd); z-index: 1000; display: none; max-height: 200px; overflow-y: auto; }
-        .suggest-item { padding: 12px; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; text-align: left; direction: ltr; font-weight: bold; }
+        /* Full Screen & Slide Setup */
+        .app-container { position: relative; width: 100%; height: 100%; overflow: hidden; }
+        .page { 
+            position: absolute; inset: 0; width: 100%; height: 100%; 
+            background: var(--bg); padding: 20px; box-sizing: border-box;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex; flex-direction: column; z-index: 10;
+        }
+        .sub-page { transform: translateX(100%); z-index: 20; }
+        .page.active { transform: translateX(0); }
 
-        /* کارت محتوا */
-        .card { background: var(--bg); border-radius: 30px; box-shadow: var(--shd); padding: 20px; margin-bottom: 20px; display: none; }
-        .word-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 15px; }
-        .en-main { color: var(--blue); font-size: 30px; font-weight: 900; }
-        .fa-main { color: var(--red); font-size: 20px; font-weight: bold; }
-        .label { font-size: 11px; color: #888; display: block; margin: 12px 0 4px 0; text-align: left; border-bottom: 1px solid #ccc; direction: ltr; }
-        .content-btn { width: 100%; background: var(--bg); border: none; border-radius: 15px; box-shadow: var(--shd); padding: 12px; font-weight: bold; color: var(--txt); cursor: pointer; text-align: left; direction: ltr; }
-        .trans { color: var(--red); font-size: 13px; margin: 4px 0 12px 0; text-align: left; direction: rtl; }
+        /* Header */
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .neu-icon-btn { 
+            width: 45px; height: 45px; border-radius: 12px; border: none; 
+            background: var(--bg); box-shadow: var(--shd); cursor: pointer; color: var(--txt); font-size: 20px;
+        }
 
-        /* دکمه‌های ناوبری */
-        .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .nav-btn { padding: 15px; border-radius: 18px; border: none; color: white; font-weight: bold; box-shadow: var(--shd); cursor: pointer; }
+        /* Search Box */
+        .search-area { position: relative; margin-bottom: 20px; }
+        .search-box { 
+            display: flex; align-items: center; background: var(--bg); 
+            box-shadow: var(--inner); border-radius: 25px; padding: 5px 20px;
+        }
+        .search-box input { 
+            flex: 1; border: none; background: none; height: 50px; 
+            outline: none; color: var(--txt); text-align: center; font-size: 18px; direction: ltr;
+        }
+        .search-box span { font-size: 22px; cursor: pointer; order: -1; margin-right: 10px; }
 
-        .footer { position: fixed; bottom: 0; left: 0; right: 0; height: 70px; background: var(--bg); display: flex; justify-content: space-around; align-items: center; box-shadow: 0 -5px 15px rgba(0,0,0,0.1); border-radius: 25px 25px 0 0; z-index: 100; }
+        .suggest-list { 
+            position: absolute; top: 60px; left: 0; right: 0; background: var(--bg);
+            border-radius: 20px; box-shadow: var(--shd); z-index: 1000; display: none;
+            max-height: 200px; overflow-y: auto;
+        }
+        .suggest-item { padding: 15px; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; text-align: left; direction: ltr; font-weight: bold; }
+
+        /* Content Card */
+        .main-card { 
+            background: var(--bg); border-radius: 35px; box-shadow: var(--shd); 
+            padding: 25px; flex-grow: 1; overflow-y: auto; display: none; margin-bottom: 80px;
+        }
+        .word-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 15px; }
+        .en-title { color: var(--blue); font-size: 34px; font-weight: 900; }
+        .fa-title { color: var(--red); font-size: 24px; font-weight: bold; }
+
+        .section-label { font-size: 12px; color: #888; text-align: left; direction: ltr; border-bottom: 1px solid #ccc; margin: 15px 0 8px 0; }
+        .content-box { 
+            background: var(--bg); border-radius: 18px; padding: 15px; 
+            box-shadow: var(--shd); cursor: pointer; text-align: left; direction: ltr; 
+            margin-bottom: 5px; font-weight: 600; font-size: 17px; border: none; width: 100%; color: var(--txt);
+        }
+        .content-box:active { box-shadow: var(--inner); }
+        .fa-sub { color: var(--red); font-size: 14px; text-align: left; direction: rtl; margin-bottom: 15px; }
+
+        /* Navigation Grid */
+        .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: auto; padding-bottom: 80px; }
+        .nav-btn { padding: 18px; border-radius: 20px; border: none; color: white; font-weight: bold; box-shadow: var(--shd); cursor: pointer; font-size: 16px; }
+
+        /* Footer */
+        .footer { 
+            position: fixed; bottom: 0; left: 0; right: 0; height: 75px; 
+            background: var(--bg); display: flex; justify-content: space-around; 
+            align-items: center; box-shadow: 0 -5px 20px rgba(0,0,0,0.1); border-radius: 30px 30px 0 0; z-index: 100;
+        }
+
+        /* VIP Panel */
+        .vip-panel { 
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 80%; background: var(--bg); padding: 30px; border-radius: 30px;
+            box-shadow: var(--shd); z-index: 2000; display: none; text-align: center;
+        }
     </style>
 </head>
 <body>
 
-<div class="screen-container">
-    <div id="home" class="screen active">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-            <button onclick="toggleTheme()" class="content-btn" style="width:40px; height:40px; padding:0; text-align:center;">🌓</button>
-            <b id="status">👤 Guest Mode</b>
-            <button onclick="toggleMute()" id="muteBtn" class="content-btn" style="width:40px; height:40px; padding:0; text-align:center;">🔊</button>
+<div class="app-container">
+    <div id="page-home" class="page active">
+        <div class="header">
+            <button class="neu-icon-btn" onclick="toggleTheme()">🌓</button>
+            <b id="statusText">👤 Guest Mode</b>
+            <button class="neu-icon-btn" onclick="openVIP()">💎</button>
         </div>
 
         <div class="search-area">
             <div class="search-box">
-                <input type="text" id="wordInp" placeholder="Search (Eng/Persian)..." oninput="handleTyping(this.value)">
-                <span>🔍</span>
+                <input type="text" id="mainSearch" placeholder="Search (d... / فارسی)" oninput="doSuggest(this.value)">
+                <span onclick="executeSearch()">🔍</span>
             </div>
-            <div id="suggestList" class="suggestions"></div>
+            <div id="suggests" class="suggest-list"></div>
         </div>
 
-        <div id="resCard" class="card">
-            <div class="word-header">
-                <div class="en-main" id="hEn"></div>
-                <div class="fa-main" id="hFa"></div>
+        <div id="resultCard" class="main-card">
+            <div class="word-row">
+                <div class="en-title" id="resEn"></div>
+                <div class="fa-title" id="resFa"></div>
             </div>
-            <span class="label">Example:</span>
-            <button class="content-btn" id="btnEx" onclick="spk(this.innerText)"></button>
-            <div class="trans" id="hExFa"></div>
-            <span class="label">Collocations & Phrases:</span>
-            <button class="content-btn" id="btnCol" onclick="spk(this.innerText)"></button>
-            <div class="trans" id="hColFa"></div>
+            
+            <span class="section-label">Definition:</span>
+            <div class="content-box" id="resDefEn" onclick="spk(this.innerText)"></div>
+            <div class="fa-sub" id="resDefFa"></div>
+
+            <span class="section-label">Example:</span>
+            <div class="content-box" id="resExEn" onclick="spk(this.innerText)"></div>
+            <div class="fa-sub" id="resExFa"></div>
+
+            <span class="section-label">Collocations:</span>
+            <div class="content-box" id="resColEn" onclick="spk(this.innerText)"></div>
+            <div class="fa-sub" id="resColFa"></div>
+
+            <span class="section-label">Phrasal Verbs:</span>
+            <div class="content-box" id="resPhrEn" onclick="spk(this.innerText)"></div>
+            <div class="fa-sub" id="resPhrFa"></div>
+
+            <button onclick="addToLeitner()" style="width:100%; background:none; border:none; color:var(--red); font-weight:bold; margin-top:10px;">❌ یاد نگرفتم (لایتنر)</button>
         </div>
 
-        <div class="nav-grid">
-            <button class="nav-btn" style="background:#3498db" onclick="navTo('practice')">📝 تمرین</button>
-            <button class="nav-btn" style="background:#27ae60" onclick="navTo('leitner')">🗂 لایتنر</button>
-            <button class="nav-btn" style="background:#f39c12" onclick="navTo('match')">🎮 مسابقه</button>
-            <button class="nav-btn" style="background:#9b59b6" onclick="activateVIP()">💎 VIP</button>
+        <div class="nav-grid" id="mainNav">
+            <button class="nav-btn" style="background:#3498db" onclick="goPage('page-practice')">📝 تمرین</button>
+            <button class="nav-btn" style="background:#27ae60" onclick="goPage('page-leitner')">🗂 لایتنر</button>
+            <button class="nav-btn" style="background:#f39c12" onclick="goPage('page-match')">🎮 مسابقه</button>
+            <button class="nav-btn" style="background:#e74c3c" onclick="closeApp()">🚪 خروج</button>
         </div>
     </div>
 
-    <div id="leitner" class="screen sub-screen">
-        <button class="content-btn" style="width:45px;" onclick="navBack('leitner')">🔙</button>
-        <h2 style="text-align:center;">جعبه لایتنر</h2>
-        <div id="leitnerList"></div>
+    <div id="page-practice" class="page sub-page">
+        <button class="neu-icon-btn" onclick="backHome('page-practice')">🔙</button>
+        <h2 style="text-align:center;">Daily Practice</h2>
+        <div style="flex-grow:1; display:flex; align-items:center; justify-content:center;">
+            <p>آماده برای تمرین ۱۰۰ لغت...</p>
+        </div>
+    </div>
+
+    <div id="page-leitner" class="page sub-page">
+        <button class="neu-icon-btn" onclick="backHome('page-leitner')">🔙</button>
+        <h2 style="text-align:center;">لایتنر من</h2>
+        <div id="leitnerBox"></div>
     </div>
 </div>
 
 <div class="footer">
-    <span id="clicks">📝 0/5</span>
-    <span style="font-size:40px;">🏆</span>
-    <span>⭐ <span id="stars">0</span></span>
+    <span id="statClick">📝 0/5</span>
+    <span style="font-size:45px;">🏆</span>
+    <span>⭐ <span id="statStar">0</span></span>
+</div>
+
+<div id="vipPanel" class="vip-panel">
+    <h3>فعال‌سازی VIP</h3>
+    <div class="search-box"><input type="text" id="vipCode" placeholder="Enter Code"></div>
+    <br>
+    <button class="nav-btn" style="background:#27ae60; width:100%;" onclick="checkVIP()">تایید</button>
+    <p onclick="closeVIP()" style="margin-top:15px; cursor:pointer;">انصراف</p>
 </div>
 
 <script>
@@ -101,52 +182,71 @@
     const CHAT_ID = "96991859";
 
     const dictionary = {
-        "be": { fa: "بودن", ex: "Be yourself.", exFa: "خودت باش.", col: "be careful", colFa: "مراقب بودن" },
-        "go": { fa: "رفتن", ex: "I go home.", exFa: "من به خانه می‌روم.", col: "go shopping", colFa: "به خرید رفتن" },
-        "do": { fa: "انجام دادن", ex: "Do it now.", exFa: "الان انجامش بده.", col: "do your best", colFa: "تلاشت را بکن" }
+        "be": { 
+            fa: "بودن", 
+            defEn: "To exist or take place.", defFa: "وجود داشتن یا واقع شدن.",
+            exEn: "Be happy and smile.", exFa: "خوشحال باش و لبخند بزن.",
+            colEn: "be careful / be quiet", colFa: "مراقب بودن / ساکت بودن",
+            phrEn: "be able to", phrFa: "توانستن"
+        },
+        "go": { 
+            fa: "رفتن", 
+            defEn: "To move from one place to another.", defFa: "حرکت از یک مکان به مکان دیگر.",
+            exEn: "I go to school by bus.", exFa: "من با اتوبوس به مدرسه می‌روم.",
+            colEn: "go home / go shopping", colFa: "به خانه رفتن / به خرید رفتن",
+            phrEn: "go on / go away", phrFa: "ادامه دادن / دور شدن"
+        }
     };
 
-    let db = JSON.parse(localStorage.getItem('fred_master_v1')) || { type: 'guest', clicks: 0, stars: 0, leitner: [] };
-    let isMuted = false;
+    let db = JSON.parse(localStorage.getItem('fred_final_v5')) || { type: 'guest', clicks: 0, stars: 0, leitner: [] };
+    let curW = "";
 
-    function handleTyping(val) {
-        let list = document.getElementById('suggestList');
-        if (!val) { list.style.display = 'none'; return; }
-        let filtered = Object.keys(dictionary).filter(k => k.startsWith(val.toLowerCase()) || dictionary[k].fa.includes(val));
-        list.innerHTML = filtered.map(w => `<div class="suggest-item" onclick="showWord('${w}')">${w.toUpperCase()} - ${dictionary[w].fa}</div>`).join('');
-        list.style.display = filtered.length ? 'block' : 'none';
+    function doSuggest(v) {
+        let list = document.getElementById('suggests');
+        if(!v) { list.style.display='none'; return; }
+        let matches = Object.keys(dictionary).filter(k => k.startsWith(v.toLowerCase()) || dictionary[k].fa.includes(v));
+        list.innerHTML = matches.map(m => `<div class="suggest-item" onclick="loadWord('${m}')">${m.toUpperCase()} - ${dictionary[m].fa}</div>`).join('');
+        list.style.display = matches.length ? 'block' : 'none';
     }
 
-    function showWord(w) {
-        if(db.type === 'guest' && db.clicks >= 5) { alert("محدودیت میهمان!"); return; }
-        let word = dictionary[w];
-        document.getElementById('resCard').style.display = 'block';
-        document.getElementById('suggestList').style.display = 'none';
-        document.getElementById('hEn').innerText = w.toUpperCase();
-        document.getElementById('hFa').innerText = word.fa;
-        document.getElementById('btnEx').innerText = word.ex;
-        document.getElementById('hExFa').innerText = word.exFa;
-        document.getElementById('btnCol').innerText = word.col;
-        document.getElementById('hColFa').innerText = word.colFa;
-        spk(w);
-        db.clicks++;
-        saveDB();
-        sendReport(`🔍 Search: ${w} (${db.clicks}/5)`);
+    function loadWord(w) {
+        if(db.type === 'guest' && db.clicks >= 5) { alert("محدودیت میهمان تمام شد!"); return; }
+        curW = w; let data = dictionary[w];
+        document.getElementById('resultCard').style.display = 'block';
+        document.getElementById('mainNav').style.display = 'none';
+        document.getElementById('suggests').style.display = 'none';
+        
+        document.getElementById('resEn').innerText = w.toUpperCase();
+        document.getElementById('resFa').innerText = data.fa;
+        document.getElementById('resDefEn').innerText = data.defEn;
+        document.getElementById('resDefFa').innerText = data.defFa;
+        document.getElementById('resExEn').innerText = data.exEn;
+        document.getElementById('resExFa').innerText = data.exFa;
+        document.getElementById('resColEn').innerText = data.colEn;
+        document.getElementById('resColFa').innerText = data.colFa;
+        document.getElementById('resPhrEn').innerText = data.phrEn;
+        document.getElementById('resPhrFa').innerText = data.phrFa;
+        
+        spk(w); db.clicks++; save();
+        sendReport(`🔍 Word: ${w} (User: ${db.type})`);
     }
 
-    function navTo(id) { document.getElementById(id).classList.add('active'); if(id==='leitner') renderLeitner(); }
-    function navBack(id) { document.getElementById(id).classList.remove('active'); }
-    function saveDB() { localStorage.setItem('fred_master_v1', JSON.stringify(db)); updateUI(); }
-    function updateUI() {
-        document.getElementById('status').innerText = db.type === 'student' ? "👨‍🎓 VIP User" : "👤 Guest Mode";
-        document.getElementById('clicks').innerText = `📝 ${db.type==='student' ? '∞' : db.clicks+'/5'}`;
-        document.getElementById('stars').innerText = db.stars;
-    }
-    function spk(t) { if(!isMuted) { window.speechSynthesis.cancel(); let m = new SpeechSynthesisUtterance(t); m.lang='en-US'; m.rate=0.8; window.speechSynthesis.speak(m); } }
-    function toggleMute() { isMuted = !isMuted; document.getElementById('muteBtn').innerText = isMuted ? "🔇" : "🔊"; }
+    function goPage(id) { document.getElementById(id).classList.add('active'); }
+    function backHome(id) { document.getElementById(id).classList.remove('active'); }
     function toggleTheme() { document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') === 'dark' ? '' : 'dark'); }
-    function activateVIP() { if(prompt("Code:") === "FRED-2025") { db.type='student'; saveDB(); } }
+    function spk(t) { window.speechSynthesis.cancel(); let m = new SpeechSynthesisUtterance(t); m.lang='en-US'; m.rate=0.8; window.speechSynthesis.speak(m); }
+    function save() { localStorage.setItem('fred_final_v5', JSON.stringify(db)); updateUI(); }
+    function updateUI() {
+        document.getElementById('statusText').innerText = db.type === 'student' ? "👨‍🎓 VIP Mode" : "👤 Guest Mode";
+        document.getElementById('statClick').innerText = `📝 ${db.type==='student' ? '∞' : db.clicks+'/5'}`;
+        document.getElementById('statStar').innerText = db.stars;
+    }
+    function openVIP() { document.getElementById('vipPanel').style.display='block'; }
+    function closeVIP() { document.getElementById('vipPanel').style.display='none'; }
+    function checkVIP() { if(document.getElementById('vipCode').value === "FRED-2025") { db.type='student'; save(); closeVIP(); } }
+    function closeApp() { window.close(); }
     async function sendReport(m) { fetch(`${TG_URL}?chat_id=${CHAT_ID}&text=${encodeURIComponent(m)}`).catch(()=>{}); }
+    
     updateUI();
 </script>
 </body>
