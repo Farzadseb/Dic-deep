@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="manifest" href="data:application/manifest+json,{"display":"standalone","name":"FredDic Pro"}">
-    <title>FredDic Professional</title>
+    <title>FredDic Elite Master</title>
     <style>
         :root {
             --bg: #e0e0e0; --shd: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
@@ -17,26 +16,42 @@
             --bg: #2c2f33; --shd: 6px 6px 12px #1c1e22, -4px -4px 10px #3c4248;
             --inner: inset 4px 4px 8px #1c1e22, inset -2px -2px 8px #3c4248; --txt: #f0f0f0;
         }
-        body, html { margin: 0; padding: 0; height: 100%; width: 100%; background: var(--bg); font-family: sans-serif; direction: rtl; color: var(--txt); overflow: hidden; }
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; background: var(--bg); font-family: 'Segoe UI', Tahoma, sans-serif; direction: rtl; color: var(--txt); overflow: hidden; }
         .page { position: absolute; inset: 0; padding: 20px; display: flex; flex-direction: column; background: var(--bg); overflow-y: auto; padding-bottom: 90px; }
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .icon-btn { width: 45px; height: 45px; border-radius: 12px; border: none; background: var(--bg); box-shadow: var(--shd); cursor: pointer; font-size: 18px; color: var(--txt); }
-        .search-box { display: flex; align-items: center; background: var(--bg); box-shadow: var(--inner); border-radius: 25px; padding: 0 15px; margin-bottom: 20px; }
-        .search-box input { flex: 1; border: none; background: none; height: 50px; outline: none; color: var(--txt); text-align: center; font-size: 18px; direction: ltr; }
         
-        .word-card { background: var(--bg); padding: 25px; border-radius: 35px; box-shadow: var(--shd); margin-bottom: 20px; display: none; }
-        .word-row { display: flex; flex-direction: row; justify-content: space-between; align-items: center; margin-bottom: 20px; direction: ltr; }
-        .en-title { color: var(--blue); font-size: 34px; font-weight: 900; }
-        .fa-title { color: var(--red); font-size: 26px; font-weight: bold; direction: rtl; }
+        /* هدر - Mute و Theme */
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .icon-btn { width: 50px; height: 50px; border-radius: 15px; border: none; background: var(--bg); box-shadow: var(--shd); cursor: pointer; font-size: 20px; color: var(--txt); display: flex; align-items: center; justify-content: center; }
+        .icon-btn:active { box-shadow: var(--inner); }
 
-        /* فیلدهای جدید که اضافه شدند */
-        .label { font-size: 11px; color: #888; text-align: left; direction: ltr; margin: 10px 0 2px 0; display: block; border-bottom: 1px solid rgba(0,0,0,0.1); }
-        .content-box { background: var(--bg); border-radius: 15px; padding: 12px; box-shadow: var(--shd); cursor: pointer; text-align: left; direction: ltr; width: 100%; border: none; margin-bottom: 10px; color: var(--txt); font-weight: bold; font-size: 15px; }
-        .fa-sub { color: var(--red); font-size: 13px; text-align: left; direction: rtl; margin-top: -8px; margin-bottom: 12px; }
+        /* باکس جستجو */
+        .search-box { display: flex; align-items: center; background: var(--bg); box-shadow: var(--inner); border-radius: 25px; padding: 0 15px; margin-bottom: 25px; }
+        .search-box input { flex: 1; border: none; background: none; height: 55px; outline: none; color: var(--txt); text-align: center; font-size: 18px; direction: ltr; font-weight: bold; }
 
-        .custom-alert { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85%; background: var(--bg); box-shadow: var(--shd); border-radius: 25px; padding: 30px; z-index: 3000; text-align: center; display: none; }
-        .nav-btn { padding: 18px; border-radius: 20px; border: none; color: white; font-weight: bold; box-shadow: var(--shd); cursor: pointer; width: 100%; margin-top: 10px; }
-        .footer { position: fixed; bottom: 0; left: 0; right: 0; height: 70px; background: var(--bg); display: flex; justify-content: space-around; align-items: center; border-radius: 20px 20px 0 0; }
+        /* کارت لغت - تراز وسواسی */
+        .word-card { background: var(--bg); padding: 25px; border-radius: 35px; box-shadow: var(--shd); margin-bottom: 25px; display: none; animation: slideUp 0.3s ease; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .word-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; direction: ltr; }
+        .en-title { color: var(--blue); font-size: 34px; font-weight: 900; text-align: left; }
+        .fa-title { color: var(--red); font-size: 28px; font-weight: bold; text-align: right; direction: rtl; }
+
+        .label { font-size: 10px; color: #888; text-align: left; direction: ltr; margin: 12px 0 4px 0; text-transform: uppercase; letter-spacing: 1px; }
+        .content-box { background: var(--bg); border-radius: 18px; padding: 15px; box-shadow: var(--shd); cursor: pointer; text-align: left; direction: ltr; width: 100%; border: none; margin-bottom: 12px; color: var(--txt); font-weight: 600; font-size: 16px; line-height: 1.4; transition: 0.2s; }
+        .content-box:active { box-shadow: var(--inner); }
+        .fa-sub { color: var(--red); font-size: 14px; text-align: left; direction: rtl; margin-top: -8px; margin-bottom: 15px; font-weight: 500; }
+
+        /* دکمه فعالسازی اختصاصی */
+        .vip-card { background: var(--bg); padding: 25px; border-radius: 30px; box-shadow: var(--shd); margin: 30px 0; text-align: center; }
+        .vip-input { width: 85%; padding: 15px; border-radius: 15px; border: none; background: var(--bg); box-shadow: var(--inner); text-align: center; font-size: 20px; font-weight: bold; color: var(--blue); margin-bottom: 20px; outline: none; letter-spacing: 2px; }
+        .vip-btn { background: var(--bg); color: var(--blue); padding: 15px 45px; border-radius: 15px; border: none; box-shadow: var(--shd); font-weight: 900; cursor: pointer; font-size: 16px; }
+        .vip-btn:active { box-shadow: var(--inner); transform: scale(0.96); }
+
+        /* مودال پیام - بدون نام گیت هاب */
+        .modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85%; background: var(--bg); box-shadow: var(--shd); border-radius: 30px; padding: 35px; z-index: 5000; text-align: center; display: none; }
+        .btn-confirm { padding: 18px; border-radius: 20px; border: none; color: white; font-weight: bold; box-shadow: var(--shd); cursor: pointer; width: 100%; margin-top: 15px; font-size: 16px; }
+
+        .footer { position: fixed; bottom: 0; left: 0; right: 0; height: 75px; background: var(--bg); display: flex; justify-content: space-around; align-items: center; border-radius: 25px 25px 0 0; box-shadow: 0 -5px 20px rgba(0,0,0,0.05); }
     </style>
 </head>
 <body>
@@ -44,14 +59,14 @@
 <div class="page">
     <div class="header">
         <button class="icon-btn" onclick="toggleMute()" id="muteBtn">🔊</button>
-        <b id="statusLabel">Guest Mode 👤</b>
+        <b id="statusLabel" style="font-size: 14px;">Guest Mode 👤</b>
         <button class="icon-btn" onclick="toggleTheme()">🌓</button>
     </div>
 
     <div id="main-ui">
         <div class="search-box">
-            <input type="text" id="wordInp" placeholder="Search (e.g. go)" oninput="handleTyping(this.value)">
-            <span>🔍</span>
+            <input type="text" id="wordInp" placeholder="Type a word (e.g. go)" oninput="handleTyping(this.value)">
+            <span style="font-size: 20px;">🔍</span>
         </div>
 
         <div id="resCard" class="word-card">
@@ -77,50 +92,75 @@
             <div class="fa-sub" id="hPhrFa"></div>
         </div>
 
-        <div id="vipInputArea" style="text-align:center; margin: 20px 0;">
-            <input type="text" id="vipCode" placeholder="Enter VIP Code" style="width:70%; padding:10px; border-radius:15px; border:none; box-shadow:var(--inner); background:var(--bg); text-align:center;">
-            <button onclick="checkVIP()" style="margin-top:10px; border:none; background:none; color:var(--blue); font-weight:bold; cursor:pointer;">فعال‌سازی 💎</button>
+        <div id="vipInputArea" class="vip-card">
+            <p style="margin-bottom:15px; font-weight:bold; font-size:14px; color:#666;">فعال‌سازی نسخه VIP استاد Fred</p>
+            <input type="text" id="vipCode" class="vip-input" placeholder="----">
+            <br>
+            <button class="vip-btn" onclick="checkVIP()">تایید و ارتقا 💎</button>
         </div>
     </div>
 </div>
 
-<div id="msgBox" class="custom-alert">
-    <h2 style="color:var(--blue);">🎓 وقت ثبت‌نام است!</h2>
-    <p>تست‌های رایگان تمام شد. برای ادامه، با استاد Fred در ارتباط باشید.</p>
-    <button class="nav-btn" style="background:#25D366;" onclick="window.location.href='https://wa.me/989017708544?text=سلام استاد Fred، درخواست ثبت‌نام دارم.'">پیام در واتس‌اپ</button>
-    <button class="nav-btn" style="background:#888;" onclick="closePop()">بستن</button>
+<div id="msgBox" class="modal">
+    <h2 id="msgTitle" style="color:var(--blue); margin-top:0;">FredDic</h2>
+    <p id="msgBody" style="line-height:1.6; color:#555;"></p>
+    <div id="waArea"></div>
+    <button class="btn-confirm" style="background:#888;" onclick="closePop()">بستن</button>
 </div>
 
 <div class="footer">
-    <span id="clickCounter">📝 0/5</span>
-    <span style="font-size:35px;">🏆</span>
-    <span>⭐ 0</span>
+    <span id="clickCounter" style="font-weight:bold;">📝 0/5</span>
+    <span style="font-size:38px;">🏆</span>
+    <span style="font-weight:bold;">⭐ 0</span>
 </div>
 
 <script>
     const dictionary = {
         "go": { 
             fa: "رفتن", 
-            def: "To move from one place to another.", defFa: "حرکت از مکانی به مکان دیگر.",
-            ex: "I go to school every day.", exFa: "من هر روز به مدرسه می‌روم.",
-            col: "go home", colFa: "خانه رفتن",
-            phr: "go on", phrFa: "ادامه دادن" 
+            def: "To move from one place to another.", defFa: "حرکت از جایی به جای دیگر.",
+            ex: "I go to the park every weekend.", exFa: "من هر آخر هفته به پارک می‌روم.",
+            col: "go home / go shopping", colFa: "خانه رفتن / خرید رفتن",
+            phr: "go on / go away", phrFa: "ادامه دادن / دور شدن" 
         },
         "be": { 
             fa: "بودن", 
-            def: "To exist.", defFa: "وجود داشتن.",
-            ex: "Be happy.", exFa: "خوشحال باش.",
-            col: "be careful", colFa: "مراقب بودن",
+            def: "To exist or live.", defFa: "وجود داشتن یا زندگی کردن.",
+            ex: "Be kind to everyone.", exFa: "با همه مهربان باش.",
+            col: "be careful / be ready", colFa: "مراقب بودن / آماده بودن",
             phr: "be able to", phrFa: "توانستن" 
         }
     };
 
     let isMuted = false;
-    let db = JSON.parse(localStorage.getItem('fred_final_full')) || { type: 'guest', clicks: 0 };
+    let db = JSON.parse(localStorage.getItem('fred_master_v20')) || { type: 'guest', clicks: 0 };
+
+    function myAlert(title, body, isWA = false) {
+        document.getElementById('msgTitle').innerText = title;
+        document.getElementById('msgBody').innerText = body;
+        const wa = document.getElementById('waArea');
+        wa.innerHTML = isWA ? `<button class="btn-confirm" style="background:#25D366; margin-bottom:10px;" onclick="window.location.href='https://wa.me/989017708544?text=سلام استاد Fred، درخواست فعالسازی لایسنس دارم.'">ارسال پیام به استاد (WhatsApp)</button>` : '';
+        document.getElementById('msgBox').style.display = 'block';
+    }
+
+    function checkVIP() {
+        const input = document.getElementById('vipCode').value.trim();
+        if(input === "FRED-2025") {
+            db.type = 'student';
+            localStorage.setItem('fred_master_v20', JSON.stringify(db));
+            myAlert('💎 تبریک!', 'لایسنس با موفقیت تایید شد. تمام محدودیت‌ها برداشته شد.');
+            setTimeout(() => { location.reload(); }, 2000);
+        } else {
+            myAlert('❌ خطا', 'کد وارد شده صحیح نیست. لطفاً با استاد تماس بگیرید.');
+        }
+    }
 
     function handleTyping(v) {
-        let w = v.toLowerCase();
-        if(db.type === 'guest' && db.clicks >= 5) { document.getElementById('msgBox').style.display='block'; return; }
+        let w = v.toLowerCase().trim();
+        if(db.type === 'guest' && db.clicks >= 5) {
+            myAlert('🎓 وقت ثبت‌نام است!', 'تست‌های رایگان شما به پایان رسید. برای دریافت کد دائم و ادامه آموزش حرفه‌ای با استاد در تماس باشید.', true);
+            return;
+        }
         if(dictionary[w]) {
             let d = dictionary[w];
             document.getElementById('resCard').style.display = 'block';
@@ -135,7 +175,9 @@
             document.getElementById('hPhr').innerText = d.phr;
             document.getElementById('hPhrFa').innerText = d.phrFa;
             spk(w);
-            if(db.type === 'guest') { db.clicks++; save(); }
+            if(db.type === 'guest') { db.clicks++; localStorage.setItem('fred_master_v20', JSON.stringify(db)); updateUI(); }
+        } else {
+            document.getElementById('resCard').style.display = 'none';
         }
     }
 
@@ -143,15 +185,15 @@
         if(isMuted) return;
         window.speechSynthesis.cancel();
         let m = new SpeechSynthesisUtterance(t);
-        m.rate = 0.5;
+        m.rate = 0.5; // سرعت کم برای آموزش دقیق
+        m.lang = 'en-US';
         window.speechSynthesis.speak(m);
     }
 
     function closePop() { document.getElementById('msgBox').style.display = 'none'; }
     function toggleMute() { isMuted = !isMuted; document.getElementById('muteBtn').innerText = isMuted ? "🔇" : "🔊"; }
     function toggleTheme() { document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') === 'dark' ? '' : 'dark'); }
-    function checkVIP() { if(document.getElementById('vipCode').value === "FRED-2025") { db.type='student'; save(); location.reload(); } }
-    function save() { localStorage.setItem('fred_final_full', JSON.stringify(db)); updateUI(); }
+    
     function updateUI() {
         document.getElementById('statusLabel').innerText = db.type === 'student' ? "VIP Mode 👨‍🎓" : "Guest Mode 👤";
         document.getElementById('clickCounter').innerText = `📝 ${db.type === 'student' ? '∞' : db.clicks + '/5'}`;
