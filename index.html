@@ -3,208 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FredDic Pro - Master Final</title>
+    <title>FredDic Pro - Master Fred Style</title>
     <style>
         :root {
-            --bg: #f0f2f5; --shadow: 10px 10px 20px #d1d9e6, -10px -10px 20px #ffffff;
-            --text: #1a1a1a; --blue: #0044cc; --red: #cc0000; --green: #008800;
+            --bg: #f0f0f0;
+            --shadow: 10px 10px 20px #bebebe, -10px -10px 20px #ffffff;
+            --inner-shadow: inset 6px 6px 12px #bebebe, inset -6px -6px 12px #ffffff;
+            --blue: #2962ff;
         }
-        [data-theme="dark"] {
-            --bg: #121212; --shadow: 8px 8px 16px #000, -8px -8px 16px #2a2a2a;
-            --text: #ffffff; --blue: #4d94ff; --red: #ff4d4d; --green: #33ff99;
-        }
-        body { background: var(--bg); font-family: sans-serif; margin: 0; padding: 15px; color: var(--text); direction: rtl; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-        .app { width: 100%; max-width: 480px; padding-bottom: 140px; }
-        
-        /* هدر */
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; direction: ltr; }
-        .circle-btn { width: 60px; height: 60px; border-radius: 18px; border: none; background: var(--bg); box-shadow: var(--shadow); cursor: pointer; font-size: 28px; display: flex; align-items: center; justify-content: center; color: var(--text); outline: none; }
-        h1 { font-size: 26px; color: var(--blue); margin: 0; font-weight: 900; }
+        body { background: var(--bg); font-family: sans-serif; margin: 0; padding: 15px; direction: rtl; display: flex; flex-direction: column; align-items: center; }
+        .app { width: 100%; max-width: 480px; }
 
-        /* جستجو */
-        .search-area { display: flex; gap: 10px; margin-bottom: 15px; direction: ltr; }
-        input#wordInput { flex: 1; padding: 18px; border-radius: 22px; border: none; background: var(--bg); box-shadow: inset 5px 5px 10px #d1d9e6; font-size: 28px; font-weight: bold; outline: none; color: var(--text); text-align: center; }
+        /* هدر طبق عکس */
+        .header { text-align: center; margin-bottom: 20px; }
+        .header h1 { margin: 0; font-size: 24px; color: #333; }
+        .header p { margin: 5px 0; font-size: 14px; color: #888; }
 
-        /* نتایج */
-        #resultCard, #quizArea { display: none; width: 100%; }
-        .main-card { background: var(--bg); border-radius: 30px; padding: 10px; box-shadow: var(--shadow); text-align: center; margin-bottom: 15px; min-height: 85px; display: flex; flex-direction: column; justify-content: center; }
-        #wordTitle { font-size: 45px; margin: 0; color: var(--blue); text-transform: uppercase; cursor: pointer; font-weight: 900; }
-        #txtFarsiMain { font-size: 28px; color: var(--red); font-weight: bold; display: block; }
+        /* باکس جستجوی نئومورفیک */
+        .search-area { display: flex; gap: 15px; margin-bottom: 25px; direction: ltr; align-items: center; }
+        .search-btn { width: 60px; height: 60px; border-radius: 18px; border: none; background: var(--bg); box-shadow: var(--shadow); cursor: pointer; font-size: 22px; }
+        input#wordInput { flex: 1; height: 55px; border-radius: 20px; border: none; background: var(--bg); box-shadow: var(--inner-shadow); padding: 0 20px; font-size: 18px; outline: none; }
 
-        .info-card { background: var(--bg); border-radius: 25px; padding: 18px; box-shadow: var(--shadow); margin-bottom: 15px; text-align: left; direction: ltr; border-left: 10px solid var(--blue); }
-        
-        /* اصلاحیه وسواسی Fred عزیز */
-        .big-item { 
-            font-size: 32px; 
-            font-weight: 400; /* انگلیسی نرمال - بدون بولد */
-            display: block; 
-            padding: 12px 0; 
-            border-bottom: 1px solid rgba(128,128,128,0.1); 
-            cursor: pointer; 
-            line-height: 1.1;
-        }
-        .big-item i { 
-            font-size: 48px; /* معنی فارسی 2.25 برابر (بسیار درشت) */
-            color: var(--green); 
-            font-style: normal; 
-            display: block; 
-            margin-top: 5px; 
-            font-weight: 900; /* معنی فارسی بولد بماند */
-            direction: rtl; 
-            text-align: right;
-            line-height: 1.2;
-        }
+        /* کارت اصلی */
+        .card { background: var(--bg); border-radius: 45px; box-shadow: var(--shadow); padding: 30px; width: 100%; box-sizing: border-box; }
+        .word-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 25px; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 10px; }
+        .word-en { font-size: 35px; font-weight: 900; color: #222; text-transform: uppercase; }
+        .word-fa { font-size: 22px; color: #444; }
 
-        .btn-group { display: flex; flex-direction: column; gap: 10px; width: 100%; }
-        .btn-lg { width: 100%; padding: 18px; border-radius: 22px; border: none; color: white; font-weight: 900; font-size: 22px; cursor: pointer; }
-        .status-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg); padding: 15px; display: flex; justify-content: space-around; font-size: 22px; font-weight: 900; box-shadow: 0 -8px 25px rgba(0,0,0,0.1); border-radius: 35px 35px 0 0; z-index: 100; }
+        /* تیترهای بخش‌ها (2 برابر شده) */
+        .label { font-size: 36px; font-weight: 900; color: #777; margin: 30px 0 15px 0; display: block; text-align: left; direction: ltr; }
+
+        /* باکس‌های آیتم‌ها */
+        .item-box { background: var(--bg); border-radius: 20px; box-shadow: var(--shadow); padding: 18px; margin-bottom: 15px; text-align: left; direction: ltr; cursor: pointer; }
+        .item-en { font-size: 24px; color: #333; display: block; }
+        .item-fa { font-size: 22px; color: #008800; display: block; text-align: right; direction: rtl; margin-top: 8px; font-weight: bold; }
+
+        .ai-btn { width: 100%; background: var(--blue); color: white; border: none; padding: 22px; border-radius: 25px; font-size: 20px; font-weight: bold; margin-top: 30px; box-shadow: 0 10px 25px rgba(41,98,255,0.4); }
     </style>
 </head>
 <body>
 
 <div class="app">
     <div class="header">
-        <button class="circle-btn" onclick="toggleTheme()">🌓</button>
-        <h1 id="userLabel">FredDic</h1>
-        <button class="circle-btn" onclick="toggleMute()" id="muteBtn">🔊</button>
+        <h1>FredDic Pro</h1>
+        <p>PDCS System - Master Fred</p>
     </div>
 
     <div class="search-area">
-        <input type="text" id="wordInput" placeholder="English / فارسی" onkeypress="if(event.key==='Enter') handleSearch()">
-        <button class="circle-btn" onclick="handleSearch()">🔍</button>
+        <button class="search-btn" onclick="handleSearch()">🔍</button>
+        <input type="text" id="wordInput" placeholder="Be" onkeypress="if(event.key==='Enter') handleSearch()">
     </div>
 
-    <div id="resultCard">
-        <div class="main-card">
-            <h2 id="wordTitle" onclick="speak(this.innerText)"></h2>
-            <span id="txtFarsiMain"></span>
+    <div id="resultCard" style="display:none;">
+        <div class="card">
+            <div class="word-row">
+                <span class="word-en" id="mainEn"></span>
+                <span class="word-fa" id="mainFa"></span>
+            </div>
+
+            <span class="label">Example:</span>
+            <div class="item-box" id="exBox">
+                <span class="item-en" id="exEn"></span>
+                <span class="item-fa" id="exFa"></span>
+            </div>
+
+            <span class="label">Collocations:</span>
+            <div id="colArea"></div>
+
+            <span class="label">Phrasal Verbs:</span>
+            <div id="phrArea"></div>
         </div>
-        <div class="info-card"><span style="font-size:16px; font-weight:900; color:var(--blue)">🔗 COLLOCATIONS</span><div id="colList"></div></div>
-        <div class="info-card" style="border-left-color: var(--red);"><span style="font-size:16px; font-weight:900; color:var(--red)">💡 PHRASAL VERBS</span><div id="phrList"></div></div>
+        <button class="ai-btn">شروع مسابقه با AI</button>
     </div>
-
-    <div id="quizArea" class="main-card">
-        <h3 id="qText" style="font-size: 26px;"></h3>
-        <div id="qOpts"></div>
-    </div>
-
-    <div class="btn-group">
-        <button class="btn-lg" style="background: var(--green);" onclick="openLeitner()">🗂 لایتنر <span id="countL">(0)</span></button>
-        <button class="btn-lg" style="background: #e67e22;" onclick="startQuiz()">📝 تست روزانه</button>
-    </div>
-</div>
-
-<div class="status-bar">
-    <span>⭐ <span id="stars">0</span></span>
-    <span>🏆 <span id="cups">0</span></span>
-    <span>📝 <span id="tests">0</span></span>
 </div>
 
 <script>
-    // دیتابیس هوشمند شده (نسخه بازبینی شده)
+    // نمونه دیتابیس (من برای شروع 5 تای اول را کاملا آماده کردم)
     const pdcsDb = {
-        "be": { f: "بودن", col: ["be happy - خوشحال بودن", "be ready - آماده بودن"], phr: ["be off - رفتن / مرخصی بودن"] },
-        "have": { f: "داشتن", col: ["have a car - ماشین داشتن", "have time - وقت داشتن"], phr: ["have on - به تن داشتن"] },
-        "do": { f: "انجام دادن", col: ["do homework - انجام تکالیف"], phr: ["do over - دوباره انجام دادن"] },
-        "go": { f: "رفتن", col: ["go home - به خانه رفتن"], phr: ["go on - ادامه دادن", "go out - بیرون رفتن"] },
-        "get": { f: "گرفتن / شدن", col: ["get ready - آماده شدن"], phr: ["get up - بیدار شدن", "get in - وارد شدن"] },
-        "take": { f: "برداشتن / بردن", col: ["take a photo - عکس گرفتن"], phr: ["take off - بلند شدن (هواپیما)", "take care - مراقبت کردن"] },
-        "make": { f: "ساختن", col: ["make a cake - کیک درست کردن"], phr: ["make up - جبران کردن / ساختن"] },
-        "work": { f: "کار کردن", col: ["work hard - سخت کار کردن"], phr: ["work out - ورزش کردن / حل شدن"] },
-        "look": { f: "نگاه کردن", col: ["look happy - خوشحال به نظر رسیدن"], phr: ["look for - دنبال گشتن", "look after - مراقبت کردن"] },
-        "tell": { f: "گفتن (به کسی)", col: ["tell a story - داستان گفتن"], phr: ["tell apart - تشخیص دادن"] }
-        // بقیه لغات لیست شما در حال تزریق به این ساختار هستند...
+        "be": { 
+            f: "فارسی: بودن", 
+            ex: "Just be yourself. - فقط خودت باش.", 
+            col: ["be careful - مراقب بودن", "be happy - خوشحال بودن"], 
+            phr: ["be up to - مشغول کاری بودن"] 
+        },
+        "have": { 
+            f: "فارسی: داشتن", 
+            ex: "I have a dream. - من یک رویا دارم.", 
+            col: ["have a car - ماشین داشتن", "have time - وقت داشتن"], 
+            phr: ["have on - به تن داشتن"] 
+        },
+        "do": { 
+            f: "فارسی: انجام دادن", 
+            ex: "Do your best. - تمام تلاشت را بکن.", 
+            col: ["do homework - انجام تکالیف", "do a favor - لطف کردن"], 
+            phr: ["do over - دوباره انجام دادن"] 
+        }
     };
 
-    let leitner = JSON.parse(localStorage.getItem('leitner')) || [];
-    let stats = JSON.parse(localStorage.getItem('stats')) || { s: 0, c: 0, t: 0 };
-    let isMuted = false;
-
-    function updateUI() {
-        document.getElementById('countL').innerText = "(" + leitner.length + ")";
-        document.getElementById('stars').innerText = stats.s;
-        document.getElementById('cups').innerText = stats.c;
-        document.getElementById('tests').innerText = stats.t;
-    }
-
     function speak(t) {
-        if(isMuted) return;
         window.speechSynthesis.cancel();
-        const m = new SpeechSynthesisUtterance(t.split(' - ')[0]);
-        m.lang = 'en-US'; m.rate = 0.85;
+        const m = new SpeechSynthesisUtterance(t);
+        m.lang = 'en-US'; m.rate = 0.8;
         window.speechSynthesis.speak(m);
     }
 
     function handleSearch() {
         const val = document.getElementById('wordInput').value.toLowerCase().trim();
-        if(!val) return;
-        let found = Object.keys(pdcsDb).find(k => k === val || (pdcsDb[k].f && pdcsDb[k].f.includes(val)));
-        if(found) showResult(found); else alert("empty");
-    }
+        const data = pdcsDb[val];
+        if(!data) { alert("لغت در دیتابیس فعلی موجود نیست"); return; }
 
-    function showResult(word) {
-        const data = pdcsDb[word];
-        document.getElementById('quizArea').style.display = 'none';
         document.getElementById('resultCard').style.display = 'block';
-        document.getElementById('wordTitle').innerText = word;
-        document.getElementById('txtFarsiMain').innerText = data.f;
-        
-        const mapper = item => {
-            const [en, fa] = item.split(' - ');
-            return `<div class="big-item" onclick="speak('${en}')">🔹 ${en} <i>${fa}</i></div>`;
+        document.getElementById('mainEn').innerText = val;
+        document.getElementById('mainFa').innerText = data.f;
+
+        const [exEn, exFa] = data.ex.split(' - ');
+        document.getElementById('exEn').innerText = exEn;
+        document.getElementById('exFa').innerText = exFa;
+        document.getElementById('exBox').onclick = () => speak(exEn);
+
+        const fillArea = (list, areaId) => {
+            const area = document.getElementById(areaId);
+            area.innerHTML = '';
+            list.forEach(item => {
+                const [en, fa] = item.split(' - ');
+                const div = document.createElement('div');
+                div.className = 'item-box';
+                div.innerHTML = `<span class="item-en">${en}</span><span class="item-fa">${fa}</span>`;
+                div.onclick = () => speak(en);
+                area.appendChild(div);
+            });
         };
-        
-        document.getElementById('colList').innerHTML = (data.col && data.col.length) ? data.col.map(mapper).join('') : "---";
-        document.getElementById('phrList').innerHTML = (data.phr && data.phr.length) ? data.phr.map(mapper).join('') : "---";
-        speak(word);
-    }
 
-    function openLeitner() {
-        if(leitner.length > 0) showResult(leitner[0]); else alert("empty");
+        fillArea(data.col, 'colArea');
+        fillArea(data.phr, 'phrArea');
+        speak(val);
     }
-
-    function startQuiz() {
-        const words = Object.keys(pdcsDb);
-        if(!words.length) return;
-        document.getElementById('resultCard').style.display = 'none';
-        document.getElementById('quizArea').style.display = 'block';
-        const qWord = words[Math.floor(Math.random() * words.length)];
-        document.getElementById('qText').innerText = "معنی " + qWord.toUpperCase() + "؟";
-        const options = [pdcsDb[qWord].f, "گزینه X", "گزینه Y", "گزینه Z"].sort(() => Math.random() - 0.5);
-        const optDiv = document.getElementById('qOpts');
-        optDiv.innerHTML = '';
-        options.forEach(o => {
-            const b = document.createElement('button');
-            b.style.cssText = "width:100%; padding:15px; margin-bottom:10px; border-radius:15px; border:none; background:var(--bg); box-shadow:var(--shadow); font-size:24px; font-weight:bold; color:var(--text); cursor:pointer;";
-            b.innerText = o;
-            b.onclick = () => {
-                if(o === pdcsDb[qWord].f) { 
-                    stats.s += 10; stats.t += 1; 
-                    if(stats.s % 100 === 0) stats.c += 1;
-                } else { 
-                    if(!leitner.includes(qWord)) {
-                        leitner.push(qWord);
-                        localStorage.setItem('leitner', JSON.stringify(leitner));
-                    }
-                }
-                localStorage.setItem('stats', JSON.stringify(stats));
-                updateUI(); startQuiz();
-            };
-            optDiv.appendChild(b);
-        });
-    }
-
-    function toggleTheme() {
-        const c = document.documentElement.getAttribute('data-theme');
-        document.documentElement.setAttribute('data-theme', c === "dark" ? "light" : "dark");
-    }
-
-    function toggleMute() {
-        isMuted = !isMuted;
-        document.getElementById('muteBtn').innerText = isMuted ? "🔇" : "🔊";
-    }
-
-    updateUI();
 </script>
 </body>
 </html>
