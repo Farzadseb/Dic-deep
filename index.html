@@ -3,96 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FredDic Pro - Master Edition</title>
+    <title>FredDic Pro - Master Fred</title>
     <style>
         :root {
-            --bg: #f0f0f0;
-            --shadow: 10px 10px 20px #bebebe, -10px -10px 20px #ffffff;
-            --inner-shadow: inset 6px 6px 12px #bebebe, inset -6px -6px 12px #ffffff;
-            --blue: #2962ff; --green: #008800; --red: #cc0000;
+            --bg: #e0e5ec;
+            --shadow: 9px 9px 16px rgba(163, 177, 198, 0.6), -9px -9px 16px rgba(255, 255, 255, 0.5);
+            --inner-shadow: inset 6px 6px 12px #b8bec9, inset -6px -6px 12px #ffffff;
+            --text: #31344b; --blue: #2962ff; --green: #008800; --red: #cc0000;
         }
-        body { background: var(--bg); font-family: sans-serif; margin: 0; padding: 15px; direction: rtl; display: flex; flex-direction: column; align-items: center; min-height: 100vh; color: #333; }
-        .app { width: 100%; max-width: 480px; padding-bottom: 120px; }
+        [data-theme="dark"] {
+            --bg: #2d2d2d; --shadow: 8px 8px 16px #1b1b1b, -8px -8px 16px #3f3f3f;
+            --inner-shadow: inset 6px 6px 12px #1b1b1b, inset -6px -6px 12px #3f3f3f;
+            --text: #ffffff; --blue: #4d94ff;
+        }
+        body { background: var(--bg); font-family: sans-serif; margin: 0; padding: 15px; direction: rtl; display: flex; flex-direction: column; align-items: center; min-height: 100vh; color: var(--text); }
+        .app { width: 100%; max-width: 480px; padding-bottom: 140px; }
 
-        /* Header */
-        .header { text-align: center; margin-bottom: 20px; position: relative; }
-        .header h1 { margin: 0; font-size: 26px; font-weight: 900; color: #333; }
-        .header p { margin: 5px 0; font-size: 14px; color: #888; }
-        .mute-btn { position: absolute; left: 0; top: 0; width: 50px; height: 50px; border-radius: 15px; border: none; background: var(--bg); box-shadow: var(--shadow); cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; }
+        /* کنترلهای بالای صفحه که غایب بودند */
+        .top-bar { display: flex; justify-content: space-between; width: 100%; margin-bottom: 20px; direction: ltr; }
+        .icon-btn { width: 50px; height: 50px; border-radius: 15px; border: none; background: var(--bg); box-shadow: var(--shadow); cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; color: var(--text); }
 
-        /* Search Box */
-        .search-area { display: flex; gap: 15px; margin-bottom: 25px; direction: ltr; align-items: center; }
-        .search-btn { width: 65px; height: 65px; border-radius: 20px; border: none; background: var(--bg); box-shadow: var(--shadow); cursor: pointer; font-size: 24px; }
-        input#wordInput { flex: 1; height: 60px; border-radius: 22px; border: none; background: var(--bg); box-shadow: var(--inner-shadow); padding: 0 20px; font-size: 20px; outline: none; text-align: center; font-weight: bold; }
+        /* جستجو - طبق عکس اول */
+        .search-area { display: flex; gap: 15px; margin-bottom: 30px; direction: ltr; align-items: center; }
+        .search-btn { width: 60px; height: 60px; border-radius: 20px; border: none; background: var(--bg); box-shadow: var(--shadow); cursor: pointer; font-size: 20px; }
+        input#wordInput { flex: 1; height: 55px; border-radius: 25px; border: none; background: var(--bg); box-shadow: var(--inner-shadow); padding: 0 25px; font-size: 18px; outline: none; text-align: left; }
 
-        /* Card System */
-        #resultCard, #quizArea { display: none; width: 100%; }
-        .card { background: var(--bg); border-radius: 40px; box-shadow: var(--shadow); padding: 25px; box-sizing: border-box; margin-bottom: 20px; }
+        /* کارت اصلی محتوا */
+        #resultCard { display: none; width: 100%; }
+        .main-card { background: var(--bg); border-radius: 50px; box-shadow: var(--shadow); padding: 35px; box-sizing: border-box; margin-bottom: 25px; }
         
-        .word-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; border-bottom: 2px solid rgba(0,0,0,0.05); padding-bottom: 12px; }
-        .word-en { font-size: 42px; font-weight: 900; color: var(--blue); text-transform: uppercase; }
-        .word-fa { font-size: 24px; color: var(--red); font-weight: bold; }
+        .word-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 25px; }
+        .word-en { font-size: 32px; font-weight: 900; color: #333; text-transform: uppercase; }
+        .word-fa { font-size: 18px; color: #555; }
 
-        /* 2X Titles */
-        .label { font-size: 36px; font-weight: 900; color: #777; margin: 30px 0 15px 0; display: block; text-align: left; direction: ltr; }
+        /* تیترهای بخش‌ها - ۲ برابر */
+        .section-label { font-size: 32px; font-weight: 900; color: #888; margin: 25px 0 15px 0; display: block; text-align: left; direction: ltr; }
 
-        /* Neumorphic Item Boxes */
-        .item-box { background: var(--bg); border-radius: 22px; box-shadow: var(--shadow); padding: 20px; margin-bottom: 18px; text-align: left; direction: ltr; cursor: pointer; transition: 0.2s; border: none; width: 100%; display: block; }
-        .item-box:active { box-shadow: var(--inner-shadow); transform: scale(0.98); }
-        .item-en { font-size: 26px; color: #333; display: block; font-weight: 500; }
-        .item-fa { font-size: 24px; color: var(--green); display: block; text-align: right; direction: rtl; margin-top: 10px; font-weight: 900; }
+        /* باکس‌های آیتم - طبق تصویر دوم (فارسی سبز سمت راست) */
+        .item-box { background: var(--bg); border-radius: 25px; box-shadow: var(--shadow); padding: 22px; margin-bottom: 18px; display: flex; flex-direction: column; cursor: pointer; border: none; width: 100%; }
+        .item-box:active { box-shadow: var(--inner-shadow); }
+        .item-en { font-size: 26px; color: #333; text-align: left; direction: ltr; }
+        .item-fa { font-size: 24px; color: var(--green); text-align: right; direction: rtl; margin-top: 8px; font-weight: bold; }
 
-        /* Footer Buttons */
-        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px; width: 100%; }
-        .action-btn { padding: 22px; border-radius: 25px; border: none; font-size: 20px; font-weight: bold; cursor: pointer; box-shadow: var(--shadow); color: white; transition: 0.2s; }
-        .action-btn:active { box-shadow: var(--inner-shadow); }
-        
-        /* Status Bar */
-        .status-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg); padding: 18px; display: flex; justify-content: space-around; font-size: 22px; font-weight: 900; box-shadow: 0 -8px 25px rgba(0,0,0,0.05); border-radius: 35px 35px 0 0; z-index: 1000; }
+        /* دکمه‌های نارنجی و سبز پایین - اصلاح undefined */
+        .footer-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; width: 100%; }
+        .f-btn { padding: 20px; border-radius: 40px; border: none; color: white; font-size: 18px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+
+        /* دکمه آبی بزرگ - طبق عکس اول */
+        .blue-btn { width: 100%; background: var(--blue); color: white; border: none; padding: 25px; border-radius: 25px; font-size: 20px; font-weight: bold; margin-top: 25px; box-shadow: 0 10px 20px rgba(41,98,255,0.3); cursor: pointer; }
+
+        .status-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg); padding: 15px; display: flex; justify-content: space-around; font-size: 20px; font-weight: bold; box-shadow: 0 -5px 15px rgba(0,0,0,0.05); border-radius: 30px 30px 0 0; }
     </style>
 </head>
 <body>
 
 <div class="app">
-    <div class="header">
-        <button class="mute-btn" onclick="toggleMute()" id="muteBtn">🔊</button>
-        <h1>FredDic Pro</h1>
-        <p>PDCS System - Master Fred</p>
+    <div class="top-bar">
+        <button class="icon-btn" onclick="toggleMute()" id="muteBtn">🔊</button>
+        <button class="icon-btn" onclick="toggleTheme()">🌓</button>
     </div>
 
     <div class="search-area">
         <button class="search-btn" onclick="handleSearch()">🔍</button>
-        <input type="text" id="wordInput" placeholder="Enter word..." onkeypress="if(event.key==='Enter') handleSearch()">
+        <input type="text" id="wordInput" placeholder="Be" onkeypress="if(event.key==='Enter') handleSearch()">
     </div>
 
     <div id="resultCard">
-        <div class="card">
-            <div class="word-row">
+        <div class="main-card">
+            <div class="word-header">
                 <span class="word-en" id="mainEn"></span>
                 <span class="word-fa" id="mainFa"></span>
             </div>
-            <span class="label">Example:</span>
+            
+            <span class="section-label">Example:</span>
             <div class="item-box" id="exBox">
                 <span class="item-en" id="exEn"></span>
-                <span class="item-fa" id="exFa"></span>
+                <span class="item-fa" id="exFa" style="color: #666; font-weight: normal;"></span>
             </div>
-            <span class="label">Collocations:</span>
+
+            <span class="section-label">Collocations:</span>
             <div id="colArea"></div>
-            <span class="label">Phrasal Verbs:</span>
+
+            <span class="section-label">Phrasal Verbs:</span>
             <div id="phrArea"></div>
         </div>
+        <button class="blue-btn">شروع مسابقه با AI</button>
     </div>
 
-    <div id="quizArea">
-        <div class="card">
-            <h3 id="qText" style="font-size: 28px; text-align: center; margin-bottom: 25px;"></h3>
-            <div id="qOpts"></div>
-        </div>
+    <div id="quizArea" style="display:none;" class="main-card">
+        <h3 id="qText" style="text-align: center;"></h3>
+        <div id="qOpts"></div>
     </div>
 
-    <div class="btn-grid">
-        <button class="action-btn" style="background: var(--green);" onclick="openLeitner()">🗂 لایتنر <span id="countL">(0)</span></button>
-        <button class="action-btn" style="background: #e67e22;" onclick="startQuiz()">📝 تست روزانه</button>
+    <div class="footer-btns">
+        <button class="f-btn" style="background: #e67e22;" onclick="startQuiz()">📝 تست روزانه</button>
+        <button class="f-btn" style="background: #008000;" onclick="openLeitner()">🗂 لایتنر <span id="countL">(0)</span></button>
     </div>
 </div>
 
@@ -103,12 +108,9 @@
 </div>
 
 <script>
-    // دیتابیس هوشمند (آماده برای اضافه کردن لغات شما)
     const pdcsDb = {
-        "be": { f: "بودن", ex: "Just be yourself. - فقط خودت باش.", col: ["be careful - مراقب بودن", "be happy - خوشحال بودن"], phr: ["be up to - مشغول کاری بودن"] },
-        "have": { f: "داشتن", ex: "I have a dream. - من یک رویا دارم.", col: ["have a car - ماشین داشتن", "have time - وقت داشتن"], phr: ["have on - به تن داشتن"] },
-        "do": { f: "انجام دادن", ex: "Do your best. - تلاشت را بکن.", col: ["do homework - مشق نوشتن"], phr: ["do over - دوباره انجام دادن"] },
-        "go": { f: "رفتن", ex: "Go home now. - الان برو خونه.", col: ["go shopping - خرید رفتن"], phr: ["go on - ادامه دادن"] }
+        "be": { f: "فارسی: بودن", ex: "Just be yourself. - فقط خودت باش.", col: ["be careful - مراقب بودن", "be happy - خوشحال بودن"], phr: ["be up to - مشغول کاری بودن"] },
+        "have": { f: "فارسی: داشتن", ex: "I have a dream. - من یک رویا دارم.", col: ["have a car - ماشین داشتن"], phr: ["have on - به تن داشتن"] }
     };
 
     let leitner = JSON.parse(localStorage.getItem('leitner')) || [];
@@ -116,7 +118,7 @@
     let isMuted = false;
 
     function updateUI() {
-        document.getElementById('countL').innerText = "(" + leitner.length + ")";
+        document.getElementById('countL').innerText = "(" + (leitner.length || 0) + ")";
         document.getElementById('stars').innerText = stats.s;
         document.getElementById('cups').innerText = stats.c;
         document.getElementById('tests').innerText = stats.t;
@@ -132,7 +134,7 @@
 
     function handleSearch() {
         const val = document.getElementById('wordInput').value.toLowerCase().trim();
-        if(pdcsDb[val]) showResult(val); else alert("Word not found");
+        if(pdcsDb[val]) showResult(val);
     }
 
     function showResult(word) {
@@ -141,17 +143,16 @@
         document.getElementById('resultCard').style.display = 'block';
         document.getElementById('mainEn').innerText = word;
         document.getElementById('mainFa').innerText = data.f;
-        
+
         const [exEn, exFa] = data.ex.split(' - ');
         document.getElementById('exEn').innerText = exEn;
         document.getElementById('exFa').innerText = exFa;
-        document.getElementById('exBox').onclick = () => speak(exEn);
-
+        
         const fill = (list, id) => {
             const el = document.getElementById(id); el.innerHTML = '';
             list.forEach(i => {
                 const [en, fa] = i.split(' - ');
-                const b = document.createElement('button');
+                const b = document.createElement('div');
                 b.className = 'item-box';
                 b.innerHTML = `<span class="item-en">${en}</span><span class="item-fa">${fa}</span>`;
                 b.onclick = () => speak(en);
@@ -168,15 +169,14 @@
         document.getElementById('resultCard').style.display = 'none';
         document.getElementById('quizArea').style.display = 'block';
         const qW = words[Math.floor(Math.random() * words.length)];
-        document.getElementById('qText').innerText = "Meaning of " + qW.toUpperCase() + "?";
-        
-        const opts = [pdcsDb[qW].f, "گزینه اشتباه ۱", "گزینه اشتباه ۲", "گزینه اشتباه ۳"].sort(() => Math.random() - 0.5);
+        document.getElementById('qText').innerText = "معنی " + qW.toUpperCase() + "؟";
+        const opts = [pdcsDb[qW].f, "گزینه X", "گزینه Y"].sort(() => Math.random() - 0.5);
         const div = document.getElementById('qOpts'); div.innerHTML = '';
         opts.forEach(o => {
             const b = document.createElement('button');
             b.className = 'item-box'; b.innerText = o;
             b.onclick = () => {
-                if(o === pdcsDb[qW].f) { stats.s += 10; stats.t += 1; if(stats.s % 100 === 0) stats.c++; }
+                if(o === pdcsDb[qW].f) { stats.s += 10; stats.t += 1; }
                 else { if(!leitner.includes(qW)) leitner.push(qW); }
                 localStorage.setItem('stats', JSON.stringify(stats));
                 localStorage.setItem('leitner', JSON.stringify(leitner));
@@ -187,7 +187,12 @@
     }
 
     function openLeitner() {
-        if(leitner.length) showResult(leitner[0]); else alert("Leitner is empty");
+        if(leitner.length) showResult(leitner[0]); else alert("خالی است");
+    }
+
+    function toggleTheme() {
+        const c = document.documentElement.getAttribute('data-theme');
+        document.documentElement.setAttribute('data-theme', c === "dark" ? "light" : "dark");
     }
 
     function toggleMute() {
