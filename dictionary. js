@@ -1,7 +1,7 @@
 const dictionary = [
     { 
         en: "book", fa: "کتاب", 
-        def: "A set of printed pages inside a cover.", defFa: "مجموعه‌ای از صفحات چاپ شده در یک جلد.",
+        def: "A set of printed pages inside a cover.", defFa: "مجموعه‌ای از صفحات چاپ شده.",
         ex: "I read a book every night.", exFa: "من هر شب یک کتاب می‌خوانم.",
         col: "Open a book: Please open your book.", colFa: "باز کردن کتاب: لطفاً کتابت را باز کن.",
         phr: "Book in: I need to book in at the hotel.", phrFa: "رزرو کردن: باید در هتل اتاق رزرو کنم." 
@@ -12,61 +12,5 @@ const dictionary = [
         ex: "Can I have some water, please?", exFa: "می‌توانم کمی آب داشته باشم، لطفاً؟",
         col: "Drink water: Drink plenty of water.", colFa: "آب نوشیدن: مقدار زیادی آب بنوشید.",
         phr: "Water down: Don't water down the juice.", phrFa: "رقیق کردن: آب‌میوه را با آب رقیق نکن." 
-    },
-    { 
-        en: "friend", fa: "دوست", 
-        def: "A person you know and like.", defFa: "شخصی که می‌شناسید و دوستش دارید.",
-        ex: "She is my best friend.", exFa: "او بهترین دوست من است.",
-        col: "Close friend: We are close friends.", colFa: "دوست صمیمی: ما دوستان صمیمی هستیم.",
-        phr: "Make friends: It's easy to make friends here.", phrFa: "دوست شدن: اینجا دوست پیدا کردن راحت است." 
-    },
-    { 
-        en: "happy", fa: "خوشحال", 
-        def: "Feeling or showing pleasure.", defFa: "احساس یا نشان دادن لذت و شادی.",
-        ex: "I am so happy today.", exFa: "من امروز خیلی خوشحالم.",
-        col: "Happy birthday: Happy birthday to you!", colFa: "تولدت مبارک: تولدت مبارک!",
-        phr: "Happy for: I am happy for your success.", phrFa: "خوشحال بودن برای کسی: برای موفقیتت خوشحالم." 
-    },
-    { 
-        en: "work", fa: "کار کردن", 
-        def: "To do a job to earn money.", defFa: "انجام شغلی برای کسب درآمد.",
-        ex: "I work in an office.", exFa: "من در یک اداره کار می‌کنم.",
-        col: "Hard work: Success needs hard work.", colFa: "کار سخت: موفقیت به کار سخت نیاز دارد.",
-        phr: "Work out: I work out at the gym.", phrFa: "ورزش کردن: من در باشگاه ورزش می‌کنم." 
-    },
-    { 
-        en: "time", fa: "زمان", 
-        def: "The period when things happen.", defFa: "دوره ای که اتفاقات در آن رخ می‌دهد.",
-        ex: "What time is it?", exFa: "ساعت چند است؟",
-        col: "On time: Please be here on time.", colFa: "سر وقت: لطفاً سر وقت اینجا باشید.",
-        phr: "Time's up: Stop writing, time's up!", phrFa: "وقت تمام: نوشتن را متوقف کنید، وقت تمام است!" 
-    },
-    { 
-        en: "study", fa: "درس خواندن", 
-        def: "To learn about a subject.", defFa: "یادگیری در مورد یک موضوع.",
-        ex: "I study English every day.", exFa: "من هر روز انگلیسی مطالعه می‌کنم.",
-        col: "Study hard: You should study hard for exams.", colFa: "سخت درس خواندن: باید برای امتحانات سخت درس بخوانی.",
-        phr: "Study under: He studied under a great teacher.", phrFa: "نزد کسی درس خواندن: او نزد استاد بزرگی درس خواند." 
-    },
-    { 
-        en: "food", fa: "غذا", 
-        def: "Things that people and animals eat.", defFa: "چیزهایی که انسان‌ها و حیوانات می‌خورند.",
-        ex: "I love Italian food.", exFa: "من عاشق غذای ایتالیایی هستم.",
-        col: "Fast food: Fast food is not healthy.", colFa: "غذای آماده: فست‌فود سالم نیست.",
-        phr: "Food for thought: This idea is food for thought.", phrFa: "چیزی برای فکر کردن: این ایده جای تفکر دارد." 
-    },
-    { 
-        en: "travel", fa: "سفر کردن", 
-        def: "To go from one place to another.", defFa: "رفتن از جایی به جای دیگر.",
-        ex: "I want to travel to Spain.", exFa: Spain"من می‌خواهم به اسپانیا سفر کنم.",
-        col: "Travel agency: I called the travel agency.", colFa: "آژانس مسافرتی: با آژانس مسافرتی تماس گرفتم.",
-        phr: "Travel light: I always travel light.", phrFa: "سبک سفر کردن: من همیشه سبک سفر می‌کنم (بار کم)." 
-    },
-    { 
-        en: "learn", fa: "یاد گرفتن", 
-        def: "To get new knowledge or skills.", defFa: "به دست آوردن دانش یا مهارت جدید.",
-        ex: "Children learn very fast.", exFa: "کودکان خیلی سریع یاد می‌گیرند.",
-        col: "Learn by heart: Learn this poem by heart.", colFa: "حفظ کردن: این شعر را حفظ کن.",
-        phr: "Learn about: We learn about history today.", phrFa: "یادگیری درباره چیزی: ما امروز درباره تاریخ یاد می‌گیریم." 
     }
 ];
