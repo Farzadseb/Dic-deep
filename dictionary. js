@@ -1,212 +1,72 @@
-<!DOCTYPE html>
-<html lang="fa">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FredDic Pro - Master Final</title>
-    <style>
-        :root {
-            --bg: #f0f2f5; --shadow: 10px 10px 20px #d1d9e6, -10px -10px 20px #ffffff;
-            --text: #1a1a1a; --blue: #0044cc; --red: #cc0000; --green: #008800;
-        }
-        [data-theme="dark"] {
-            --bg: #121212; --shadow: 8px 8px 16px #000, -8px -8px 16px #2a2a2a;
-            --text: #ffffff; --blue: #4d94ff; --red: #ff4d4d; --green: #33ff99;
-        }
-        body { background: var(--bg); font-family: sans-serif; margin: 0; padding: 15px; color: var(--text); direction: rtl; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-        .app { width: 100%; max-width: 480px; padding-bottom: 140px; }
-        
-        /* هدر */
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; direction: ltr; }
-        .circle-btn { width: 60px; height: 60px; border-radius: 18px; border: none; background: var(--bg); box-shadow: var(--shadow); cursor: pointer; font-size: 28px; display: flex; align-items: center; justify-content: center; color: var(--text); outline: none; }
-        h1 { font-size: 26px; color: var(--blue); margin: 0; font-weight: 900; }
-
-        /* جستجو */
-        .search-area { display: flex; gap: 10px; margin-bottom: 15px; direction: ltr; }
-        input#wordInput { flex: 1; padding: 18px; border-radius: 22px; border: none; background: var(--bg); box-shadow: inset 5px 5px 10px #d1d9e6; font-size: 28px; font-weight: bold; outline: none; color: var(--text); text-align: center; }
-
-        /* کادر اصلی معنی (ارتفاع بهینه) */
-        #resultCard, #quizArea { display: none; width: 100%; }
-        .main-card { background: var(--bg); border-radius: 30px; padding: 10px; box-shadow: var(--shadow); text-align: center; margin-bottom: 15px; min-height: 85px; display: flex; flex-direction: column; justify-content: center; }
-        #wordTitle { font-size: 45px; margin: 0; color: var(--blue); text-transform: uppercase; cursor: pointer; }
-        #txtFarsiMain { font-size: 28px; color: var(--red); font-weight: bold; display: block; }
-
-        /* کالوکیشن‌ها و فریزال‌ورب‌ها */
-        .info-card { background: var(--bg); border-radius: 25px; padding: 18px; box-shadow: var(--shadow); margin-bottom: 15px; text-align: left; direction: ltr; border-left: 10px solid var(--blue); }
-        .big-item { 
-            font-size: 32px; /* انگلیسی 1.5 برابر */
-            font-weight: 900; 
-            display: block; 
-            padding: 12px 0; 
-            border-bottom: 1px solid rgba(128,128,128,0.1); 
-            cursor: pointer; 
-            line-height: 1.1;
-        }
-        .big-item i { 
-            font-size: 48px; /* معنی 2.25 برابر */
-            color: var(--green); 
-            font-style: normal; 
-            display: block; 
-            margin-top: 5px; 
-            font-weight: 900; 
-            direction: rtl; 
-            text-align: right;
-            line-height: 1.2;
-        }
-
-        /* دکمه‌ها و نوار وضعیت */
-        .btn-group { display: flex; flex-direction: column; gap: 10px; width: 100%; }
-        .btn-lg { width: 100%; padding: 18px; border-radius: 22px; border: none; color: white; font-weight: 900; font-size: 22px; cursor: pointer; }
-        .status-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg); padding: 15px; display: flex; justify-content: space-around; font-size: 22px; font-weight: 900; box-shadow: 0 -8px 25px rgba(0,0,0,0.1); border-radius: 35px 35px 0 0; z-index: 100; }
-    </style>
-</head>
-<body>
-
-<div class="app">
-    <div class="header">
-        <button class="circle-btn" onclick="toggleTheme()">🌓</button>
-        <h1 id="userLabel">FredDic</h1>
-        <button class="circle-btn" onclick="toggleMute()" id="muteBtn">🔊</button>
-    </div>
-
-    <div class="search-area">
-        <input type="text" id="wordInput" placeholder="English / فارسی" onkeypress="if(event.key==='Enter') handleSearch()">
-        <button class="circle-btn" onclick="handleSearch()">🔍</button>
-    </div>
-
-    <div id="resultCard">
-        <div class="main-card">
-            <h2 id="wordTitle" onclick="speak(this.innerText)"></h2>
-            <span id="txtFarsiMain"></span>
-        </div>
-        <div class="info-card"><span style="font-size:16px; font-weight:900; color:var(--blue)">🔗 COLLOCATIONS</span><div id="colList"></div></div>
-        <div class="info-card" style="border-left-color: var(--red);"><span style="font-size:16px; font-weight:900; color:var(--red)">💡 PHRASAL VERBS</span><div id="phrList"></div></div>
-    </div>
-
-    <div id="quizArea" class="main-card">
-        <h3 id="qText" style="font-size: 26px;"></h3>
-        <div id="qOpts"></div>
-    </div>
-
-    <div class="btn-group">
-        <button class="btn-lg" style="background: var(--green);" onclick="openLeitner()">🗂 لایتنر <span id="countL">(0)</span></button>
-        <button class="btn-lg" style="background: #e67e22;" onclick="startQuiz()">📝 تست روزانه</button>
-        <button class="btn-lg" style="background: #6366f1;" onclick="loginUser()">👤 ورود کاربر</button>
-    </div>
-</div>
-
-<div class="status-bar">
-    <span>⭐ <span id="stars">0</span></span>
-    <span>🏆 <span id="cups">0</span></span>
-    <span>📝 <span id="tests">0</span></span>
-</div>
-
-<script>
-    const BOT_TOKEN = '8553224514:AAG0XXzA8da55jCGXnzStP-0IxHhnfkTPRw';
-    const CHAT_ID = '96991859';
-
-    // دیتابیس هوشمند
-    const pdcsDb = {
-        "get": { f: "گرفتن - رسیدن", col: ["get married - ازدواج کردن", "get ready - آماده شدن", "get a job - پیدا کردن شغل"], phr: ["get up - بیدار شدن", "get in - وارد شدن"] },
-        "take": { f: "برداشتن - بردن", col: ["take a photo - عکس گرفتن", "take a break - استراحت کردن"], phr: ["take off - بلند شدن", "take care - مراقبت کردن"] },
-        "go": { f: "رفتن", col: ["go home - رفتن به خانه", "go shopping - خرید رفتن"], phr: ["go on - ادامه دادن", "go out - بیرون رفتن"] }
-    };
-
-    let leitner = JSON.parse(localStorage.getItem('leitner')) || [];
-    let stats = JSON.parse(localStorage.getItem('stats')) || { s: 0, c: 0, t: 0 };
-    let user = localStorage.getItem('user') || "FredDic";
-    let isMuted = false;
-
-    // گزارش‌دهی هوشمند (فقط در صورت اتصال به اینترنت)
-    function sendReport() {
-        if (!navigator.onLine) return;
-        const msg = `📊 FredDic Status\n👤 User: ${user}\n⭐ Score: ${stats.s}\n🏆 Cups: ${stats.c}\n📝 Tests: ${stats.t}`;
-        fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(msg)}`).catch(()=>{});
+const dictionary = [
+    { 
+        en: "book", fa: "کتاب", 
+        def: "A set of printed pages inside a cover.", defFa: "مجموعه‌ای از صفحات چاپ شده در یک جلد.",
+        ex: "I read a book every night.", exFa: "من هر شب یک کتاب می‌خوانم.",
+        col: "Open a book: Please open your book.", colFa: "باز کردن کتاب: لطفاً کتابت را باز کن.",
+        phr: "Book in: I need to book in at the hotel.", phrFa: "رزرو کردن: باید در هتل اتاق رزرو کنم." 
+    },
+    { 
+        en: "water", fa: "آب", 
+        def: "A clear liquid that we drink.", defFa: "مایع شفافی که می‌نوشیم.",
+        ex: "Can I have some water, please?", exFa: "می‌توانم کمی آب داشته باشم، لطفاً؟",
+        col: "Drink water: Drink plenty of water.", colFa: "آب نوشیدن: مقدار زیادی آب بنوشید.",
+        phr: "Water down: Don't water down the juice.", phrFa: "رقیق کردن: آب‌میوه را با آب رقیق نکن." 
+    },
+    { 
+        en: "friend", fa: "دوست", 
+        def: "A person you know and like.", defFa: "شخصی که می‌شناسید و دوستش دارید.",
+        ex: "She is my best friend.", exFa: "او بهترین دوست من است.",
+        col: "Close friend: We are close friends.", colFa: "دوست صمیمی: ما دوستان صمیمی هستیم.",
+        phr: "Make friends: It's easy to make friends here.", phrFa: "دوست شدن: اینجا دوست پیدا کردن راحت است." 
+    },
+    { 
+        en: "happy", fa: "خوشحال", 
+        def: "Feeling or showing pleasure.", defFa: "احساس یا نشان دادن لذت و شادی.",
+        ex: "I am so happy today.", exFa: "من امروز خیلی خوشحالم.",
+        col: "Happy birthday: Happy birthday to you!", colFa: "تولدت مبارک: تولدت مبارک!",
+        phr: "Happy for: I am happy for your success.", phrFa: "خوشحال بودن برای کسی: برای موفقیتت خوشحالم." 
+    },
+    { 
+        en: "work", fa: "کار کردن", 
+        def: "To do a job to earn money.", defFa: "انجام شغلی برای کسب درآمد.",
+        ex: "I work in an office.", exFa: "من در یک اداره کار می‌کنم.",
+        col: "Hard work: Success needs hard work.", colFa: "کار سخت: موفقیت به کار سخت نیاز دارد.",
+        phr: "Work out: I work out at the gym.", phrFa: "ورزش کردن: من در باشگاه ورزش می‌کنم." 
+    },
+    { 
+        en: "time", fa: "زمان", 
+        def: "The period when things happen.", defFa: "دوره ای که اتفاقات در آن رخ می‌دهد.",
+        ex: "What time is it?", exFa: "ساعت چند است؟",
+        col: "On time: Please be here on time.", colFa: "سر وقت: لطفاً سر وقت اینجا باشید.",
+        phr: "Time's up: Stop writing, time's up!", phrFa: "وقت تمام: نوشتن را متوقف کنید، وقت تمام است!" 
+    },
+    { 
+        en: "study", fa: "درس خواندن", 
+        def: "To learn about a subject.", defFa: "یادگیری در مورد یک موضوع.",
+        ex: "I study English every day.", exFa: "من هر روز انگلیسی مطالعه می‌کنم.",
+        col: "Study hard: You should study hard for exams.", colFa: "سخت درس خواندن: باید برای امتحانات سخت درس بخوانی.",
+        phr: "Study under: He studied under a great teacher.", phrFa: "نزد کسی درس خواندن: او نزد استاد بزرگی درس خواند." 
+    },
+    { 
+        en: "food", fa: "غذا", 
+        def: "Things that people and animals eat.", defFa: "چیزهایی که انسان‌ها و حیوانات می‌خورند.",
+        ex: "I love Italian food.", exFa: "من عاشق غذای ایتالیایی هستم.",
+        col: "Fast food: Fast food is not healthy.", colFa: "غذای آماده: فست‌فود سالم نیست.",
+        phr: "Food for thought: This idea is food for thought.", phrFa: "چیزی برای فکر کردن: این ایده جای تفکر دارد." 
+    },
+    { 
+        en: "travel", fa: "سفر کردن", 
+        def: "To go from one place to another.", defFa: "رفتن از جایی به جای دیگر.",
+        ex: "I want to travel to Spain.", exFa: Spain"من می‌خواهم به اسپانیا سفر کنم.",
+        col: "Travel agency: I called the travel agency.", colFa: "آژانس مسافرتی: با آژانس مسافرتی تماس گرفتم.",
+        phr: "Travel light: I always travel light.", phrFa: "سبک سفر کردن: من همیشه سبک سفر می‌کنم (بار کم)." 
+    },
+    { 
+        en: "learn", fa: "یاد گرفتن", 
+        def: "To get new knowledge or skills.", defFa: "به دست آوردن دانش یا مهارت جدید.",
+        ex: "Children learn very fast.", exFa: "کودکان خیلی سریع یاد می‌گیرند.",
+        col: "Learn by heart: Learn this poem by heart.", colFa: "حفظ کردن: این شعر را حفظ کن.",
+        phr: "Learn about: We learn about history today.", phrFa: "یادگیری درباره چیزی: ما امروز درباره تاریخ یاد می‌گیریم." 
     }
-
-    function updateUI() {
-        document.getElementById('countL').innerText = "(" + (leitner.length || 0) + ")";
-        document.getElementById('stars').innerText = stats.s || 0;
-        document.getElementById('cups').innerText = stats.c || 0;
-        document.getElementById('tests').innerText = stats.t || 0;
-        document.getElementById('userLabel').innerText = user;
-    }
-
-    // صوت آفلاین
-    function speak(t) {
-        if(isMuted) return;
-        const englishPart = t.split(' - ')[0].trim();
-        window.speechSynthesis.cancel();
-        const m = new SpeechSynthesisUtterance(englishPart);
-        m.lang = 'en-US'; m.rate = 0.8;
-        window.speechSynthesis.speak(m);
-    }
-
-    function handleSearch() {
-        const val = document.getElementById('wordInput').value.toLowerCase().trim();
-        if(!val) return;
-        let found = Object.keys(pdcsDb).find(k => k === val || pdcsDb[k].f.includes(val) || pdcsDb[k].phr.some(p => p.includes(val)) || pdcsDb[k].col.some(c => c.includes(val)));
-        if(found) showResult(found); else alert("empty");
-    }
-
-    function showResult(word) {
-        const data = pdcsDb[word];
-        document.getElementById('quizArea').style.display = 'none';
-        document.getElementById('resultCard').style.display = 'block';
-        document.getElementById('wordTitle').innerText = word;
-        document.getElementById('txtFarsiMain').innerText = data.f;
-        const mapper = item => {
-            const [en, fa] = item.split(' - ');
-            return `<div class="big-item" onclick="speak('${en}')">🔹 ${en} <i>${fa}</i></div>`;
-        };
-        document.getElementById('colList').innerHTML = data.col.map(mapper).join('');
-        document.getElementById('phrList').innerHTML = data.phr.map(mapper).join('');
-        speak(word);
-    }
-
-    function openLeitner() {
-        if(leitner.length > 0) showResult(leitner[0]); else alert("empty");
-    }
-
-    function loginUser() {
-        const n = prompt("نام شما:");
-        if(n) { user = n; localStorage.setItem('user', n); updateUI(); sendReport(); }
-    }
-
-    function startQuiz() {
-        document.getElementById('resultCard').style.display = 'none';
-        document.getElementById('quizArea').style.display = 'block';
-        const words = Object.keys(pdcsDb);
-        const qWord = words[Math.floor(Math.random() * words.length)];
-        document.getElementById('qText').innerText = "معنی " + qWord.toUpperCase() + "؟";
-        const options = [pdcsDb[qWord].f, "خوابیدن", "نوشتن", "دویدن"].sort(() => Math.random() - 0.5);
-        const optDiv = document.getElementById('qOpts');
-        optDiv.innerHTML = '';
-        options.forEach(o => {
-            const b = document.createElement('button');
-            b.style.cssText = "width:100%; padding:15px; margin-bottom:10px; border-radius:15px; border:none; background:var(--bg); box-shadow:var(--shadow); font-size:24px; font-weight:bold; color:var(--text); cursor:pointer;";
-            b.innerText = o;
-            b.onclick = () => {
-                if(o === pdcsDb[qWord].f) { stats.s += 10; stats.t += 1; }
-                else { if(!leitner.includes(qWord)) { leitner.push(qWord); localStorage.setItem('leitner', JSON.stringify(leitner)); } }
-                localStorage.setItem('stats', JSON.stringify(stats));
-                updateUI(); sendReport(); startQuiz();
-            };
-            optDiv.appendChild(b);
-        });
-    }
-
-    function toggleTheme() {
-        const c = document.documentElement.getAttribute('data-theme');
-        document.documentElement.setAttribute('data-theme', c === "dark" ? "light" : "dark");
-    }
-
-    function toggleMute() {
-        isMuted = !isMuted;
-        document.getElementById('muteBtn').innerText = isMuted ? "🔇" : "🔊";
-    }
-
-    updateUI();
-</script>
-</body>
-</html>
+];
