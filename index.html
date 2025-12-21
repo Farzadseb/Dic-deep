@@ -3,160 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <title>Fred Elite Compact</title>
+    <meta name="theme-color" content="#1e40af">
+    <link rel="manifest" href="manifest.json">
+    
+    <title>Fred Elite V3</title>
     <style>
         :root { 
-            --bg: #1a1a1a; --text: #eeeeee; --accent: #00d2ff;
-            --shadow: 4px 4px 8px #0a0a0a, -4px -4px 8px #2a2a2a;
-            --inner: inset 3px 3px 6px #0a0a0a, inset -3px -3px 6px #2a2a2a;
+            --bg: #e0e5ec; --text: #1a237e; --accent: #1e40af;
+            --shadow: 8px 8px 16px #a3b1c6, -8px -8px 16px #ffffff;
+            --inner: inset 6px 6px 12px #b8bec5, inset -6px -6px 12px #ffffff;
         }
-        html, body {
-            background-color: var(--bg) !important; color: var(--text) !important;
-            font-family: 'Segoe UI', Tahoma, sans-serif !important;
-            font-size: 14px !important; margin: 0; padding: 5px; height: 100%;
+        /* تم تاریک */
+        body.dark-mode { 
+            --bg: #2d3436; --text: #dfe6e9; --accent: #81ecec;
+            --shadow: 8px 8px 16px #202425, -8px -8px 16px #3a4447;
+            --inner: inset 6px 6px 12px #1b1f20, inset -6px -6px 12px #3f494d;
         }
-        .header-bar { display: flex; justify-content: space-between; padding: 5px 10px; align-items: center; }
-        .neu-btn {
-            background: #222; border: none; padding: 8px 12px; border-radius: 10px;
-            color: var(--accent); font-weight: bold; font-size: 11px; box-shadow: var(--shadow); cursor: pointer;
+
+        body { 
+            background-color: var(--bg); color: var(--text); 
+            font-family: Tahoma, sans-serif; margin: 0; padding: 10px;
+            font-size: 24px !important; /* فونت ۲ برابر */
+            transition: 0.3s; line-height: 1.6;
         }
-        .btn-exit { color: #ff4d4d !important; }
-        .card {
-            background: #1a1a1a; padding: 12px; border-radius: 15px;
-            box-shadow: var(--shadow); text-align: center; margin-top: 8px;
+
+        .neu-card { 
+            background: var(--bg); border-radius: 25px; box-shadow: var(--shadow); 
+            padding: 20px; margin-bottom: 15px; text-align: center; 
         }
-        /* استایل فیلد جستجو مشابه تصویر سوم */
-        .search-box {
-            width: 100%; border: none; background: #222; box-shadow: var(--inner);
-            padding: 10px; border-radius: 20px; color: white; outline: none;
-            text-align: center; margin-bottom: 10px; font-size: 13px;
+
+        .neu-btn { 
+            border: none; background: var(--bg); box-shadow: var(--shadow); 
+            padding: 15px; border-radius: 15px; cursor: pointer; 
+            color: var(--accent); font-weight: bold; font-size: 1em; 
         }
-        .word-display { 
-            text-align: left; direction: ltr; padding: 10px; 
-            border-radius: 12px; background: #222; box-shadow: var(--inner); margin-bottom: 5px;
+        .neu-btn:active { box-shadow: var(--inner); transform: scale(0.98); }
+        .btn-exit { color: #ff7675 !important; }
+
+        .search-input { 
+            width: 100%; border: none; background: var(--bg); box-shadow: var(--inner); 
+            padding: 15px; border-radius: 50px; outline: none; text-align: center; color: var(--text);
+            font-size: 0.8em;
         }
-        .en-title { font-size: 18px; color: var(--accent); font-weight: bold; }
-        .fa-title { float: right; direction: rtl; color: #ff4d4d; font-size: 14px; }
-        .example { font-size: 12px; color: #bbb; margin-top: 5px; }
+
+        .footer-bar { 
+            display: flex; justify-content: space-around; align-items: center; 
+            padding: 15px; margin-top: 20px;
+        }
+
         .hidden { display: none !important; }
-        .grid-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+        .en-text { direction: ltr; font-size: 1.2em; font-weight: bold; margin: 15px 0; }
+        .grid-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
     </style>
 </head>
 <body>
 
-<div class="header-bar">
-    <button id="muteBtn" class="neu-btn" onclick="app.toggleMute()">🔊 Mute</button>
-    <div style="font-size: 10px; opacity: 0.7;">Fred Elite v2</div>
-    <button class="neu-btn btn-exit" onclick="app.exit()">✖ خروج</button>
-</div>
+    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+        <button class="neu-btn" style="width: 60px;" onclick="app.toggleTheme()">🌓</button>
+        <button id="muteBtn" class="neu-btn" style="width: 60px;" onclick="app.toggleMute()">🔊</button>
+        <button class="neu-btn btn-exit" onclick="app.exit()">✖ خروج</button>
+    </div>
 
-<div id="home">
-    <div class="card">
-        <input type="text" id="searchInput" class="search-box" placeholder="🔍 جستجوی لغت (Go...)" oninput="app.search()">
-        
-        <div id="searchResult" class="hidden"></div>
+    <div id="home">
+        <div class="neu-card">
+            <input type="text" id="wordSearch" class="search-input" placeholder="🔍 جستجو لغات..." oninput="app.search()">
+            <div id="searchResult" style="margin-top: 15px; font-size: 0.8em;"></div>
+        </div>
 
         <div class="grid-btns">
-            <button class="neu-btn" style="background: #1565c0; color: white;" onclick="app.startQuiz()">📝 تمرین</button>
-            <button class="neu-btn" style="background: #2e7d32; color: white;">📂 لایتنر</button>
-            <button class="neu-btn" style="background: #6a1b9a; color: white;">💎 VIP</button>
-            <button class="neu-btn" style="background: #ef6c00; color: white;">🎮 مسابقه</button>
+            <button class="neu-btn" style="background:#3498db; color:white;" onclick="app.startQuiz()">📝 تمرین</button>
+            <button class="neu-btn" style="background:#2ecc71; color:white;">📂 لایتنر</button>
         </div>
     </div>
-</div>
 
-<div id="quiz" class="hidden">
-    <div class="card">
-        <div id="qText" style="font-size: 18px; direction: ltr; margin: 15px 0;"></div>
-        <div id="qOptions" style="display: grid; gap: 8px;"></div>
-        <div id="feedback" style="margin-top: 10px; font-size: 12px; font-weight: bold;"></div>
+    <div id="quiz" class="hidden">
+        <div class="neu-card">
+            <div id="qText" class="en-text"></div>
+            <div id="qOptions" style="display: grid; gap: 12px;"></div>
+        </div>
     </div>
-</div>
 
-<script>
-    // حذف خودکار کش
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.getRegistrations().then(rs => { for(let r of rs) r.unregister(); });
-    }
+    <div class="footer-bar">
+        <div>⭐ <span id="starCount">0</span></div>
+        <div style="font-size: 1.5em;">🏆</div>
+        <div>Score: <span id="scoreVal">0</span></div>
+    </div>
 
-    // لود دیکشنری با کد ضد کش
-    const s = document.createElement('script');
-    s.src = 'dictionary.js?v=' + Date.now();
-    document.head.appendChild(s);
+    <script src="dictionary.js"></script>
+    <script>
+        const app = {
+            score: 0,
+            isMuted: false,
 
-    const app = {
-        isMuted: false, currentWord: null,
+            toggleTheme() { document.body.classList.toggle('dark-mode'); },
+            toggleMute() {
+                this.isMuted = !this.isMuted;
+                document.getElementById('muteBtn').innerText = this.isMuted ? "🔇" : "🔊";
+            },
+            exit() { if(confirm("آیا خارج می‌شوید؟")) location.reload(); },
 
-        toggleMute() {
-            this.isMuted = !this.isMuted;
-            document.getElementById('muteBtn').innerText = this.isMuted ? "🔇 Unmute" : "🔊 Mute";
-        },
+            search() {
+                const term = document.getElementById('wordSearch').value.toLowerCase();
+                const res = document.getElementById('searchResult');
+                if(!term) { res.innerHTML = ""; return; }
+                const found = dictionary.find(w => w.en.toLowerCase().includes(term));
+                if(found) {
+                    res.innerHTML = `<div class="neu-card" style="box-shadow:var(--inner); text-align:left; direction:ltr;">
+                        <b style="color:var(--accent)">${found.en}</b>: ${found.fa}<br>
+                        <small>${found.ex}</small>
+                    </div>`;
+                    if(!this.isMuted) this.speak(found.en);
+                }
+            },
 
-        exit() { if(confirm("بازگشت؟")) location.reload(); },
+            speak(t) {
+                if(!this.isMuted && 'speechSynthesis' in window) {
+                    window.speechSynthesis.cancel();
+                    const u = new SpeechSynthesisUtterance(t);
+                    u.lang = 'en-US'; u.rate = 0.8;
+                    window.speechSynthesis.speak(u);
+                }
+            },
 
-        search() {
-            const term = document.getElementById('searchInput').value.toLowerCase();
-            const resDiv = document.getElementById('searchResult');
-            if(!term) { resDiv.classList.add('hidden'); return; }
-            
-            const found = dictionary.find(w => w.en.toLowerCase() === term || w.fa.includes(term));
-            if(found) {
-                resDiv.classList.remove('hidden');
-                resDiv.innerHTML = `
-                    <div class="word-display">
-                        <span class="fa-title">${found.fa}</span>
-                        <div class="en-title">${found.en.toUpperCase()}</div>
-                        <div class="example"><b>Def:</b> ${found.def || '...'}</div>
-                        <div class="example" style="color:#00ff88"><b>Ex:</b> ${found.ex}</div>
-                    </div>
-                `;
-                if(!this.isMuted) this.speak(found.en);
-            } else { resDiv.classList.add('hidden'); }
-        },
+            startQuiz() {
+                document.getElementById('home').classList.add('hidden');
+                document.getElementById('quiz').classList.remove('hidden');
+                this.next();
+            },
 
-        speak(t) {
-            if(!this.isMuted && 'speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const u = new SpeechSynthesisUtterance(t);
-                u.lang = 'en-US'; u.rate = 0.8;
-                window.speechSynthesis.speak(u);
+            next() {
+                const w = dictionary[Math.floor(Math.random() * dictionary.length)];
+                this.current = w;
+                this.speak(w.en);
+                document.getElementById('qText').innerText = w.ex.replace(new RegExp(w.en, 'gi'), "____");
+                
+                const opts = [w.en, dictionary[0].en, dictionary[1].en].sort(() => 0.5 - Math.random());
+                const cont = document.getElementById('qOptions');
+                cont.innerHTML = "";
+                opts.forEach(o => {
+                    const b = document.createElement('button');
+                    b.className = 'neu-btn';
+                    b.innerText = o;
+                    b.onclick = () => this.check(o);
+                    cont.appendChild(b);
+                });
+            },
+
+            check(ans) {
+                if(ans === this.current.en) {
+                    this.score += 10;
+                    document.getElementById('scoreVal').innerText = this.score;
+                    document.getElementById('starCount').innerText = Math.floor(this.score / 30);
+                } else {
+                    this.speak(this.current.en);
+                }
+                this.next();
             }
-        },
+        };
 
-        startQuiz() {
-            document.getElementById('home').classList.add('hidden');
-            document.getElementById('quiz').classList.remove('hidden');
-            this.nextQ();
-        },
-
-        nextQ() {
-            const w = dictionary[Math.floor(Math.random() * dictionary.length)];
-            this.currentWord = w;
-            this.speak(w.en);
-            document.getElementById('qText').innerText = w.ex.replace(new RegExp(w.en, 'gi'), "___");
-            let opts = [w, ...dictionary.filter(d=>d.en!==w.en).slice(0,2)].sort(()=>0.5-Math.random());
-            const cont = document.getElementById('qOptions');
-            cont.innerHTML = "";
-            opts.forEach(o => {
-                const b = document.createElement('button');
-                b.className = 'neu-btn';
-                b.style.width = "100%";
-                b.innerText = o.en;
-                b.onclick = () => this.check(o.en);
-                cont.appendChild(b);
-            });
-        },
-
-        check(ans) {
-            const f = document.getElementById('feedback');
-            const isC = ans === this.currentWord.en;
-            f.innerText = isC ? "✅ Excellent!" : "❌ " + this.currentWord.en;
-            f.style.color = isC ? "#00ff88" : "#ff4d4d";
-            if(!isC) this.speak(this.currentWord.en);
-            setTimeout(() => { f.innerText = ""; this.nextQ(); }, 1200);
+        // فعال‌سازی حالت نصب PWA
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js');
         }
-    };
-</script>
+    </script>
 </body>
 </html>
