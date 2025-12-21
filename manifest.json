@@ -1,15 +1,9 @@
 {
-  "name": "Fred Practice Elite",
-  "short_name": "Fred Elite",
+  "name": "Fred Elite",
+  "short_name": "FredElite",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#e0e5ec",
   "theme_color": "#1e40af",
-  "icons": [
-    {
-      "src": "https://cdn-icons-png.flaticon.com/512/1041/1041916.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
+  "icons": [{ "src": "https://cdn-icons-png.flaticon.com/512/5832/5832416.png", "sizes": "512x512", "type": "image/png" }]
 }
