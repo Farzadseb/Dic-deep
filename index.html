@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Fred Elite V3.1</title>
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <title>Fred Elite V3.2</title>
     <style>
         :root { 
             --bg: #e0e5ec; --text: #333; --accent: #1e40af;
@@ -30,18 +29,18 @@
         .fa-title { font-size: 26px; color: #d63031; font-weight: bold; text-align: right; }
         
         .label { font-size: 14px; color: #888; text-align: left; margin-top: 10px; border-bottom: 1px solid #ccc; direction: ltr; }
-        .content-box { background: var(--bg); box-shadow: var(--inner); padding: 10px; border-radius: 15px; margin: 5px 0; text-align: left; direction: ltr; font-size: 18px; min-height: 20px; }
+        .content-box { background: var(--bg); box-shadow: var(--inner); padding: 10px; border-radius: 15px; margin: 5px 0; text-align: left; direction: ltr; font-size: 18px; min-height: 20px; font-weight: bold; }
         .fa-sub { direction: rtl; text-align: right; font-size: 16px; color: #d63031; margin-bottom: 10px; margin-top: -5px; font-weight: bold; }
 
         .bottom-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-        .nav-item { padding: 12px; border-radius: 15px; font-size: 16px; color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+        .nav-item { padding: 12px; border-radius: 15px; font-size: 16px; color: white; }
         .exit-btn { grid-column: span 2; background: #e74c3c; padding: 12px; border-radius: 15px; color: white; font-size: 18px; margin-top: 5px; }
         
         .footer-status { display: flex; justify-content: space-around; align-items: center; margin-top: 15px; padding: 10px; border-top: 1px solid #ccc; font-size: 18px; }
         .hidden { display: none !important; }
     </style>
 </head>
-<body>
+<body onclick="app.initAudio()">
 
     <div class="header">
         <button id="speakerBtn" class="neu-btn" style="width:50px; height:50px; border-radius:50%;" onclick="app.toggleMute()">🔊</button>
@@ -59,7 +58,7 @@
             </div>
 
             <div class="label">Definition:</div>
-            <div id="defBox" class="content-box"></div>
+            <div id="defBox" class="content-box">---</div>
 
             <div class="label">Example:</div>
             <div id="exBox" class="content-box"></div>
@@ -67,11 +66,9 @@
 
             <div class="label">Collocations:</div>
             <div id="collBox" class="content-box"></div>
-            <div id="collFa" class="fa-sub"></div>
 
             <div class="label">Phrasal Verbs:</div>
             <div id="phrasalBox" class="content-box"></div>
-            <div id="phrasalFa" class="fa-sub"></div>
         </div>
 
         <div class="bottom-nav">
@@ -98,29 +95,29 @@
     </div>
 
     <script>
-        // لود کردن دیکشنری با روش ضد کَش
-        const script = document.createElement('script');
-        script.src = "dictionary.js?v=" + new Date().getTime();
-        document.head.appendChild(script);
+        // لود دیکشنری با روش جدید برای جلوگیری از کش
+        const s = document.createElement('script');
+        s.src = "dictionary.js?v=" + Date.now();
+        document.head.appendChild(s);
 
         const app = {
             isMuted: false,
             currentWord: null,
+            audioInit: false,
 
+            initAudio() { if(!this.audioInit) { window.speechSynthesis.getVoices(); this.audioInit = true; } },
             toggleTheme() { document.body.classList.toggle('dark-mode'); },
-            
             toggleMute() {
                 this.isMuted = !this.isMuted;
                 document.getElementById('speakerBtn').innerText = this.isMuted ? "🔇" : "🔊";
             },
-
-            exit() { if(confirm("آیا خارج می‌شوید؟")) window.close(); },
-            showMsg(name) { alert(name + " به‌زودی فعال می‌شود."); },
+            exit() { if(confirm("آیا خارج می‌شوید؟")) window.location.reload(); },
+            showMsg(m) { alert(m + " به‌زودی فعال می‌شود."); },
 
             search() {
                 const term = document.getElementById('searchInput').value.trim().toLowerCase();
                 const card = document.getElementById('wordCard');
-                if(!term) { card.classList.add('hidden'); return; }
+                if(!term || typeof dictionary === 'undefined') { card.classList.add('hidden'); return; }
 
                 const f = dictionary.find(w => w.en.toLowerCase() === term);
                 if(f) {
@@ -130,11 +127,8 @@
                     document.getElementById('faMain').innerText = f.fa;
                     document.getElementById('defBox').innerText = f.def || "---";
                     document.getElementById('exBox').innerText = f.ex || "---";
-                    document.getElementById('exFa').innerText = f.exFa || "";
-                    document.getElementById('collBox').innerText = f.coll || "---";
-                    document.getElementById('collFa').innerText = f.collFa || "";
-                    document.getElementById('phrasalBox').innerText = f.phrasal || "---";
-                    document.getElementById('phrasalFa').innerText = f.phrasalFa || "";
+                    document.getElementById('collBox').innerText = f.col || "---"; // هماهنگ با col در فایل شما
+                    document.getElementById('phrasalBox').innerText = f.phr || "---"; // هماهنگ با phr در فایل شما
                     this.speak();
                 }
             },
@@ -153,16 +147,14 @@
                 document.getElementById('quizView').classList.remove('hidden');
                 this.nextQuestion();
             },
-
             stopQuiz() {
                 document.getElementById('quizView').classList.add('hidden');
                 document.getElementById('mainView').classList.remove('hidden');
             },
-
             nextQuestion() {
                 const w = dictionary[Math.floor(Math.random() * dictionary.length)];
-                document.getElementById('qQuestion').innerText = "معنی کدام است؟: " + w.en;
-                const opts = [w.fa, "خطا 1", "خطا 2"].sort(() => Math.random() - 0.5);
+                document.getElementById('qQuestion').innerText = "معنی صحیح: " + w.en;
+                const opts = [w.fa, "رفتن", "داشتن", "کار کردن"].filter((v,i,a) => a.indexOf(v) === i).slice(0,3).sort(() => 0.5 - Math.random());
                 const cont = document.getElementById('qOptions');
                 cont.innerHTML = "";
                 opts.forEach(o => {
@@ -171,8 +163,8 @@
                     b.style.padding = "15px";
                     b.innerText = o;
                     b.onclick = () => {
-                        if(o === w.fa) { alert("آفرین! ✅"); this.nextQuestion(); }
-                        else alert("دوباره سعی کن ❌");
+                        if(o === w.fa) { alert("✅ درست بود!"); this.nextQuestion(); }
+                        else alert("❌ اشتباه بود!");
                     };
                     cont.appendChild(b);
                 });
