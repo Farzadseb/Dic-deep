@@ -3,213 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Fred Practice Elite</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <title>Fred Elite Compact</title>
     <style>
-        /* تنظیمات اصلی تم شب (خاکستری تیره) طبق درخواست شما */
         :root { 
-            --bg: #2d3436; /* خاکستری تیره */
-            --text: #dfe6e9; /* متن روشن */
-            --accent: #81ecec; /* رنگ دکمه‌ها */
-            --shadow: 10px 10px 20px #1e2223, -10px -10px 20px #3c4649;
-            --inner: inset 6px 6px 12px #1e2223, inset -6px -6px 12px #3c4649;
+            --bg: #1a1a1a;
+            --text: #eeeeee;
+            --accent: #00d2ff;
+            --shadow: 4px 4px 8px #0a0a0a, -4px -4px 8px #2a2a2a;
         }
 
-        body { 
-            background-color: var(--bg) !important; 
-            color: var(--text) !important; 
-            font-family: 'Segoe UI', Tahoma, sans-serif; 
-            margin: 0; padding: 15px; 
-            /* فونت بسیار درشت طبق درخواست شما */
-            font-size: 30px !important; 
-            line-height: 1.6;
-            overflow-x: hidden;
+        html, body {
+            background-color: var(--bg) !important;
+            color: var(--text) !important;
+            font-family: 'Segoe UI', Tahoma, sans-serif !important;
+            font-size: 14px !important; 
+            margin: 0; padding: 5px;
+            height: 100%;
         }
 
-        .neu-card { 
-            background: var(--bg); 
-            border-radius: 30px; 
-            box-shadow: var(--shadow); 
-            padding: 30px; 
-            margin-bottom: 25px; 
-            text-align: center; 
+        .header-bar { display: flex; justify-content: space-between; padding: 5px 10px; }
+
+        .neu-btn {
+            background: #222222; border: none; padding: 8px 12px; 
+            border-radius: 8px; color: var(--accent); font-weight: bold;
+            font-size: 12px; box-shadow: var(--shadow); cursor: pointer;
         }
 
-        .neu-btn { 
-            border: none; 
-            background: var(--bg); 
-            box-shadow: var(--shadow); 
-            padding: 20px; 
-            border-radius: 20px; 
-            cursor: pointer; 
-            color: var(--accent); 
-            font-weight: bold; 
-            font-size: 1.1em; 
-            transition: 0.2s; 
-            width: 100%;
-            margin: 10px 0;
+        .btn-exit { color: #ff4d4d !important; }
+
+        .card {
+            background: #1a1a1a; padding: 15px; border-radius: 15px;
+            box-shadow: var(--shadow); text-align: center; margin-top: 10px;
         }
 
-        .neu-btn:active { box-shadow: var(--inner); transform: scale(0.95); }
+        .en-text { font-size: 18px; color: #ffffff; margin: 15px 0; display: block; direction: ltr; }
 
-        /* دکمه خروج قرمز رنگ */
-        .btn-exit { 
-            color: #ff7675 !important; 
-            font-size: 0.8em;
-            box-shadow: 5px 5px 10px #1e2223, -5px -5px 10px #3c4649;
-        }
-
-        .en-text { 
-            direction: ltr; 
-            font-size: 1.5em; 
-            color: #fff;
-            margin: 30px 0;
-            display: block;
-            font-weight: bold;
-        }
+        .option-btn { width: 100%; margin: 5px 0; padding: 10px; }
 
         .hidden { display: none !important; }
-        
-        #header-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .small-btn {
-            width: 80px !important;
-            padding: 10px !important;
-            font-size: 0.7em !important;
-        }
+        h1 { font-size: 20px; margin: 5px 0; }
     </style>
 </head>
 <body>
 
-    <div id="header-bar">
-        <button id="muteBtn" class="neu-btn small-btn" onclick="app.toggleMute()">🔊 Mute</button>
-        <button class="neu-btn small-btn btn-exit" onclick="app.exitApp()">✖ خروج</button>
+<div class="header-bar">
+    <button id="muteBtn" class="neu-btn" onclick="app.toggleMute()">🔊 Mute</button>
+    <button class="neu-btn btn-exit" onclick="app.exit()">✖ خروج</button>
+</div>
+
+<div id="home">
+    <div class="card">
+        <h1 style="color: #00d2ff;">Fred Elite</h1>
+        <p style="font-size: 10px; color: #888;">Compact Mode (Auto-Refresh)</p>
+        <button class="neu-btn" style="width: 100%;" onclick="app.start()">🚀 شروع</button>
     </div>
+</div>
 
-    <div id="mainApp">
-        <div id="homeMenu">
-            <div class="neu-card">
-                <h1 style="color: var(--accent);">Fred Elite</h1>
-                <p style="font-size: 0.8em;">یادگیری با فونت درشت و تم شب</p>
-                <button class="neu-btn" onclick="app.startQuiz()">📝 شروع تمرین</button>
-            </div>
-        </div>
-
-        <div id="quizArea" class="hidden">
-            <div class="neu-card">
-                <div id="qText" class="en-text"></div>
-                <div id="qOptions"></div>
-                <div id="qFeedback" class="hidden" style="margin-top:20px; font-size: 0.9em;"></div>
-            </div>
-        </div>
+<div id="quiz" class="hidden">
+    <div class="card">
+        <div id="qText" class="en-text"></div>
+        <div id="qOptions"></div>
+        <div id="feedback" style="margin-top: 10px; font-size: 12px;"></div>
     </div>
+</div>
 
-    <script src="dictionary.js"></script>
-    <script>
-        const PROXY_URL = "https://script.google.com/macros/s/AKfycbwpS34Rfd59aIpCger7MC2ggs0WyaIxlcfHQ_AjkDevV22HtbkuP-jKcKysNIj0LWwb/exec";
-
-        class FredApp {
-            constructor() {
-                this.qIndex = 0;
-                this.mistakes = [];
-                this.isMuted = false;
-                this.currentQ = null;
+<script>
+    // لایه دوم: پاک کردن کش Service Worker ها به محض باز شدن صفحه
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            for(let registration of registrations) {
+                registration.unregister();
             }
+        });
+    }
 
-            toggleMute() {
-                this.isMuted = !this.isMuted;
-                document.getElementById('muteBtn').innerText = this.isMuted ? "🔇 Unmute" : "🔊 Mute";
-                document.getElementById('muteBtn').style.color = this.isMuted ? "#b2bec3" : "#81ecec";
+    // لایه سوم: لود کردن دیکشنری با کد تصادفی برای دور زدن کش
+    const script = document.createElement('script');
+    script.src = 'dictionary.js?v=' + Date.now();
+    document.head.appendChild(script);
+
+    const app = {
+        isMuted: false,
+        currentWord: null,
+
+        toggleMute() {
+            this.isMuted = !this.isMuted;
+            document.getElementById('muteBtn').innerText = this.isMuted ? "🔇" : "🔊";
+        },
+
+        exit() { if(confirm("خروج؟")) location.reload(); },
+
+        speak(text) {
+            if (!this.isMuted && 'speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const u = new SpeechSynthesisUtterance(text);
+                u.lang = 'en-US'; u.rate = 0.8;
+                window.speechSynthesis.speak(u);
             }
+        },
 
-            speak(text) {
-                if (!this.isMuted && 'speechSynthesis' in window) {
-                    window.speechSynthesis.cancel();
-                    const u = new SpeechSynthesisUtterance(text);
-                    u.lang = 'en-US';
-                    u.rate = 0.75; // کمی آرام‌تر برای یادگیری بهتر
-                    window.speechSynthesis.speak(u);
-                }
+        start() {
+            document.getElementById('home').classList.add('hidden');
+            document.getElementById('quiz').classList.remove('hidden');
+            this.next();
+        },
+
+        next() {
+            if (typeof dictionary === 'undefined') return alert("خطا در بارگذاری لغات!");
+            const word = dictionary[Math.floor(Math.random() * dictionary.length)];
+            this.currentWord = word;
+            this.speak(word.en);
+            document.getElementById('qText').innerText = word.ex.replace(new RegExp(word.en, 'gi'), "___");
+            let wrongs = dictionary.filter(d => d.en !== word.en).sort(() => 0.5 - Math.random()).slice(0, 2);
+            let opts = [word, ...wrongs].sort(() => 0.5 - Math.random());
+            const container = document.getElementById('qOptions');
+            container.innerHTML = "";
+            opts.forEach(o => {
+                const btn = document.createElement('button');
+                btn.className = 'neu-btn option-btn';
+                btn.innerText = o.en;
+                btn.onclick = () => this.check(o.en);
+                container.appendChild(btn);
+            });
+        },
+
+        check(ans) {
+            const f = document.getElementById('feedback');
+            if(ans === this.currentWord.en) {
+                f.innerText = "✅ Excellent!"; f.style.color = "#00ff88";
+            } else {
+                f.innerText = "❌ No"; f.style.color = "#ff4d4d";
+                this.speak(this.currentWord.en);
             }
-
-            exitApp() {
-                if (confirm("آیا می‌خواهید به منوی اصلی برگردید؟")) {
-                    location.reload();
-                }
-            }
-
-            startQuiz() {
-                document.getElementById('homeMenu').classList.add('hidden');
-                document.getElementById('quizArea').classList.remove('hidden');
-                this.activePool = [...dictionary].sort(() => 0.5 - Math.random());
-                this.qIndex = 0;
-                this.nextQuestion();
-            }
-
-            nextQuestion() {
-                if (this.qIndex >= 10) {
-                    this.finishRound();
-                    return;
-                }
-                
-                this.qIndex++;
-                this.currentQ = this.activePool.pop();
-                
-                // تلفظ خودکار
-                this.speak(this.currentQ.en);
-
-                let wrongs = dictionary.filter(i => i.en !== this.currentQ.en).sort(() => 0.5 - Math.random()).slice(0, 2);
-                let opts = [this.currentQ, ...wrongs].sort(() => 0.5 - Math.random());
-
-                // نمایش سوال
-                document.getElementById('qText').innerText = this.currentQ.ex.replace(new RegExp(this.currentQ.en, 'gi'), "_______");
-                
-                const container = document.getElementById('qOptions');
-                container.innerHTML = "";
-                opts.forEach(o => {
-                    const btn = document.createElement('button');
-                    btn.className = 'neu-btn';
-                    btn.innerText = o.en;
-                    btn.onclick = () => this.check(o.en);
-                    container.appendChild(btn);
-                });
-            }
-
-            check(chosen) {
-                const fb = document.getElementById('qFeedback');
-                fb.classList.remove('hidden');
-                
-                if (chosen === this.currentQ.en) {
-                    fb.innerText = "✅ EXCELLENT!";
-                    fb.style.color = "#55efc4";
-                } else {
-                    fb.innerText = `❌ CORRECT: ${this.currentQ.en}`;
-                    fb.style.color = "#ff7675";
-                    this.mistakes.push(this.currentQ);
-                    this.speak(this.currentQ.en);
-                }
-
-                setTimeout(() => {
-                    fb.classList.add('hidden');
-                    this.nextQuestion();
-                }, 1800);
-            }
-
-            finishRound() {
-                // ارسال گزارش به تلگرام
-                const msg = `📊 گزارش: فوند درشت\nاشتباهات: ${this.mistakes.length}`;
-                fetch(PROXY_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ message: msg }) });
-                
-                alert(`تمرین تمام شد!\nتعداد اشتباهات: ${this.mistakes.length}`);
-                location.reload();
-            }
+            setTimeout(() => { f.innerText = ""; this.next(); }, 1200);
         }
+    };
+</script>
 
-        const app = new FredApp();
-    </script>
 </body>
 </html>
