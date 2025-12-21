@@ -1,5 +1,5 @@
-// دسته‌بندی اول: افعال پایه و کمکی (۱ تا ۲۰)
-const dict_base_verbs = [
+const dictionary = [
+  // 1-20: افعال پایه
   { id: 1, en: "be", fa: "بودن", def: "To exist.", defFa: "وجود داشتن", ex: "I want to be happy.", exFa: "می‌خواهم خوشحال باشم.", col: "Be careful!", colFa: "Be careful: مراقب بودن", phr: "She is away.", phrFa: "Be away: غایب بودن" },
   { id: 2, en: "am", fa: "هستم", def: "First-person of be.", defFa: "اول شخص بودن", ex: "I am a student.", exFa: "من یک دانش‌آموز هستم.", col: "I am ready.", colFa: "I am ready: من آماده‌ام", phr: "I am in a hurry.", phrFa: "Be in a hurry: عجله داشتن" },
   { id: 3, en: "is", fa: "هست", def: "Third-person of be.", defFa: "سوم شخص بودن", ex: "He is my teacher.", exFa: "او معلم من است.", col: "It is easy.", colFa: "It is easy: آسان است", phr: "She is at work.", phrFa: "Be at work: سر کار بودن" },
@@ -19,11 +19,9 @@ const dict_base_verbs = [
   { id: 17, en: "like", fa: "دوست داشتن", def: "To enjoy.", defFa: "لذت بردن", ex: "I like apples.", exFa: "من سیب دوست دارم.", col: "Like it a lot.", colFa: "Like a lot: خیلی دوست داشتن", phr: "Feel like.", phrFa: "Feel like: هوس کردن" },
   { id: 18, en: "love", fa: "عشق ورزیدن", def: "To like very much.", defFa: "علاقه زیاد", ex: "I love my family.", exFa: "خانواده‌ام را دوست دارم.", col: "Fall in love.", colFa: "Fall in love: عاشق شدن", phr: "Love for art.", phrFa: "Love for: علاقه به هنر" },
   { id: 19, en: "help", fa: "کمک کردن", def: "To support.", defFa: "حمایت کردن", ex: "Can you help me?", exFa: "می‌توانی کمکم کنی؟", col: "Help each other.", colFa: "Help each other: کمک به یکدیگر", phr: "Help out.", phrFa: "Help out: گره‌گشایی کردن" },
-  { id: 20, en: "try", fa: "تلاش کردن", def: "To attempt.", defFa: "سعی کردن", ex: "I try to learn.", exFa: "سعی می‌کنم یاد بگیرم.", col: "Give it a try.", colFa: "Give it a try: امتحان کردن", phr: "Try on.", phrFa: "Try on: پرو کردن (لباس)" }
-];
+  { id: 20, en: "try", fa: "تلاش کردن", def: "To attempt.", defFa: "سعی کردن", ex: "I try to learn.", exFa: "سعی می‌کنم یاد بگیرم.", col: "Give it a try.", colFa: "Give it a try: امتحان کردن", phr: "Try on.", phrFa: "Try on: پرو کردن (لباس)" },
 
-// دسته‌بندی دوم: ارتباطات و فعالیت‌های ذهنی (۲۱ تا ۵۰)
-const dict_comm_mental = [
+  // 21-50: ذهن و ارتباط
   { id: 21, en: "start", fa: "شروع کردن", def: "To begin.", defFa: "آغاز کردن", ex: "Start the engine.", exFa: "موتور را روشن کن.", col: "Start a fire.", colFa: "Start a fire: آتش روشن کردن", phr: "Start over.", phrFa: "Start over: از اول شروع کردن" },
   { id: 22, en: "stop", fa: "ایستادن / قطع کردن", def: "To finish moving.", defFa: "متوقف شدن", ex: "Stop the car.", exFa: "ماشین را نگه دار.", col: "Stop crying.", colFa: "Stop crying: گریه نکن", phr: "Stop by.", phrFa: "Stop by: سر زدن کوتاه" },
   { id: 23, en: "say", fa: "گفتن", def: "To speak words.", defFa: "بیان کلمات", ex: "Say your name.", exFa: "اسمت را بگو.", col: "Say sorry.", colFa: "Say sorry: عذرخواهی کردن", phr: "Say it out loud.", phrFa: "Say out loud: بلند بگو" },
@@ -53,16 +51,9 @@ const dict_comm_mental = [
   { id: 47, en: "job", fa: "شغل", def: "Work for money.", defFa: "حرفه", ex: "A new job.", exFa: "یک شغل جدید.", col: "Full-time job.", colFa: "Full-time job: شغل تمام وقت", phr: "Good job!", phrFa: "Good job: آفرین" },
   { id: 48, en: "work_n", fa: "کار (اسم)", def: "Activity.", defFa: "فعالیت", ex: "Go to work.", exFa: "سر کار رفتن.", col: "Hard work.", colFa: "Hard work: کار سخت", phr: "At work.", phrFa: "At work: مشغول کار" },
   { id: 49, en: "money", fa: "پول", def: "Currency.", defFa: "سرمایه", ex: "Save money.", exFa: "پول پس‌انداز کن.", col: "Pocket money.", colFa: "Pocket money: پول توجیبی", phr: "Money for value.", phrFa: "Money for value: ارزش در مقابل قیمت" },
-  { id: 50, en: "time", fa: "زمان", def: "Duration.", defFa: "وقت", ex: "No time.", exFa: "وقتی نیست.", col: "On time.", colFa: "On time: سر وقت", phr: "Time's up.", phrFa: "Time's up: وقت تمام است" }
-];
+  { id: 50, en: "time", fa: "زمان", def: "Duration.", defFa: "وقت", ex: "No time.", exFa: "وقتی نیست.", col: "On time.", colFa: "On time: سر وقت", phr: "Time's up.", phrFa: "Time's up: وقت تمام است" },
 
-// ادغام نهایی برای استفاده در اپلیکیشن
-const dictionary = [
-  ...dict_base_verbs,
-  ...dict_comm_mental
-];
-// دسته‌بندی سوم: زمان، مکان و موقعیت (۵۱ تا ۸۰)
-const dict_time_place = [
+  // 51-100: زمان، مکان و صفات
   { id: 51, en: "day", fa: "روز", def: "24 hours.", defFa: "یک شبانه روز", ex: "Have a nice day.", exFa: "روز خوبی داشته باشی.", col: "Every day.", colFa: "Every day: هر روز", phr: "Day off.", phrFa: "Day off: روز تعطیل / مرخصی" },
   { id: 52, en: "week", fa: "هفته", def: "7 days.", defFa: "هفت روز", ex: "Next week.", exFa: "هفته آینده.", col: "Once a week.", colFa: "Once a week: هفته‌ای یکبار", phr: "Week in week out.", phrFa: "Week in week out: هفته پشت هفته" },
   { id: 53, en: "year", fa: "سال", def: "12 months.", defFa: "دوازده ماه", ex: "Last year.", exFa: "سال گذشته.", col: "New year.", colFa: "New year: سال نو", phr: "Year after year.", phrFa: "Year after year: سال به سال" },
@@ -82,11 +73,7 @@ const dict_time_place = [
   { id: 67, en: "school", fa: "مدرسه", def: "Place to learn.", defFa: "آموزشگاه", ex: "Go to school.", exFa: "به مدرسه رفتن.", col: "High school.", colFa: "High school: دبیرستان", phr: "Back to school.", phrFa: "Back to school: بازگشت به مدرسه" },
   { id: 68, en: "office", fa: "اداره", def: "Place of work.", defFa: "دفتر کار", ex: "In the office.", exFa: "در اداره.", col: "Post office.", colFa: "Post office: اداره پست", phr: "Office hours.", phrFa: "Office hours: ساعات اداری" },
   { id: 69, en: "shop", fa: "مغازه", def: "Place to buy.", defFa: "فروشگاه", ex: "A small shop.", exFa: "یک مغازه کوچک.", col: "Coffee shop.", colFa: "Coffee shop: کافی شاپ", phr: "Shop around.", phrFa: "Shop around: قیمت گرفتن از چند جا" },
-  { id: 70, en: "street", fa: "خیابان", def: "Road in a city.", defFa: "معبر شهری", ex: "On the street.", exFa: "در خیابان.", col: "Street food.", colFa: "Street food: غذای خیابانی", phr: "Main street.", phrFa: "Main street: خیابان اصلی" }
-];
-
-// دسته‌بندی چهارم: صفات پایه و تضادها (۷۱ تا ۹۰)
-const dict_adjectives = [
+  { id: 70, en: "street", fa: "خیابان", def: "Road in a city.", defFa: "معبر شهری", ex: "On the street.", exFa: "در خیابان.", col: "Street food.", colFa: "Street food: غذای خیابانی", phr: "Main street.", phrFa: "Main street: خیابان اصلی" },
   { id: 71, en: "good", fa: "خوب", def: "High quality.", defFa: "نیکو", ex: "Good job.", exFa: "کار خوب.", col: "Good morning.", colFa: "Good morning: صبح بخیر", phr: "Good for you.", phrFa: "Good for you: خوش به حالت" },
   { id: 72, en: "bad", fa: "بد", def: "Not good.", defFa: "ناپسند", ex: "Bad weather.", exFa: "هوای بد.", col: "Bad news.", colFa: "Bad news: خبر بد", phr: "Too bad.", phrFa: "Too bad: حیف شد" },
   { id: 73, en: "easy", fa: "آسان", def: "Not hard.", defFa: "راحت", ex: "Easy English.", exFa: "انگلیسیِ آسان.", col: "Easy way.", colFa: "Easy way: راه آسان", phr: "Take it easy.", phrFa: "Take it easy: سخت نگیر" },
@@ -106,11 +93,7 @@ const dict_adjectives = [
   { id: 87, en: "wrong", fa: "غلط", def: "Not right.", defFa: "اشتباه", ex: "Wrong key.", exFa: "کلید اشتباه.", col: "Wrong number.", colFa: "Wrong number: شماره اشتباه", phr: "Go wrong.", phrFa: "Go wrong: اشتباه پیش رفتن" },
   { id: 88, en: "important", fa: "مهم", def: "Valuable.", defFa: "پراهمیت", ex: "Important test.", exFa: "امتحان مهم.", col: "Important person.", colFa: "Important person: شخص مهم", phr: "Most important.", phrFa: "Most important: مهم‌ترین" },
   { id: 89, en: "possible", fa: "ممکن", def: "Can happen.", defFa: "شدنی", ex: "It is possible.", exFa: "ممکن است.", col: "As soon as possible.", colFa: "ASAP: در اسرع وقت", phr: "If possible.", phrFa: "If possible: اگر ممکن باشد" },
-  { id: 90, en: "ready", fa: "آماده", def: "Prepared.", defFa: "مهیا", ex: "Are you ready?", exFa: "آماده‌ای؟", col: "Get ready.", colFa: "Get ready: آماده شدن", phr: "Ready to go.", phrFa: "Ready to go: آماده رفتن" }
-];
-
-// دسته‌بندی پنجم: کلمات ربط و حروف اضافه پایه (۹۱ تا ۱۰۰)
-const dict_conjunctions = [
+  { id: 90, en: "ready", fa: "آماده", def: "Prepared.", defFa: "مهیا", ex: "Are you ready?", exFa: "آماده‌ای؟", col: "Get ready.", colFa: "Get ready: آماده شدن", phr: "Ready to go.", phrFa: "Ready to go: آماده رفتن" },
   { id: 91, en: "and", fa: "و", def: "Also.", defFa: "به علاوه", ex: "You and me.", exFa: "تو و من.", col: "Black and white.", colFa: "Black and white: سیاه و سفید", phr: "And so on.", phrFa: "And so on: و غیره" },
   { id: 92, en: "but", fa: "اما", def: "However.", defFa: "ولی", ex: "Small but nice.", exFa: "کوچک اما خوب.", col: "But why?", colFa: "But why: اما چرا؟", phr: "All but one.", phrFa: "All but one: همه به جز یکی" },
   { id: 93, en: "because", fa: "چون", def: "Reason.", defFa: "زیرا", ex: "Because of rain.", exFa: "به خاطر باران.", col: "Just because.", colFa: "Just because: همین‌طوری", phr: "Because of you.", phrFa: "Because of: به خاطر تو" },
@@ -120,19 +103,9 @@ const dict_conjunctions = [
   { id: 97, en: "before", fa: "قبل از", def: "Earlier than.", defFa: "پیش از", ex: "Before lunch.", exFa: "قبل از ناهار.", col: "Before work.", colFa: "Before work: قبل از کار", phr: "Before long.", phrFa: "Before long: به زودی" },
   { id: 98, en: "after", fa: "بعد از", def: "Later than.", defFa: "پس از", ex: "After school.", exFa: "بعد از مدرسه.", col: "After lunch.", colFa: "After lunch: بعد از ناهار", phr: "Day after day.", phrFa: "Day after day: روز به روز" },
   { id: 99, en: "about", fa: "درباره", def: "On a topic.", defFa: "در مورد", ex: "About me.", exFa: "درباره من.", col: "About time.", colFa: "About time: وقتش رسیده", phr: "How about?", phrFa: "How about: چطور است که...؟" },
-  { id: 100, en: "with", fa: "با", def: "By someone.", defFa: "به همراه", ex: "With my friend.", exFa: "با دوستم.", col: "With help.", colFa: "With help: با کمک", phr: "With you.", phrFa: "With you: با تو" }
-];
+  { id: 100, en: "with", fa: "با", def: "By someone.", defFa: "به همراه", ex: "With my friend.", exFa: "با دوستم.", col: "With help.", colFa: "With help: با کمک", phr: "With you.", phrFa: "With you: با تو" },
 
-// ادغام در متغیر نهایی (به ترتیب ID)
-const dictionary = [
-  ...dict_base_verbs,   // ۱ تا ۲۰ (در پیام قبلی)
-  ...dict_comm_mental,  // ۲۱ تا ۵۰ (در پیام قبلی)
-  ...dict_time_place,   // ۵۱ تا ۷۰
-  ...dict_adjectives,   // ۷۱ تا ۹۰
-  ...dict_conjunctions  // ۹۱ تا ۱۰۰
-];
-// دسته‌بندی ششم: حروف اضافه و کلمات اشاره (۱۰۱ تا ۱۱۶)
-const dict_prepositions_pointing = [
+  // 101-150: حروف اضافه و مقادیر
   { id: 101, en: "without", fa: "بدون", def: "Not having.", defFa: "بدونِ", ex: "Without money.", exFa: "بدون پول.", col: "Without doubt.", colFa: "Without doubt: بدون شک", phr: "Do without.", phrFa: "Do without: بدون چیزی سر کردن" },
   { id: 102, en: "for", fa: "برای", def: "Intended to.", defFa: "به جهت", ex: "This is for you.", exFa: "این برای تو است.", col: "For sale.", colFa: "For sale: برای فروش", phr: "For ever.", phrFa: "For ever: برای همیشه" },
   { id: 103, en: "from", fa: "از", def: "Starting point.", defFa: "مبدأ", ex: "From Tehran.", exFa: "از تهران.", col: "From now on.", colFa: "From now on: از الان به بعد", phr: "From time to time.", phrFa: "From time to time: هر از گاهی" },
@@ -148,11 +121,7 @@ const dict_prepositions_pointing = [
   { id: 113, en: "something", fa: "چیزی", def: "An object.", defFa: "یک شیء", ex: "Eat something.", exFa: "چیزی بخور.", col: "Something new.", colFa: "Something new: چیزی جدید", phr: "Something like that.", phrFa: "Something like that: چیزی شبیه آن" },
   { id: 114, en: "someone", fa: "کسی", def: "A person.", defFa: "یک فرد", ex: "Someone is here.", exFa: "کسی اینجا است.", col: "Special someone.", colFa: "Special someone: فرد خاص", phr: "Someone else.", phrFa: "Someone else: فرد دیگری" },
   { id: 115, en: "nothing", fa: "هیچ‌چیز", def: "Not anything.", defFa: "پوچ", ex: "Nothing is here.", exFa: "هیچ‌چیزی اینجا نیست.", col: "Nothing special.", colFa: "Nothing special: هیچ چیز خاصی", phr: "Nothing at all.", phrFa: "Nothing at all: اصلاً هیچ‌چیز" },
-  { id: 116, en: "everything", fa: "همه‌چیز", def: "All things.", defFa: "تمام اشیاء", ex: "Everything is OK.", exFa: "همه‌چیز مرتب است.", col: "Is everything ready?", colFa: "Everything ready: همه‌چیز آماده", phr: "Everything counts.", phrFa: "Everything counts: همه‌چیز موثر است" }
-];
-
-// دسته‌بندی هفتم: اعداد و مقادیر (۱۱۷ تا ۱۳۰)
-const dict_quantifiers = [
+  { id: 116, en: "everything", fa: "همه‌چیز", def: "All things.", defFa: "تمام اشیاء", ex: "Everything is OK.", exFa: "همه‌چیز مرتب است.", col: "Is everything ready?", colFa: "Everything ready: همه‌چیز آماده", phr: "Everything counts.", phrFa: "Everything counts: همه‌چیز موثر است" },
   { id: 117, en: "one", fa: "یک", def: "Number 1.", defFa: "عدد ۱", ex: "One cup.", exFa: "یک فنجان.", col: "One by one.", colFa: "One by one: یکی یکی", phr: "One more.", phrFa: "One more: یکی دیگه" },
   { id: 118, en: "two", fa: "دو", def: "Number 2.", defFa: "عدد ۲", ex: "Two boys.", exFa: "دو پسر.", col: "Two of us.", colFa: "Two of us: دو نفر ما", phr: "Two-way.", phrFa: "Two-way: دو طرفه" },
   { id: 119, en: "many", fa: "زیاد (قابل شمارش)", def: "A large number.", defFa: "بسیار", ex: "Many cats.", exFa: "گربه‌های زیادی.", col: "How many?", colFa: "How many: چند تا؟", phr: "Many times.", phrFa: "Many times: بارها" },
@@ -165,11 +134,7 @@ const dict_quantifiers = [
   { id: 126, en: "any", fa: "هیچ / هر", def: "Whichever.", defFa: "کدام", ex: "Any pen.", exFa: "هر خودکاری.", col: "Any time.", colFa: "Any time: هر زمانی", phr: "Not any more.", phrFa: "Not any more: دیگه نه" },
   { id: 128, en: "other", fa: "دیگر / سایر", def: "Different one.", defFa: "دیگری", ex: "The other car.", exFa: "آن یکی ماشین.", col: "Each other.", colFa: "Each other: همدیگر", phr: "Other than.", phrFa: "Other than: به جز" },
   { id: 129, en: "another", fa: "یکی دیگر", def: "One more.", defFa: "موردی دیگر", ex: "Another cup.", exFa: "یک فنجان دیگر.", col: "Another day.", colFa: "Another day: یک روز دیگر", phr: "One another.", phrFa: "One another: یکدیگر" },
-  { id: 130, en: "kind_n", fa: "نوع / مدل", def: "Type.", defFa: "گونه", ex: "What kind?", exFa: "چه نوعی؟", col: "All kinds of.", colFa: "All kinds: انواع مختلف", phr: "Kind of.", phrFa: "Kind of: یه جورایی" }
-];
-
-// دسته‌بندی هشتم: زمان‌های روز و قیدهای تکرار (۱۳۱ تا ۱۵۰)
-const dict_daily_adverbs = [
+  { id: 130, en: "kind_n", fa: "نوع / مدل", def: "Type.", defFa: "گونه", ex: "What kind?", exFa: "چه نوعی؟", col: "All kinds of.", colFa: "All kinds: انواع مختلف", phr: "Kind of.", phrFa: "Kind of: یه جورایی" },
   { id: 131, en: "morning", fa: "صبح", def: "Early day.", defFa: "بامداد", ex: "Every morning.", exFa: "هر صبح.", col: "Good morning.", colFa: "Good morning: صبح بخیر", phr: "In the morning.", phrFa: "In the morning: در هنگام صبح" },
   { id: 132, en: "afternoon", fa: "بعدازظهر", def: "Midday.", defFa: "پس از ظهر", ex: "This afternoon.", exFa: "امروز بعدازظهر.", col: "Sunday afternoon.", colFa: "Sunday afternoon: بعدازظهر یکشنبه", phr: "In the afternoon.", phrFa: "In the afternoon: در هنگام عصر" },
   { id: 133, en: "evening", fa: "عصر / غروب", def: "Late day.", defFa: "غروب", ex: "Good evening.", exFa: "عصر بخیر.", col: "Evening meal.", colFa: "Evening meal: وعده عصرانه", phr: "In the evening.", phrFa: "In the evening: در هنگام غروب" },
@@ -187,22 +152,9 @@ const dict_daily_adverbs = [
   { id: 147, en: "just", fa: "فقط / همین الان", def: "Only.", defFa: "صرفاً", ex: "Just one.", exFa: "فقط یکی.", col: "Just a minute.", colFa: "Just a minute: فقط یک لحظه", phr: "Just in case.", phrFa: "Just in case: محض احتیاط" },
   { id: 148, en: "also", fa: "همچنین", def: "Too.", defFa: "نیز", ex: "He also came.", exFa: "او هم آمد.", col: "Also known as.", colFa: "AKA: همچنین شناخته شده با نامِ", phr: "But also.", phrFa: "But also: بلکه همچنین" },
   { id: 149, en: "maybe", fa: "شاید", def: "Perhaps.", defFa: "احتمالاً", ex: "Maybe tomorrow.", exFa: "شاید فردا.", col: "Maybe yes.", colFa: "Maybe yes: شاید بله", phr: "Maybe so.", phrFa: "Maybe so: شاید این‌طور باشد" },
-  { id: 150, en: "sure", fa: "مطمئن", def: "Certain.", defFa: "بی‌شک", ex: "Are you sure?", exFa: "مطمئنی؟", col: "For sure.", colFa: "For sure: مطمئناً", phr: "Make sure.", phrFa: "Make sure: اطمینان حاصل کردن" }
-];
+  { id: 150, en: "sure", fa: "مطمئن", def: "Certain.", defFa: "بی‌شک", ex: "Are you sure?", exFa: "مطمئنی؟", col: "For sure.", colFa: "For sure: مطمئناً", phr: "Make sure.", phrFa: "Make sure: اطمینان حاصل کردن" },
 
-// ادغام در متغیر نهایی (به ترتیب ID)
-const dictionary = [
-  ...dict_base_verbs,      // ۱ تا ۲۰
-  ...dict_comm_mental,     // ۲۱ تا ۵۰
-  ...dict_time_place,      // ۵۱ تا ۷۰
-  ...dict_adjectives,      // ۷۱ تا ۹۰
-  ...dict_conjunctions,    // ۹۱ تا ۱۰۰
-  ...dict_prepositions_pointing, // ۱۰۱ تا ۱۱۶
-  ...dict_quantifiers,     // ۱۱۷ تا ۱۳۰
-  ...dict_daily_adverbs    // ۱۳۱ تا ۱۵۰
-];
-// دسته‌بندی نهم: خانه، حمل‌ونقل و اشیاء (۱۵۱ تا ۱۷۵)
-const dict_objects_transport = [
+  // 151-200: اشیاء و اعضای بدن
   { id: 151, en: "car", fa: "ماشین", def: "A vehicle.", defFa: "خودرو", ex: "Drive a car.", exFa: "راندن ماشین.", col: "Car park.", colFa: "Car park: پارکینگ", phr: "By car.", phrFa: "By car: با ماشین" },
   { id: 152, en: "bus", fa: "اتوبوس", def: "Large vehicle.", defFa: "وسیله نقلیه بزرگ", ex: "Take the bus.", exFa: "سوار اتوبوس شدن.", col: "Bus station.", colFa: "Bus station: ایستگاه اتوبوس", phr: "Catch the bus.", phrFa: "Catch the bus: به اتوبوس رسیدن" },
   { id: 153, en: "train", fa: "قطار", def: "Railway vehicle.", defFa: "وسیله نقلیه ریلی", ex: "The train is fast.", exFa: "قطار سریع است.", col: "Train ticket.", colFa: "Train ticket: بلیط قطار", phr: "By train.", phrFa: "By train: با قطار" },
@@ -227,11 +179,7 @@ const dict_objects_transport = [
   { id: 172, en: "bag", fa: "کیف", def: "To carry things.", defFa: "ساک", ex: "My school bag.", exFa: "کیف مدرسه من.", col: "Paper bag.", colFa: "Paper bag: کیسه کاغذی", phr: "In the bag.", phrFa: "In the bag: قطعی بودن موفقیت" },
   { id: 173, en: "money_n", fa: "پول (اسم)", def: "Coins and notes.", defFa: "وجه نقد", ex: "I have money.", exFa: "پول دارم.", col: "Make money.", colFa: "Make money: پول درآوردن", phr: "Pocket money.", phrFa: "Pocket money: پول توجیبی" },
   { id: 174, en: "watch_v", fa: "تماشا کردن (فعل)", def: "To look for a time.", defFa: "نگاه کردن طولانی", ex: "Watch TV.", exFa: "تماشای تلویزیون.", col: "Watch movies.", colFa: "Watch movies: تماشای فیلم", phr: "Watch out!", phrFa: "Watch out: مراقب باش" },
-  { id: 175, en: "watch_n", fa: "ساعت مچی (اسم)", def: "Clock on wrist.", defFa: "زمان‌سنج مچی", ex: "Nice watch.", exFa: "ساعت زیبایی است.", col: "Wrist watch.", colFa: "Wrist watch: ساعت مچی", phr: "On my watch.", phrFa: "On my watch: در زمان مسئولیت من" }
-];
-
-// دسته‌بندی دهم: اعضای بدن و مفاهیم نهایی (۱۷۶ تا ۲۰۰)
-const dict_body_final = [
+  { id: 175, en: "watch_n", fa: "ساعت مچی (اسم)", def: "Clock on wrist.", defFa: "زمان‌سنج مچی", ex: "Nice watch.", exFa: "ساعت زیبایی است.", col: "Wrist watch.", colFa: "Wrist watch: ساعت مچی", phr: "On my watch.", phrFa: "On my watch: در زمان مسئولیت من" },
   { id: 176, en: "body", fa: "بدن", def: "Your physical form.", defFa: "جسم", ex: "Healthy body.", exFa: "بدن سالم.", col: "Body parts.", colFa: "Body parts: اعضای بدن", phr: "Every body.", phrFa: "Everybody: هر کسی" },
   { id: 177, en: "head", fa: "سر", def: "Top of body.", defFa: "جمجمه", ex: "My head hurts.", exFa: "سرم درد می‌کند.", col: "Head of the team.", colFa: "Head of team: رئیس تیم", phr: "Use your head.", phrFa: "Use your head: از عقلت استفاده کن" },
   { id: 178, en: "face", fa: "صورت", def: "Front of head.", defFa: "چهره", ex: "Wash your face.", exFa: "صورتت را بشوی.", col: "Face to face.", colFa: "Face to face: رو در رو", phr: "Face the truth.", phrFa: "Face the truth: با حقیقت روبرو شدن" },
@@ -257,18 +205,4 @@ const dict_body_final = [
   { id: 198, en: "thank", fa: "تشکر کردن", def: "To say thanks.", defFa: "سپاسگزاری", ex: "Thank you.", exFa: "ممنونم.", col: "Thank God.", colFa: "Thank God: خدا را شکر", phr: "No, thank you.", phrFa: "No, thank you: نه، متشکرم" },
   { id: 199, en: "hello", fa: "سلام", def: "A greeting.", defFa: "درود", ex: "Say hello.", exFa: "سلام بگو.", col: "Hello there!", colFa: "Hello there: سلام بر شما", phr: "Hello and goodbye.", phrFa: "Hello and goodbye: سلام و خداحافظی" },
   { id: 200, en: "goodbye", fa: "خداحافظ", def: "Saying bye.", defFa: "بدرود", ex: "Time to say goodbye.", exFa: "وقت خداحافظی است.", col: "Say goodbye.", colFa: "Say goodbye: خداحافظی کردن", phr: "Kiss goodbye.", phrFa: "Kiss goodbye: برای همیشه از دست دادن" }
-];
-
-// ادغام نهایی تمام ۲۰۰ لغت برای پروژه Fred
-const dictionary = [
-  ...dict_base_verbs,           // 1-20
-  ...dict_comm_mental,          // 21-50
-  ...dict_time_place,           // 51-70
-  ...dict_adjectives,           // 71-90
-  ...dict_conjunctions,         // 91-100
-  ...dict_prepositions_pointing,// 101-116
-  ...dict_quantifiers,          // 117-130
-  ...dict_daily_adverbs,        // 131-150
-  ...dict_objects_transport,    // 151-175
-  ...dict_body_final            // 176-200
 ];
