@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Fred Elite V3.3</title>
+    <title>Fred Elite V4.0</title>
     <style>
         :root { 
             --bg: #e0e5ec; --text: #333; --accent: #1e40af;
@@ -17,40 +17,39 @@
         }
         body { 
             background-color: var(--bg); color: var(--text); font-family: Tahoma, sans-serif; 
-            margin: 0; padding: 10px; font-size: 22px; transition: 0.3s;
+            margin: 0; padding: 10px; font-size: 24px; transition: 0.3s;
         }
-        .header { display: flex; justify-content: space-between; align-items: center; padding: 5px 15px; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 10px; }
         .neu-card { background: var(--bg); border-radius: 25px; box-shadow: var(--shadow); padding: 15px; margin-bottom: 15px; }
         .neu-btn { border: none; background: var(--bg); box-shadow: var(--shadow); cursor: pointer; color: var(--text); font-weight: bold; transition: 0.2s; display: flex; align-items: center; justify-content: center; }
         .neu-btn:active { box-shadow: var(--inner); transform: scale(0.98); }
         
-        /* اصلاح جابجایی لغت و معنی */
-        .word-header { display: flex; flex-direction: row-reverse; justify-content: space-between; align-items: center; width: 100%; }
-        .en-title { font-size: 32px; font-weight: bold; color: var(--accent); }
-        .fa-title { font-size: 26px; color: #d63031; font-weight: bold; }
+        .word-header { display: flex; flex-direction: row-reverse; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .en-title { font-size: 36px; font-weight: bold; color: var(--accent); }
+        .fa-title { font-size: 30px; color: #d63031; font-weight: bold; }
 
-        .search-box { width: 90%; border: none; background: var(--bg); box-shadow: var(--inner); padding: 12px; border-radius: 50px; outline: none; text-align: center; font-size: 18px; margin: 10px auto; display: block; color: var(--text); }
-        .label { font-size: 14px; color: #888; text-align: left; margin-top: 10px; border-bottom: 1px solid #ccc; direction: ltr; }
-        .content-box { background: var(--bg); box-shadow: var(--inner); padding: 10px; border-radius: 15px; margin: 5px 0; text-align: left; direction: ltr; font-size: 18px; font-weight: bold; }
-        .fa-sub { direction: rtl; text-align: right; font-size: 16px; color: #d63031; margin-bottom: 10px; margin-top: -5px; font-weight: bold; }
+        .search-box { width: 92%; border: none; background: var(--bg); box-shadow: var(--inner); padding: 15px; border-radius: 50px; outline: none; text-align: center; font-size: 20px; margin: 10px auto; display: block; color: var(--text); }
+        .label { font-size: 16px; color: #888; text-align: left; margin-top: 15px; border-bottom: 1px solid #ccc; direction: ltr; font-weight: bold; }
+        .content-box { background: var(--bg); box-shadow: var(--inner); padding: 12px; border-radius: 15px; margin: 5px 0; text-align: left; direction: ltr; font-size: 20px; font-weight: bold; }
+        .fa-sub { direction: rtl; text-align: right; font-size: 18px; color: #d63031; margin-top: 5px; font-weight: bold; }
 
-        .bottom-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-        .nav-item { padding: 12px; border-radius: 15px; font-size: 16px; color: white; }
-        .exit-btn { grid-column: span 2; background: #e74c3c; padding: 12px; border-radius: 15px; color: white; font-size: 18px; margin-top: 5px; border: none; box-shadow: var(--shadow); cursor: pointer; }
+        .bottom-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
+        .nav-item { padding: 15px; border-radius: 15px; font-size: 18px; color: white; border: none; box-shadow: var(--shadow); cursor: pointer; }
+        .exit-btn { grid-column: span 2; background: #e74c3c; padding: 15px; border-radius: 15px; color: white; font-size: 22px; font-weight: bold; border: none; box-shadow: var(--shadow); cursor: pointer; }
         
-        .footer-status { display: flex; justify-content: space-around; align-items: center; margin-top: 15px; padding: 10px; border-top: 1px solid #ccc; font-size: 18px; }
+        .footer-status { display: flex; justify-content: space-around; align-items: center; margin-top: 20px; padding: 15px; border-top: 1px solid #ccc; }
         .hidden { display: none !important; }
     </style>
 </head>
 <body onclick="app.initAudio()">
 
     <div class="header">
-        <button id="speakerBtn" class="neu-btn" style="width:50px; height:50px; border-radius:50%;" onclick="app.toggleMute()">🔊</button>
-        <span style="font-size: 18px;">Guest Mode 👤</span>
-        <button class="neu-btn" style="width:50px; height:50px; border-radius:50%;" onclick="app.toggleTheme()">🌓</button>
+        <button id="speakerBtn" class="neu-btn" style="width:60px; height:60px; border-radius:50%;" onclick="app.toggleMute()">🔊</button>
+        <span style="font-size: 20px;">Guest Mode 👤</span>
+        <button class="neu-btn" style="width:60px; height:60px; border-radius:50%;" onclick="app.toggleTheme()">🌓</button>
     </div>
 
-    <input type="text" id="searchInput" class="search-box" placeholder="Go..." oninput="app.search()">
+    <input type="text" id="searchInput" class="search-box" placeholder="جستجو..." oninput="app.search()">
 
     <div id="mainView">
         <div id="wordCard" class="neu-card hidden">
@@ -60,51 +59,52 @@
             </div>
 
             <div class="label">Definition:</div>
-            <div id="defBox" class="content-box">---</div>
+            <div id="defFa" class="fa-sub"></div>
+            <div id="defBox" class="content-box"></div>
 
             <div class="label">Example:</div>
-            <div id="exBox" class="content-box"></div>
             <div id="exFa" class="fa-sub"></div>
+            <div id="exBox" class="content-box"></div>
 
             <div class="label">Collocations:</div>
+            <div id="collFa" class="fa-sub"></div>
             <div id="collBox" class="content-box"></div>
 
             <div class="label">Phrasal Verbs:</div>
+            <div id="phrasalFa" class="fa-sub"></div>
             <div id="phrasalBox" class="content-box"></div>
         </div>
 
         <div class="bottom-nav">
-            <button class="neu-btn nav-item" style="background:#2ecc71;" onclick="app.showMsg('لایتنر')">📂 لایتنر</button>
-            <button class="neu-btn nav-item" style="background:#3498db;" onclick="app.startQuiz()">📝 تمرین</button>
-            <button class="neu-btn nav-item" style="background:#9b59b6;" onclick="app.showMsg('VIP')">💎 VIP</button>
-            <button class="neu-btn nav-item" style="background:#f39c12;" onclick="app.showMsg('مسابقه')">🎮 مسابقه</button>
-            <button class="neu-btn exit-btn" onclick="app.exit()">✖ خروج</button>
+            <button class="nav-item" style="background:#2ecc71;" onclick="alert('لایتنر به‌زودی')">📂 لایتنر</button>
+            <button class="nav-item" style="background:#3498db;" onclick="app.startQuiz()">📝 تمرین</button>
+            <button class="nav-item" style="background:#9b59b6;" onclick="alert('VIP به‌زودی')">💎 VIP</button>
+            <button class="nav-item" style="background:#f39c12;" onclick="alert('مسابقه به‌زودی')">🎮 مسابقه</button>
+            <button class="exit-btn" onclick="app.exit()">✖ خروج از برنامه</button>
         </div>
     </div>
 
     <div id="quizView" class="hidden">
-        <div class="neu-card">
-            <div id="qQuestion" style="font-size: 24px; margin-bottom: 20px; direction: ltr;"></div>
-            <div id="qOptions" style="display: grid; gap: 10px;"></div>
-            <button class="neu-btn exit-btn" style="width:100%; margin-top:20px;" onclick="app.stopQuiz()">برگشت</button>
+        <div class="neu-card" style="text-align: center;">
+            <div id="qQuestion" style="font-size: 28px; margin-bottom: 25px;"></div>
+            <div id="qOptions" style="display: grid; gap: 15px;"></div>
+            <button class="exit-btn" style="width:100%; margin-top:30px;" onclick="app.stopQuiz()">برگشت به خانه</button>
         </div>
     </div>
 
     <div class="footer-status">
-        <div><span id="starVal">0</span> ⭐</div>
-        <div style="font-size: 40px;">🏆</div>
-        <div>1/5 📝</div>
+        <div style="font-size: 20px;"><span id="starVal">0</span> ⭐</div>
+        <div style="font-size: 50px;">🏆</div>
+        <div style="font-size: 20px;">1/5 📝</div>
     </div>
 
     <script>
-        // جلوگیری از کش فایل دیکشنری
-        const script = document.createElement('script');
-        script.src = "dictionary.js?v=" + Date.now();
-        document.head.appendChild(script);
+        const s = document.createElement('script');
+        s.src = "dictionary.js?v=" + Date.now();
+        document.head.appendChild(s);
 
         const app = {
             isMuted: false, currentWord: null, audioInit: false,
-
             initAudio() { if(!this.audioInit) { window.speechSynthesis.getVoices(); this.audioInit = true; } },
             toggleTheme() { document.body.classList.toggle('dark-mode'); },
             toggleMute() {
@@ -112,35 +112,27 @@
                 document.getElementById('speakerBtn').innerText = this.isMuted ? "🔇" : "🔊";
             },
             exit() { if(confirm("آیا خارج می‌شوید؟")) window.location.reload(); },
-            showMsg(m) { alert(m + " به‌زودی فعال می‌شود."); },
-
             search() {
                 const term = document.getElementById('searchInput').value.trim().toLowerCase();
                 const card = document.getElementById('wordCard');
                 if(!term || typeof dictionary === 'undefined') { card.classList.add('hidden'); return; }
-
                 const f = dictionary.find(w => w.en.toLowerCase() === term);
                 if(f) {
                     this.currentWord = f;
                     card.classList.remove('hidden');
-                    
-                    // تنظیم کلمه و معنی در جای درست
                     document.getElementById('enMain').innerText = f.en.toUpperCase();
                     document.getElementById('faMain').innerText = f.fa;
-                    
+                    document.getElementById('defFa').innerText = f.defFa || "";
                     document.getElementById('defBox').innerText = f.def || "---";
+                    document.getElementById('exFa').innerText = f.exFa || "";
                     document.getElementById('exBox').innerText = f.ex || "---";
-                    
-                    // نمایش هوشمند معنی مثال (اگر exFa نبود، خود fa را نشان می‌دهد)
-                    document.getElementById('exFa').innerText = f.exFa || f.fa || "";
-                    
+                    document.getElementById('collFa').innerText = f.colFa || "";
                     document.getElementById('collBox').innerText = f.col || "---";
+                    document.getElementById('phrasalFa').innerText = f.phrFa || "";
                     document.getElementById('phrasalBox').innerText = f.phr || "---";
-                    
                     this.speak();
                 }
             },
-
             speak() {
                 if(!this.isMuted && this.currentWord && 'speechSynthesis' in window) {
                     window.speechSynthesis.cancel();
@@ -149,7 +141,6 @@
                     window.speechSynthesis.speak(u);
                 }
             },
-
             startQuiz() {
                 document.getElementById('mainView').classList.add('hidden');
                 document.getElementById('quizView').classList.remove('hidden');
@@ -161,16 +152,16 @@
             },
             nextQuestion() {
                 const w = dictionary[Math.floor(Math.random() * dictionary.length)];
-                document.getElementById('qQuestion').innerText = "معنی صحیح: " + w.en;
-                const opts = [w.fa, "رفتن", "داشتن", "کار کردن"].filter((v,i,a) => a.indexOf(v) === i).slice(0,3).sort(() => 0.5 - Math.random());
+                document.getElementById('qQuestion').innerText = "معنی صحیح " + w.en.toUpperCase() + " چیست؟";
+                const opts = [w.fa, "رفتن", "داشتن", "دیدن"].filter((v,i,a) => a.indexOf(v) === i).slice(0,3).sort(() => 0.5 - Math.random());
                 const cont = document.getElementById('qOptions');
                 cont.innerHTML = "";
                 opts.forEach(o => {
                     const b = document.createElement('button');
-                    b.className = 'neu-btn'; b.style.padding = "15px"; b.innerText = o;
+                    b.className = 'neu-btn'; b.style.padding = "20px"; b.innerText = o;
                     b.onclick = () => {
-                        if(o === w.fa) { alert("✅ درست بود!"); this.nextQuestion(); }
-                        else alert("❌ اشتباه بود!");
+                        if(o === w.fa) { alert("✅ عالی بود!"); this.nextQuestion(); }
+                        else alert("❌ اشتباه بود، دوباره تلاش کن!");
                     };
                     cont.appendChild(b);
                 });
