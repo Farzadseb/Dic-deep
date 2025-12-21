@@ -5,40 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Fred Practice Elite</title>
     <style>
+        /* تنظیمات اصلی تم شب (خاکستری تیره) طبق درخواست شما */
         :root { 
-            /* پالت آبی آموزشی ارگونومیک */
-            --bg: #e3f2fd; 
-            --accent: #1565c0; 
-            --text: #1a237e; 
-            --shadow: 9px 9px 16px #c1cfd9, -9px -9px 16px #ffffff; 
-            --inner: inset 5px 5px 10px #becbd6, inset -5px -5px 10px #ffffff;
-        }
-
-        /* تم شب خاکستری */
-        body.dark-mode { 
-            --bg: #2d3436; 
-            --text: #dfe6e9; 
-            --accent: #81ecec; 
-            --shadow: 7px 7px 14px #202425, -7px -7px 14px #3a4447; 
-            --inner: inset 4px 4px 8px #1b1f20, inset -4px -4px 8px #3f494d; 
+            --bg: #2d3436; /* خاکستری تیره */
+            --text: #dfe6e9; /* متن روشن */
+            --accent: #81ecec; /* رنگ دکمه‌ها */
+            --shadow: 10px 10px 20px #1e2223, -10px -10px 20px #3c4649;
+            --inner: inset 6px 6px 12px #1e2223, inset -6px -6px 12px #3c4649;
         }
 
         body { 
             background-color: var(--bg) !important; 
-            color: var(--text); 
+            color: var(--text) !important; 
             font-family: 'Segoe UI', Tahoma, sans-serif; 
             margin: 0; padding: 15px; 
-            /* فونت ۱.۵ برابر */
-            font-size: 24px; 
-            transition: all 0.3s ease;
+            /* فونت بسیار درشت طبق درخواست شما */
+            font-size: 30px !important; 
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
         .neu-card { 
             background: var(--bg); 
-            border-radius: 25px; 
+            border-radius: 30px; 
             box-shadow: var(--shadow); 
-            padding: 25px; 
-            margin-bottom: 20px; 
+            padding: 30px; 
+            margin-bottom: 25px; 
             text-align: center; 
         }
 
@@ -46,61 +38,178 @@
             border: none; 
             background: var(--bg); 
             box-shadow: var(--shadow); 
-            padding: 15px 20px; 
-            border-radius: 18px; 
+            padding: 20px; 
+            border-radius: 20px; 
             cursor: pointer; 
             color: var(--accent); 
             font-weight: bold; 
-            font-size: 0.9em; /* نسبت به فونت اصلی */
+            font-size: 1.1em; 
             transition: 0.2s; 
+            width: 100%;
+            margin: 10px 0;
         }
 
         .neu-btn:active { box-shadow: var(--inner); transform: scale(0.95); }
-        .btn-exit { color: #d63031 !important; }
-        
+
+        /* دکمه خروج قرمز رنگ */
+        .btn-exit { 
+            color: #ff7675 !important; 
+            font-size: 0.8em;
+            box-shadow: 5px 5px 10px #1e2223, -5px -5px 10px #3c4649;
+        }
+
         .en-text { 
             direction: ltr; 
-            font-size: 1.3em; 
-            line-height: 1.5; 
-            margin: 20px 0;
+            font-size: 1.5em; 
+            color: #fff;
+            margin: 30px 0;
             display: block;
+            font-weight: bold;
         }
 
         .hidden { display: none !important; }
-        .grid-menu { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        
+        #header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .small-btn {
+            width: 80px !important;
+            padding: 10px !important;
+            font-size: 0.7em !important;
+        }
     </style>
 </head>
-<body id="mainBody">
+<body>
 
-    <div class="neu-card" style="display:flex; justify-content: space-between; align-items: center; padding: 10px 15px;">
-        <button class="neu-btn" onclick="app.toggleTheme()">🌓</button>
-        <button id="muteBtn" class="neu-btn" onclick="app.toggleMute()">🔊</button>
-        <button class="neu-btn btn-exit" onclick="app.exitApp()">✖ خروج</button>
+    <div id="header-bar">
+        <button id="muteBtn" class="neu-btn small-btn" onclick="app.toggleMute()">🔊 Mute</button>
+        <button class="neu-btn small-btn btn-exit" onclick="app.exitApp()">✖ خروج</button>
     </div>
 
     <div id="mainApp">
         <div id="homeMenu">
             <div class="neu-card">
-                <h2 style="margin-top:0;">Fred Elite</h2>
-                <button class="neu-btn" style="width:100%; font-size:1.2em;" onclick="app.startQuiz()">📝 شروع تمرین</button>
-            </div>
-            <div class="grid-menu">
-                <button class="neu-btn" onclick="alert('بزودی')">📂 لایتنر</button>
-                <button class="neu-btn" onclick="alert('بزودی')">📊 آمار</button>
+                <h1 style="color: var(--accent);">Fred Elite</h1>
+                <p style="font-size: 0.8em;">یادگیری با فونت درشت و تم شب</p>
+                <button class="neu-btn" onclick="app.startQuiz()">📝 شروع تمرین</button>
             </div>
         </div>
 
         <div id="quizArea" class="hidden">
             <div class="neu-card">
-                <div id="statusLabel" style="font-size:0.6em; color:gray; margin-bottom:10px;"></div>
                 <div id="qText" class="en-text"></div>
-                <div id="qOptions" style="display:grid; gap:15px;"></div>
-                <div id="qFeedback" class="hidden" style="margin-top:15px; font-weight:bold;"></div>
+                <div id="qOptions"></div>
+                <div id="qFeedback" class="hidden" style="margin-top:20px; font-size: 0.9em;"></div>
             </div>
         </div>
     </div>
 
     <script src="dictionary.js"></script>
-    <script src="core.js"></script>
+    <script>
+        const PROXY_URL = "https://script.google.com/macros/s/AKfycbwpS34Rfd59aIpCger7MC2ggs0WyaIxlcfHQ_AjkDevV22HtbkuP-jKcKysNIj0LWwb/exec";
+
+        class FredApp {
+            constructor() {
+                this.qIndex = 0;
+                this.mistakes = [];
+                this.isMuted = false;
+                this.currentQ = null;
+            }
+
+            toggleMute() {
+                this.isMuted = !this.isMuted;
+                document.getElementById('muteBtn').innerText = this.isMuted ? "🔇 Unmute" : "🔊 Mute";
+                document.getElementById('muteBtn').style.color = this.isMuted ? "#b2bec3" : "#81ecec";
+            }
+
+            speak(text) {
+                if (!this.isMuted && 'speechSynthesis' in window) {
+                    window.speechSynthesis.cancel();
+                    const u = new SpeechSynthesisUtterance(text);
+                    u.lang = 'en-US';
+                    u.rate = 0.75; // کمی آرام‌تر برای یادگیری بهتر
+                    window.speechSynthesis.speak(u);
+                }
+            }
+
+            exitApp() {
+                if (confirm("آیا می‌خواهید به منوی اصلی برگردید؟")) {
+                    location.reload();
+                }
+            }
+
+            startQuiz() {
+                document.getElementById('homeMenu').classList.add('hidden');
+                document.getElementById('quizArea').classList.remove('hidden');
+                this.activePool = [...dictionary].sort(() => 0.5 - Math.random());
+                this.qIndex = 0;
+                this.nextQuestion();
+            }
+
+            nextQuestion() {
+                if (this.qIndex >= 10) {
+                    this.finishRound();
+                    return;
+                }
+                
+                this.qIndex++;
+                this.currentQ = this.activePool.pop();
+                
+                // تلفظ خودکار
+                this.speak(this.currentQ.en);
+
+                let wrongs = dictionary.filter(i => i.en !== this.currentQ.en).sort(() => 0.5 - Math.random()).slice(0, 2);
+                let opts = [this.currentQ, ...wrongs].sort(() => 0.5 - Math.random());
+
+                // نمایش سوال
+                document.getElementById('qText').innerText = this.currentQ.ex.replace(new RegExp(this.currentQ.en, 'gi'), "_______");
+                
+                const container = document.getElementById('qOptions');
+                container.innerHTML = "";
+                opts.forEach(o => {
+                    const btn = document.createElement('button');
+                    btn.className = 'neu-btn';
+                    btn.innerText = o.en;
+                    btn.onclick = () => this.check(o.en);
+                    container.appendChild(btn);
+                });
+            }
+
+            check(chosen) {
+                const fb = document.getElementById('qFeedback');
+                fb.classList.remove('hidden');
+                
+                if (chosen === this.currentQ.en) {
+                    fb.innerText = "✅ EXCELLENT!";
+                    fb.style.color = "#55efc4";
+                } else {
+                    fb.innerText = `❌ CORRECT: ${this.currentQ.en}`;
+                    fb.style.color = "#ff7675";
+                    this.mistakes.push(this.currentQ);
+                    this.speak(this.currentQ.en);
+                }
+
+                setTimeout(() => {
+                    fb.classList.add('hidden');
+                    this.nextQuestion();
+                }, 1800);
+            }
+
+            finishRound() {
+                // ارسال گزارش به تلگرام
+                const msg = `📊 گزارش: فوند درشت\nاشتباهات: ${this.mistakes.length}`;
+                fetch(PROXY_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ message: msg }) });
+                
+                alert(`تمرین تمام شد!\nتعداد اشتباهات: ${this.mistakes.length}`);
+                location.reload();
+            }
+        }
+
+        const app = new FredApp();
+    </script>
 </body>
 </html>
