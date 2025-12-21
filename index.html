@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Fred Elite V3.2</title>
+    <title>Fred Elite V3.3</title>
     <style>
         :root { 
             --bg: #e0e5ec; --text: #333; --accent: #1e40af;
@@ -23,18 +23,20 @@
         .neu-card { background: var(--bg); border-radius: 25px; box-shadow: var(--shadow); padding: 15px; margin-bottom: 15px; }
         .neu-btn { border: none; background: var(--bg); box-shadow: var(--shadow); cursor: pointer; color: var(--text); font-weight: bold; transition: 0.2s; display: flex; align-items: center; justify-content: center; }
         .neu-btn:active { box-shadow: var(--inner); transform: scale(0.98); }
+        
+        /* اصلاح جابجایی لغت و معنی */
+        .word-header { display: flex; flex-direction: row-reverse; justify-content: space-between; align-items: center; width: 100%; }
+        .en-title { font-size: 32px; font-weight: bold; color: var(--accent); }
+        .fa-title { font-size: 26px; color: #d63031; font-weight: bold; }
+
         .search-box { width: 90%; border: none; background: var(--bg); box-shadow: var(--inner); padding: 12px; border-radius: 50px; outline: none; text-align: center; font-size: 18px; margin: 10px auto; display: block; color: var(--text); }
-        
-        .en-title { font-size: 32px; font-weight: bold; color: var(--accent); text-align: left; direction: ltr; }
-        .fa-title { font-size: 26px; color: #d63031; font-weight: bold; text-align: right; }
-        
         .label { font-size: 14px; color: #888; text-align: left; margin-top: 10px; border-bottom: 1px solid #ccc; direction: ltr; }
-        .content-box { background: var(--bg); box-shadow: var(--inner); padding: 10px; border-radius: 15px; margin: 5px 0; text-align: left; direction: ltr; font-size: 18px; min-height: 20px; font-weight: bold; }
+        .content-box { background: var(--bg); box-shadow: var(--inner); padding: 10px; border-radius: 15px; margin: 5px 0; text-align: left; direction: ltr; font-size: 18px; font-weight: bold; }
         .fa-sub { direction: rtl; text-align: right; font-size: 16px; color: #d63031; margin-bottom: 10px; margin-top: -5px; font-weight: bold; }
 
         .bottom-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
         .nav-item { padding: 12px; border-radius: 15px; font-size: 16px; color: white; }
-        .exit-btn { grid-column: span 2; background: #e74c3c; padding: 12px; border-radius: 15px; color: white; font-size: 18px; margin-top: 5px; }
+        .exit-btn { grid-column: span 2; background: #e74c3c; padding: 12px; border-radius: 15px; color: white; font-size: 18px; margin-top: 5px; border: none; box-shadow: var(--shadow); cursor: pointer; }
         
         .footer-status { display: flex; justify-content: space-around; align-items: center; margin-top: 15px; padding: 10px; border-top: 1px solid #ccc; font-size: 18px; }
         .hidden { display: none !important; }
@@ -52,7 +54,7 @@
 
     <div id="mainView">
         <div id="wordCard" class="neu-card hidden">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div class="word-header">
                 <div id="enMain" class="en-title"></div>
                 <div id="faMain" class="fa-title"></div>
             </div>
@@ -95,15 +97,13 @@
     </div>
 
     <script>
-        // لود دیکشنری با روش جدید برای جلوگیری از کش
-        const s = document.createElement('script');
-        s.src = "dictionary.js?v=" + Date.now();
-        document.head.appendChild(s);
+        // جلوگیری از کش فایل دیکشنری
+        const script = document.createElement('script');
+        script.src = "dictionary.js?v=" + Date.now();
+        document.head.appendChild(script);
 
         const app = {
-            isMuted: false,
-            currentWord: null,
-            audioInit: false,
+            isMuted: false, currentWord: null, audioInit: false,
 
             initAudio() { if(!this.audioInit) { window.speechSynthesis.getVoices(); this.audioInit = true; } },
             toggleTheme() { document.body.classList.toggle('dark-mode'); },
@@ -123,12 +123,20 @@
                 if(f) {
                     this.currentWord = f;
                     card.classList.remove('hidden');
+                    
+                    // تنظیم کلمه و معنی در جای درست
                     document.getElementById('enMain').innerText = f.en.toUpperCase();
                     document.getElementById('faMain').innerText = f.fa;
+                    
                     document.getElementById('defBox').innerText = f.def || "---";
                     document.getElementById('exBox').innerText = f.ex || "---";
-                    document.getElementById('collBox').innerText = f.col || "---"; // هماهنگ با col در فایل شما
-                    document.getElementById('phrasalBox').innerText = f.phr || "---"; // هماهنگ با phr در فایل شما
+                    
+                    // نمایش هوشمند معنی مثال (اگر exFa نبود، خود fa را نشان می‌دهد)
+                    document.getElementById('exFa').innerText = f.exFa || f.fa || "";
+                    
+                    document.getElementById('collBox').innerText = f.col || "---";
+                    document.getElementById('phrasalBox').innerText = f.phr || "---";
+                    
                     this.speak();
                 }
             },
@@ -159,9 +167,7 @@
                 cont.innerHTML = "";
                 opts.forEach(o => {
                     const b = document.createElement('button');
-                    b.className = 'neu-btn';
-                    b.style.padding = "15px";
-                    b.innerText = o;
+                    b.className = 'neu-btn'; b.style.padding = "15px"; b.innerText = o;
                     b.onclick = () => {
                         if(o === w.fa) { alert("✅ درست بود!"); this.nextQuestion(); }
                         else alert("❌ اشتباه بود!");
