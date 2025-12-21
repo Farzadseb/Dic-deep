@@ -1,5 +1,5 @@
-// Fred Elite Core Logic - Integrated with Secure Proxy
-const PROXY_URL = "Https://script.google.com/macros/s/AKfycbwpS34Rfd59aIpCger7MC2ggs0WyaIxlcfHQ_AjkDevV22HtbkuP-jKcKysNIj0LWwb/exec";
+// Fred Elite Core Logic - Secure & Smart Review System
+const PROXY_URL = "https://script.google.com/macros/s/AKfycbwpS34Rfd59aIpCger7MC2ggs0WyaIxlcfHQ_AjkDevV22HtbkuP-jKcKysNIj0LWwb/exec";
 
 class FredApp {
     constructor() {
@@ -13,7 +13,6 @@ class FredApp {
     }
 
     init() {
-        // مدیریت ورود اتوماتیک از طریق URL
         const params = new URLSearchParams(window.location.search);
         if (params.get('name')) {
             this.userName = params.get('name');
@@ -33,12 +32,13 @@ class FredApp {
         this.qIndex = 0;
         this.mistakes = [];
         this.isReviewMode = false;
+        // مخلوط کردن لغات از فایل dictionary.js
         this.activePool = [...dictionary].sort(() => 0.5 - Math.random());
         this.nextQuestion();
     }
 
     nextQuestion() {
-        // چک کردن پایان دور اول (۱۰ سوال) یا پایان مرور اشتباهات
+        // پایان دور اصلی (۱۰ سوال) یا پایان لیست مرور
         if (!this.isReviewMode && this.qIndex >= 10) {
             this.finishFirstRound();
             return;
@@ -49,20 +49,15 @@ class FredApp {
         }
 
         this.qIndex++;
-        
-        // انتخاب لغت (اگر در حالت مرور باشد از لیست اشتباهات، وگرنه تصادفی)
         const correct = this.activePool.pop();
         let wrongs = dictionary.filter(i => i.en !== correct.en).sort(() => 0.5 - Math.random()).slice(0, 3);
         let opts = [correct, ...wrongs].sort(() => 0.5 - Math.random());
 
         this.currentQ = correct;
         
-        // فراخوانی رابط کاربری (توابع UI در index.html تعریف شده‌اند)
-        ui.render(
-            correct.ex.replace(new RegExp(correct.en, 'gi'), "_______"), 
-            opts.map(o => o.en),
-            (this.isReviewMode ? "Review Mode" : `Question ${this.qIndex}/10`)
-        );
+        // نمایش اطلاعات در UI
+        const statusText = this.isReviewMode ? `Reviewing Mistake #${this.qIndex}` : `Question ${this.qIndex}/10`;
+        ui.render(correct.ex.replace(new RegExp(correct.en, 'gi'), "_______"), opts.map(o => o.en), statusText);
     }
 
     check(chosen) {
@@ -71,11 +66,11 @@ class FredApp {
         if (isCorrect) {
             if (!this.isReviewMode) this.score += 20;
         } else {
-            // اگر در دور اول اشتباه کند، به لیست مرور اضافه می‌شود
+            // در دور اصلی، اشتباهات ذخیره می‌شوند
             if (!this.isReviewMode) {
                 this.mistakes.push(this.currentQ);
             } else {
-                // اگر در زمان مرور هم اشتباه کند، دوباره به ته لیست می‌رود تا یاد بگیرد
+                // در دور مرور، اگر باز هم غلط بزند، لغت به انتهای صف برمی‌گردد تا حتماً یاد بگیرد
                 this.activePool.unshift(this.currentQ);
             }
         }
@@ -85,39 +80,35 @@ class FredApp {
     }
 
     async finishFirstRound() {
-        // ارسال گزارش امن به تلگرام شاگرد/استاد
-        let report = `📊 ${this.userName}\nScore: ${this.score}\nMistakes: ${this.mistakes.length}`;
+        let report = `📊 ${this.userName}\nScore: ${this.score}/200\nMistakes: ${this.mistakes.length}`;
         this.sendToTelegram(report);
 
         if (this.mistakes.length > 0) {
-            // افکت بصری برای شروع فاز مرور
-            if (confirm(`You had ${this.mistakes.length} mistakes. Let's fix them!`)) {
+            const redo = confirm(`You had ${this.mistakes.length} mistakes. Ready to review and fix them?`);
+            if (redo) {
                 this.isReviewMode = true;
                 this.activePool = [...this.mistakes].sort(() => 0.5 - Math.random());
                 this.qIndex = 0;
                 this.nextQuestion();
-            } else {
-                location.reload();
-            }
+            } else { location.reload(); }
         } else {
-            alert("Perfect! No mistakes found. Excellence achieved! 🏆");
+            alert("Perfect! No mistakes found. 🏆");
             location.reload();
         }
     }
 
     async sendToTelegram(msg) {
-        // استفاده از پروکسی شما برای امنیت توکن
         try {
             fetch(PROXY_URL, { 
                 method: 'POST', 
                 mode: 'no-cors', 
                 body: JSON.stringify({ message: msg }) 
             });
-        } catch(e) { console.log("Reporting offline."); }
+        } catch(e) { console.warn("Log failed, but quiz continues."); }
     }
 
     endSession() {
-        alert("Well done! You have mastered your mistakes. 🌟");
+        alert("Well done! You have corrected all your mistakes. 🌟");
         location.reload();
     }
 }
