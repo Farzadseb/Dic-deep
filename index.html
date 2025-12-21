@@ -1,147 +1,154 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>FredDic Professional Edition</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FredDic Elite Pro 2025</title>
     <style>
         :root {
-            --bg: #e0e0e0; --shd: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
-            --inner: inset 6px 6px 12px #bebebe, inset -6px -6px 12px #ffffff;
-            --blue: #2d5bc0; --red: #d32f2f; --txt: #444;
+            --bg: #e0e5ec;
+            --shadow: 9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px rgba(255,255,255, 0.5);
+            --inner-shadow: inset 6px 6px 12px #b8bec5, inset -6px -6px 12px #ffffff;
+            --accent: #4a90e2;
         }
-        [data-theme="dark"] {
-            --bg: #2c2f33; --shd: 6px 6px 12px #1c1e22, -4px -4px 10px #3c4248;
-            --inner: inset 4px 4px 8px #1c1e22, inset -2px -2px 8px #3c4248; --txt: #f0f0f0;
+        body.dark {
+            --bg: #2d3436;
+            --shadow: 5px 5px 10px #23282a, -5px -5px 10px #374042;
+            --inner-shadow: inset 3px 3px 6px #23282a, inset -3px -3px 6px #374042;
+            color: white;
         }
-        body, html { margin: 0; padding: 0; height: 100%; width: 100%; background: var(--bg); font-family: sans-serif; direction: rtl; color: var(--txt); overflow: hidden; }
-        .page { position: absolute; inset: 0; padding: 20px; display: flex; flex-direction: column; background: var(--bg); overflow-y: auto; padding-bottom: 90px; }
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .icon-btn { width: 45px; height: 45px; border-radius: 12px; border: none; background: var(--bg); box-shadow: var(--shd); cursor: pointer; color: var(--txt); font-size: 18px; }
-        .search-box { display: flex; align-items: center; background: var(--bg); box-shadow: var(--inner); border-radius: 25px; padding: 0 15px; margin-bottom: 20px; }
-        .search-box input { flex: 1; border: none; background: none; height: 50px; outline: none; color: var(--txt); text-align: center; font-size: 18px; direction: ltr; }
-        .word-card { background: var(--bg); padding: 25px; border-radius: 35px; box-shadow: var(--shd); margin-bottom: 20px; display: none; }
-        .word-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; direction: ltr; }
-        .en-title { color: var(--blue); font-size: 32px; font-weight: 900; }
-        .fa-title { color: var(--red); font-size: 26px; font-weight: bold; direction: rtl; }
-        .label { font-size: 10px; color: #888; text-align: left; direction: ltr; margin: 10px 0 2px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
-        .content-box { background: var(--bg); border-radius: 15px; padding: 12px; box-shadow: var(--shd); cursor: pointer; text-align: left; direction: ltr; width: 100%; border: none; margin-bottom: 8px; color: var(--txt); font-weight: bold; font-size: 15px; }
-        .fa-sub { color: var(--red); font-size: 13px; text-align: left; direction: rtl; margin-top: -5px; margin-bottom: 12px; }
-        .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px; margin-bottom: 20px; }
-        .nav-btn { padding: 18px; border-radius: 20px; border: none; color: white; font-weight: bold; box-shadow: var(--shd); cursor: pointer; }
-        .vip-card { background: var(--bg); padding: 25px; border-radius: 30px; box-shadow: var(--shd); margin: 20px 0; text-align: center; }
-        .vip-input { width: 85%; padding: 15px; border-radius: 15px; border: none; background: var(--bg); box-shadow: var(--inner); text-align: center; font-size: 18px; font-weight: bold; color: var(--blue); margin-bottom: 15px; outline: none; }
-        .modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85%; background: var(--bg); box-shadow: var(--shd); border-radius: 25px; padding: 30px; z-index: 5000; text-align: center; display: none; }
-        .footer { position: fixed; bottom: 0; left: 0; right: 0; height: 70px; background: var(--bg); display: flex; justify-content: space-around; align-items: center; border-radius: 20px 20px 0 0; }
+        body { background: var(--bg); font-family: 'Segoe UI', Tahoma; transition: 0.3s; padding: 20px; margin: 0; }
+        .neu-card { background: var(--bg); border-radius: 20px; box-shadow: var(--shadow); padding: 20px; margin-bottom: 20px; text-align: center; }
+        .neu-btn { border: none; background: var(--bg); box-shadow: var(--shadow); padding: 12px 25px; border-radius: 12px; cursor: pointer; font-weight: bold; color: var(--accent); margin: 5px; transition: 0.2s; }
+        .neu-btn:active { box-shadow: var(--inner-shadow); transform: scale(0.98); }
+        .hidden { display: none; }
+        #progressBar { width: 100%; height: 12px; background: #d1d9e6; border-radius: 6px; overflow: hidden; margin: 15px 0; box-shadow: var(--inner-shadow); }
+        #progressInner { width: 0%; height: 100%; background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%); transition: 0.5s; }
+        .search-input { width: 100%; border: none; background: var(--bg); box-shadow: var(--inner-shadow); padding: 15px; border-radius: 15px; outline: none; color: var(--accent); font-size: 16px; box-sizing: border-box; }
+        .stars-container { font-size: 24px; color: #f1c40f; margin: 10px 0; }
+        .example-box { font-size: 0.85em; background: rgba(0,0,0,0.05); padding: 8px; border-radius: 10px; margin-top: 8px; text-align: left; direction: ltr; }
     </style>
 </head>
-<body>
+<body class="light">
 
-<div class="page">
-    <div class="header">
-        <button class="icon-btn" onclick="toggleMute()" id="muteBtn">🔊</button>
-        <b id="statusLabel">Guest Mode 👤</b>
-        <button class="icon-btn" onclick="toggleTheme()">🌓</button>
-    </div>
-    <div class="search-box">
-        <input type="text" id="wordInp" placeholder="Search / جستجو" oninput="handleSearch(this.value)">
-    </div>
-    <div id="resCard" class="word-card">
-        <div class="word-row">
-            <div class="en-title" id="hEn"></div>
-            <div class="fa-title" id="hFa"></div>
+    <div class="neu-card">
+        <div style="display:flex; justify-content: space-between; align-items: center;">
+            <button class="neu-btn" onclick="toggleTheme()">🌓</button>
+            <h3 id="userDisplay" style="margin:0;">Guest Mode</h3>
+            <span id="scoreDisplay" style="font-weight:bold; color:var(--accent);">Score: 0</span>
         </div>
-        <span class="label">Definition:</span>
-        <div class="content-box" id="hDef" onclick="spk(this.innerText)"></div>
-        <div class="fa-sub" id="hDefFa"></div>
-        <span class="label">Example:</span>
-        <div class="content-box" id="hEx" onclick="spk(this.innerText)"></div>
-        <div class="fa-sub" id="hExFa"></div>
-        <span class="label">Collocation:</span>
-        <div class="content-box" id="hCol" onclick="spk(this.innerText)"></div>
-        <div class="fa-sub" id="hColFa"></div>
-        <span class="label">Phrasal Verb:</span>
-        <div class="content-box" id="hPhr" onclick="spk(this.innerText)"></div>
-        <div class="fa-sub" id="hPhrFa"></div>
+        <div id="progressBar"><div id="progressInner"></div></div>
+        <div id="starDisplay" class="stars-container"></div>
     </div>
-    <div class="nav-grid">
-        <button class="nav-btn" style="background:#27ae60" onclick="myAlert('لایتنر','بخش لایتنر به‌زودی...')">🗂 لایتنر</button>
-        <button class="nav-btn" style="background:#3498db" onclick="myAlert('تمرین','تمرینات کلاسی...')">📝 تمرین</button>
-        <button class="nav-btn" style="background:#f39c12" onclick="myAlert('مسابقه','رقابت آنلاین!')">🎮 مسابقه</button>
-        <button class="nav-btn" style="background:#e74c3c" onclick="showExit()">🚪 خروج</button>
+
+    <div id="vipArea" class="neu-card">
+        <h3>🔒 VIP ACCESS</h3>
+        <input type="text" id="vipCode" class="search-input" style="text-align:center; margin-bottom:15px;" placeholder="ENTER FRED CODE">
+        <button class="neu-btn" onclick="checkVIP()">UNLOCK SYSTEM</button>
     </div>
-    <div id="vipInputArea" class="vip-card">
-        <input type="text" id="vipCode" class="vip-input" placeholder="Enter Code">
-        <button onclick="checkVIP()" style="border:none; background:none; color:var(--blue); font-weight:900; cursor:pointer;">تایید 💎</button>
+
+    <div id="mainContent" class="hidden">
+        <div class="neu-card">
+            <input type="text" id="search" class="search-input" placeholder="🔍 Search English or Persian..." oninput="liveSearch()">
+            <div id="results" style="margin-top:20px;"></div>
+        </div>
+
+        <div class="neu-card" id="quizArea">
+            <h3>🤖 AI CHALLENGE</h3>
+            <p id="quizQuestion" style="font-size:1.2em; font-weight:bold;">Ready to test your skills?</p>
+            <div id="options" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;"></div>
+            <div id="timer" style="margin-top:15px; font-weight:bold; color:#e74c3c;"></div>
+            <button id="startBtn" class="neu-btn" onclick="startQuiz()">START BATTLE</button>
+        </div>
     </div>
-</div>
 
-<div id="msgBox" class="modal">
-    <h3 id="msgTitle"></h3><p id="msgBody"></p><div id="waArea"></div>
-    <button onclick="closePop()" style="width:100%; padding:15px; border-radius:15px; border:none; background:#888; color:white; font-weight:bold; margin-top:15px;">بستن</button>
-</div>
+    <script src="dictionary.js"></script>
+    <script>
+        const BOT_TOKEN = '553224514:AAG0XXzA8da55jCGXnzStP-0IxHhnfkTPRw';
+        const CHAT_ID = '969918598';
+        let UID = "PDCS-" + Math.floor(1000 + Math.random() * 9000);
+        let score = 0, stars = 0, aiTimer;
 
-<div id="exitBox" class="modal">
-    <h3 style="color:var(--red);">خروج</h3><p>آیا مایل به بستن برنامه هستید؟</p>
-    <button class="nav-btn" style="background:#27ae60; width:100%; margin-bottom:10px;" onclick="window.close()">بله</button>
-    <button class="nav-btn" style="background:#888; width:100%;" onclick="closePop()">خیر</button>
-</div>
-
-<div class="footer">
-    <span id="clickCounter">📝 0/5</span><span style="font-size:30px;">🏆</span><span>⭐ 0</span>
-</div>
-
-<script>
-    // --- دیتابیس لغات (بخش قفل شده) ---
-    const dictionary = [
-        { en: "book", fa: "کتاب", def: "A set of printed pages.", defFa: "مجموعه‌ای از صفحات چاپ شده.", ex: "I read a book.", exFa: "من یک کتاب می‌خوانم.", col: "Open a book", colFa: "باز کردن کتاب", phr: "Book in", phrFa: "رزرو کردن" },
-        { en: "water", fa: "آب", def: "A clear liquid.", defFa: "مایع شفاف.", ex: "I drink water.", exFa: "من آب می‌نوشم.", col: "Cold water", colFa: "آب سرد", phr: "Water down", phrFa: "رقیق کردن" },
-        { en: "friend", fa: "دوست", def: "A person you like.", defFa: "کسی که دوستش دارید.", ex: "He is my friend.", exFa: "او دوست من است.", col: "Best friend", colFa: "بهترین دوست", phr: "Make friends", phrFa: "دوست پیدا کردن" },
-        { en: "happy", fa: "خوشحال", def: "Feeling good.", defFa: "احساس خوب داشتن.", ex: "I am happy.", exFa: "من خوشحالم.", col: "Happy life", colFa: "زندگی شاد", phr: "Happy for you", phrFa: "خوشحال برای تو" },
-        { en: "work", fa: "کار", def: "A job or task.", defFa: "یک شغل یا وظیفه.", ex: "I go to work.", exFa: "من به سر کار می‌روم.", col: "Hard work", colFa: "کار سخت", phr: "Work out", phrFa: "ورزش کردن" }
-    ];
-
-    let isMuted = false;
-    let db = JSON.parse(localStorage.getItem('fred_db_v2')) || { type: 'guest', clicks: 0 };
-
-    function handleSearch(val) {
-        let v = val.toLowerCase().trim();
-        if(!v) { document.getElementById('resCard').style.display='none'; return; }
-        if(db.type === 'guest' && db.clicks >= 5) { myAlert('Limit', 'لطفاً کد VIP وارد کنید.', true); return; }
-        
-        let found = dictionary.find(item => item.en === v || item.fa === v);
-        if(found) {
-            document.getElementById('resCard').style.display = 'block';
-            document.getElementById('hEn').innerText = found.en.toUpperCase();
-            document.getElementById('hFa').innerText = found.fa;
-            document.getElementById('hDef').innerText = found.def;
-            document.getElementById('hDefFa').innerText = found.defFa;
-            document.getElementById('hEx').innerText = found.ex;
-            document.getElementById('hExFa').innerText = found.exFa;
-            document.getElementById('hCol').innerText = found.col;
-            document.getElementById('hColFa').innerText = found.colFa;
-            document.getElementById('hPhr').innerText = found.phr;
-            document.getElementById('hPhrFa').innerText = found.phrFa;
-            spk(found.en);
-            if(db.type === 'guest') { db.clicks++; save(); }
+        async function sendLog(msg) {
+            const text = `👤 User: ${UID}\n🎯 Event: ${msg}\n🏆 Score: ${score}\n⭐ Stars: ${stars}`;
+            try { await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(text)}`); } catch (e) {}
         }
-    }
 
-    function spk(t) { if(!isMuted) { window.speechSynthesis.cancel(); let m = new SpeechSynthesisUtterance(t); m.rate = 0.5; window.speechSynthesis.speak(m); } }
-    function myAlert(t, b, isWA) { document.getElementById('msgTitle').innerText = t; document.getElementById('msgBody').innerText = b; document.getElementById('waArea').innerHTML = isWA ? `<button onclick="window.location.href='https://wa.me/989017708544'" style="width:100%; padding:15px; background:#25D366; color:white; border:none; border-radius:15px;">WhatsApp</button>` : ''; document.getElementById('msgBox').style.display = 'block'; }
-    function closePop() { document.getElementById('msgBox').style.display = 'none'; document.getElementById('exitBox').style.display = 'none'; }
-    function showExit() { document.getElementById('exitBox').style.display = 'block'; }
-    function checkVIP() { if(document.getElementById('vipCode').value.trim() === "FRED-2025") { db.type='student'; save(); location.reload(); } }
-    function toggleMute() { isMuted = !isMuted; document.getElementById('muteBtn').innerText = isMuted ? "🔇" : "🔊"; }
-    function toggleTheme() { document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') === 'dark' ? '' : 'dark'); }
-    function save() { localStorage.setItem('fred_db_v2', JSON.stringify(db)); updateUI(); }
-    function updateUI() {
-        document.getElementById('statusLabel').innerText = db.type === 'student' ? "VIP Mode 👨‍🎓" : "Guest Mode 👤";
-        document.getElementById('clickCounter').innerText = `📝 ${db.type === 'student' ? '∞' : db.clicks + '/5'}`;
-        if(db.type === 'student') document.getElementById('vipInputArea').style.display = 'none';
-    }
-    updateUI();
-</script>
+        function toggleTheme() { document.body.classList.toggle('dark'); }
+
+        function checkVIP() {
+            if(document.getElementById('vipCode').value === "FRED-2025") {
+                document.getElementById('vipArea').classList.add('hidden');
+                document.getElementById('mainContent').classList.remove('hidden');
+                document.getElementById('userDisplay').innerText = UID;
+                sendLog("System Unlocked");
+            } else { alert("Wrong Code!"); }
+        }
+
+        function liveSearch() {
+            const term = document.getElementById('search').value.toLowerCase();
+            const res = document.getElementById('results');
+            res.innerHTML = "";
+            if(term.length < 1) return;
+            dictionary.filter(w => w.en.includes(term) || w.fa.includes(term)).slice(0, 5).forEach(w => {
+                res.innerHTML += `
+                    <div class="neu-card" style="padding:15px; margin-bottom:10px; box-shadow:var(--inner-shadow);">
+                        <div style="display:flex; justify-content:space-between; font-weight:bold; color:var(--accent);">
+                            <span>${w.en}</span><span>${w.fa}</span>
+                        </div>
+                        <div class="example-box">
+                            <b>Ex:</b> ${w.ex}<br>
+                            <b>Col:</b> ${w.col}<br>
+                            <b>Phr:</b> ${w.phr}
+                        </div>
+                    </div>`;
+            });
+        }
+
+        function startQuiz() {
+            document.getElementById('startBtn').classList.add('hidden');
+            const correct = dictionary[Math.floor(Math.random() * dictionary.length)];
+            const options = [correct];
+            while(options.length < 4) {
+                const rand = dictionary[Math.floor(Math.random() * dictionary.length)];
+                if(!options.includes(rand)) options.push(rand);
+            }
+            options.sort(() => Math.random() - 0.5);
+            document.getElementById('quizQuestion').innerText = `Meaning of "${correct.en}"?`;
+            const optDiv = document.getElementById('options');
+            optDiv.innerHTML = "";
+            options.forEach(o => {
+                const btn = document.createElement('button');
+                btn.className = "neu-btn";
+                btn.innerText = o.fa;
+                btn.onclick = () => handleAnswer(o === correct);
+                optDiv.appendChild(btn);
+            });
+            let sec = 30;
+            clearInterval(aiTimer);
+            aiTimer = setInterval(() => {
+                document.getElementById('timer').innerText = `AI Counter: ${--sec}s`;
+                if(sec <= 0) { clearInterval(aiTimer); aiMove(); }
+            }, 1000);
+        }
+
+        function handleAnswer(isCorrect) {
+            clearInterval(aiTimer);
+            if(isCorrect) { score += 20; updateStats(); startQuiz(); }
+            else { alert("Wrong!"); sendLog("Mistake Made"); startQuiz(); }
+        }
+
+        function aiMove() {
+            if(Math.random() < 0.3) { score = Math.max(0, score - 10); alert("AI Won!"); }
+            else { score += 15; alert("AI Failed!"); }
+            updateStats(); startQuiz();
+        }
+
+        function updateStats() {
+            document.getElementById('scoreDisplay').innerText = `Score: ${score}`;
+            document.getElementById('progressInner').style.width = Math.min(100, (score/1000)*100) + "%";
+            if(score > 0 && score % 100 === 0) { stars++; document.getElementById('starDisplay').innerHTML = "⭐".repeat(stars); }
+        }
+    </script>
 </body>
 </html>
