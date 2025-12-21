@@ -1,25 +1,7 @@
-const cacheName = 'dicdeep-v1';
-const assets = [
-  './',
-  './index.html',
-  './dictionary.js',
-  './manifest.json'
-];
-
-// نصب سرویس ورکر و ذخیره فایل‌ها در کش
+const CACHE_NAME = 'fred-v1';
 self.addEventListener('install', e => {
-  e.waitUntil(
-    caches.open(cacheName).then(cache => {
-      return cache.addAll(assets);
-    })
-  );
+    e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(['./', './index.html', './core.js', './dictionary.js', './manifest.json'])));
 });
-
-// پاسخ‌دهی به درخواست‌ها حتی در حالت آفلاین
 self.addEventListener('fetch', e => {
-  e.respondWith(
-    caches.match(e.request).then(res => {
-      return res || fetch(e.request);
-    })
-  );
+    e.respondWith(caches.match(e.request).then(r => r || fetch(e.request)));
 });
