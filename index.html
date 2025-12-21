@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Fred Elite V3</title>
+    <title>Fred Elite V3.1</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <style>
         :root { 
             --bg: #e0e5ec; --text: #333; --accent: #1e40af;
@@ -17,26 +18,24 @@
         }
         body { 
             background-color: var(--bg); color: var(--text); font-family: Tahoma, sans-serif; 
-            margin: 0; padding: 10px; font-size: 22px; transition: 0.3s; overflow-x: hidden;
+            margin: 0; padding: 10px; font-size: 22px; transition: 0.3s;
         }
         .header { display: flex; justify-content: space-between; align-items: center; padding: 5px 15px; }
         .neu-card { background: var(--bg); border-radius: 25px; box-shadow: var(--shadow); padding: 15px; margin-bottom: 15px; }
-        .neu-btn { border: none; background: var(--bg); box-shadow: var(--shadow); cursor: pointer; color: var(--text); font-weight: bold; transition: 0.2s; }
+        .neu-btn { border: none; background: var(--bg); box-shadow: var(--shadow); cursor: pointer; color: var(--text); font-weight: bold; transition: 0.2s; display: flex; align-items: center; justify-content: center; }
         .neu-btn:active { box-shadow: var(--inner); transform: scale(0.98); }
-        .search-box { width: 90%; border: none; background: var(--bg); box-shadow: var(--inner); padding: 12px; border-radius: 50px; outline: none; text-align: center; font-size: 18px; margin: 10px auto; display: block; }
+        .search-box { width: 90%; border: none; background: var(--bg); box-shadow: var(--inner); padding: 12px; border-radius: 50px; outline: none; text-align: center; font-size: 18px; margin: 10px auto; display: block; color: var(--text); }
         
-        .word-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .en-title { font-size: 32px; font-weight: bold; color: var(--accent); }
-        .fa-title { font-size: 26px; color: #d63031; font-weight: bold; }
+        .en-title { font-size: 32px; font-weight: bold; color: var(--accent); text-align: left; direction: ltr; }
+        .fa-title { font-size: 26px; color: #d63031; font-weight: bold; text-align: right; }
         
-        .label { font-size: 14px; color: #888; text-align: left; margin-top: 10px; border-bottom: 1px solid #ccc; }
-        .content-box { background: var(--bg); box-shadow: var(--inner); padding: 10px; border-radius: 15px; margin: 5px 0; text-align: left; direction: ltr; font-size: 18px; }
-        .fa-sub { direction: rtl; text-align: right; font-size: 16px; color: #d63031; margin-bottom: 10px; margin-top: -5px; }
+        .label { font-size: 14px; color: #888; text-align: left; margin-top: 10px; border-bottom: 1px solid #ccc; direction: ltr; }
+        .content-box { background: var(--bg); box-shadow: var(--inner); padding: 10px; border-radius: 15px; margin: 5px 0; text-align: left; direction: ltr; font-size: 18px; min-height: 20px; }
+        .fa-sub { direction: rtl; text-align: right; font-size: 16px; color: #d63031; margin-bottom: 10px; margin-top: -5px; font-weight: bold; }
 
-        /* بخش ۵ دکمه پایین */
-        .bottom-nav { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; }
-        .nav-item { padding: 12px; border-radius: 15px; font-size: 16px; color: white; display: flex; align-items: center; justify-content: center; gap: 5px; }
-        .exit-row { grid-column: span 2; display: flex; justify-content: center; margin-top: 5px; }
+        .bottom-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .nav-item { padding: 12px; border-radius: 15px; font-size: 16px; color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+        .exit-btn { grid-column: span 2; background: #e74c3c; padding: 12px; border-radius: 15px; color: white; font-size: 18px; margin-top: 5px; }
         
         .footer-status { display: flex; justify-content: space-around; align-items: center; margin-top: 15px; padding: 10px; border-top: 1px solid #ccc; font-size: 18px; }
         .hidden { display: none !important; }
@@ -45,44 +44,50 @@
 <body>
 
     <div class="header">
-        <button class="neu-btn" style="width:50px; height:50px; border-radius:50%;" onclick="app.speakCurrent()">🔊</button>
+        <button id="speakerBtn" class="neu-btn" style="width:50px; height:50px; border-radius:50%;" onclick="app.toggleMute()">🔊</button>
         <span style="font-size: 18px;">Guest Mode 👤</span>
         <button class="neu-btn" style="width:50px; height:50px; border-radius:50%;" onclick="app.toggleTheme()">🌓</button>
     </div>
 
     <input type="text" id="searchInput" class="search-box" placeholder="Go..." oninput="app.search()">
 
-    <div id="mainContent">
+    <div id="mainView">
         <div id="wordCard" class="neu-card hidden">
-            <div class="word-header">
-                <div id="faMain" class="fa-title"></div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
                 <div id="enMain" class="en-title"></div>
+                <div id="faMain" class="fa-title"></div>
             </div>
 
-            <div class="label">:Definition</div>
+            <div class="label">Definition:</div>
             <div id="defBox" class="content-box"></div>
 
-            <div class="label">:Example</div>
+            <div class="label">Example:</div>
             <div id="exBox" class="content-box"></div>
             <div id="exFa" class="fa-sub"></div>
 
-            <div class="label">:Collocations</div>
+            <div class="label">Collocations:</div>
             <div id="collBox" class="content-box"></div>
             <div id="collFa" class="fa-sub"></div>
 
-            <div class="label">:Phrasal Verbs</div>
+            <div class="label">Phrasal Verbs:</div>
             <div id="phrasalBox" class="content-box"></div>
             <div id="phrasalFa" class="fa-sub"></div>
         </div>
 
         <div class="bottom-nav">
-            <button class="neu-btn nav-item" style="background:#2ecc71;" onclick="alert('لایتنر')">📂 لایتنر</button>
+            <button class="neu-btn nav-item" style="background:#2ecc71;" onclick="app.showMsg('لایتنر')">📂 لایتنر</button>
             <button class="neu-btn nav-item" style="background:#3498db;" onclick="app.startQuiz()">📝 تمرین</button>
-            <button class="neu-btn nav-item" style="background:#9b59b6;" onclick="alert('VIP')">💎 VIP</button>
-            <button class="neu-btn nav-item" style="background:#f39c12;" onclick="alert('مسابقه')">🎮 مسابقه</button>
+            <button class="neu-btn nav-item" style="background:#9b59b6;" onclick="app.showMsg('VIP')">💎 VIP</button>
+            <button class="neu-btn nav-item" style="background:#f39c12;" onclick="app.showMsg('مسابقه')">🎮 مسابقه</button>
+            <button class="neu-btn exit-btn" onclick="app.exit()">✖ خروج</button>
         </div>
-        <div class="exit-row">
-            <button class="neu-btn nav-item" style="background:#e74c3c; width: 100%;" onclick="app.exit()">✖ خروج</button>
+    </div>
+
+    <div id="quizView" class="hidden">
+        <div class="neu-card">
+            <div id="qQuestion" style="font-size: 24px; margin-bottom: 20px; direction: ltr;"></div>
+            <div id="qOptions" style="display: grid; gap: 10px;"></div>
+            <button class="neu-btn exit-btn" style="width:100%; margin-top:20px;" onclick="app.stopQuiz()">برگشت</button>
         </div>
     </div>
 
@@ -92,49 +97,87 @@
         <div>1/5 📝</div>
     </div>
 
-    <script src="dictionary.js"></script>
     <script>
+        // لود کردن دیکشنری با روش ضد کَش
+        const script = document.createElement('script');
+        script.src = "dictionary.js?v=" + new Date().getTime();
+        document.head.appendChild(script);
+
         const app = {
-            current: null,
+            isMuted: false,
+            currentWord: null,
+
             toggleTheme() { document.body.classList.toggle('dark-mode'); },
-            exit() { if(confirm("آیا خارج می‌شوید؟")) location.reload(); },
             
+            toggleMute() {
+                this.isMuted = !this.isMuted;
+                document.getElementById('speakerBtn').innerText = this.isMuted ? "🔇" : "🔊";
+            },
+
+            exit() { if(confirm("آیا خارج می‌شوید؟")) window.close(); },
+            showMsg(name) { alert(name + " به‌زودی فعال می‌شود."); },
+
             search() {
-                const term = document.getElementById('searchInput').value.toLowerCase();
+                const term = document.getElementById('searchInput').value.trim().toLowerCase();
                 const card = document.getElementById('wordCard');
                 if(!term) { card.classList.add('hidden'); return; }
 
                 const f = dictionary.find(w => w.en.toLowerCase() === term);
                 if(f) {
-                    this.current = f;
+                    this.currentWord = f;
                     card.classList.remove('hidden');
                     document.getElementById('enMain').innerText = f.en.toUpperCase();
                     document.getElementById('faMain').innerText = f.fa;
                     document.getElementById('defBox').innerText = f.def || "---";
-                    document.getElementById('exBox').innerText = f.ex;
+                    document.getElementById('exBox').innerText = f.ex || "---";
                     document.getElementById('exFa').innerText = f.exFa || "";
                     document.getElementById('collBox').innerText = f.coll || "---";
                     document.getElementById('collFa').innerText = f.collFa || "";
                     document.getElementById('phrasalBox').innerText = f.phrasal || "---";
                     document.getElementById('phrasalFa').innerText = f.phrasalFa || "";
-                    this.speakCurrent();
+                    this.speak();
                 }
             },
 
-            speakCurrent() {
-                if(this.current && 'speechSynthesis' in window) {
+            speak() {
+                if(!this.isMuted && this.currentWord && 'speechSynthesis' in window) {
                     window.speechSynthesis.cancel();
-                    const u = new SpeechSynthesisUtterance(this.current.en);
-                    u.lang = 'en-US';
+                    const u = new SpeechSynthesisUtterance(this.currentWord.en);
+                    u.lang = 'en-US'; u.rate = 0.8;
                     window.speechSynthesis.speak(u);
                 }
             },
-            
-            startQuiz() { alert("در حال انتقال به بخش آزمون..."); }
-        };
 
-        // برای اینکه کلمات نمایش داده شوند، آبجکت لغت در dictionary.js باید این فیلدها را داشته باشد:
-        // { en: "go", fa: "رفتن", def: "To move", ex: "I go to school", exFa: "من به مدرسه میروم", coll: "go home", collFa: "به خانه رفتن", phrasal: "go on", phrasalFa: "ادامه دادن" }
+            startQuiz() {
+                document.getElementById('mainView').classList.add('hidden');
+                document.getElementById('quizView').classList.remove('hidden');
+                this.nextQuestion();
+            },
+
+            stopQuiz() {
+                document.getElementById('quizView').classList.add('hidden');
+                document.getElementById('mainView').classList.remove('hidden');
+            },
+
+            nextQuestion() {
+                const w = dictionary[Math.floor(Math.random() * dictionary.length)];
+                document.getElementById('qQuestion').innerText = "معنی کدام است؟: " + w.en;
+                const opts = [w.fa, "خطا 1", "خطا 2"].sort(() => Math.random() - 0.5);
+                const cont = document.getElementById('qOptions');
+                cont.innerHTML = "";
+                opts.forEach(o => {
+                    const b = document.createElement('button');
+                    b.className = 'neu-btn';
+                    b.style.padding = "15px";
+                    b.innerText = o;
+                    b.onclick = () => {
+                        if(o === w.fa) { alert("آفرین! ✅"); this.nextQuestion(); }
+                        else alert("دوباره سعی کن ❌");
+                    };
+                    cont.appendChild(b);
+                });
+            }
+        };
     </script>
 </body>
 </html>
