@@ -4,61 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Dic-Deep Elite</title>
-    
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="manifest" href="manifest.json">
 
     <style>
         :root { 
-            --bg: #e0e5ec; 
-            --accent: #4a90e2; 
-            --main-word: #000000; 
-            --text: #444; 
-            --shadow: 9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px rgba(255,255,255, 0.5); 
+            --bg: #e0e5ec; --accent: #4a90e2; --main-word: #333333; --text: #555; 
+            --shadow: 9px 9px 16px rgb(163,177,198,0.5), -9px -9px 16px rgba(255,255,255, 0.6); 
+            --inner-shadow: inset 5px 5px 10px #b8bec5, inset -5px -5px 10px #ffffff;
         }
         body.dark { 
-            --bg: #2d3436; 
-            --accent: #4facfe; 
-            --main-word: #ffffff; 
-            --text: #eee; 
+            --bg: #2d3436; --accent: #4facfe; --main-word: #ffffff; --text: #ccc; 
             --shadow: 5px 5px 10px #23282a, -5px -5px 10px #374042;
+            --inner-shadow: inset 4px 4px 8px #23282a, inset -4px -4px 8px #374042;
         }
         body { background: var(--bg); font-family: Tahoma, sans-serif; transition: 0.3s; padding: 20px; margin: 0; color: var(--text); touch-action: manipulation; }
-        .neu-card { background: var(--bg); border-radius: 25px; box-shadow: var(--shadow); padding: 25px; margin-bottom: 25px; text-align: center; }
-        .neu-btn { border: none; background: var(--bg); box-shadow: var(--shadow); padding: 15px 20px; border-radius: 15px; cursor: pointer; color: var(--accent); font-weight: bold; transition: 0.2s; }
-        .neu-btn:active { transform: scale(0.96); box-shadow: inset 4px 4px 8px #b8bec5; }
-        .search-input { width: 100%; border: none; background: var(--bg); box-shadow: inset 6px 6px 12px #b8bec5, inset -6px -6px 12px #ffffff; padding: 18px; border-radius: 20px; outline: none; color: var(--accent); font-size: 16px; text-align: center; box-sizing: border-box; }
-        .main-word-style { color: var(--main-word); font-size: 1.5em; font-weight: 900; direction: ltr; display: inline-block; }
-        .example-box { font-size: 0.85em; background: rgba(0,0,0,0.03); padding: 15px; border-radius: 15px; margin-top: 15px; text-align: left; direction: ltr; border-left: 4px solid var(--accent); }
+        
+        .neu-card { background: var(--bg); border-radius: 20px; box-shadow: var(--shadow); padding: 22px; margin-bottom: 22px; text-align: center; }
+        
+        /* دکمه‌ها و ورودی‌ها بدون حالت بولد */
+        .neu-btn { border: none; background: var(--bg); box-shadow: var(--shadow); padding: 12px 18px; border-radius: 12px; cursor: pointer; color: var(--accent); transition: 0.2s; font-weight: normal; }
+        .neu-btn:active { transform: scale(0.97); box-shadow: var(--inner-shadow); }
+        
+        .search-input { width: 100%; border: none; background: var(--bg); box-shadow: var(--inner-shadow); padding: 15px; border-radius: 15px; outline: none; color: var(--accent); text-align: center; box-sizing: border-box; font-weight: normal; }
+
+        /* استایل ظریف برای کلمه اصلی */
+        .main-word-style { 
+            color: var(--main-word); 
+            font-size: 1.25em; 
+            font-weight: normal; /* حذف حالت بولد */
+            direction: ltr; 
+            display: inline-block;
+        }
+
+        .example-box { font-size: 0.85em; background: rgba(0,0,0,0.02); padding: 12px; border-radius: 12px; margin-top: 12px; text-align: left; direction: ltr; border-left: 2px solid var(--accent); }
         .hidden { display: none !important; }
+        h3, h2 { font-weight: normal; color: var(--text); }
     </style>
 </head>
 <body class="light">
 
     <div class="neu-card">
-        <div style="display:flex; justify-content: space-between; align-items: center;">
+        <div style="display:flex; justify-content: space-between; align-items: center; font-size: 0.9em;">
             <div>Score: <span id="scoreDisp">0</span></div>
-            <button class="neu-btn" onclick="app.toggleTheme()">🌓</button>
+            <button class="neu-btn" onclick="app.toggleTheme()" style="padding: 8px 12px;">🌓</button>
             <div>⭐ <span id="starDisp">0</span></div>
         </div>
     </div>
 
     <div id="vipArea" class="neu-card">
-        <h3>ورود VIP</h3>
+        <h3>ورود به پنل ELITE</h3>
         <input type="text" id="vipCode" class="search-input" placeholder="کد ورود">
         <button class="neu-btn" style="margin-top:20px; width:100%;" onclick="app.checkVIP()">تایید</button>
     </div>
 
     <div id="mainContent" class="hidden">
         <div class="neu-card">
-            <input type="text" id="wordInput" class="search-input" placeholder="🔍 جستجو..." oninput="app.liveSearch()">
-            <div id="results" style="margin-top: 20px;"></div>
+            <input type="text" id="wordInput" class="search-input" placeholder="🔍 جستجو در لغات..." oninput="app.liveSearch()">
+            <div id="results" style="margin-top: 15px;"></div>
         </div>
+        
         <div class="neu-card">
-            <h3 id="quizQ"></h3>
-            <div id="options" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px;"></div>
-            <button id="startBtn" class="neu-btn" style="width:100%; margin-top:15px;" onclick="app.startQuiz()">شروع مسابقه</button>
+            <div id="quizContainer">
+                <h3 id="quizQ" style="margin-bottom: 20px;">آماده شروع؟</h3>
+                <div id="options" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;"></div>
+            </div>
+            <button id="startBtn" class="neu-btn" style="width:100%; margin-top:15px;" onclick="app.startQuiz()">شروع مسابقه صوتی</button>
         </div>
     </div>
 
@@ -73,7 +84,7 @@
 
             speak(text) {
                 const msg = new SpeechSynthesisUtterance(text);
-                msg.lang = 'en-US';
+                msg.lang = 'en-US'; msg.rate = 0.85;
                 window.speechSynthesis.speak(msg);
             }
 
@@ -87,7 +98,7 @@
                 if (val === "FRED-2025") {
                     document.getElementById('vipArea').classList.add('hidden');
                     document.getElementById('mainContent').classList.remove('hidden');
-                    this.sendLog("🚀 ورود موفق کاربر به اپلیکیشن");
+                    this.sendLog("🚀 User Logged In");
                 } else { alert("کد اشتباه است!"); }
             }
 
@@ -98,10 +109,12 @@
                 const data = (typeof dictionary !== 'undefined') ? dictionary : this.fallbackDict;
                 data.filter(w => w.en.toLowerCase().includes(term) || w.fa.includes(term)).slice(0,3).forEach(w => {
                     res.innerHTML += `
-                    <div class="neu-card" style="box-shadow:none; border:1px solid rgba(0,0,0,0.05); text-align:right;">
-                        <div onclick="app.speak('${w.en}')" style="cursor:pointer;"><span class="main-word-style">${w.en}</span> 🔊</div>
-                        <div><b>معنی:</b> ${w.fa}</div>
-                        <div style="font-size:0.8em; color:gray;">Col: ${w.col} | Phr: ${w.phr}</div>
+                    <div class="neu-card" style="box-shadow:none; border:1px solid rgba(0,0,0,0.05); text-align:right; padding:12px;">
+                        <div onclick="app.speak('${w.en}')" style="cursor:pointer; margin-bottom:5px;">
+                            <span class="main-word-style">${w.en}</span> <span style="font-size:0.8em; color:var(--accent);">🔊</span>
+                        </div>
+                        <div style="font-size:0.95em;">معنی: ${w.fa}</div>
+                        <div style="font-size:0.75em; color:gray; margin-top:5px;">Col: ${w.col || '---'} | Phr: ${w.phr || '---'}</div>
                         <div class="example-box">${w.ex}</div>
                     </div>`;
                 });
@@ -112,7 +125,6 @@
                 const data = (typeof dictionary !== 'undefined') ? dictionary : this.fallbackDict;
                 const correct = data[Math.floor(Math.random() * data.length)];
                 this.speak(correct.en);
-                
                 let opts = [correct];
                 while(opts.length < 4) {
                     const r = data[Math.floor(Math.random() * data.length)];
@@ -120,6 +132,7 @@
                 }
                 opts.sort(() => Math.random() - 0.5);
 
+                // علامت سوال در انتها و کلمه بدون بولد
                 document.getElementById('quizQ').innerHTML = `معنی <span class="main-word-style">"${correct.en}"?</span> چیست؟`;
                 
                 const div = document.getElementById('options'); div.innerHTML = "";
@@ -137,23 +150,22 @@
                     document.getElementById('starDisp').innerText = this.stars;
                     this.testCount++;
                     if(this.testCount >= 5) { this.showModal(); this.testCount = 0; } else { this.startQuiz(); }
-                } else { alert("اشتباه بود!"); this.startQuiz(); }
+                } else { this.startQuiz(); }
             }
 
             showModal() {
                 const m = document.createElement('div');
                 m.id = "modalWrap";
                 m.innerHTML = `
-                <div style="position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); z-index:2000; width:85%; max-width:320px; padding:30px; border-radius:30px; background:var(--bg); box-shadow: var(--shadow); text-align:center;">
-                    <h2 style="color:var(--accent);">پیشرفت عالی!</h2>
-                    <p>برای کلاس خصوصی با من تماس بگیر.</p>
-                    <div style="display:flex; justify-content:space-around; margin-top:25px;">
-                        <a href="https://wa.me/989017708544" style="text-decoration:none;"><button class="neu-btn" style="background:#25D366; color:white;">WhatsApp</button></a>
-                        <a href="tel:09017708544" style="text-decoration:none;"><button class="neu-btn" style="background:var(--accent); color:white;">Call</button></a>
+                <div style="position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); z-index:2000; width:80%; max-width:300px; padding:25px; border-radius:20px; background:var(--bg); box-shadow: var(--shadow); text-align:center;">
+                    <h3 style="color:var(--accent);">پیشرفت عالی</h3>
+                    <p style="font-size:0.9em;">برای آموزش مکالمه با من در ارتباط باش.</p>
+                    <div style="display:flex; justify-content:space-around; margin-top:20px;">
+                        <a href="https://wa.me/989017708544" style="text-decoration:none;"><button class="neu-btn">WhatsApp</button></a>
+                        <a href="tel:09017708544" style="text-decoration:none;"><button class="neu-btn">Call</button></a>
                     </div>
-                    <button class="neu-btn" onclick="document.getElementById('modalWrap').remove(); app.startQuiz();" style="margin-top:30px; width:100%;">ادامه</button>
-                </div>
-                <div style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); backdrop-filter:blur(5px); z-index:1999;"></div>`;
+                    <button class="neu-btn" onclick="document.getElementById('modalWrap').remove(); app.startQuiz();" style="margin-top:25px; width:100%;">ادامه</button>
+                </div><div style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.3); z-index:1999; backdrop-filter:blur(3px);"></div>`;
                 document.body.appendChild(m);
             }
 
