@@ -1,60 +1,125 @@
-// Fred Elite Core Logic
-const CONFIG = {
-    PROXY_URL: "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", // امنیت تلگرام
-    GUEST_LIMIT: 2,
-    FREE_SEARCH_LIMIT: 20
-};
+// Fred Elite Core Logic - Integrated with Secure Proxy
+const PROXY_URL = "Https://script.google.com/macros/s/AKfycbwpS34Rfd59aIpCger7MC2ggs0WyaIxlcfHQ_AjkDevV22HtbkuP-jKcKysNIj0LWwb/exec";
 
 class FredApp {
     constructor() {
-        this.user = this.loadUser();
-        this.stats = this.loadStats();
-        this.initUI();
+        this.score = 0;
+        this.qIndex = 0;
+        this.mistakes = []; 
+        this.isReviewMode = false;
+        this.userName = localStorage.getItem('fred_name') || "Guest";
+        this.isVIP = localStorage.getItem('fred_vip') === 'true';
+        this.init();
     }
 
-    loadUser() {
+    init() {
+        // مدیریت ورود اتوماتیک از طریق URL
         const params = new URLSearchParams(window.location.search);
-        // جایگزینی چک کردن ساده با شناسه منحصر به فرد (در آینده)
-        return {
-            name: params.get('name') || localStorage.getItem('fred_user') || "Guest",
-            isVIP: params.get('vip') === 'true' || localStorage.getItem('fred_vip') === 'true'
-        };
-    }
-
-    // جدا کردن محدودیت جستجو از محدودیت کوییز (حل مشکل UX)
-    canSearch() {
-        if (this.user.isVIP) return true;
-        return this.stats.searchCount < CONFIG.FREE_SEARCH_LIMIT;
-    }
-
-    async sendReport(msg) {
-        // امنیت: ارسال به پروکسی به جای مستقیم به تلگرام
-        try {
-            await fetch(CONFIG.PROXY_URL, {
-                method: 'POST',
-                body: JSON.stringify({ name: this.user.name, message: msg })
-            });
-        } catch (e) { console.error("Report failed"); }
-    }
-}
-
-class QuizEngine {
-    constructor(app) {
-        this.app = app;
-        this.wrongAnswers = []; // ذخیره برای مرور اشتباهات (Elite Feature)
-    }
-
-    start() {
-        if (!this.app.user.isVIP && this.app.stats.quizToday >= CONFIG.GUEST_LIMIT) {
-            alert("محدودیت روزانه تمام شد. برای دسترسی نامحدود با استاد تماس بگیرید.");
-            return;
+        if (params.get('name')) {
+            this.userName = params.get('name');
+            localStorage.setItem('fred_name', this.userName);
+            if (params.get('vip') === 'yes') {
+                this.isVIP = true;
+                localStorage.setItem('fred_vip', 'true');
+            }
         }
-        // منطق پیشرفته سوالات (وزن دادن به لغات سخت در آینده اینجا اضافه می‌شود)
+        document.getElementById('userBadge').innerText = this.isVIP ? "🎓 VIP Mode" : "👤 Guest Mode";
+    }
+
+    startQuiz() {
+        document.getElementById('homeMenu').classList.add('hidden');
+        document.getElementById('quizArea').classList.remove('hidden');
+        this.score = 0;
+        this.qIndex = 0;
+        this.mistakes = [];
+        this.isReviewMode = false;
+        this.activePool = [...dictionary].sort(() => 0.5 - Math.random());
         this.nextQuestion();
     }
-    
-    // ... ادامه منطق کوییز
+
+    nextQuestion() {
+        // چک کردن پایان دور اول (۱۰ سوال) یا پایان مرور اشتباهات
+        if (!this.isReviewMode && this.qIndex >= 10) {
+            this.finishFirstRound();
+            return;
+        }
+        if (this.isReviewMode && this.activePool.length === 0) {
+            this.endSession();
+            return;
+        }
+
+        this.qIndex++;
+        
+        // انتخاب لغت (اگر در حالت مرور باشد از لیست اشتباهات، وگرنه تصادفی)
+        const correct = this.activePool.pop();
+        let wrongs = dictionary.filter(i => i.en !== correct.en).sort(() => 0.5 - Math.random()).slice(0, 3);
+        let opts = [correct, ...wrongs].sort(() => 0.5 - Math.random());
+
+        this.currentQ = correct;
+        
+        // فراخوانی رابط کاربری (توابع UI در index.html تعریف شده‌اند)
+        ui.render(
+            correct.ex.replace(new RegExp(correct.en, 'gi'), "_______"), 
+            opts.map(o => o.en),
+            (this.isReviewMode ? "Review Mode" : `Question ${this.qIndex}/10`)
+        );
+    }
+
+    check(chosen) {
+        const isCorrect = chosen === this.currentQ.en;
+        
+        if (isCorrect) {
+            if (!this.isReviewMode) this.score += 20;
+        } else {
+            // اگر در دور اول اشتباه کند، به لیست مرور اضافه می‌شود
+            if (!this.isReviewMode) {
+                this.mistakes.push(this.currentQ);
+            } else {
+                // اگر در زمان مرور هم اشتباه کند، دوباره به ته لیست می‌رود تا یاد بگیرد
+                this.activePool.unshift(this.currentQ);
+            }
+        }
+        
+        ui.feedback(isCorrect, this.currentQ.en);
+        setTimeout(() => this.nextQuestion(), 1300);
+    }
+
+    async finishFirstRound() {
+        // ارسال گزارش امن به تلگرام شاگرد/استاد
+        let report = `📊 ${this.userName}\nScore: ${this.score}\nMistakes: ${this.mistakes.length}`;
+        this.sendToTelegram(report);
+
+        if (this.mistakes.length > 0) {
+            // افکت بصری برای شروع فاز مرور
+            if (confirm(`You had ${this.mistakes.length} mistakes. Let's fix them!`)) {
+                this.isReviewMode = true;
+                this.activePool = [...this.mistakes].sort(() => 0.5 - Math.random());
+                this.qIndex = 0;
+                this.nextQuestion();
+            } else {
+                location.reload();
+            }
+        } else {
+            alert("Perfect! No mistakes found. Excellence achieved! 🏆");
+            location.reload();
+        }
+    }
+
+    async sendToTelegram(msg) {
+        // استفاده از پروکسی شما برای امنیت توکن
+        try {
+            fetch(PROXY_URL, { 
+                method: 'POST', 
+                mode: 'no-cors', 
+                body: JSON.stringify({ message: msg }) 
+            });
+        } catch(e) { console.log("Reporting offline."); }
+    }
+
+    endSession() {
+        alert("Well done! You have mastered your mistakes. 🌟");
+        location.reload();
+    }
 }
 
 const app = new FredApp();
-const quiz = new QuizEngine(app);
