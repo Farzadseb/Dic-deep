@@ -3,216 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FredDic Elite Pro 2025</title>
-    
+    <title>Dic-Deep Elite</title>
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#4a90e2">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-
     <style>
-        /* بخش استایل (Style) - طراحی نیومورفیسم حرفه‌ای */
-        :root {
-            --bg: #e0e5ec;
-            --shadow: 9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px rgba(255,255,255, 0.5);
-            --inner-shadow: inset 6px 6px 12px #b8bec5, inset -6px -6px 12px #ffffff;
-            --accent: #4a90e2;
-        }
-        body.dark {
-            --bg: #2d3436;
-            --shadow: 5px 5px 10px #23282a, -5px -5px 10px #374042;
-            --inner-shadow: inset 3px 3px 6px #23282a, inset -3px -3px 6px #374042;
-            color: white;
-        }
-        body { background: var(--bg); font-family: 'Segoe UI', Tahoma; transition: 0.3s; padding: 20px; margin: 0; overflow-x: hidden; }
+        :root { --bg: #e0e5ec; --accent: #4a90e2; --shadow: 9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px rgba(255,255,255, 0.5); }
+        body.dark { --bg: #2d3436; --shadow: 5px 5px 10px #23282a, -5px -5px 10px #374042; color: white; }
+        body { background: var(--bg); font-family: Tahoma; transition: 0.3s; padding: 20px; margin: 0; }
         .neu-card { background: var(--bg); border-radius: 20px; box-shadow: var(--shadow); padding: 20px; margin-bottom: 20px; text-align: center; }
-        .neu-btn { border: none; background: var(--bg); box-shadow: var(--shadow); padding: 12px 25px; border-radius: 12px; cursor: pointer; font-weight: bold; color: var(--accent); margin: 5px; transition: 0.2s; outline: none; }
-        .neu-btn:active { box-shadow: var(--inner-shadow); transform: scale(0.98); }
+        .neu-btn { border: none; background: var(--bg); box-shadow: var(--shadow); padding: 12px 20px; border-radius: 12px; cursor: pointer; color: var(--accent); font-weight: bold; transition: 0.2s; }
+        .neu-btn:active { transform: scale(0.95); }
         .hidden { display: none; }
-        #progressBar { width: 100%; height: 12px; background: #d1d9e6; border-radius: 6px; overflow: hidden; margin: 15px 0; box-shadow: var(--inner-shadow); }
-        #progressInner { width: 0%; height: 100%; background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%); transition: 0.5s; }
-        .search-input { width: 100%; border: none; background: var(--bg); box-shadow: var(--inner-shadow); padding: 15px; border-radius: 15px; outline: none; color: var(--accent); font-size: 16px; box-sizing: border-box; text-align: center; }
-        .stars-container { font-size: 24px; color: #f1c40f; margin: 10px 0; min-height: 30px; }
-        .example-box { font-size: 0.85em; background: rgba(0,0,0,0.05); padding: 12px; border-radius: 12px; margin-top: 10px; text-align: left; direction: ltr; line-height: 1.6; }
-        #results { margin-top: 20px; }
-        .word-title { display: flex; justify-content: space-between; align-items: center; font-size: 1.2em; font-weight: bold; color: var(--accent); }
+        .search-input { width: 100%; border: none; background: var(--bg); box-shadow: inset 5px 5px 10px #b8bec5, inset -5px -5px 10px #ffffff; padding: 15px; border-radius: 15px; outline: none; box-sizing: border-box; text-align: center; }
+        .example-box { font-size: 0.8em; background: rgba(0,0,0,0.05); padding: 10px; border-radius: 10px; margin-top: 10px; text-align: left; direction: ltr; }
+        @keyframes pop { from { transform: translate(-50%, -45%) scale(0.9); opacity: 0; } to { transform: translate(-50%, -50%) scale(1); opacity: 1; } }
     </style>
 </head>
 <body class="light">
 
     <div class="neu-card">
         <div style="display:flex; justify-content: space-between; align-items: center;">
-            <button class="neu-btn" onclick="toggleTheme()" aria-label="تغییر تم">🌓</button>
-            <h3 id="userDisplay" style="margin:0;">Guest Mode</h3>
-            <span id="scoreDisplay" style="font-weight:bold; color:var(--accent);">Score: 0</span>
+            <button class="neu-btn" onclick="app.toggleTheme()">🌓</button>
+            <h3 id="scoreDisp" style="margin:0; color:var(--accent);">Score: 0</h3>
+            <div id="starDisp">⭐ 0</div>
         </div>
-        <div id="progressBar"><div id="progressInner"></div></div>
-        <div id="starDisplay" class="stars-container"></div>
     </div>
 
     <div id="vipArea" class="neu-card">
-        <h3>🔒 ورود به سیستم Elite</h3>
-        <p style="font-size: 0.9em; color: #777;">لطفاً کد فعال‌سازی خود را وارد کنید</p>
-        <input type="text" id="vipCode" class="search-input" style="margin-bottom:15px;" placeholder="ENTER FRED CODE">
-        <button class="neu-btn" onclick="checkVIP()">تایید و ورود</button>
+        <h3>🔒 ورود VIP</h3>
+        <input type="text" id="vipCode" class="search-input" placeholder="کد را وارد کنید">
+        <button class="neu-btn" style="margin-top:15px; width:100%;" onclick="app.checkVIP()">تایید</button>
     </div>
 
     <div id="mainContent" class="hidden">
         <div class="neu-card">
-            <input type="text" id="search" class="search-input" placeholder="🔍 جستجوی انگلیسی یا فارسی..." oninput="liveSearch()">
+            <input type="text" id="wordInput" class="search-input" placeholder="🔍 جستجو..." oninput="app.liveSearch()">
             <div id="results"></div>
         </div>
-
-        <div class="neu-card" id="quizArea">
-            <h3 style="color: var(--accent);">🤖 چالش هوش مصنوعی</h3>
-            <p id="quizQuestion" style="font-size:1.1em; font-weight:bold; margin: 15px 0;">برای شروع رقابت آماده‌اید؟</p>
+        <div class="neu-card">
+            <h3 id="quizQ">آماده‌اید؟</h3>
             <div id="options" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;"></div>
-            <div id="timer" style="margin-top:20px; font-weight:bold; color:#e74c3c; min-height: 20px;"></div>
-            <button id="startBtn" class="neu-btn" onclick="startQuiz()" style="width: 80%; margin-top: 10px;">شروع رقابت</button>
+            <button id="startBtn" class="neu-btn" style="width:100%; margin-top:10px;" onclick="app.startQuiz()">شروع چالش</button>
         </div>
     </div>
 
     <script src="dictionary.js"></script>
     <script>
-        // ۱. تنظیمات اتصال به تلگرام و آفلاین
-        const BOT_TOKEN = '553224514:AAG0XXzA8da55jCGXnzStP-0IxHhnfkTPRw';
-        const CHAT_ID = '969918598';
-        let UID = "PDCS-" + Math.floor(1000 + Math.random() * 9000);
-        let score = 0, stars = 0, aiTimer;
-
-        // فعال‌سازی Service Worker برای حالت آفلاین
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js');
-        }
-
-        // سیستم ارسال گزارش به تلگرام
-        async function sendLog(msg) {
-            const text = `👤 کاربر: ${UID}\n🎯 رویداد: ${msg}\n🏆 امتیاز: ${score}\n⭐ ستاره: ${stars}`;
-            try { 
-                await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(text)}`); 
-            } catch (e) { 
-                console.log("آفلاین: گزارش در حافظه موقت ماند."); 
+        class DicDeepApp {
+            constructor() {
+                this.score = 0; this.stars = 0; this.testCount = 0;
+                this.theme = 'light';
+                window.app = this;
             }
-        }
 
-        // ۲. مدیریت ظاهر (Theme)
-        function toggleTheme() { document.body.classList.toggle('dark'); }
-
-        // ۳. سیستم VIP
-        function checkVIP() {
-            const code = document.getElementById('vipCode').value;
-            if(code === "FRED-2025") {
-                document.getElementById('vipArea').classList.add('hidden');
-                document.getElementById('mainContent').classList.remove('hidden');
-                document.getElementById('userDisplay').innerText = UID;
-                sendLog("ورود موفقیت‌آمیز به برنامه");
-            } else { 
-                alert("کد اشتباه است!"); 
+            toggleTheme() { 
+                this.theme = this.theme === 'light' ? 'dark' : 'light';
+                document.body.className = this.theme;
             }
-        }
 
-        // ۴. جستجوی آنی (Live Search) با جزئیات کامل
-        function liveSearch() {
-            const term = document.getElementById('search').value.toLowerCase();
-            const res = document.getElementById('results');
-            res.innerHTML = "";
-            if(term.length < 1) return;
-
-            const filtered = dictionary.filter(w => w.en.includes(term) || w.fa.includes(term));
-            filtered.slice(0, 5).forEach(w => {
-                res.innerHTML += `
-                    <div class="neu-card" style="padding:15px; margin-bottom:15px; box-shadow:var(--inner-shadow); text-align: right;">
-                        <div class="word-title">
-                            <span>${w.en}</span>
-                            <span style="color: #333;">${w.fa}</span>
-                        </div>
-                        <div class="example-box">
-                            <div style="margin-bottom:5px;"><b>💡 Example:</b> ${w.ex}</div>
-                            <div style="margin-bottom:5px; color: #444;"><b>🔗 Col:</b> ${w.col}</div>
-                            <div style="color: #666; font-style: italic;"><b>🔄 Phrasal:</b> ${w.phr}</div>
-                        </div>
-                    </div>`;
-            });
-        }
-
-        // ۵. موتور مسابقه و هوش مصنوعی (AI)
-        function startQuiz() {
-            document.getElementById('startBtn').classList.add('hidden');
-            const correct = dictionary[Math.floor(Math.random() * dictionary.length)];
-            const options = [correct];
-            
-            while(options.length < 4) {
-                const rand = dictionary[Math.floor(Math.random() * dictionary.length)];
-                if(!options.includes(rand)) options.push(rand);
-            }
-            options.sort(() => Math.random() - 0.5);
-
-            document.getElementById('quizQuestion').innerText = `معنی کلمه "${correct.en}" کدام است؟`;
-            const optDiv = document.getElementById('options');
-            optDiv.innerHTML = "";
-            
-            options.forEach(o => {
-                const btn = document.createElement('button');
-                btn.className = "neu-btn";
-                btn.innerText = o.fa;
-                btn.onclick = () => handleAnswer(o === correct);
-                optDiv.appendChild(btn);
-            });
-
-            let sec = 30;
-            document.getElementById('timer').innerText = `زمان باقی‌مانده: ${sec} ثانیه`;
-            clearInterval(aiTimer);
-            aiTimer = setInterval(() => {
-                sec--;
-                document.getElementById('timer').innerText = `زمان باقی‌مانده: ${sec} ثانیه`;
-                if(sec <= 0) { 
-                    clearInterval(aiTimer); 
-                    aiMove(); 
+            checkVIP() {
+                if(document.getElementById('vipCode').value === "FRED-2025") {
+                    document.getElementById('vipArea').style.display = 'none';
+                    document.getElementById('mainContent').classList.remove('hidden');
+                    this.sendLog("ورود موفق");
                 }
-            }, 1000);
-        }
+            }
 
-        function handleAnswer(isCorrect) {
-            clearInterval(aiTimer);
-            if(isCorrect) { 
-                score += 20; 
-                alert("آفرین! پاسخ درست بود. +۲۰ امتیاز");
-                updateStats(); 
-                startQuiz(); 
-            } else { 
-                alert("اشتباه بود! دوباره تلاش کن.");
-                sendLog("پاسخ اشتباه در مسابقه");
-                startQuiz(); 
+            liveSearch() {
+                const term = document.getElementById('wordInput').value.toLowerCase();
+                const res = document.getElementById('results');
+                res.innerHTML = "";
+                if(!term) return;
+                dictionary.filter(w => w.en.includes(term) || w.fa.includes(term)).slice(0,2).forEach(w => {
+                    res.innerHTML += `<div class="neu-card" style="box-shadow:none; border:1px solid #ccc; text-align:right;">
+                        <b>${w.en}</b>: ${w.fa}<div class="example-box">${w.ex}</div></div>`;
+                });
+            }
+
+            startQuiz() {
+                document.getElementById('startBtn').classList.add('hidden');
+                const correct = dictionary[Math.floor(Math.random() * dictionary.length)];
+                const opts = [correct];
+                while(opts.length < 4) {
+                    const r = dictionary[Math.floor(Math.random() * dictionary.length)];
+                    if(!opts.includes(r)) opts.push(r);
+                }
+                opts.sort(() => Math.random() - 0.5);
+                document.getElementById('quizQ').innerText = `Meaning of "${correct.en}"?`;
+                const div = document.getElementById('options'); div.innerHTML = "";
+                opts.forEach(o => {
+                    const b = document.createElement('button'); b.className = "neu-btn"; b.innerText = o.fa;
+                    b.onclick = () => this.handleAns(o === correct);
+                    div.appendChild(b);
+                });
+            }
+
+            handleAns(isCorrect) {
+                if(isCorrect) { this.score += 20; if(this.score % 100 === 0) this.stars++; }
+                this.testCount++;
+                document.getElementById('scoreDisp').innerText = `Score: ${this.score}`;
+                document.getElementById('starDisp').innerText = `⭐ ${this.stars}`;
+                if(this.testCount >= 5) { this.showModal(); this.testCount = 0; }
+                this.startQuiz();
+            }
+
+            showModal() {
+                const m = document.createElement('div');
+                m.id = "contactModal";
+                m.innerHTML = `
+                    <div style="position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); z-index:1000; width:85%; max-width:350px; padding:25px; border-radius:30px; background:var(--bg); box-shadow:var(--shadow); text-align:center; border:2px solid var(--accent); animation: pop 0.4s ease;">
+                        <div style="font-size:40px;">🎓</div>
+                        <h2 style="color:var(--accent); margin:10px 0;">تسلط کامل با استاد</h2>
+                        <p style="line-height:1.6; font-size:0.95em;">یادگیری لغات عالی است، اما برای <b>صحبت کردن حرفه‌ای</b> به آموزش اصولی نیاز داری. من برای تدریس در کنار تو هستم.</p>
+                        <div style="display:flex; justify-content:space-around; margin-top:20px;">
+                            <a href="https://wa.me/989017708544?text=سلام استاد، مایل به شرکت در کلاس‌های تدریس کامل هستم." style="text-decoration:none;">
+                                <button class="neu-btn" style="background:#25D366; color:white; width:60px; height:60px; border-radius:50%;">🟢</button>
+                                <div style="font-size:10px; margin-top:5px; color:black;">WhatsApp</div>
+                            </a>
+                            <a href="tel:09017708544" style="text-decoration:none;">
+                                <button class="neu-btn" style="background:var(--accent); color:white; width:60px; height:60px; border-radius:50%;">📞</button>
+                                <div style="font-size:10px; margin-top:5px; color:black;">Call</div>
+                            </a>
+                        </div>
+                        <button class="neu-btn" onclick="document.getElementById('contactModal').remove(); document.getElementById('ovl').remove();" style="margin-top:20px; width:100%;">ادامه تمرین 🚀</button>
+                    </div>
+                    <div id="ovl" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:999; backdrop-filter:blur(3px);"></div>`;
+                document.body.appendChild(m);
+            }
+
+            async sendLog(msg) {
+                const url = `https://api.telegram.org/bot553224514:AAG0XXzA8da55jCGXnzStP-0IxHhnfkTPRw/sendMessage?chat_id=969918598&text=${encodeURIComponent(msg)}`;
+                try { fetch(url); } catch(e) {}
             }
         }
-
-        // منطق هوش مصنوعی (AI) با شانس شکست ۷۰ درصد
-        function aiMove() {
-            if(Math.random() < 0.3) { // ۳۰ درصد شانس برد AI
-                score = Math.max(0, score - 10); 
-                alert("زمان تمام شد! هوش مصنوعی پاسخ درست را داد. ۱۰ امتیاز کسر شد.");
-                sendLog("شکست از هوش مصنوعی");
-            } else { 
-                score += 15; 
-                alert("زمان تمام شد! هوش مصنوعی هم اشتباه کرد. شما برنده شدید!");
-                sendLog("پیروزی بر هوش مصنوعی (AI Fail)");
-            }
-            updateStats(); 
-            startQuiz();
-        }
-
-        // ۶. بروزرسانی نوار پیشرفت و ستاره‌ها
-        function updateStats() {
-            document.getElementById('scoreDisplay').innerText = `Score: ${score}`;
-            const progress = Math.min(100, (score / 1000) * 100);
-            document.getElementById('progressInner').style.width = progress + "%";
-            
-            if(score > 0 && score % 100 === 0) { 
-                stars++; 
-                document.getElementById('starDisplay').innerHTML = "⭐".repeat(stars); 
-                alert("تبریک! شما یک ستاره طلایی جدید گرفتید! ⭐");
-            }
-        }
+        const app = new DicDeepApp();
     </script>
 </body>
 </html>
