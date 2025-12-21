@@ -17,35 +17,31 @@
             --inner-shadow: inset 4px 4px 8px #23282a, inset -4px -4px 8px #374042;
         }
         body { background: var(--bg); font-family: Tahoma, sans-serif; transition: 0.3s; padding: 20px; margin: 0; color: var(--text); touch-action: manipulation; }
-        .neu-card { background: var(--bg); border-radius: 20px; box-shadow: var(--shadow); padding: 20px; margin-bottom: 20px; text-align: center; }
-        .neu-btn { border: none; background: var(--bg); box-shadow: var(--shadow); padding: 12px 18px; border-radius: 12px; cursor: pointer; color: var(--accent); transition: 0.2s; font-weight: normal; font-family: Tahoma; }
-        .neu-btn:active { transform: scale(0.97); box-shadow: var(--inner-shadow); }
-        .neu-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        .search-input { width: 100%; border: none; background: var(--bg); box-shadow: var(--inner-shadow); padding: 15px; border-radius: 15px; outline: none; color: var(--accent); text-align: center; box-sizing: border-box; margin-bottom: 10px; }
-        .main-word-style { color: var(--main-word); font-size: 1.2em; font-weight: normal; direction: ltr; display: inline-block; }
-        .example-box { font-size: 0.85em; background: rgba(0,0,0,0.02); padding: 12px; border-radius: 12px; margin-top: 12px; text-align: left; direction: ltr; border-left: 2px solid var(--accent); }
+        .neu-card { background: var(--bg); border-radius: 20px; box-shadow: var(--shadow); padding: 25px; margin-bottom: 25px; text-align: center; }
+        .neu-btn { border: none; background: var(--bg); box-shadow: var(--shadow); padding: 15px 20px; border-radius: 15px; cursor: pointer; color: var(--accent); transition: 0.2s; font-size: 1em; font-family: Tahoma; }
+        .neu-btn:active { transform: scale(0.95); box-shadow: var(--inner-shadow); }
+        .search-input { width: 100%; border: none; background: var(--bg); box-shadow: var(--inner-shadow); padding: 18px; border-radius: 20px; outline: none; color: var(--accent); text-align: center; box-sizing: border-box; margin-bottom: 15px; font-size: 1.1em; }
         .hidden { display: none !important; }
-        .feedback { margin-top: 15px; padding: 10px; border-radius: 10px; font-size: 0.9em; animation: fadeIn 0.3s; }
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 15px; font-size: 0.95em; animation: fadeIn 0.3s; line-height: 1.6; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .progress-bar { width: 100%; height: 8px; background: var(--bg); border-radius: 10px; box-shadow: var(--inner-shadow); margin-bottom: 15px; overflow: hidden; }
-        .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: 0.3s; }
+        .progress-bar { width: 100%; height: 10px; background: var(--bg); border-radius: 10px; box-shadow: var(--inner-shadow); margin-bottom: 20px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: 0.4s; }
+        .header-box { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; margin-bottom: 25px; }
     </style>
 </head>
 <body class="light">
 
-    <div class="neu-card">
-        <div style="display:flex; justify-content: space-between; align-items: center;">
-            <div>Score: <span id="scoreDisp">0</span></div>
-            <button class="neu-btn" onclick="app.toggleTheme()">🌓</button>
-            <div>⭐ <span id="starDisp">0</span></div>
-        </div>
+    <div class="neu-card header-box">
+        <div style="font-size: 1.1em;">⭐ <span id="starDisp">0</span></div>
+        <button class="neu-btn" style="padding: 10px 15px; border-radius: 50%;" onclick="app.toggleTheme()">🌓</button>
+        <div style="font-size: 1.1em;">Score: <span id="scoreDisp">0</span></div>
     </div>
 
     <div id="authArea" class="neu-card">
-        <h3 style="font-weight:normal;">خوش آمدید</h3>
+        <h2 style="font-weight:normal;">ورود به Fred Elite</h2>
         <input type="text" id="studentName" class="search-input" placeholder="نام خود را وارد کنید">
-        <input type="text" id="vipCode" class="search-input" placeholder="کد VIP (در صورت داشتن)">
-        <button class="neu-btn" style="width:100%; margin-top:10px;" onclick="app.login()">شروع برنامه</button>
+        <input type="text" id="vipCode" class="search-input" placeholder="کد ورود">
+        <button class="neu-btn" style="width:100%;" onclick="app.manualLogin()">ورود</button>
     </div>
 
     <div id="mainApp" class="hidden">
@@ -53,14 +49,11 @@
             <input type="text" id="wordInput" class="search-input" placeholder="🔍 جستجو در لغات..." oninput="app.liveSearch()">
             <div id="results"></div>
         </div>
-
-        <div id="fredSection">
-            <div id="quizContainer">
-                <div class="neu-card">
-                    <h2 style="font-weight:normal; color:var(--accent);">Fred Practice</h2>
-                    <p>هر نوبت شامل ۱۰ سوال تصادفی از مخزن لغات شماست.</p>
-                    <button class="neu-btn" onclick="app.startSession()">شروع نوبت تمرین</button>
-                </div>
+        <div id="quizContainer">
+            <div class="neu-card">
+                <h2 style="font-weight:normal; color:var(--accent);">Fred Practice</h2>
+                <p>آماده شروع ۱۰ سوال تصادفی هستید؟</p>
+                <button class="neu-btn" style="width: 100%;" onclick="app.startSession()">شروع تمرین</button>
             </div>
         </div>
     </div>
@@ -70,85 +63,73 @@
         class DicDeepApp {
             constructor() {
                 this.score = 0; this.theme = 'light';
-                this.clickCount = 0; this.isVIP = false; this.studentName = "میهمان";
-                this.currentQIndex = 0; this.mistakes = []; this.currentQData = null;
-                this.dailyLimit = 2;
-                this.fallbackDict = [{ en: "usually", fa: "معمولاً", ex: "I usually go home at 5.", col: "as usually", phr: "---" }];
-                this.initDailyStats();
+                this.isVIP = false; this.studentName = "";
+                this.currentQIndex = 0; this.mistakes = []; this.clickCount = 0;
+                // --- بخش مدیریت استاد ---
+                this.blacklist = ["BadUser", "Test1"]; 
+                // -----------------------
+                this.initDaily();
                 window.app = this;
+                this.checkUrlParams(); 
             }
 
-            initDailyStats() {
+            initDaily() {
                 const today = new Date().toDateString();
-                this.stats = JSON.parse(localStorage.getItem('fred_stats')) || { date: today, count: 0 };
-                if (this.stats.date !== today) { this.stats = { date: today, count: 0 }; this.saveStats(); }
+                let saved = JSON.parse(localStorage.getItem('fred_stats')) || { date: today, count: 0 };
+                this.stats = (saved.date !== today) ? { date: today, count: 0 } : saved;
             }
-            saveStats() { localStorage.setItem('fred_stats', JSON.stringify(this.stats)); }
 
-            toggleTheme() { this.theme = this.theme === 'light' ? 'dark' : 'light'; document.body.className = this.theme; }
+            checkUrlParams() {
+                const params = new URLSearchParams(window.location.search);
+                const urlName = params.get('name');
+                const urlVip = params.get('vip');
+                const savedName = localStorage.getItem('registered_name');
 
-            login() {
-                const name = document.getElementById('studentName').value.trim();
-                const code = document.getElementById('vipCode').value.trim().toUpperCase();
-                if (!name) { alert("لطفاً نام خود را وارد کنید."); return; }
-                this.studentName = name;
-                if (code === "FRED-2025") this.isVIP = true;
+                if (urlName) {
+                    if (this.blacklist.includes(urlName)) { alert("دسترسی غیرفعال است."); return; }
+                    
+                    if (savedName && savedName !== urlName) {
+                        alert("این لینک اختصاصی شما نیست. ورود به عنوان میهمان...");
+                        this.studentName = "Guest_" + urlName;
+                    } else {
+                        localStorage.setItem('registered_name', urlName);
+                        this.studentName = urlName;
+                        if (urlVip === 'yes') this.isVIP = true;
+                    }
+                    this.autoLogin();
+                }
+            }
+
+            autoLogin() {
                 document.getElementById('authArea').classList.add('hidden');
                 document.getElementById('mainApp').classList.remove('hidden');
-                this.sendLog(`👤 ورود جدید: ${this.studentName} | وضعیت: ${this.isVIP?'VIP':'Guest'}`);
+                this.sendLog(`🚀 ورود اتوماتیک: ${this.studentName} | VIP: ${this.isVIP}`);
+            }
+
+            manualLogin() {
+                const name = document.getElementById('studentName').value.trim();
+                const code = document.getElementById('vipCode').value.trim().toUpperCase();
+                if (!name) return;
+                this.studentName = name;
+                if (code === "FRED-2025") this.isVIP = true;
+                this.autoLogin();
             }
 
             trackClick() {
                 if (this.isVIP) return true;
                 this.clickCount++;
-                if (this.clickCount > 15) { // ۵ کلیک دیکشنری + ۱۰ سوال کوییز
-                    alert("محدودیت میهمان تمام شد. لطفاً کد VIP تهیه کنید.");
-                    return false;
-                }
+                if (this.clickCount > 15) { alert("محدودیت میهمان تمام شد."); return false; }
                 return true;
             }
 
-            liveSearch() {
-                if (!this.trackClick()) return;
-                const term = document.getElementById('wordInput').value.toLowerCase().trim();
-                const res = document.getElementById('results'); res.innerHTML = "";
-                if(!term) return;
-                const data = (typeof dictionary !== 'undefined') ? dictionary : this.fallbackDict;
-                data.filter(w => w.en.toLowerCase().includes(term) || w.fa.includes(term)).slice(0,3).forEach(w => {
-                    res.innerHTML += `
-                    <div class="neu-card" style="box-shadow:none; border:1px solid rgba(0,0,0,0.05); text-align:right;">
-                        <div onclick="app.speak('${w.en}')" style="cursor:pointer;"><span class="main-word-style">${w.en}</span> 🔊</div>
-                        <div style="font-size:0.9em; margin-top:5px;">معنی: ${w.fa}</div>
-                        <div class="example-box">${w.ex}</div>
-                    </div>`;
-                });
-            }
-
-            speak(text) {
-                const msg = new SpeechSynthesisUtterance(text);
-                msg.lang = 'en-US'; msg.rate = 0.8;
-                window.speechSynthesis.speak(msg);
-            }
-
             startSession() {
-                if (!this.isVIP && this.stats.count >= this.dailyLimit) {
-                    alert("شما ۲ بار در روز تمرین کرده‌اید. برای ادامه کد VIP لازم است.");
-                    return;
-                }
+                if (!this.isVIP && this.stats.count >= 2) { alert("محدودیت ۲ بار تمرین روزانه تمام شد."); return; }
                 this.currentQIndex = 0; this.mistakes = []; this.score = 0;
-                document.getElementById('scoreDisp').innerText = "0";
                 this.nextQuestion();
             }
 
-            nextQuestion() {
-                if (this.currentQIndex >= 10) { this.finishSession(); return; }
-                this.currentQIndex++;
-                this.currentQData = this.generateQuestion();
-                this.renderFredQ();
-            }
-
             generateQuestion() {
-                const data = (typeof dictionary !== 'undefined') ? dictionary : this.fallbackDict;
+                const data = dictionary;
                 const correct = data[Math.floor(Math.random() * data.length)];
                 let wrongs = data.filter(i => i.en !== correct.en).sort(() => 0.5 - Math.random()).slice(0, 3);
                 let opts = [correct, ...wrongs].sort(() => 0.5 - Math.random());
@@ -157,62 +138,73 @@
                     en: correct.en,
                     options: opts.map(o => o.fa),
                     correct: opts.indexOf(correct),
-                    rationale: opts.map(o => o.en === correct.en ? "درست!" : `غلط! این معنی لغت "${o.en}" است.`),
-                    hint: `معنی لغت: ${correct.fa}`
+                    rationale: opts.map(o => o.en === correct.en ? "✅ درست!" : `❌ غلط! این معنی "${o.en}" است.`),
+                    hint: `معنی: ${correct.fa}`
                 };
             }
 
-            renderFredQ() {
+            nextQuestion() {
+                if (this.currentQIndex >= 10) { this.finishSession(); return; }
+                this.currentQIndex++;
+                this.currentQData = this.generateQuestion();
+                this.renderQuiz();
+            }
+
+            renderQuiz() {
                 const item = this.currentQData;
                 document.getElementById('quizContainer').innerHTML = `
-                    <div class="neu-card" style="box-shadow:none;">
+                    <div class="neu-card">
                         <div class="progress-bar"><div class="progress-fill" style="width:${this.currentQIndex*10}%"></div></div>
-                        <p style="font-size:0.8em; margin-bottom:10px;">سوال ${this.currentQIndex} از ۱۰</p>
-                        <p style="direction:ltr; text-align:left; font-size:1.1em; line-height:1.5;">${item.q}</p>
+                        <p style="direction:ltr; text-align:left; font-size:1.1em; line-height:1.7;">${item.q}</p>
                         <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:20px;">
                             ${item.options.map((opt, i) => `<button class="neu-btn" onclick="app.checkAns(${i})">${opt}</button>`).join('')}
                         </div>
                         <div id="fb" class="hidden feedback"></div>
-                        <button id="nextBtn" class="neu-btn hidden" style="width:100%; margin-top:20px;" onclick="app.nextQuestion()">سوال بعدی ❯</button>
-                        <button class="neu-btn" style="margin-top:15px; font-size:0.8em;" onclick="app.toggleHint('${item.hint}')">راهنما (Show Hint)</button>
+                        <button id="nextBtn" class="neu-btn hidden" style="width:100%; margin-top:20px; background:var(--accent); color:white;" onclick="app.nextQuestion()">بعدی ❯</button>
                     </div>`;
             }
 
             checkAns(choice) {
+                if (!this.trackClick()) return;
                 const item = this.currentQData;
-                const fb = document.getElementById('fb');
-                fb.classList.remove('hidden');
-                fb.innerText = item.rationale[choice];
-                const isCorrect = choice === item.correct;
-                fb.style.color = isCorrect ? "green" : "red";
-                if (isCorrect) this.score += 20;
-                else this.mistakes.push({word: item.en, yourAns: item.options[choice], correctAns: item.options[item.correct]});
-                document.getElementById('scoreDisp').innerText = this.score;
-                document.querySelectorAll('#quizContainer button').forEach(b => b.onclick = null);
+                const fb = document.getElementById('fb'); fb.classList.remove('hidden');
+                const correct = choice === item.correct;
+                fb.innerText = item.rationale[choice]; fb.style.color = correct ? "green" : "red";
+                if (correct) { this.score += 20; document.getElementById('scoreDisp').innerText = this.score; }
+                else { this.mistakes.push({w: item.en, y: item.options[choice], c: item.options[item.correct]}); }
+                document.querySelectorAll('#quizContainer button').forEach(b => { if(b.id !== 'nextBtn') b.onclick = null; });
                 document.getElementById('nextBtn').classList.remove('hidden');
             }
 
-            toggleHint(txt) { alert("راهنما: " + txt); }
-
             async finishSession() {
-                this.stats.count++; this.saveStats();
-                let msg = `📊 گزارش Fred Practice\n👤 شاگرد: ${this.studentName}\n🎯 امتیاز: ${this.score}\n`;
+                this.stats.count++;
+                localStorage.setItem('fred_stats', JSON.stringify(this.stats));
+                let report = `📊 نمره ${this.studentName}: ${this.score}\n`;
                 if (this.mistakes.length > 0) {
-                    msg += "❌ اشتباهات:\n";
-                    this.mistakes.forEach((m, i) => msg += `${i+1}. ${m.word} (زد: ${m.yourAns})\n`);
-                } else msg += "⭐️ عالی و بدون غلط!";
-                await this.sendLog(msg);
-
-                let reportHtml = `<h3>نتیجه تمرین</h3><p>امتیاز شما: ${this.score}</p>`;
-                if (this.mistakes.length > 0) {
-                    this.mistakes.forEach(m => reportHtml += `<div style="font-size:0.8em; border-top:1px solid #ccc; padding:5px; direction:ltr; text-align:left;"><b>${m.word}</b>: Correct: ${m.correctAns}</div>`);
-                }
-                document.getElementById('quizContainer').innerHTML = `<div class="neu-card">${reportHtml}<button class="neu-btn" onclick="location.reload()" style="width:100%; margin-top:20px;">بستن و بازگشت</button></div>`;
+                    report += "❌ اشتباهات:\n";
+                    this.mistakes.forEach(m => report += `- ${m.w} (زد: ${m.y})\n`);
+                } else report += "⭐ بدون غلط!";
+                await this.sendLog(report);
+                document.getElementById('quizContainer').innerHTML = `<div class="neu-card"><h3>پایان</h3><p>امتیاز: ${this.score}</p><button class="neu-btn" onclick="location.reload()">بازگشت</button></div>`;
             }
 
             async sendLog(msg) {
                 const url = `https://api.telegram.org/bot553224514:AAG0XXzA8da55jCGXnzStP-0IxHhnfkTPRw/sendMessage?chat_id=969918598&text=${encodeURIComponent(msg)}`;
                 try { await fetch(url); } catch(e) {}
+            }
+
+            toggleTheme() { this.theme = this.theme === 'light' ? 'dark' : 'light'; document.body.className = this.theme; }
+            speak(t) { window.speechSynthesis.speak(new SpeechSynthesisUtterance(t)); }
+            liveSearch() {
+                if (!this.trackClick()) return;
+                const term = document.getElementById('wordInput').value.toLowerCase();
+                const res = document.getElementById('results'); res.innerHTML = "";
+                if(!term) return;
+                dictionary.filter(w => w.en.toLowerCase().includes(term) || w.fa.includes(term)).slice(0,3).forEach(w => {
+                    res.innerHTML += `<div class="neu-card" style="box-shadow:none; border:1px solid rgba(0,0,0,0.1); text-align:right; padding:15px;">
+                        <div onclick="app.speak('${w.en}')" style="cursor:pointer;">${w.en} 🔊</div>
+                        <div style="font-size:0.85em; color:var(--accent);">${w.fa}</div></div>`;
+                });
             }
         }
         const app = new DicDeepApp();
