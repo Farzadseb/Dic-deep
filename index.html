@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>FredDic Final Elite</title>
+    <title>FredDic Professional Edition</title>
+    <script src="dictionary.js"></script>
     <style>
         :root {
             --bg: #e0e0e0; --shd: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
@@ -19,25 +20,23 @@
         .page { position: absolute; inset: 0; padding: 20px; display: flex; flex-direction: column; background: var(--bg); overflow-y: auto; padding-bottom: 90px; }
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         .icon-btn { width: 45px; height: 45px; border-radius: 12px; border: none; background: var(--bg); box-shadow: var(--shd); cursor: pointer; color: var(--txt); font-size: 18px; }
-        
         .search-box { display: flex; align-items: center; background: var(--bg); box-shadow: var(--inner); border-radius: 25px; padding: 0 15px; margin-bottom: 20px; }
         .search-box input { flex: 1; border: none; background: none; height: 50px; outline: none; color: var(--txt); text-align: center; font-size: 18px; direction: ltr; }
-
-        /* کارت لغت با تراز وسواسی */
+        
+        /* کارت لغت */
         .word-card { background: var(--bg); padding: 25px; border-radius: 35px; box-shadow: var(--shd); margin-bottom: 20px; display: none; }
         .word-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; direction: ltr; }
-        .en-title { color: var(--blue); font-size: 32px; font-weight: 900; text-align: left; }
-        .fa-title { color: var(--red); font-size: 26px; font-weight: bold; text-align: right; direction: rtl; }
-
+        .en-title { color: var(--blue); font-size: 32px; font-weight: 900; }
+        .fa-title { color: var(--red); font-size: 26px; font-weight: bold; direction: rtl; }
         .label { font-size: 10px; color: #888; text-align: left; direction: ltr; margin: 10px 0 2px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
         .content-box { background: var(--bg); border-radius: 15px; padding: 12px; box-shadow: var(--shd); cursor: pointer; text-align: left; direction: ltr; width: 100%; border: none; margin-bottom: 8px; color: var(--txt); font-weight: bold; font-size: 15px; }
         .fa-sub { color: var(--red); font-size: 13px; text-align: left; direction: rtl; margin-top: -5px; margin-bottom: 12px; }
 
-        /* کادرهای ناوبری که در نسخه قبل جا مانده بود */
+        /* کادرهای ناوبری */
         .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px; margin-bottom: 20px; }
-        .nav-btn { padding: 18px; border-radius: 20px; border: none; color: white; font-weight: bold; box-shadow: var(--shd); cursor: pointer; font-size: 14px; }
-        .nav-btn:active { box-shadow: var(--inner); }
+        .nav-btn { padding: 18px; border-radius: 20px; border: none; color: white; font-weight: bold; box-shadow: var(--shd); cursor: pointer; }
 
+        /* کادر VIP */
         .vip-card { background: var(--bg); padding: 25px; border-radius: 30px; box-shadow: var(--shd); margin: 20px 0; text-align: center; }
         .vip-input { width: 85%; padding: 15px; border-radius: 15px; border: none; background: var(--bg); box-shadow: var(--inner); text-align: center; font-size: 18px; font-weight: bold; color: var(--blue); margin-bottom: 15px; outline: none; }
 
@@ -63,41 +62,37 @@
             <div class="en-title" id="hEn"></div>
             <div class="fa-title" id="hFa"></div>
         </div>
-        
         <span class="label">Definition:</span>
         <div class="content-box" id="hDef" onclick="spk(this.innerText)"></div>
         <div class="fa-sub" id="hDefFa"></div>
-
         <span class="label">Example:</span>
         <div class="content-box" id="hEx" onclick="spk(this.innerText)"></div>
         <div class="fa-sub" id="hExFa"></div>
-
-        <span class="label">Collocation & Example (A1):</span>
+        <span class="label">Collocation & Example:</span>
         <div class="content-box" id="hCol" onclick="spk(this.innerText)"></div>
         <div class="fa-sub" id="hColFa"></div>
-
-        <span class="label">Phrasal Verb & Example (A1):</span>
+        <span class="label">Phrasal Verb & Example:</span>
         <div class="content-box" id="hPhr" onclick="spk(this.innerText)"></div>
         <div class="fa-sub" id="hPhrFa"></div>
     </div>
 
     <div class="nav-grid">
-        <button class="nav-btn" style="background:#27ae60" onclick="myAlert('لایتنر','بخش لایتنر به‌زودی فعال می‌شود.')">🗂 لایتنر</button>
-        <button class="nav-btn" style="background:#3498db" onclick="myAlert('تمرین','تمرینات A1 در حال بارگذاری است.')">📝 تمرین</button>
-        <button class="nav-btn" style="background:#f39c12" onclick="myAlert('مسابقه','رقابت آنلاین به‌زودی!')">🎮 مسابقه</button>
+        <button class="nav-btn" style="background:#27ae60" onclick="myAlert('لایتنر','بخش لایتنر به‌زودی...')">🗂 لایتنر</button>
+        <button class="nav-btn" style="background:#3498db" onclick="myAlert('تمرین','تمرینات کلاسی...')">📝 تمرین</button>
+        <button class="nav-btn" style="background:#f39c12" onclick="myAlert('مسابقه','رقابت آنلاین!')">🎮 مسابقه</button>
         <button class="nav-btn" style="background:#e74c3c" onclick="showExit()">🚪 خروج</button>
     </div>
 
     <div id="vipInputArea" class="vip-card">
-        <p style="font-weight:bold; margin-bottom:15px; font-size:14px;">فعال‌سازی لایسنس VIP:</p>
+        <p style="font-weight:bold; margin-bottom:15px;">فعال‌سازی VIP:</p>
         <input type="text" id="vipCode" class="vip-input" placeholder="Enter Code">
-        <button onclick="checkVIP()" style="background:var(--bg); box-shadow:var(--shd); border:none; padding:10px 25px; border-radius:12px; color:var(--blue); font-weight:900; cursor:pointer;">تایید 💎</button>
+        <button onclick="checkVIP()" style="border:none; background:none; color:var(--blue); font-weight:900; cursor:pointer;">تایید 💎</button>
     </div>
 </div>
 
 <div id="msgBox" class="modal">
-    <h3 id="msgTitle" style="color:var(--blue);">FredDic</h3>
-    <p id="msgBody" style="line-height:1.6;"></p>
+    <h3 id="msgTitle">FredDic</h3>
+    <p id="msgBody"></p>
     <div id="waArea"></div>
     <button onclick="closePop()" style="width:100%; padding:15px; border-radius:15px; border:none; background:#888; color:white; font-weight:bold; margin-top:15px;">بستن</button>
 </div>
@@ -116,32 +111,18 @@
 </div>
 
 <script>
-    // دیتابیس هوشمند با جستجوی دوطرفه و مثال‌های A1
-    const dictionary = [
-        { 
-            en: "go", fa: "رفتن", 
-            def: "To move to a place.", defFa: "به جایی رفتن.",
-            ex: "I go to school.", exFa: "من به مدرسه می‌روم.",
-            col: "Go home: I go home at 5 PM.", colFa: "خانه رفتن: ساعت ۵ به خانه می‌روم.",
-            phr: "Go on: Please go on talking.", phrFa: "ادامه دادن: لطفا به صحبت ادامه دهید." 
-        }
-    ];
-
     let isMuted = false;
-    let db = JSON.parse(localStorage.getItem('fred_vfinal_fix')) || { type: 'guest', clicks: 0 };
+    let db = JSON.parse(localStorage.getItem('fred_locked_v1')) || { type: 'guest', clicks: 0 };
 
     function handleSearch(val) {
         let v = val.toLowerCase().trim();
         if(!v) { document.getElementById('resCard').style.display='none'; return; }
-        
         if(db.type === 'guest' && db.clicks >= 5) {
-            myAlert('🎓 وقت ثبت‌نام است!', 'تست‌های رایگان شما تمام شد. برای ادامه یادگیری حرفه‌ای، لطفاً به واتس‌اپ استاد Fred پیام دهید.', true);
+            myAlert('🎓 لایسنس مورد نیاز', 'برای ادامه با استاد Fred تماس بگیرید.', true);
             return;
         }
-
-        // جستجوی دوطرفه (انگلیسی یا فارسی)
+        // جستجو در فایل dictionary.js
         let found = dictionary.find(item => item.en === v || item.fa === v);
-
         if(found) {
             document.getElementById('resCard').style.display = 'block';
             document.getElementById('hEn').innerText = found.en.toUpperCase();
@@ -163,23 +144,23 @@
         if(isMuted) return;
         window.speechSynthesis.cancel();
         let m = new SpeechSynthesisUtterance(t);
-        m.rate = 0.5; // سرعت کم طبق دستور استاد
+        m.rate = 0.5;
         window.speechSynthesis.speak(m);
     }
 
     function myAlert(title, body, isWA = false) {
         document.getElementById('msgTitle').innerText = title;
         document.getElementById('msgBody').innerText = body;
-        document.getElementById('waArea').innerHTML = isWA ? `<button onclick="window.location.href='https://wa.me/989017708544'" style="width:100%; padding:15px; border-radius:15px; border:none; background:#25D366; color:white; font-weight:bold;">پیام در واتس‌اپ استاد Fred</button>` : '';
+        document.getElementById('waArea').innerHTML = isWA ? `<button onclick="window.location.href='https://wa.me/989017708544'" style="width:100%; padding:15px; border-radius:15px; border:none; background:#25D366; color:white; font-weight:bold;">واتس‌اپ استاد Fred</button>` : '';
         document.getElementById('msgBox').style.display = 'block';
     }
 
     function showExit() { document.getElementById('exitBox').style.display = 'block'; }
     function closePop() { document.getElementById('msgBox').style.display = 'none'; document.getElementById('exitBox').style.display = 'none'; }
-    function checkVIP() { if(document.getElementById('vipCode').value.trim() === "FRED-2025") { db.type='student'; save(); location.reload(); } else { alert('کد نادرست است'); } }
+    function checkVIP() { if(document.getElementById('vipCode').value.trim() === "FRED-2025") { db.type='student'; save(); location.reload(); } }
     function toggleMute() { isMuted = !isMuted; document.getElementById('muteBtn').innerText = isMuted ? "🔇" : "🔊"; }
     function toggleTheme() { document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') === 'dark' ? '' : 'dark'); }
-    function save() { localStorage.setItem('fred_vfinal_fix', JSON.stringify(db)); updateUI(); }
+    function save() { localStorage.setItem('fred_locked_v1', JSON.stringify(db)); updateUI(); }
     function updateUI() {
         document.getElementById('statusLabel').innerText = db.type === 'student' ? "VIP Mode 👨‍🎓" : "Guest Mode 👤";
         document.getElementById('clickCounter').innerText = `📝 ${db.type === 'student' ? '∞' : db.clicks + '/5'}`;
