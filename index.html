@@ -4,44 +4,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Fred Practice Elite</title>
-    <link rel="stylesheet" href="style.css"> </head>
-<body class="light">
+    <link rel="manifest" href="manifest.json">
+    <style>
+        :root { 
+            --bg: #e0e5ec; --accent: #1e40af; --text: #444; 
+            --shadow: 9px 9px 16px rgb(163,177,198,0.5), -9px -9px 16px rgba(255,255,255, 0.6); 
+            --inner: inset 5px 5px 10px #b8bec5, inset -5px -5px 10px #ffffff;
+        }
+        body { background: var(--bg); font-family: Tahoma, sans-serif; margin: 0; padding: 15px; color: var(--text); padding-bottom: 80px; transition: 0.3s; }
+        .neu-card { background: var(--bg); border-radius: 25px; box-shadow: var(--shadow); padding: 20px; margin-bottom: 20px; text-align: center; }
+        .neu-btn { border: none; background: var(--bg); box-shadow: var(--shadow); padding: 15px; border-radius: 15px; cursor: pointer; color: var(--accent); font-weight: bold; transition: 0.2s; outline: none; }
+        .neu-btn:active { box-shadow: var(--inner); transform: scale(0.98); }
+        .search-input { width: 100%; border: none; background: var(--bg); box-shadow: var(--inner); padding: 18px; border-radius: 50px; outline: none; text-align: center; box-sizing: border-box; }
+        .grid-menu { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .btn-blue { background: #3498db; color: white; }
+        .btn-green { background: #2ecc71; color: white; }
+        .btn-orange { background: #f39c12; color: white; }
+        .btn-purple { background: #9b59b6; color: white; }
+        .hidden { display: none !important; }
+        .footer-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg); display: flex; justify-content: space-around; align-items: center; padding: 10px; border-radius: 25px 25px 0 0; box-shadow: 0 -5px 15px rgba(0,0,0,0.05); }
+        .progress { height: 8px; background: var(--bg); box-shadow: var(--inner); border-radius: 10px; margin-bottom: 15px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: 0.4s; }
+        .en-text { direction: ltr; font-family: 'Segoe UI', sans-serif; font-size: 1.2em; line-height: 1.6; }
+    </style>
+</head>
+<body>
 
-    <header class="neu-card header-box">
-        <button class="icon-btn" onclick="ui.toggleTheme()">🌓</button>
-        <div id="userBadge">Guest Mode</div>
-        <div class="score-box">📝 <span id="scoreDisp">0</span></div>
-    </header>
+    <div class="neu-card" style="display:flex; justify-content: space-between; align-items: center; padding: 10px 20px;">
+        <button class="neu-btn" style="width:45px; height:45px; border-radius:50%; padding:0;" onclick="app.toggleTheme()">🌓</button>
+        <div id="userBadge" style="font-weight:bold;">Elite Mode</div>
+        <button class="neu-btn" style="width:45px; height:45px; border-radius:50%; padding:0;" onclick="app.speakCurrent()">🔊</button>
+    </div>
 
-    <main id="app">
-        <section id="dictArea" class="neu-card">
-            <input type="text" id="wordInput" class="search-input" placeholder="🔍 جستجو در لغات..." oninput="app.search()">
-            <div id="results"></div>
-        </section>
+    <div id="mainApp">
+        <div class="neu-card">
+            <input type="text" id="wordInput" class="search-input" placeholder="🔍 جستجو در لغات..." oninput="ui.search()">
+            <div id="results" style="margin-top:15px;"></div>
+        </div>
 
-        <nav id="homeMenu" class="grid-menu">
-            <button class="main-menu-btn btn-quiz" onclick="quiz.start()">📝 شروع تمرین هوشمند</button>
-            <button class="main-menu-btn" onclick="ui.showToast('بزودی...')">📂 لایتنر</button>
-            <button class="main-menu-btn" onclick="ui.showToast('بزودی...')">🎮 مسابقه</button>
-            <button class="main-menu-btn vip-gold" onclick="ui.showVIP()">💎 وضعیت ELITE</button>
-        </nav>
+        <div id="homeMenu" class="grid-menu">
+            <button class="neu-btn btn-blue" onclick="app.startQuiz()">📝 تمرین</button>
+            <button class="neu-btn btn-green">📂 لایتنر</button>
+            <button class="neu-btn btn-orange">🎮 مسابقه</button>
+            <button class="neu-btn btn-purple">💎 VIP</button>
+        </div>
 
-        <div id="quizOverlay" class="hidden">
-            <div class="neu-card quiz-card">
-                <div class="progress-bar"><div id="pFill" class="progress-fill"></div></div>
-                <p id="qText" class="en-text"></p>
-                <div id="qOptions" class="options-grid"></div>
-                <div id="qFeedback" class="hidden feedback-msg"></div>
+        <div id="quizArea" class="hidden">
+            <div class="neu-card">
+                <div class="progress"><div id="pFill" class="progress-fill"></div></div>
+                <div id="qText" class="en-text"></div>
+                <div id="qOptions" style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:20px;"></div>
+                <div id="qFeedback" class="hidden" style="margin-top:15px; font-weight:bold;"></div>
             </div>
         </div>
-    </main>
+    </div>
 
-    <footer class="footer-bar">
-        <div id="starCount">0 ⭐</div>
-        <div class="trophy">🏆</div>
-        <div id="dailyLimit">Daily: 0/2</div>
-    </footer>
+    <div class="footer-bar">
+        <div>⭐ <span id="starDisp">0</span></div>
+        <div style="font-size: 2.5em; margin-top: -30px;">🏆</div>
+        <div>Score: <span id="scoreDisp">0</span></div>
+    </div>
 
     <script src="dictionary.js"></script>
-    <script src="core.js"></script> </body>
+    <script src="core.js"></script>
+    <script>
+        const ui = {
+            render: (q, opts, status) => {
+                document.getElementById('qText').innerHTML = `<div>${q}</div><div style="font-size:0.7em; color:gray; margin-top:5px;">${status}</div>`;
+                const container = document.getElementById('qOptions');
+                container.innerHTML = "";
+                opts.forEach(o => {
+                    const btn = document.createElement('button');
+                    btn.className = 'neu-btn';
+                    btn.innerText = o;
+                    btn.onclick = () => app.check(o);
+                    container.appendChild(btn);
+                });
+            },
+            feedback: (isCorrect, correctEn) => {
+                const fb = document.getElementById('qFeedback');
+                fb.classList.remove('hidden');
+                fb.innerText = isCorrect ? "✅ Excellent!" : `❌ Correct: ${correctEn}`;
+                fb.style.color = isCorrect ? "green" : "red";
+                setTimeout(() => fb.classList.add('hidden'), 1200);
+            },
+            search: () => {
+                const term = document.getElementById('wordInput').value.toLowerCase();
+                const res = document.getElementById('results'); res.innerHTML = "";
+                if(!term) return;
+                dictionary.filter(w => w.en.toLowerCase().includes(term) || w.fa.includes(term)).slice(0,3).forEach(w => {
+                    res.innerHTML += `<div class="neu-card" style="box-shadow:var(--inner); text-align:left; direction:ltr; padding:15px;">
+                        <b style="color:blue;">${w.en}</b> <span style="float:right; direction:rtl;">${w.fa}</span>
+                        <div style="font-size:0.8em; margin-top:5px;">${w.ex}</div>
+                    </div>`;
+                });
+            }
+        };
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js');
+        }
+    </script>
+</body>
 </html>
