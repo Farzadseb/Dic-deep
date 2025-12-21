@@ -12,5 +12,1384 @@ const dictionary = [
         ex: "Can I have some water, please?", exFa: "می‌توانم کمی آب داشته باشم، لطفاً؟",
         col: "Drink water: Drink plenty of water.", colFa: "آب نوشیدن: مقدار زیادی آب بنوشید.",
         phr: "Water down: Don't water down the juice.", phrFa: "رقیق کردن: آب‌میوه را با آب رقیق نکن." 
+}const dictionary = [
+    { 
+        en: "apple", fa: "سیب", 
+        def: "A round fruit with red or green skin.", defFa: "میوه‌ای گرد با پوست قرمز یا سبز.",
+        ex: "I eat an apple every morning.", exFa: "من هر صبح یک سیب می‌خورم.",
+        col: "Red apple: This is a sweet red apple.", colFa: "سیب قرمز: این یک سیب قرمز شیرین است.",
+        phr: "Apple of my eye: My daughter is the apple of my eye.", phrFa: "نور چشم: دخترم نور چشم من است." 
+    },
+    { 
+        en: "bread", fa: "نان", 
+        def: "A food made from flour and water.", defFa: "غذایی که از آرد و آب درست می‌شود.",
+        ex: "I buy fresh bread for breakfast.", exFa: "من برای صبحانه نان تازه می‌خرم.",
+        col: "White bread: I prefer white bread.", colFa: "نان سفید: من نان سفید را ترجیح می‌دهم.",
+        phr: "Bread and butter: Teaching is my bread and butter.", phrFa: "منبع درآمد: تدریس منبع درآمد (نان و کره) من است." 
+    },
+    { 
+        en: "car", fa: "ماشین", 
+        def: "A vehicle with four wheels.", defFa: "وسیله نقلیه با چهار چرخ.",
+        ex: "He drives a blue car.", exFa: "او یک ماشین آبی می‌راند.",
+        col: "Drive a car: Can you drive a car?", colFa: "ماشین راندن: بلدی ماشین برانی؟",
+        phr: "Car park: The car park is full.", phrFa: "پارکینگ: پارکینگ ماشین پر است." 
+    },
+    { 
+        en: "door", fa: "در", 
+        def: "The entrance to a room or building.", defFa: "ورودی یک اتاق یا ساختمان.",
+        ex: "Please close the door.", exFa: "لطفاً در را ببندید.",
+        col: "Open the door: Open the door, please.", colFa: "در را باز کن: لطفاً در را باز کن.",
+        phr: "Door-to-door: He is a door-to-door salesman.", phrFa: "خانه به خانه: او یک فروشنده دوره گرد (خانه به خانه) است." 
+    },
+    { 
+        en: "egg", fa: "تخم‌مرغ", 
+        def: "An oval object produced by a bird.", defFa: "شیء بیضی شکلی که توسط پرنده تولید می‌شود.",
+        ex: "I like boiled eggs.", exFa: "من تخم‌مرغ آب‌پز دوست دارم.",
+        col: "Fry an egg: I fry an egg for lunch.", colFa: "تخم‌مرغ سرخ کردن: برای ناهار تخم‌مرغ سرخ می‌کنم.",
+        phr: "Egg on: They egged him on to fight.", phrFa: "تحریک کردن: آن‌ها او را برای دعوا تحریک کردند." 
     }
 ];
+const dictionary = [
+    { 
+        en: "be", fa: "بودن", 
+        def: "To exist or live.", defFa: "وجود داشتن یا زندگی کردن.",
+        ex: "I want to be a teacher.", exFa: "من می‌خواهم یک معلم باشم.",
+        col: "Be careful: Please be careful!", colFa: "مراقب بودن: لطفاً مراقب باش!",
+        phr: "Be up to: It is up to you.", phrFa: "بسته بودن به: این به تو بستگی دارد." 
+    },
+    { 
+        en: "have", fa: "داشتن", 
+        def: "To own or possess something.", defFa: "مالک چیزی بودن یا داشتن آن.",
+        ex: "I have a small family.", exFa: "من یک خانواده کوچک دارم.",
+        col: "Have lunch: Let's have lunch.", colFa: "ناهار خوردن: بیا ناهار بخوریم.",
+        phr: "Have on: She has a red hat on.", phrFa: "پوشیدن: او یک کلاه قرمز به سر دارد." 
+    },
+    { 
+        en: "do", fa: "انجام دادن", 
+        def: "To perform an action.", defFa: "انجام دادن یک عمل یا کار.",
+        ex: "I do my homework every day.", exFa: "من هر روز تکالیفم را انجام می‌دهم.",
+        col: "Do your best: Just do your best.", colFa: "تلاشت را بکن: فقط تمام تلاشت را بکن.",
+        phr: "Do over: I need to do it over.", phrFa: "دوباره انجام دادن: باید دوباره انجامش دهم." 
+    },
+    { 
+        en: "work", fa: "کار کردن", 
+        def: "To do a job for money.", defFa: "انجام شغلی برای کسب درآمد.",
+        ex: "I work from 9 to 5.", exFa: "من از ۹ تا ۵ کار می‌کنم.",
+        col: "Hard work: Success needs hard work.", colFa: "کار سخت: موفقیت به کار سخت نیاز دارد.",
+        phr: "Work out: I work out every morning.", phrFa: "ورزش کردن: من هر صبح ورزش می‌کنم." 
+    },
+    { 
+        en: "go", fa: "رفتن", 
+        def: "To move from one place to another.", defFa: "حرکت کردن از جایی به جای دیگر.",
+        ex: "I go to school by bus.", exFa: "من با اتوبوس به مدرسه می‌روم.",
+        col: "Go home: It is time to go home.", colFa: "رفتن به خانه: وقت رفتن به خانه است.",
+        phr: "Go on: Please go on talking.", phrFa: "ادامه دادن: لطفاً به صحبت کردن ادامه بده." 
+    },
+    { 
+        en: "come", fa: "آمدن", 
+        def: "To move toward a person or place.", defFa: "حرکت به سمت یک شخص یا مکان.",
+        ex: "Please come here.", exFa: "لطفاً بیا اینجا.",
+        col: "Come true: My dream came true.", colFa: "محقق شدن: رویای من به حقیقت پیوست.",
+        phr: "Come back: When will you come back?", phrFa: "برگشتن: کی برمی‌گردی؟" 
+    },
+    { 
+        en: "get", fa: "گرفتن / شدن", 
+        def: "To receive or become something.", defFa: "دریافت کردن یا تبدیل شدن به چیزی.",
+        ex: "I get a gift on my birthday.", exFa: "من در روز تولدم هدیه می‌گیرم.",
+        col: "Get ready: Get ready for school.", colFa: "آماده شدن: برای مدرسه آماده شو.",
+        phr: "Get up: I get up at 7 AM.", phrFa: "بیدار شدن: من ساعت ۷ صبح بیدار می‌شوم." 
+    },
+    { 
+        en: "make", fa: "ساختن", 
+        def: "To create or produce something.", defFa: "خلق کردن یا تولید چیزی.",
+        ex: "I make a cake for you.", exFa: "من برای تو یک کیک درست می‌کنم.",
+        col: "Make a mistake: Don't make a mistake.", colFa: "اشتباه کردن: اشتباه نکن.",
+        phr: "Make up: They made up after the fight.", phrFa: "آشتی کردن: آن‌ها بعد از دعوا آشتی کردند." 
+    },
+    { 
+        en: "use", fa: "استفاده کردن", 
+        def: "To employ something for a purpose.", defFa: "به کار گرفتن چیزی برای هدفی خاص.",
+        ex: "Can I use your pen?", exFa: "می‌توانم از خودکارت استفاده کنم؟",
+        col: "Easy to use: This app is easy to use.", colFa: "استفاده آسان: این برنامه برای استفاده آسان است.",
+        phr: "Use up: We used up all the milk.", phrFa: "تمام کردن: ما تمام شیر را مصرف کردیم." 
+    },
+    { 
+        en: "need", fa: "نیاز داشتن", 
+        def: "To require something important.", defFa: "احتیاج داشتن به چیزی مهم.",
+        ex: "I need some help.", exFa: "من به کمی کمک نیاز دارم.",
+        col: "In need: He is a friend in need.", colFa: "هنگام نیاز: او دوستِ زمانِ نیاز است.",
+        phr: "Need for: There is no need for worry.", phrFa: "نیاز به: نیازی به نگرانی نیست." 
+    }
+];
+    { 
+        en: "want", fa: "خواستن", 
+        def: "To wish for something.", defFa: "آرزوی چیزی را داشتن.",
+        ex: "I want a cup of coffee.", exFa: "من یک فنجان قهوه می‌خواهم.",
+        col: "Want to go: I want to go home.", colFa: "خواستن برای رفتن: می‌خواهم به خانه بروم.",
+        phr: "Want out: He wants out of the deal.", phrFa: "کناره‌گیری: او می‌خواهد از معامله خارج شود." 
+    },
+    { 
+        en: "like", fa: "دوست داشتن", 
+        def: "To find something pleasant.", defFa: "چیزی را خوشایند یافتن.",
+        ex: "I like your new car.", exFa: "من ماشین جدیدت را دوست دارم.",
+        col: "Feel like: I feel like a pizza.", colFa: "میل داشتن: هوس پیتزا کرده‌ام.",
+        phr: "Like for: I would like for you to stay.", phrFa: "تمایل داشتن: دوست دارم که بمانی." 
+    },
+    { 
+        en: "love", fa: "عشق ورزیدن", 
+        def: "To like someone very much.", defFa: "کسی را خیلی زیاد دوست داشتن.",
+        ex: "I love my family.", exFa: "من عاشق خانواده‌ام هستم.",
+        col: "In love: They are in love.", colFa: "عاشق بودن: آن‌ها عاشق هم هستند.",
+        phr: "Love for: Her love for music is great.", phrFa: "عشق به: عشق او به موسیقی عالی است." 
+    },
+    { 
+        en: "help", fa: "کمک کردن", 
+        def: "To make something easier for someone.", defFa: "راحت‌تر کردن کاری برای کسی.",
+        ex: "Can you help me, please?", exFa: "می‌توانی به من کمک کنی، لطفاً؟",
+        col: "Need help: I need help with this.", colFa: "نیاز به کمک: برای این کار به کمک نیاز دارم.",
+        phr: "Help out: Thanks for helping me out.", phrFa: "کمک کردن (در سختی): ممنون که کمکم کردی." 
+    },
+    { 
+        en: "try", fa: "تلاش کردن", 
+        def: "To attempt to do something.", defFa: "تلاش برای انجام کاری.",
+        ex: "I try to learn English.", exFa: "من تلاش می‌کنم انگلیسی یاد بگیرم.",
+        col: "Try again: Please try again later.", colFa: "دوباره تلاش کن: لطفاً بعداً دوباره امتحان کن.",
+        phr: "Try on: Can I try on this jacket?", phrFa: "پرو کردن: می‌توانم این کاپشن را پرو کنم؟" 
+    },
+    { 
+        en: "start", fa: "شروع کردن", 
+        def: "To begin doing something.", defFa: "شروع کردن به انجام کاری.",
+        ex: "The class starts at 8.", exFa: "کلاس ساعت ۸ شروع می‌شود.",
+        col: "Start a fire: Don't start a fire here.", colFa: "آتش روشن کردن: اینجا آتش روشن نکن.",
+        phr: "Start over: Let's start over.", phrFa: "از اول شروع کردن: بیا از اول شروع کنیم." 
+    },
+    { 
+        en: "stop", fa: "متوقف کردن", 
+        def: "To finish an action.", defFa: "تمام کردن یک عمل.",
+        ex: "Please stop the car.", exFa: "لطفاً ماشین را متوقف کن.",
+        col: "Stop talking: Stop talking, please.", colFa: "صحبت نکن: لطفاً صحبت نکنید.",
+        phr: "Stop by: I will stop by your house.", phrFa: "سر زدن: من به خانه‌ات سر خواهم زد." 
+    },
+    { 
+        en: "say", fa: "گفتن", 
+        def: "To speak words.", defFa: "بیان کردن کلمات.",
+        ex: "What did you say?", exFa: "چه گفتی؟",
+        col: "Needless to say: It's needless to say.", colFa: "نیازی به گفتن نیست: ناگفته پیداست.",
+        phr: "Say for: I can't say for sure.", phrFa: "با اطمینان گفتن: نمی‌توانم با اطمینان بگویم." 
+    },
+    { 
+        en: "tell", fa: "گفتن (به کسی)", 
+        def: "To give information to someone.", defFa: "اطلاعات دادن به کسی.",
+        ex: "Tell me the truth.", exFa: "حقیقت را به من بگو.",
+        col: "Tell a lie: Don't tell a lie.", colFa: "دروغ گفتن: دروغ نگو.",
+        phr: "Tell apart: I can't tell them apart.", phrFa: "تشخیص دادن: نمی‌توانم آن‌ها را از هم تشخیص دهم." 
+    },
+    { 
+        en: "ask", fa: "پرسیدن", 
+        def: "To put a question to someone.", defFa: "مطرح کردن سوال از کسی.",
+        ex: "Can I ask a question?", exFa: "می‌توانم یک سوال بپرسم؟",
+        col: "Ask for help: Ask for help if you need it.", colFa: "کمک خواستن: اگر نیاز داری کمک بخواه.",
+        phr: "Ask out: He asked her out.", phrFa: "دعوت به قرار: او از وی برای قرار بیرون دعوت کرد." 
+    },
+    { 
+        en: "answer", fa: "جواب دادن", 
+        def: "To react to a question.", defFa: "واکنش نشان دادن به یک سوال.",
+        ex: "Please answer the phone.", exFa: "لطفاً تلفن را جواب بده.",
+        col: "Right answer: That is the right answer.", colFa: "جواب درست: آن جواب درست است.",
+        phr: "Answer for: You must answer for it.", phrFa: "مسئول بودن: تو باید بابت آن پاسخگو باشی." 
+    },
+    { 
+        en: "talk", fa: "صحبت کردن", 
+        def: "To speak with someone.", defFa: "صحبت کردن با کسی.",
+        ex: "We talk about the weather.", exFa: "ما درباره آب و هوا صحبت می‌کنیم.",
+        col: "Talk to: I need to talk to you.", colFa: "صحبت کردن با: من باید با تو صحبت کنم.",
+        phr: "Talk back: Don't talk back to me.", phrFa: "جواب پس دادن: با من یکی به دو نکن (جواب سربالا نده)." 
+    },
+    { 
+        en: "speak", fa: "صحبت کردن", 
+        def: "To use your voice to say words.", defFa: "استفاده از صدا برای بیان کلمات.",
+        ex: "I speak English.", exFa: "من انگلیسی صحبت می‌کنم.",
+        col: "Speak loudly: Please speak loudly.", colFa: "بلند صحبت کردن: لطفاً بلند صحبت کنید.",
+        phr: "Speak up: Can you speak up?", phrFa: "بلندتر حرف زدن: می‌توانی بلندتر حرف بزنی؟" 
+    },
+    { 
+        en: "see", fa: "دیدن", 
+        def: "To look at with eyes.", defFa: "نگاه کردن با چشم‌ها.",
+        ex: "I see a bird in the sky.", exFa: "من یک پرنده در آسمان می‌بینم.",
+        col: "See a doctor: You should see a doctor.", colFa: "دکتر رفتن: تو باید پیش دکتر بروی.",
+        phr: "See off: I saw him off at the airport.", phrFa: "بدرقه کردن: او را در فرودگاه بدرقه کردم." 
+    },
+    { 
+        en: "look", fa: "نگاه کردن", 
+        def: "To direct your eyes toward something.", defFa: "هدایت چشم‌ها به سمت چیزی.",
+        ex: "Look at this picture.", exFa: "به این عکس نگاه کن.",
+        col: "Look good: You look good today.", colFa: "خوب به نظر رسیدن: امروز خوب به نظر می‌رسی.",
+        phr: "Look for: I am looking for my keys.", phrFa: "جستجو کردن: دنبال کلیدهایم می‌گردم." 
+    },
+    { 
+        en: "hear", fa: "شنیدن", 
+        def: "To receive sound in the ears.", defFa: "دریافت صدا در گوش‌ها.",
+        ex: "Did you hear that noise?", exFa: "آن صدا را شنیدی؟",
+        col: "Hear about: Did you hear about it?", colFa: "شنیدن درباره: درباره‌اش چیزی شنیدی؟",
+        phr: "Hear from: I hope to hear from you.", phrFa: "خبر گرفتن: امیدوارم از تو خبری بشنوم." 
+    },
+    { 
+        en: "listen", fa: "گوش دادن", 
+        def: "To pay attention to sound.", defFa: "توجه کردن به صدا.",
+        ex: "Listen to the music.", exFa: "به موسیقی گوش بده.",
+        col: "Listen carefully: Listen carefully to me.", colFa: "با دقت گوش دادن: با دقت به من گوش بده.",
+        phr: "Listen in: Don't listen in on us.", phrFa: "گوش ایستادن: به حرف‌های ما گوش نایست (فضولی نکن)." 
+    },
+    { 
+        en: "feel", fa: "احساس داشتن", 
+        def: "To experience an emotion.", defFa: "تجربه کردن یک عاطفه یا حس.",
+        ex: "I feel sick today.", exFa: "من امروز احساس بیماری می‌کنم.",
+        col: "Feel free: Feel free to ask.", colFa: "راحت بودن: راحت باش و بپرس.",
+        phr: "Feel for: I feel for you.", phrFa: "دلسوزی کردن: با تو همدردی می‌کنم." 
+    },
+    { 
+        en: "think", fa: "فکر کردن", 
+        def: "To use the mind.", defFa: "استفاده از ذهن.",
+        ex: "I think about my future.", exFa: "من درباره آینده‌ام فکر می‌کنم.",
+        col: "Think twice: Think twice before doing it.", colFa: "دوبار فکر کردن: قبل از انجامش خوب فکر کن.",
+        phr: "Think over: Think it over carefully.", phrFa: "خوب سنجیدن: خوب در موردش فکر کن." 
+    },
+    { 
+        en: "know", fa: "دانستن", 
+        def: "To have information.", defFa: "داشتن اطلاعات یا دانش.",
+        ex: "I know the answer.", exFa: "من جواب را می‌دانم.",
+        col: "Get to know: I want to get to know you.", colFa: "شناختن: می‌خواهم تو را بشناسم.",
+        phr: "Know of: Do you know of a good hotel?", phrFa: "اطلاع داشتن از: هتل خوبی سراغ داری؟" 
+    },
+    { 
+        en: "live", fa: "زندگی کردن", 
+        def: "To have your home in a place.", defFa: "خانه داشتن در یک مکان.",
+        ex: "I live in Tehran.", exFa: "من در تهران زندگی می‌کنم.",
+        col: "Live alone: He lives alone.", colFa: "تنها زندگی کردن: او تنها زندگی می‌کند.",
+        phr: "Live on: They live on fruit.", phrFa: "تغذیه کردن از: آن‌ها با میوه زنده می‌مانند." 
+    },
+    { 
+        en: "stay", fa: "ماندن", 
+        def: "To continue to be in a place.", defFa: "ادامه دادن به حضور در یک مکان.",
+        ex: "Please stay with me.", exFa: "لطفاً پیش من بمان.",
+        col: "Stay home: I will stay home today.", colFa: "خانه ماندن: من امروز خانه می‌مانم.",
+        phr: "Stay up: Don't stay up late.", phrFa: "بیدار ماندن: تا دیر وقت بیدار نمان." 
+    },
+    { 
+        en: "leave", fa: "ترک کردن", 
+        def: "To go away from a place.", defFa: "رفتن از یک مکان.",
+        ex: "I leave home at 8 AM.", exFa: "من ساعت ۸ صبح خانه را ترک می‌کنم.",
+        col: "Leave a message: Please leave a message.", colFa: "پیام گذاشتن: لطفاً پیام بگذارید.",
+        phr: "Leave out: Don't leave me out.", phrFa: "نادیده گرفتن: مرا کنار نگذار (وارد بازی کن)." 
+    },
+    { 
+        en: "move", fa: "حرکت کردن", 
+        def: "To change position.", defFa: "تغییر دادن موقعیت یا مکان.",
+        ex: "Don't move, please.", exFa: "لطفاً حرکت نکن.",
+        col: "Move house: We are moving house.", colFa: "اسباب‌کشی کردن: ما داریم اسباب‌کشی می‌کنیم.",
+        phr: "Move on: It is time to move on.", phrFa: "پیش رفتن: وقت آن است که به جلو حرکت کنیم." 
+    },
+    { 
+        en: "happen", fa: "اتفاق افتادن", 
+        def: "To take place.", defFa: "رخ دادن یا صورت گرفتن.",
+        ex: "What happened here?", exFa: "اینجا چه اتفاقی افتاد؟",
+        col: "Happen to: What happened to him?", colFa: "اتفاق افتادن برای: چه بلایی سرش آمد؟",
+        phr: "Happen on: I happened on an old friend.", phrFa: "تصادفی دیدن: اتفاقی یک دوست قدیمی را دیدم." 
+    },
+    { 
+        en: "people", fa: "مردم", 
+        def: "Humans in general.", defFa: "انسان‌ها به صورت کلی.",
+        ex: "People are very kind here.", exFa: "مردم اینجا خیلی مهربان هستند.",
+        col: "Young people: Young people love music.", colFa: "جوانان: جوانان عاشق موسیقی هستند.",
+        phr: "People person: I am a people person.", phrFa: "اجتماعی: من آدم اجتماعی‌ای هستم." 
+    },
+    { 
+        en: "person", fa: "شخص", 
+        def: "A human being.", defFa: "یک موجود انسانی.",
+        ex: "He is a good person.", exFa: "او آدم خوبی است.",
+        col: "In person: I want to see you in person.", colFa: "حضوری: می‌خواهم تو را حضوری ببینم.",
+        phr: "Per person: It costs 10 dollars per person.", phrFa: "به ازای هر نفر: هزینه‌اش ۱۰ دلار برای هر نفر است." 
+    },
+    { 
+        en: "man", fa: "مرد", 
+        def: "An adult male human.", defFa: "انسان مذکر بالغ.",
+        ex: "That man is my teacher.", exFa: "آن مرد معلم من است.",
+        col: "Old man: He is an old man.", colFa: "پیرمرد: او یک پیرمرد است.",
+        phr: "Man up: You need to man up.", phrFa: "قوی بودن: باید مثل یک مرد قوی باشی." 
+    },
+    { 
+        en: "woman", fa: "زن", 
+        def: "An adult female human.", defFa: "انسان مؤنث بالغ.",
+        ex: "She is a strong woman.", exFa: "او زن قدرتمندی است.",
+        col: "Young woman: She is a young woman.", colFa: "زن جوان: او زن جوانی است.",
+        phr: "Woman of her word: She is a woman of her word.", phrFa: "زن خوش‌قول: او پای حرفش می‌ایستد." 
+    },
+    { 
+        en: "friend", fa: "دوست", 
+        def: "A person you know and like.", defFa: "شخصی که می‌شناسید و دوستش دارید.",
+        ex: "She is my best friend.", exFa: "او بهترین دوست من است.",
+        col: "Make friends: It is easy to make friends.", colFa: "دوست پیدا کردن: دوست پیدا کردن راحت است.",
+        phr: "Friend for life: He is a friend for life.", phrFa: "دوست همیشگی: او یک دوست برای تمام عمر است." 
+    },
+    { 
+        en: "family", fa: "خانواده", 
+        def: "A group of related people.", defFa: "گروهی از افراد مرتبط (فامیل).",
+        ex: "I love my family.", exFa: "من عاشق خانواده‌ام هستم.",
+        col: "Large family: I have a large family.", colFa: "خانواده پرجمعیت: من خانواده پرجمعیتی دارم.",
+        phr: "Run in the family: It runs in the family.", phrFa: "ارثی بودن: این در خانواده ما موروثی است." 
+    },
+    { 
+        en: "job", fa: "شغل", 
+        def: "The work someone does for money.", defFa: "کاری که کسی برای پول انجام می‌دهد.",
+        ex: "I am looking for a job.", exFa: "من دنبال یک شغل می‌گردم.",
+        col: "Full-time job: I have a full-time job.", colFa: "شغل تمام‌وقت: من شغل تمام‌وقت دارم.",
+        phr: "On the job: He learned it on the job.", phrFa: "حین کار: او این را موقع کار یاد گرفت." 
+    },
+    { 
+        en: "money", fa: "پول", 
+        def: "What you use to buy things.", defFa: "چیزی که برای خرید استفاده می‌کنید.",
+        ex: "I don't have enough money.", exFa: "من پول کافی ندارم.",
+        col: "Save money: You should save money.", colFa: "پس‌انداز کردن: تو باید پول پس‌انداز کنی.",
+        phr: "Money for value: It is good value for money.", phrFa: "ارزش خرید: نسبت به قیمتش ارزش خرید دارد." 
+    },
+    { 
+        en: "time", fa: "زمان", 
+        def: "The period when things happen.", defFa: "دوره‌ای که در آن اتفاقات رخ می‌دهد.",
+        ex: "What time is it?", exFa: "ساعت چند است؟",
+        col: "On time: Please be here on time.", colFa: "سر وقت: لطفاً سر وقت اینجا باش.",
+        phr: "Time off: I need some time off.", phrFa: "مرخصی: به کمی استراحت/مرخصی نیاز دارم." 
+    },
+    { 
+        en: "day", fa: "روز", 
+        def: "A period of 24 hours.", defFa: "یک دوره ۲۴ ساعته.",
+        ex: "Have a nice day.", exFa: "روز خوبی داشته باشی.",
+        col: "All day: I was busy all day.", colFa: "تمام روز: من تمام روز مشغول بودم.",
+        phr: "Day by day: It gets better day by day.", phrFa: "روز به روز: روز به روز بهتر می‌شود." 
+    },
+    { 
+        en: "week", fa: "هفته", 
+        def: "A period of seven days.", defFa: "یک دوره هفت روزه.",
+        ex: "See you next week.", exFa: "هفته بعد می‌بینمت.",
+        col: "Last week: I saw him last week.", colFa: "هفته گذشته: من هفته پیش او را دیدم.",
+        phr: "Week in, week out: He works week in, week out.", phrFa: "هفته به هفته: او هفته پشت هفته کار می‌کند (بی‌وقفه)." 
+    },
+    { 
+        en: "year", fa: "سال", 
+        def: "A period of 12 months.", defFa: "یک دوره ۱۲ ماهه.",
+        ex: "Happy New Year.", exFa: "سال نو مبارک.",
+        col: "Once a year: I travel once a year.", colFa: "سالی یک‌بار: من سالی یک‌بار سفر می‌کنم.",
+        phr: "Year after year: It happens year after year.", phrFa: "هر سال: این سال به سال اتفاق می‌افتد." 
+    },
+    { 
+        en: "today", fa: "امروز", 
+        def: "The present day.", defFa: "روز حاضر.",
+        ex: "Today is Monday.", exFa: "امروز دوشنبه است.",
+        col: "Today's news: What is today's news?", colFa: "اخبار امروز: اخبار امروز چیست؟",
+        phr: "As of today: As of today, I am free.", phrFa: "از همین امروز: از امروز به بعد، من آزاد هستم." 
+    },
+    { 
+        en: "tomorrow", fa: "فردا", 
+        def: "The day after today.", defFa: "روز بعد از امروز.",
+        ex: "See you tomorrow.", exFa: "فردا می‌بینمت.",
+        col: "Tomorrow morning: See you tomorrow morning.", colFa: "فردا صبح: فردا صبح می‌بینمت.",
+        phr: "Like no tomorrow: He spends like no tomorrow.", phrFa: "بی‌رویه: او طوری خرج می‌کند که انگار فردایی نیست." 
+    },
+    { 
+        en: "yesterday", fa: "دیروز", 
+        def: "The day before today.", defFa: "روز قبل از امروز.",
+        ex: "I was busy yesterday.", exFa: "من دیروز مشغول بودم.",
+        col: "Yesterday afternoon: I saw her yesterday afternoon.", colFa: "دیروز بعدازظهر: من او را دیروز بعدازظهر دیدم.",
+        phr: "Born yesterday: I wasn't born yesterday.", phrFa: "بچه نیستم: من دیروز به دنیا نیامده‌ام (ساده‌لوح نیستم)." 
+    },
+    { 
+        en: "now", fa: "الان", 
+        def: "At the present time.", defFa: "در زمان حاضر.",
+        ex: "I am hungry now.", exFa: "من الان گرسنه هستم.",
+        col: "Right now: Do it right now.", colFa: "همین الان: همین الان انجامش بده.",
+        phr: "Now and then: I see him now and then.", phrFa: "گهگاهی: هر از گاهی او را می‌بینم." 
+    },
+    { 
+        en: "later", fa: "بعداً", 
+        def: "At a future time.", defFa: "در زمانی در آینده.",
+        ex: "Call me later, please.", exFa: "لطفاً بعداً با من تماس بگیر.",
+        col: "See you later: See you later, alligator!", colFa: "بعداً می‌بینمت: به امید دیدار!",
+        phr: "Sooner or later: You will find it sooner or later.", phrFa: "دیر یا زود: دیر یا زود پیدایش می‌کنی." 
+    },
+    { 
+        en: "early", fa: "زود", 
+        def: "Before the usual time.", defFa: "قبل از زمان معمول.",
+        ex: "I wake up early.", exFa: "من زود بیدار می‌شوم.",
+        col: "Early morning: I love the early morning.", colFa: "صبح زود: من عاشق صبح زود هستم.",
+        phr: "Early bird: He is an early bird.", phrFa: "سحرخیز: او آدم سحرخیزی است." 
+    },
+    { 
+        en: "late", fa: "دیر", 
+        def: "After the usual time.", defFa: "بعد از زمان معمول.",
+        ex: "I am late for work.", exFa: "من برای سر کار دیر کرده‌ام.",
+        col: "Late night: I like late night movies.", colFa: "دیر وقت شب: من فیلم‌های آخر شب را دوست دارم.",
+        phr: "Late for: Don't be late for class.", phrFa: "دیر کردن برای: برای کلاس دیر نکن." 
+    },
+    { 
+        en: "here", fa: "اینجا", 
+        def: "In this place.", defFa: "در این مکان.",
+        ex: "Come here, please.", exFa: "لطفاً بیا اینجا.",
+        col: "Here and there: I looked here and there.", colFa: "اینجا و آنجا: اینجا و آنجا را گشتم.",
+        phr: "Here you go: Here you go, your coffee.", phrFa: "بفرمایید: بفرمایید، این هم قهوه شما." 
+    },
+    { 
+        en: "there", fa: "آنجا", 
+        def: "In that place.", defFa: "در آن مکان.",
+        ex: "Put the book there.", exFa: "کتاب را آنجا بگذار.",
+        col: "Over there: The shop is over there.", colFa: "آن طرف: مغازه آنجاست (آن طرف است).",
+        phr: "There you are: Oh, there you are!", phrFa: "آهان اینجایی: اوه، بالاخره پیدا شدی!" 
+    },
+    { 
+        en: "home", fa: "خانه", 
+        def: "The place where you live.", defFa: "مکانی که در آن زندگی می‌کنید.",
+        ex: "I am at home.", exFa: "من در خانه هستم.",
+        col: "Stay home: Just stay home.", colFa: "خانه ماندن: فقط در خانه بمان.",
+        phr: "At home: I feel at home here.", phrFa: "احساس راحتی: اینجا احساس می‌کنم در خانه خودم هستم." 
+    },
+    { 
+        en: "place", fa: "مکان", 
+        def: "A position or area.", defFa: "یک موقعیت یا منطقه.",
+        ex: "This is a beautiful place.", exFa: "اینجا مکان زیبایی است.",
+        col: "Safe place: Find a safe place.", colFa: "مکان امن: یک جای امن پیدا کن.",
+        phr: "Take place: When did it take place?", phrFa: "رخ دادن: چه زمانی اتفاق افتاد؟" 
+    },
+    { 
+        en: "city", fa: "شهر", 
+        def: "A large town.", defFa: "یک شهر بزرگ.",
+        ex: "I love this city.", exFa: "من این شهر را دوست دارم.",
+        col: "Big city: Tehran is a big city.", colFa: "شهر بزرگ: تهران شهر بزرگی است.",
+        phr: "City center: The shop is in the city center.", phrFa: "مرکز شهر: مغازه در مرکز شهر است." 
+    },
+    { 
+        en: "country", fa: "کشور", 
+        def: "A nation or land.", defFa: "یک ملت یا سرزمین.",
+        ex: "Iran is my country.", exFa: "ایران کشور من است.",
+        col: "Beautiful country: It is a beautiful country.", colFa: "کشور زیبا: این کشور زیبایی است.",
+        phr: "Across the country: He traveled across the country.", phrFa: "سراسر کشور: او به تمام نقاط کشور سفر کرد." 
+    }
+
+    { 
+        en: "school", fa: "مدرسه", 
+        def: "A place where children learn.", defFa: "مکانی که کودکان در آن یاد می‌گیرند.",
+        ex: "I go to school every day.", exFa: "من هر روز به مدرسه می‌روم.",
+        col: "Primary school: My son is in primary school.", colFa: "مدرسه ابتدایی: پسرم در مدرسه ابتدایی است.",
+        phr: "School of thought: It is a different school of thought.", phrFa: "مکتب فکری: این یک مکتب فکری متفاوت است." 
+    },
+    { 
+        en: "office", fa: "اداره", 
+        def: "A room or building where people work.", defFa: "اتاق یا ساختمانی که مردم در آن کار می‌کنند.",
+        ex: "My office is in the city center.", exFa: "اداره من در مرکز شهر است.",
+        col: "Office hours: What are your office hours?", colFa: "ساعات اداری: ساعات اداری شما چیست؟",
+        phr: "Head office: Our head office is in London.", phrFa: "دفتر مرکزی: دفتر مرکزی ما در لندن است." 
+    },
+    { 
+        en: "shop", fa: "مغازه", 
+        def: "A place where you buy things.", defFa: "مکانی که در آن چیزهایی می‌خرید.",
+        ex: "I need to go to the shop.", exFa: "من باید به مغازه بروم.",
+        col: "Coffee shop: Let's meet at the coffee shop.", colFa: "کافی‌شاپ: بیا در کافی‌شاپ همدیگر را ببینیم.",
+        phr: "Shop around: You should shop around for a better price.", phrFa: "قیمت گرفتن: باید برای قیمت بهتر بازار را بگردی." 
+    },
+    { 
+        en: "street", fa: "خیابان", 
+        def: "A public road in a city.", defFa: "یک راه عمومی در شهر.",
+        ex: "I live on this street.", exFa: "من در این خیابان زندگی می‌کنم.",
+        col: "Main street: The bank is on the main street.", colFa: "خیابان اصلی: بانک در خیابان اصلی است.",
+        phr: "Across the street: He lives across the street.", phrFa: "آن طرف خیابان: او آن طرف خیابان زندگی می‌کند." 
+    },
+    { 
+        en: "good", fa: "خوب", 
+        def: "High quality or correct.", defFa: "با کیفیت بالا یا درست.",
+        ex: "He is a good student.", exFa: "او دانش‌آموز خوبی است.",
+        col: "Good news: I have some good news.", colFa: "خبر خوب: من چند خبر خوب دارم.",
+        phr: "Good for you: You passed? Good for you!", phrFa: "خوش به حالت: قبول شدی؟ خوش به حالت!" 
+    },
+    { 
+        en: "bad", fa: "بد", 
+        def: "Not good; unpleasant.", defFa: "نه خوب؛ ناخوشایند.",
+        ex: "I have a bad headache.", exFa: "من سردرد بدی دارم.",
+        col: "Bad weather: The weather is bad today.", colFa: "آب و هوای بد: امروز هوا بد است.",
+        phr: "Too bad: It's too bad you can't come.", phrFa: "خیلی بد شد: خیلی بد شد که نمی‌توانی بیایی." 
+    },
+    { 
+        en: "easy", fa: "آسان", 
+        def: "Not difficult.", defFa: "نه سخت.",
+        ex: "This test is very easy.", exFa: "این امتحان خیلی آسان است.",
+        col: "Easy way: Find an easy way to do it.", colFa: "راه آسان: یک راه آسان برای انجامش پیدا کن.",
+        phr: "Take it easy: Just take it easy!", phrFa: "سخت نگیر: فقط سخت نگیر (استراحت کن)!" 
+    },
+    { 
+        en: "hard", fa: "سخت", 
+        def: "Difficult or firm.", defFa: "دشوار یا سفت.",
+        ex: "English is not hard.", exFa: "انگلیسی سخت نیست.",
+        col: "Hard work: Success needs hard work.", colFa: "کار سخت: موفقیت به کار سخت نیاز دارد.",
+        phr: "Hard on: Don't be so hard on yourself.", phrFa: "سخت گرفتن به: اینقدر به خودت سخت نگیر." 
+    },
+    { 
+        en: "big", fa: "بزرگ", 
+        def: "Large in size.", defFa: "بزرگ از نظر اندازه.",
+        ex: "They have a big house.", exFa: "آن‌ها خانه بزرگی دارند.",
+        col: "Big city: London is a big city.", colFa: "شهر بزرگ: لندن شهر بزرگی است.",
+        phr: "Big deal: It's not a big deal.", phrFa: "مهم بودن: چیز مهمی نیست (اتفاق مهمی نیست)." 
+    },
+    { 
+        en: "small", fa: "کوچک", 
+        def: "Little in size.", defFa: "کم‌حجم از نظر اندازه.",
+        ex: "I want a small coffee.", exFa: "من یک قهوه کوچک می‌خواهم.",
+        col: "Small talk: We made some small talk.", colFa: "گپ زدن: کمی در مورد مسائل متفرقه گپ زدیم.",
+        phr: "Small wonder: It's a small wonder he failed.", phrFa: "جای تعجب نیست: جای تعجب نیست که او مردود شد." 
+    },
+    { 
+        en: "new", fa: "جدید", 
+        def: "Recently made or bought.", defFa: "اخیراً ساخته شده یا خریداری شده.",
+        ex: "I have a new phone.", exFa: "من یک گوشی جدید دارم.",
+        col: "New year: Happy New Year!", colFa: "سال نو: سال نو مبارک!",
+        phr: "New to: I am new to this city.", phrFa: "تازه‌وارد: من در این شهر تازه‌وارد هستم." 
+    },
+    { 
+        en: "old", fa: "قدیمی / پیر", 
+        def: "Having lived a long time; not new.", defFa: "برای مدت طولانی زندگی کرده؛ نه جدید.",
+        ex: "This is an old book.", exFa: "این یک کتاب قدیمی است.",
+        col: "Old friend: He is an old friend.", colFa: "دوست قدیمی: او یک دوست قدیمی است.",
+        phr: "Old-fashioned: It's a bit old-fashioned.", phrFa: "دمده: این کمی قدیمی/دمده است." 
+    },
+    { 
+        en: "same", fa: "یکسان", 
+        def: "Not different.", defFa: "نه متفاوت.",
+        ex: "We are the same age.", exFa: "ما هم‌سن هستیم.",
+        col: "Same time: They arrived at the same time.", colFa: "زمان یکسان: آن‌ها هم‌زمان رسیدند.",
+        phr: "All the same: It's all the same to me.", phrFa: "فرقی نکردن: برای من هیچ فرقی نمی‌کند." 
+    },
+    { 
+        en: "different", fa: "متفاوت", 
+        def: "Not the same.", defFa: "نه یکسان.",
+        ex: "I like different foods.", exFa: "من غذاهای متفاوتی را دوست دارم.",
+        col: "Different story: That's a different story.", colFa: "داستان متفاوت: آن موضوعش فرق می‌کند.",
+        phr: "Different from: This is different from that.", phrFa: "متفاوت از: این با آن متفاوت است." 
+    },
+    { 
+        en: "busy", fa: "مشغول", 
+        def: "Doing something; not free.", defFa: "انجام کاری؛ نه آزاد.",
+        ex: "I am very busy today.", exFa: "من امروز خیلی مشغول هستم.",
+        col: "Busy street: It's a busy street.", colFa: "خیابان شلوغ: این خیابان شلوغی است.",
+        phr: "Busy with: She is busy with her kids.", phrFa: "مشغول بودن با: او سرش با بچه‌هایش گرم است." 
+    },
+    { 
+        en: "free", fa: "آزاد / رایگان", 
+        def: "Not busy or costing nothing.", defFa: "نه مشغول یا بدون هزینه.",
+        ex: "Are you free tonight?", exFa: "آیا امشب آزادی؟",
+        col: "Free time: What do you do in your free time?", colFa: "وقت آزاد: در وقت آزادت چه کار می‌کنی؟",
+        phr: "Free of: This water is free of salt.", phrFa: "بدونِ: این آب بدون نمک است." 
+    },
+    { 
+        en: "tired", fa: "خسته", 
+        def: "Needing rest.", defFa: "نیازمند استراحت.",
+        ex: "I am tired after work.", exFa: "من بعد از کار خسته هستم.",
+        col: "Dead tired: I am dead tired.", colFa: "خستهِ مرده: من از خستگی دارم می‌میرم.",
+        phr: "Tired of: I am tired of waiting.", phrFa: "خسته شدن از (بیزار): از منتظر ماندن خسته شده‌ام." 
+    },
+    { 
+        en: "happy", fa: "خوشحال", 
+        def: "Feeling pleasure.", defFa: "احساس لذت داشتن.",
+        ex: "I am happy to see you.", exFa: "از دیدنت خوشحالم.",
+        col: "Happy life: I wish you a happy life.", colFa: "زندگی شاد: برایت آرزوی زندگی شادی دارم.",
+        phr: "Happy ending: The movie had a happy ending.", phrFa: "پایان خوش: فیلم پایان خوشی داشت." 
+    },
+    { 
+        en: "sad", fa: "ناراحت", 
+        def: "Not happy.", defFa: "نه خوشحال.",
+        ex: "It's a sad movie.", exFa: "این یک فیلم غم‌انگیز است.",
+        col: "Feel sad: I feel sad today.", colFa: "احساس ناراحتی: امروز احساس ناراحتی می‌کنم.",
+        phr: "Sad to say: Sad to say, he failed.", phrFa: "متأسفانه: متأسفانه باید بگویم او مردود شد." 
+    },
+    { 
+        en: "right", fa: "درست / راست", 
+        def: "Correct or opposite of left.", defFa: "صحیح یا مخالف چپ.",
+        ex: "That's the right answer.", exFa: "آن جواب درست است.",
+        col: "Right turn: Take a right turn.", colFa: "پیچش به راست: به سمت راست بپیچید.",
+        phr: "Right away: Do it right away!", phrFa: "همین الان: فوراً انجامش بده!" 
+    },
+    { 
+        en: "wrong", fa: "غلط", 
+        def: "Not correct.", defFa: "نه صحیح.",
+        ex: "What's wrong with you?", exFa: "مشکلت چیه؟ (چه اتفاق بدی افتاده؟)",
+        col: "Wrong number: Sorry, wrong number.", colFa: "شماره اشتباه: ببخشید، شماره اشتباه است.",
+        phr: "Go wrong: Everything went wrong.", phrFa: "خراب شدن: همه چیز اشتباه پیش رفت." 
+    },
+    { 
+        en: "important", fa: "مهم", 
+        def: "Having great value.", defFa: "داشتن ارزش زیاد.",
+        ex: "This is an important lesson.", exFa: "این درس مهمی است.",
+        col: "Important role: He has an important role.", colFa: "نقش مهم: او نقش مهمی دارد.",
+        phr: "Important to: It is important to me.", phrFa: "مهم بودن برای: این برای من مهم است." 
+    },
+    { 
+        en: "possible", fa: "ممکن", 
+        def: "That can happen.", defFa: "چیزی که می‌تواند رخ دهد.",
+        ex: "Is it possible to see you?", exFa: "آیا ممکن است شما را ببینم؟",
+        col: "As soon as possible: Call me as soon as possible.", colFa: "در اسرع وقت: در اسرع وقت با من تماس بگیر.",
+        phr: "If possible: Please come if possible.", phrFa: "در صورت امکان: اگر ممکن است بیایید." 
+    },
+    { 
+        en: "ready", fa: "آماده", 
+        def: "Prepared for something.", defFa: "آماده شده برای چیزی.",
+        ex: "Are you ready to go?", exFa: "آیا برای رفتن آماده‌ای؟",
+        col: "Get ready: Get ready, we're leaving.", colFa: "آماده شدن: آماده شو، داریم می‌ریم.",
+        phr: "Ready for: I am ready for the test.", phrFa: "آماده بودن برای: برای امتحان آماده‌ام." 
+    },
+    { 
+        en: "and", fa: "و", 
+        def: "Used to join words.", defFa: "استفاده شده برای اتصال کلمات.",
+        ex: "I like tea and coffee.", exFa: "من چای و قهوه دوست دارم.",
+        col: "And so on: We bought pens, paper and so on.", colFa: "و غیره: ما مداد، کاغذ و غیره خریدیم.",
+        phr: "And yet: He's rich, and yet he's sad.", phrFa: "با این حال: او ثروتمند است، با این حال ناراحت است." 
+    },
+    { 
+        en: "but", fa: "اما", 
+        def: "Used to show contrast.", defFa: "استفاده شده برای نشان دادن تضاد.",
+        ex: "I am tired but happy.", exFa: "من خسته اما خوشحالم.",
+        col: "But for: But for your help, I would fail.", colFa: "اگر نبود: اگر کمک تو نبود، من شکست می‌خوردم.",
+        phr: "Nothing but: He eats nothing but fruit.", phrFa: "فقط و فقط: او چیزی جز میوه نمی‌خورد." 
+    },
+    { 
+        en: "because", fa: "چون / زیرا", 
+        def: "For the reason that.", defFa: "به دلیلی که...",
+        ex: "I'm late because of traffic.", exFa: "من به خاطر ترافیک دیر کردم.",
+        col: "Just because: Just because I said so!", colFa: "فقط به این خاطر که: فقط چون من اینطور گفتم!",
+        phr: "Because of: We stayed home because of rain.", phrFa: "به دلیلِ: به خاطر باران خانه ماندیم." 
+    },
+    { 
+        en: "so", fa: "پس / بنابراین", 
+        def: "For that reason.", defFa: "به آن دلیل.",
+        ex: "I was tired, so I went to bed.", exFa: "خسته بودم، پس به رختخواب رفتم.",
+        col: "So far: So far, so good.", colFa: "تا اینجا: تا اینجا که همه چیز خوب بوده.",
+        phr: "So that: I study so that I can pass.", phrFa: "به طوری که / تا اینکه: درس می‌خوانم تا بتوانم قبول شوم." 
+    },
+    { 
+        en: "if", fa: "اگر", 
+        def: "Used for a condition.", defFa: "استفاده شده برای یک شرط.",
+        ex: "Call me if you need help.", exFa: "اگر کمک نیاز داشتی با من تماس بگیر.",
+        col: "If only: If only I knew!", colFa: "کاش: ای کاش می‌دانستم!",
+        phr: "What if: What if it rains?", phrFa: "چه می‌شود اگر: اگر باران ببارد چه؟" 
+    },
+    { 
+        en: "when", fa: "وقتی که / چه وقت", 
+        def: "At what time.", defFa: "در چه زمانی.",
+        ex: "Call me when you arrive.", exFa: "وقتی رسیدی با من تماس بگیر.",
+        col: "Since when: Since when do you smoke?", colFa: "از کی تا حالا: از کی تا حالا سیگار می‌کشی؟",
+        phr: "When it comes to: When it comes to music, he's great.", phrFa: "در موردِ (وقتی نوبت به... می‌رسد): وقتی نوبت به موسیقی می‌رسد، او عالی است." 
+    },
+    { 
+        en: "before", fa: "قبل از", 
+        def: "Earlier than.", defFa: "زودتر از.",
+        ex: "Wash your hands before lunch.", exFa: "قبل از ناهار دست‌هایت را بشوی.",
+        col: "Before long: I will see you before long.", colFa: "به زودی: به زودی می‌بینمت.",
+        phr: "Beforehand: I knew it beforehand.", phrFa: "از قبل: من از قبل آن را می‌دانستم." 
+    },
+    { 
+        en: "after", fa: "بعد از", 
+        def: "Later than.", defFa: "دیرتر از.",
+        ex: "I go to gym after work.", exFa: "من بعد از کار به باشگاه می‌روم.",
+        col: "After all: After all, he is your friend.", colFa: "هر چه باشد: هر چه باشد، او دوست توست.",
+        phr: "Look after: Please look after my cat.", phrFa: "مراقبت کردن: لطفاً مراقب گربه من باش." 
+    },
+    { 
+        en: "about", fa: "درباره / تقریباً", 
+        def: "On the subject of.", defFa: "در مورد موضوعِ...",
+        ex: "Tell me about your family.", exFa: "درباره خانواده‌ات به من بگو.",
+        col: "How about: How about a coffee?", colFa: "نظرت در موردِ... چیست: نظرت در مورد یک قهوه چیست؟",
+        phr: "About to: I was about to leave.", phrFa: "در آستانه: در آستانه رفتن (ترک کردن) بودم." 
+    },
+    { 
+        en: "with", fa: "با", 
+        def: "Accompanied by.", defFa: "همراه شده توسطِ...",
+        ex: "I go with you.", exFa: "من با تو می‌آیم.",
+        col: "With pleasure: I will do it with pleasure.", colFa: "با کمال میل: من با کمال میل این کار را انجام می‌دهم.",
+        phr: "Get along with: I get along with him.", phrFa: "کنار آمدن با: من با او کنار می‌آیم." 
+    },
+    { 
+        en: "without", fa: "بدون", 
+        def: "Not having or with.", defFa: "نداشتنِ چیزی یا بدونِ آن.",
+        ex: "I can't live without you.", exFa: "من بدون تو نمی‌توانم زندگی کنم.",
+        col: "Without doubt: Without doubt, he is the best.", colFa: "بدون شک: بدون شک او بهترین است.",
+        phr: "Do without: I can't do without my phone.", phrFa: "بدون چیزی سر کردن: بدون گوشی‌ام نمی‌توانم سر کنم." 
+    },
+    { 
+        en: "for", fa: "برای", 
+        def: "Used to show purpose.", defFa: "استفاده شده برای نشان دادن هدف.",
+        ex: "This gift is for you.", exFa: "این هدیه برای توست.",
+        col: "For free: I got this for free.", colFa: "به صورت رایگان: این را رایگان گرفتم.",
+        phr: "As for: As for me, I prefer tea.", phrFa: "و اما در موردِ: و اما در مورد من، من چای را ترجیح می‌دهم." 
+    },
+    { 
+        en: "from", fa: "از", 
+        def: "Showing the starting point.", defFa: "نشان دادن نقطه شروع.",
+        ex: "Where are you from?", exFa: "اهل کجا هستی؟ (از کجا هستی؟)",
+        col: "From now on: From now on, I will study.", colFa: "از این به بعد: از این به بعد مطالعه خواهم کرد.",
+        phr: "From time to time: I visit him from time to time.", phrFa: "هر از گاهی: وقت و بی‌وقت به او سر می‌زنم." 
+    },
+    { 
+        en: "to", fa: "به / تا", 
+        def: "Used to show direction.", defFa: "استفاده شده برای نشان دادن جهت.",
+        ex: "I go to the park.", exFa: "من به پارک می‌روم.",
+        col: "To be honest: To be honest, I don't know.", colFa: "صادقانه بگویم: راستش را بخواهید، نمی‌دانم.",
+        phr: "Back to: Let's get back to work.", phrFa: "برگشتن به: بیا به سر کار برگردیم." 
+    },
+    { 
+        en: "in", fa: "در / داخل", 
+        def: "Inside a place.", defFa: "داخل یک مکان.",
+        ex: "I live in a city.", exFa: "من در یک شهر زندگی می‌کنم.",
+        col: "In time: You arrived just in time.", colFa: "به موقع: دقیقاً به موقع رسیدی.",
+        phr: "Give in: Never give in!", phrFa: "تسلیم شدن: هرگز تسلیم نشو!" 
+    },
+    { 
+        en: "on", fa: "روی", 
+        def: "Supported by a surface.", defFa: "پشتیبانی شده توسط یک سطح.",
+        ex: "The book is on the table.", exFa: "کتاب روی میز است.",
+        col: "On purpose: He did it on purpose.", colFa: "عمداً: او این کار را عمداً انجام داد.",
+        phr: "On and on: He talked on and on.", phrFa: "پشت سر هم: او یک‌ریز (مدام) حرف زد." 
+    },
+    { 
+        en: "at", fa: "در / کنار", 
+        def: "Used to show a place or time.", defFa: "استفاده شده برای نشان دادن مکان یا زمان.",
+        ex: "I am at work.", exFa: "من سر کار هستم.",
+        col: "At all: I don't like it at all.", colFa: "اصلاً: من اصلاً از آن خوشم نمی‌آید.",
+        phr: "At least: At least, you tried.", phrFa: "حداقل: حداقل، تو تلاشت را کردی." 
+    },
+    { 
+        en: "of", fa: "ِ (کسره مالکیت) / از", 
+        def: "Belonging to.", defFa: "متعلق به.",
+        ex: "The color of the car is red.", exFa: "رنگِ ماشین قرمز است.",
+        col: "Full of: The room is full of people.", colFa: "پر از: اتاق پر از جمعیت است.",
+        phr: "Because of: I am here because of you.", phrFa: "به خاطرِ: من به خاطر تو اینجا هستم." 
+    },
+    { 
+        en: "this", fa: "این", 
+        def: "The person or thing here.", defFa: "شخص یا چیزِ موجود در اینجا.",
+        ex: "This is my house.", exFa: "این خانه من است.",
+        col: "This way: Please come this way.", colFa: "از این طرف: لطفاً از این طرف بیایید.",
+        phr: "This and that: We talked about this and that.", phrFa: "این در و آن در: در مورد این و آن حرف زدیم (مسائل متفرقه)." 
+    },
+    { 
+        en: "that", fa: "آن", 
+        def: "The person or thing there.", defFa: "شخص یا چیزِ موجود در آنجا.",
+        ex: "That is a big car.", exFa: "آن ماشین بزرگی است.",
+        col: "That's it: Good job, that's it!", colFa: "همینه: کار عالی بود، همینه!",
+        phr: "That is to say: He is rich, that is to say, wealthy.", phrFa: "به عبارتی: او غنی است، یعنی که ثروتمند است." 
+    },
+    { 
+        en: "these", fa: "این‌ها", 
+        def: "Plural of 'this'.", defFa: "جمعِ کلمه 'این'.",
+        ex: "These books are new.", exFa: "این کتاب‌ها جدید هستند.",
+        col: "In these days: Life is hard in these days.", colFa: "در این روزها: زندگی در این روزها سخت است.",
+        phr: "One of these: I want one of these.", phrFa: "یکی از این‌ها: من یکی از این‌ها را می‌خواهم." 
+    },
+    { 
+        en: "those", fa: "آن‌ها", 
+        def: "Plural of 'that'.", defFa: "جمعِ کلمه 'آن'.",
+        ex: "Those people are kind.", exFa: "آن مردم مهربان هستند.",
+        col: "Those were the days: Ah, those were the days!", colFa: "آن روزها یادش بخیر: آه، عجب روزگاری بود!",
+        phr: "One of those: It was just one of those days.", phrFa: "از آن روزها: از آن روزهای (بد/خاص) بود." 
+    },
+    { 
+        en: "something", fa: "چیزی", 
+        def: "A thing that is not known.", defFa: "چیزی که شناخته شده نیست.",
+        ex: "I have something to tell you.", exFa: "چیزی دارم که به تو بگویم.",
+        col: "Something new: Let's try something new.", colFa: "چیزی جدید: بیا یک چیز جدید را امتحان کنیم.",
+        phr: "Something like: It costs something like 10$.", phrFa: "چیزی حدودِ: قیمتش چیزی حدود ۱۰ دلار است." 
+    },
+    { 
+        en: "someone", fa: "کسی", 
+        def: "A person who is not known.", defFa: "شخصی که شناخته شده نیست.",
+        ex: "Someone is at the door.", exFa: "کسی پشت در است.",
+        col: "Someone special: You are someone special.", colFa: "کسی خاص: تو آدم خاصی هستی.",
+        phr: "Someone else: Ask someone else.", phrFa: "کسی دیگر: از کس دیگری بپرس." 
+    },
+    { 
+        en: "nothing", fa: "هیچ‌چیز", 
+        def: "Not anything.", defFa: "نه هیچ‌چیز.",
+        ex: "There is nothing in the box.", exFa: "هیچ‌چیزی در جعبه نیست.",
+        col: "Nothing much: What's up? Nothing much.", colFa: "خبری نیست: چه خبر؟ خبر خاصی نیست.",
+        phr: "Nothing but: She said nothing but the truth.", phrFa: "فقط و فقط: او چیزی جز حقیقت نگفت." 
+    },
+    { 
+        en: "everything", fa: "همه‌چیز", 
+        def: "All things.", defFa: "تمام چیزها.",
+        ex: "Everything is okay.", exFa: "همه‌چیز مرتب است.",
+        col: "Everything else: Put everything else here.", colFa: "هر چیز دیگری: بقیه چیزها را اینجا بگذار.",
+        phr: "Everything counts: In this job, everything counts.", phrFa: "همه‌چیز مهم است: در این کار، همه‌چیز حساب می‌شود (اهمیت دارد)." 
+    }
+    { 
+        en: "one", fa: "یک", 
+        def: "The number 1.", defFa: "عدد یک.",
+        ex: "I have only one brother.", exFa: "من فقط یک برادر دارم.",
+        col: "One day: One day I will travel.", colFa: "یک روزی: یک روزی من سفر خواهم کرد.",
+        phr: "One by one: Please enter one by one.", phrFa: "یکی یکی: لطفاً یکی یکی وارد شوید." 
+    },
+    { 
+        en: "two", fa: "دو", 
+        def: "The number 2.", defFa: "عدد دو.",
+        ex: "I want two apples, please.", exFa: "من دو تا سیب می‌خواهم، لطفاً.",
+        col: "Two weeks: I'll see you in two weeks.", colFa: "دو هفته: تا دو هفته دیگر می‌بینمت.",
+        phr: "Two-faced: He is a two-faced person.", phrFa: "دو رو: او آدم دورویی است." 
+    },
+    { 
+        en: "many", fa: "زیاد", 
+        def: "A large number of.", defFa: "تعداد زیادی از.",
+        ex: "I have many friends.", exFa: "من دوستان زیادی دارم.",
+        col: "How many: How many books do you have?", colFa: "چه تعداد: چند تا کتاب داری؟",
+        phr: "Many a time: I told him many a time.", phrFa: "بارها و بارها: بارها به او گفتم." 
+    },
+    { 
+        en: "few", fa: "کم", 
+        def: "A small number of.", defFa: "تعداد کمی از.",
+        ex: "I have a few questions.", exFa: "من چند تا سوال (کم) دارم.",
+        col: "Quite a few: There are quite a few people.", colFa: "تعداد نسبتاً زیاد: تعداد نسبتاً زیادی آدم آنجاست.",
+        phr: "Few and far between: Good jobs are few and far between.", phrFa: "بسیار نایاب: شغل‌های خوب بسیار نایاب هستند." 
+    },
+    { 
+        en: "a lot", fa: "خیلی", 
+        def: "A large amount or number.", defFa: "مقدار یا تعداد زیاد.",
+        ex: "Thanks a lot for your help.", exFa: "خیلی ممنون بابت کمکت.",
+        col: "A lot of: We have a lot of work.", colFa: "مقدار زیادی از: ما خیلی کار داریم.",
+        phr: "Think a lot of: I think a lot of him.", phrFa: "احترام زیادی قائل بودن: من احترام زیادی برای او قائلم." 
+    },
+    { 
+        en: "more", fa: "بیشتر", 
+        def: "A larger amount.", defFa: "مقدار بزرگتر.",
+        ex: "I need more time.", exFa: "من به زمان بیشتری نیاز دارم.",
+        col: "More or less: It is more or less the same.", colFa: "کم و بیش: کم و بیش همان است.",
+        phr: "More and more: It's getting more and more difficult.", phrFa: "بیشتر و بیشتر: دارد روز به روز سخت‌تر می‌شود." 
+    },
+    { 
+        en: "less", fa: "کمتر", 
+        def: "A smaller amount.", defFa: "مقدار کوچکتر.",
+        ex: "Eat less sugar.", exFa: "شکر کمتری بخور.",
+        col: "Less than: It costs less than 10$.", colFa: "کمتر از: قیمتش کمتر از ۱۰ دلار است.",
+        phr: "None the less: It was hard, none the less he did it.", phrFa: "با این وجود: سخت بود، با این وجود او انجامش داد." 
+    },
+    { 
+        en: "all", fa: "همه", 
+        def: "The whole number or amount.", defFa: "کل تعداد یا مقدار.",
+        ex: "All the students are here.", exFa: "همه دانش‌آموزان اینجا هستند.",
+        col: "All day: I worked all day.", colFa: "تمام روز: تمام روز را کار کردم.",
+        phr: "All in all: All in all, it was a good day.", phrFa: "در مجموع: در مجموع، روز خوبی بود." 
+    },
+    { 
+        en: "some", fa: "بعضی / مقداری", 
+        def: "An unknown amount or number.", defFa: "مقدار یا تعداد نامعلوم.",
+        ex: "I need some water.", exFa: "من مقداری آب نیاز دارم.",
+        col: "Some day: I will visit you some day.", colFa: "یک روزی: یک روزی به دیدنت می‌آیم.",
+        phr: "Some or other: For some reason or other, he left.", phrFa: "به هر دلیلی: به هر دلیلی که بود، او رفت." 
+    },
+    { 
+        en: "any", fa: "هیچ / هر", 
+        def: "One or some of any kind.", defFa: "یک یا چند از هر نوع.",
+        ex: "I don't have any money.", exFa: "من هیچ پولی ندارم.",
+        col: "Any time: Call me any time.", colFa: "هر زمان: هر وقت خواستی زنگ بزن.",
+        phr: "In any case: In any case, I will be there.", phrFa: "در هر صورت: در هر صورت، من آنجا خواهم بود." 
+    },
+    { 
+        en: "other", fa: "دیگر", 
+        def: "Different or second of two.", defFa: "متفاوت یا دومین از دوتا.",
+        ex: "I have other things to do.", exFa: "من کارهای دیگری برای انجام دادن دارم.",
+        col: "The other day: I saw him the other day.", colFa: "چند روز پیش: همین چند روز پیش او را دیدم.",
+        phr: "On the other hand: On the other hand, it's expensive.", phrFa: "از طرف دیگر: از طرف دیگر، گران است." 
+    },
+    { 
+        en: "another", fa: "یکی دیگر", 
+        def: "One more; a different one.", defFa: "یکی بیشتر؛ یکی متفاوت.",
+        ex: "Can I have another cup of tea?", exFa: "می‌توانم یک فنجان چای دیگر داشته باشم؟",
+        col: "One after another: They arrived one after another.", colFa: "یکی پس از دیگری: آن‌ها یکی پس از دیگری رسیدند.",
+        phr: "Another time: Let's do it another time.", phrFa: "یک وقت دیگر: بیا یک وقت دیگر انجامش دهیم." 
+    },
+    { 
+        en: "kind", fa: "نوع / مهربان", 
+        def: "A type or group; friendly.", defFa: "یک دسته یا نوع؛ صمیمی و دوستانه.",
+        ex: "What kind of music do you like?", exFa: "چه نوع موسیقی‌ای دوست داری؟",
+        col: "Be kind: Please be kind to animals.", colFa: "مهربان بودن: لطفاً با حیوانات مهربان باش.",
+        phr: "Kind of: I'm kind of tired.", phrFa: "یه جورایی: یه جورایی خسته‌ام." 
+    },
+    { 
+        en: "morning", fa: "صبح", 
+        def: "The early part of the day.", defFa: "بخش اولیه روز.",
+        ex: "I drink coffee in the morning.", exFa: "من صبح‌ها قهوه می‌نوشم.",
+        col: "Good morning: Good morning, teacher!", colFa: "صبح بخیر: صبح بخیر استاد!",
+        phr: "Morning person: I am not a morning person.", phrFa: "آدمِ صبح (سحرخیز): من آدمِ صبح نیستم." 
+    },
+    { 
+        en: "afternoon", fa: "بعدازظهر", 
+        def: "The time between noon and evening.", defFa: "زمان بین ظهر و عصر.",
+        ex: "See you this afternoon.", exFa: "امروز بعدازظهر می‌بینمت.",
+        col: "Good afternoon: Good afternoon, everyone.", colFa: "بعدازظهر بخیر: بعدازظهر بخیر همگی.",
+        phr: "In the afternoon: I study in the afternoon.", phrFa: "در بعدازظهر: من بعدازظهرها مطالعه می‌کنم." 
+    },
+    { 
+        en: "evening", fa: "عصر", 
+        def: "The end of the day.", defFa: "پایان روز.",
+        ex: "I watch TV in the evening.", exFa: "من عصرها تلویزیون تماشا می‌کنم.",
+        col: "Evening dress: She wore a beautiful evening dress.", colFa: "لباس شب: او لباس شب زیبایی پوشیده بود.",
+        phr: "In the evening: We walk in the evening.", phrFa: "در هنگام عصر: ما عصرها پیاده‌روی می‌کنیم." 
+    },
+    { 
+        en: "night", fa: "شب", 
+        def: "The time when it is dark.", defFa: "زمانی که هوا تاریک است.",
+        ex: "I sleep at night.", exFa: "من شب‌ها می‌خوابم.",
+        col: "Good night: Good night, sleep tight.", colFa: "شب بخیر: شب بخیر، خوب بخوابی.",
+        phr: "At night: The city is beautiful at night.", phrFa: "در شب: شهر در شب زیباست." 
+    },
+    { 
+        en: "again", fa: "دوباره", 
+        def: "One more time.", defFa: "یک بار دیگر.",
+        ex: "Can you say that again?", exFa: "می‌توانی دوباره آن را بگویی؟",
+        col: "Again and again: I told him again and again.", colFa: "بارها و بارها: بارها و بارها به او گفتم.",
+        phr: "Never again: I will never go there again.", phrFa: "هرگز دیگر: هرگز دوباره به آنجا نخواهم رفت." 
+    },
+    { 
+        en: "always", fa: "همیشه", 
+        def: "At all times.", defFa: "در تمام زمان‌ها.",
+        ex: "I always wake up at 7.", exFa: "من همیشه ساعت ۷ بیدار می‌شوم.",
+        col: "Always there: I'm always there for you.", colFa: "همیشه در دسترس: من همیشه کنارت هستم.",
+        phr: "As always: As always, he was late.", phrFa: "طبق معمول: طبق معمول، او دیر کرد." 
+    },
+    { 
+        en: "usually", fa: "معمولاً", 
+        def: "In the way that most often happens.", defFa: "به روشی که اغلب اتفاق می‌افتد.",
+        ex: "I usually go to work by car.", exFa: "من معمولاً با ماشین به سر کار می‌روم.",
+        col: "As usually: He is busy, as usually.", colFa: "طبق معمول: او مثل همیشه سرش شلوغ است.",
+        phr: "Usually like: I usually like to stay home.", phrFa: "اغلب تمایل داشتن: من معمولاً دوست دارم در خانه بمانم." 
+    },
+    { 
+        en: "sometimes", fa: "گاهی اوقات", 
+        def: "At some times; not always.", defFa: "در بعضی زمان‌ها؛ نه همیشه.",
+        ex: "Sometimes I study at night.", exFa: "گاهی اوقات شب‌ها مطالعه می‌کنم.",
+        col: "Sometimes true: That is sometimes true.", colFa: "گاهی درست: آن موضوع گاهی درست است.",
+        phr: "Sometimes or other: He'll come sometimes or other.", phrFa: "دیر یا زود (بالاخره): او بالاخره یک زمانی خواهد آمد." 
+    },
+    { 
+        en: "often", fa: "اغلب", 
+        def: "Many times.", defFa: "بسیاری از دفعات.",
+        ex: "I often visit my grandmother.", exFa: "من اغلب به مادربزرگم سر می‌زنم.",
+        col: "How often: How often do you exercise?", colFa: "چند وقت یک‌بار: چند وقت یک‌بار ورزش می‌کنی؟",
+        phr: "Every so often: We meet every so often.", phrFa: "هر از گاهی: ما هر از گاهی همدیگر را می‌بینیم." 
+    },
+    { 
+        en: "never", fa: "هرگز", 
+        def: "Not at any time.", defFa: "در هیچ زمانی.",
+        ex: "I never smoke.", exFa: "من هرگز سیگار نمی‌کشم.",
+        col: "Never mind: Never mind, it's okay.", colFa: "بی‌خیال: بی‌خیال، مشکلی نیست.",
+        phr: "Better late than never: Finally you came! Better late than never.", phrFa: "دیر رسیدن بهتر از هرگز نرسیدن است: بالاخره آمدی! دیر بیایی بهتر از این است که اصلاً نیایی." 
+    },
+    { 
+        en: "fast", fa: "سریع", 
+        def: "Moving quickly.", defFa: "در حال حرکت سریع.",
+        ex: "He drives very fast.", exFa: "او خیلی سریع رانندگی می‌کند.",
+        col: "Fast food: I don't like fast food.", colFa: "غذای آماده: من فست‌فود دوست ندارم.",
+        phr: "Fast asleep: The baby is fast asleep.", phrFa: "خوابِ عمیق: نوزاد در خواب عمیقی است." 
+    },
+    { 
+        en: "slow", fa: "آهسته", 
+        def: "Not fast.", defFa: "نه سریع.",
+        ex: "Please speak more slow.", exFa: "لطفاً آهسته‌تر صحبت کنید.",
+        col: "Slow motion: I watched it in slow motion.", colFa: "حرکت آهسته: با حرکت آهسته تماشایش کردم.",
+        phr: "Slow down: Slow down! You're driving too fast.", phrFa: "سرعت را کم کردن: یواش‌تر! داری خیلی تند می‌رانی." 
+    },
+    { 
+        en: "very", fa: "خیلی", 
+        def: "To a great degree.", defFa: "به میزان زیاد.",
+        ex: "Thank you very much.", exFa: "خیلی زیاد از شما متشکرم.",
+        col: "Very good: This is very good.", colFa: "خیلی خوب: این خیلی خوب است.",
+        phr: "The very best: You are the very best friend.", phrFa: "بهترینِ بهترین‌ها: تو بهترین دوستی هستی که کسی می‌تواند داشته باشد." 
+    },
+    { 
+        en: "really", fa: "واقعاً", 
+        def: "In fact or truth.", defFa: "در حقیقت یا واقعیت.",
+        ex: "I really like this song.", exFa: "من واقعاً این آهنگ را دوست دارم.",
+        col: "Really? : Really? I can't believe it!", colFa: "واقعاً؟: واقعاً؟ نمی‌توانم باورش کنم!",
+        phr: "For really: I'm not doing it for really.", phrFa: "به طور جدی (در محاوره): واقعاً انجامش نمی‌دهم (شوخی می‌کنم)." 
+    },
+    { 
+        en: "just", fa: "فقط / الان", 
+        def: "Only; a short time ago.", defFa: "تنها؛ مدت کوتاهی پیش.",
+        ex: "I just arrived home.", exFa: "من الان (همین الان) به خانه رسیدم.",
+        col: "Just a minute: Wait, just a minute.", colFa: "فقط یک دقیقه: صبر کن، فقط یک دقیقه.",
+        phr: "Just in case: Take an umbrella just in case.", phrFa: "برای محض احتیاط: برای محض احتیاط یک چتر بردار." 
+    },
+    { 
+        en: "also", fa: "همچنین", 
+        def: "In addition; too.", defFa: "علاوه بر این؛ همچنین.",
+        ex: "She is a teacher and also a mother.", exFa: "او یک معلم و همچنین یک مادر است.",
+        col: "Also known as: Isfahan, also known as Half the World.", colFa: "همچنین شناخته شده به عنوان: اصفهان، ملقب به نصف جهان.",
+        phr: "But also: Not only smart, but also kind.", phrFa: "بلکه همچنین: نه تنها باهوش، بلکه مهربان." 
+    },
+    { 
+        en: "maybe", fa: "شاید", 
+        def: "Possibly but not certainly.", defFa: "احتمالاً اما نه قطعی.",
+        ex: "Maybe I will go to the gym.", exFa: "شاید به باشگاه بروم.",
+        col: "Maybe next time: I can't come, maybe next time.", colFa: "شاید دفعه بعد: نمی‌توانم بیایم، شاید دفعه بعد.",
+        phr: "Maybe so: Maybe so, but I don't think so.", phrFa: "شاید اینطور باشد: شاید، اما من اینطور فکر نمی‌کنم." 
+    },
+    { 
+        en: "sure", fa: "مطمئن", 
+        def: "Certain; having no doubt.", defFa: "قطعی؛ بدون شک.",
+        ex: "Are you sure about that?", exFa: "آیا در این مورد مطمئن هستی؟.",
+        col: "Sure enough: Sure enough, he was there.", colFa: "همانطور که انتظار می‌رفت: همانطور که حدس می‌زدم، او آنجا بود.",
+        phr: "Make sure: Make sure you close the door.", phrFa: "مطمئن شدن: مطمئن شو که در را می‌بندی." 
+    },
+    { 
+        en: "yes", fa: "بله", 
+        def: "Used to agree.", defFa: "استفاده شده برای موافقت.",
+        ex: "Yes, I am a student.", exFa: "بله، من یک دانش‌آموز هستم.",
+        col: "Oh yes: Oh yes, I remember now.", colFa: "اوه بله: اوه بله، الان یادم آمد.",
+        phr: "Say yes: Please say yes to me!", phrFa: "جواب مثبت دادن: لطفاً به من جواب مثبت بده!" 
+    },
+    { 
+        en: "no", fa: "نه", 
+        def: "Used to refuse or disagree.", defFa: "استفاده شده برای رد کردن یا مخالفت.",
+        ex: "No, I don't like coffee.", exFa: "نه، من قهوه دوست ندارم.",
+        col: "No problem: You're welcome, no problem.", colFa: "مشکلی نیست: خواهش می‌کنم، مشکلی نیست.",
+        phr: "No way: There is no way I can go.", phrFa: "ابداً / راه ندارد: ابداً نمی‌توانم بروم." 
+    },
+    { 
+        en: "okay", fa: "باشه / مرتب", 
+        def: "All right; correct.", defFa: "بسیار خب؛ صحیح و مرتب.",
+        ex: "Everything is okay.", exFa: "همه‌چیز مرتب است.",
+        col: "Okay by me: That's okay by me.", colFa: "از نظر من مشکلی ندارد: این از نظر من اوکی است.",
+        phr: "Feel okay: I don't feel okay today.", phrFa: "حالِ خوب داشتن: امروز حالم زیاد خوب نیست." 
+    },
+    { 
+        en: "please", fa: "لطفاً", 
+        def: "Used to ask politely.", defFa: "استفاده شده برای درخواست مؤدبانه.",
+        ex: "Close the window, please.", exFa: "لطفاً پنجره را ببندید.",
+        col: "Yes, please: Do you want tea? Yes, please.", colFa: "بله، لطفاً: چای می‌خواهی؟ بله، لطفاً.",
+        phr: "Hard to please: He is very hard to please.", phrFa: "سخت‌گیر: او آدم سخت‌گیری است (سخت راضی می‌شود)." 
+    },
+    { 
+        en: "thanks", fa: "ممنون", 
+        def: "Used to show gratitude.", defFa: "استفاده شده برای نشان دادن قدردانی.",
+        ex: "Thanks for your help.", exFa: "ممنون بابت کمکت.",
+        col: "Many thanks: Many thanks for the gift.", colFa: "بسیار ممنون: خیلی ممنون بابت هدیه.",
+        phr: "Thanks to: Thanks to you, I finished the job.", phrFa: "به لطفِ: به لطف تو، کار را تمام کردم." 
+    },
+    { 
+        en: "sorry", fa: "ببخشید / متأسف", 
+        def: "Feeling regret or sadness.", defFa: "احساس پشیمانی یا غم.",
+        ex: "I am sorry for being late.", exFa: "ببخشید که دیر کردم.",
+        col: "Feel sorry: I feel sorry for him.", colFa: "دلسوزی کردن: برایش دلسوزی می‌کنم.",
+        phr: "Sorry about: I'm sorry about the mistake.", phrFa: "متأسف بابت: بابت آن اشتباه معذرت می‌خواهم." 
+    },
+    { 
+        en: "hello", fa: "سلام", 
+        def: "A greeting.", defFa: "یک سلام و تحیت.",
+        ex: "Hello, how are you?", exFa: "سلام، چطوری؟",
+        col: "Say hello: Say hello to your father.", colFa: "سلام رساندن: به پدرت سلام برسان.",
+        phr: "Hello there: Hello there, long time no see!", phrFa: "سلامِ گرم: سلام رفیق، خیلی وقت است ندیدمت!" 
+    },
+    { 
+        en: "hi", fa: "سلام (دوستانه)", 
+        def: "An informal greeting.", defFa: "سلام غیررسمی.",
+        ex: "Hi, what's up?", exFa: "سلام، چه خبر؟",
+        col: "Hi there: Hi there, nice to meet you.", colFa: "سلامِ گرم: سلام، از دیدنت خوشحالم.",
+        phr: "Say hi: Don't forget to say hi.", phrFa: "سلام کردن: یادت نرود سلام کنی." 
+    },
+    { 
+        en: "bye", fa: "خداحافظ", 
+        def: "Short for goodbye.", defFa: "کوتاه شده کلمه 'خداحافظ'.",
+        ex: "Bye! See you tomorrow.", exFa: "خداحافظ! فردا می‌بینمت.",
+        col: "Say bye: Say bye to your friends.", colFa: "خداحافظی کردن: با دوستانت خداحافظی کن.",
+        phr: "Bye-bye: The child said bye-bye.", phrFa: "خداحافظی کودکانه: کودک بای‌بای کرد." 
+    },
+    { 
+        en: "welcome", fa: "خوش آمدید", 
+        def: "Used to greet someone.", defFa: "استفاده شده برای خوش‌آمدگویی.",
+        ex: "Welcome to our home.", exFa: "به خانه ما خوش آمدید.",
+        col: "You're welcome: Thanks. You're welcome.", colFa: "خواهش می‌کنم: ممنون. خواهش می‌کنم (در جواب تشکر).",
+        phr: "Welcome back: Welcome back from your trip!", phrFa: "خوش برگشتید: خوش برگشتی از سفر!" 
+    },
+    { 
+        en: "question", fa: "سؤال", 
+        def: "A sentence that asks for information.", defFa: "جمله‌ای که اطلاعات می‌خواهد.",
+        ex: "I have a question.", exFa: "من یک سؤال دارم.",
+        col: "Ask a question: Can I ask a question?", colFa: "سؤال پرسیدن: می‌توانم یک سؤال بپرسم؟",
+        phr: "Out of the question: It's out of the question.", phrFa: "محال است: ابداً حرفش را هم نزن (محال است)." 
+    },
+    { 
+        en: "answer", fa: "جواب", 
+        def: "Information given after a question.", defFa: "اطلاعات داده شده بعد از یک سؤال.",
+        ex: "He gave the correct answer.", exFa: "او جواب درست را داد.",
+        col: "Right answer: That is the right answer.", colFa: "جواب درست: آن جواب درست است.",
+        phr: "Answer to: This is the answer to my problems.", phrFa: "پاسخِ: این پاسخِ مشکلات من است." 
+    },
+    { 
+        en: "problem", fa: "مشکل", 
+        def: "Something difficult to deal with.", defFa: "چیزی که برخورد با آن سخت است.",
+        ex: "I have a big problem.", exFa: "من یک مشکل بزرگ دارم.",
+        col: "Solve a problem: We must solve this problem.", colFa: "حل مشکل: ما باید این مشکل را حل کنیم.",
+        phr: "No problem: Can you help me? No problem.", phrFa: "مشکلی نیست: می‌توانی کمکم کنی؟ مشکلی نیست." 
+    },
+    { 
+        en: "reason", fa: "دلیل", 
+        def: "Why something happens.", defFa: "چرا چیزی اتفاق می‌افتد.",
+        ex: "What is the reason for this?", exFa: "دلیل این چیست؟",
+        col: "Good reason: I have a good reason for it.", colFa: "دلیل خوب: من دلیل خوبی برای آن دارم.",
+        phr: "Reason with: You can't reason with him.", phrFa: "منطق آوردن (متقاعد کردن): نمی‌توانی با منطق او را راضی کنی." 
+    },
+    { 
+        en: "idea", fa: "ایده / نظر", 
+        def: "A thought or plan.", defFa: "یک فکر یا نقشه.",
+        ex: "I have a great idea.", exFa: "من یک ایده عالی دارم.",
+        col: "Good idea: That's a good idea.", colFa: "ایده خوب: آن ایده خوبی است.",
+        phr: "Have no idea: I have no idea where he is.", phrFa: "اصلاً ندانستن: اصلاً خبر ندارم (اصلاً نمی‌دانم) کجاست." 
+    },
+    { 
+        en: "thing", fa: "چیز", 
+        def: "An object or action.", defFa: "یک جسم یا عمل.",
+        ex: "What is that thing?", exFa: "آن چیز چیست؟",
+        col: "Many things: I have many things to do.", colFa: "کارهای زیاد/چیزهای زیاد: خیلی کار برای انجام دادن دارم.",
+        phr: "First thing: Do it first thing in the morning.", phrFa: "اولین کار: اول صبح (اولین کار) انجامش بده." 
+    },
+    { 
+        en: "way", fa: "راه / روش", 
+        def: "A path or a method.", defFa: "یک مسیر یا یک متد.",
+        ex: "Which way is the bank?", exFa: "بانک از کدام طرف است؟",
+        col: "Right way: Do it the right way.", colFa: "روش درست: آن را به روش درست انجام بده.",
+        phr: "By the way: By the way, how is your father?", phrFa: "در ضمن / راستی: راستی، پدرت چطور است؟" 
+    },
+    { 
+        en: "part", fa: "بخش", 
+        def: "A piece of a whole.", defFa: "تکه‌ای از یک کل.",
+        ex: "This is a part of my job.", exFa: "این بخشی از شغل من است.",
+        col: "Spare part: I need a spare part for my car.", colFa: "قطعه یدکی: من به یک قطعه یدکی برای ماشینم نیاز دارم.",
+        phr: "Take part: We must take part in the class.", phrFa: "شرکت کردن: ما باید در کلاس شرکت کنیم." 
+    },
+    { 
+        en: "life", fa: "زندگی", 
+        def: "The period from birth to death.", defFa: "دوره از تولد تا مرگ.",
+        ex: "Life is beautiful.", exFa: "زندگی زیباست.",
+        col: "Real life: This is real life, not a movie.", colFa: "زندگی واقعی: این زندگی واقعی است، نه فیلم.",
+        phr: "Bring to life: Music brings the party to life.", phrFa: "جان بخشیدن: موسیقی به مهمانی جان می‌بخشد." 
+    }
+    { 
+        en: "world", fa: "دنیا", 
+        def: "The earth and all people.", defFa: "زمین و تمام مردم.",
+        ex: "I want to travel around the world.", exFa: "من می‌خواهم به دور دنیا سفر کنم.",
+        col: "Whole world: The whole world knows him.", colFa: "تمام دنیا: تمام دنیا او را می‌شناسند.",
+        phr: "Out of this world: This cake is out of this world!", phrFa: "فوق‌العاده: این کیک بی‌نظیر (خارج از این دنیا) است!" 
+    },
+    { 
+        en: "workday", fa: "روز کاری", 
+        def: "A day on which work is done.", defFa: "روزی که در آن کار انجام می‌شود.",
+        ex: "My workday starts at 8 AM.", exFa: "روز کاری من ساعت ۸ صبح شروع می‌شود.",
+        col: "Long workday: It was a long workday.", colFa: "روز کاری طولانی: روز کاری طولانی‌ای بود.",
+        phr: "At the end of the workday: Let's talk then.", phrFa: "پایان روز کاری: آن موقع حرف می‌زنیم." 
+    },
+    { 
+        en: "weekend", fa: "آخر هفته", 
+        def: "Saturday and Sunday (or Friday).", defFa: "شنبه و یکشنبه (یا جمعه در ایران).",
+        ex: "What do you do on the weekend?", exFa: "آخر هفته‌ها چه کار می‌کنی؟",
+        col: "Long weekend: We have a long weekend.", colFa: "تعطیلات طولانی: یک تعطیلات چند روزه (آخر هفته طولانی) داریم.",
+        phr: "At the weekend: I rest at the weekend.", phrFa: "در آخر هفته: من آخر هفته استراحت می‌کنم." 
+    },
+    { 
+        en: "break", fa: "استراحت / شکستن", 
+        def: "A short rest; to damage.", defFa: "استراحتی کوتاه؛ آسیب زدن و شکستن.",
+        ex: "Let's take a break.", exFa: "بیا کمی استراحت کنیم.",
+        col: "Lunch break: I'm on my lunch break.", colFa: "استراحت ناهار: من در زمان استراحت ناهار هستم.",
+        phr: "Break up: They broke up last month.", phrFa: "به هم زدن (رابطه): آن‌ها ماه پیش رابطه را تمام کردند." 
+    },
+    { 
+        en: "rest", fa: "استراحت / بقیه", 
+        def: "Relaxing; the remaining part.", defFa: "آرامش یافتن؛ بخش باقی‌مانده.",
+        ex: "You need some rest.", exFa: "تو به کمی استراحت نیاز داری.",
+        col: "The rest of: Eat the rest of your food.", colFa: "بقیه یِ...: بقیه غذایت را بخور.",
+        phr: "Rest assured: Rest assured, everything is fine.", phrFa: "خیالت راحت باشد: خیالت راحت، همه‌چیز مرتب است." 
+    },
+    { 
+        en: "plan", fa: "برنامه", 
+        def: "A set of decisions to do something.", defFa: "مجموعه‌ای از تصمیمات برای انجام کاری.",
+        ex: "I have a plan for tomorrow.", exFa: "من برای فردا برنامه دارم.",
+        col: "Business plan: He has a good business plan.", colFa: "طرح کسب‌وکار: او طرح تجاری خوبی دارد.",
+        phr: "Plan ahead: You need to plan ahead.", phrFa: "از قبل برنامه‌ریزی کردن: باید از قبل فکر همه‌جا را بکنی." 
+    },
+    { 
+        en: "change", fa: "تغییر / پول خرد", 
+        def: "To make something different.", defFa: "متفاوت کردن چیزی.",
+        ex: "I want to change my hair color.", exFa: "می‌خواهم رنگ مویم را تغییر دهم.",
+        col: "Climate change: Climate change is real.", colFa: "تغییرات اقلیمی: تغییرات آب‌وهوایی واقعی است.",
+        phr: "Change your mind: Did you change your mind?", phrFa: "نظرت را عوض کردی؟: آیا منصرف شدی؟" 
+    },
+    { 
+        en: "result", fa: "نتیجه", 
+        def: "Something that happens because of something else.", defFa: "چیزی که به دلیل اتفاق دیگری رخ می‌دهد.",
+        ex: "What was the result of the test?", exFa: "نتیجه امتحان چه شد؟",
+        col: "Final result: Wait for the final result.", colFa: "نتیجه نهایی: منتظر نتیجه نهایی بمان.",
+        phr: "As a result: As a result, he failed.", phrFa: "در نتیجه: در نتیجه، او مردود شد." 
+    },
+    { 
+        en: "example", fa: "مثال", 
+        def: "A thing that shows what something is like.", defFa: "چیزی که نشان می‌دهد یک موضوع چطور است.",
+        ex: "Give me an example, please.", exFa: "لطفاً یک مثال برایم بزن.",
+        col: "For example: I like fruits, for example, apples.", colFa: "به عنوان مثال: من میوه دوست دارم، مثلاً سیب.",
+        phr: "Set an example: Set a good example for others.", phrFa: "الگو شدن: الگوی خوبی برای بقیه باش." 
+    },
+    { 
+        en: "point", fa: "نکته / امتیاز", 
+        def: "An idea or opinion; a score.", defFa: "یک ایده یا نظر؛ امتیاز.",
+        ex: "That is a good point.", exFa: "این نکته خوبی است.",
+        col: "Turning point: It was a turning point in my life.", colFa: "نقطه عطف: آن یک نقطه عطف در زندگی من بود.",
+        phr: "Point out: He pointed out my mistakes.", phrFa: "اشاره کردن (متذکر شدن): او به اشتباهاتم اشاره کرد." 
+    },
+    { 
+        en: "level", fa: "سطح", 
+        def: "A position in a scale.", defFa: "موقعیتی در یک مقیاس.",
+        ex: "My English level is A1.", exFa: "سطح انگلیسی من A1 است.",
+        col: "Sea level: Above sea level.", colFa: "سطح دریا: بالاتر از سطح دریا.",
+        phr: "On the level: Is he on the level?", phrFa: "صادق و درستکار: آیا او آدم رو راست و صادقی است؟" 
+    },
+    { 
+        en: "begin", fa: "شروع کردن", 
+        def: "To start.", defFa: "آغاز کردن.",
+        ex: "Let's begin the lesson.", exFa: "بیا درس را شروع کنیم.",
+        col: "Begin to talk: She began to talk.", colFa: "شروع به صحبت کردن: او شروع کرد به حرف زدن.",
+        phr: "Begin with: The word begins with A.", phrFa: "شروع شدن با: کلمه با A شروع می‌شود." 
+    },
+    { 
+        en: "finish", fa: "تمام کردن", 
+        def: "To complete something.", defFa: "کامل کردن چیزی.",
+        ex: "Finish your homework first.", exFa: "اول تکالیفت را تمام کن.",
+        col: "Finish line: He crossed the finish line.", colFa: "خط پایان: او از خط پایان گذشت.",
+        phr: "Finish off: Let's finish off the cake.", phrFa: "تهِ چیزی را درآوردن (کامل تمام کردن): بیا کیک را تا آخر بخوریم." 
+    },
+    { 
+        en: "wait", fa: "صبر کردن", 
+        def: "To stay until something happens.", defFa: "ماندن تا زمانی که اتفاقی بیفتد.",
+        ex: "Please wait for me.", exFa: "لطفاً منتظر من بمان.",
+        col: "Wait a minute: Wait a minute, please.", colFa: "یک دقیقه صبر کن: یک دقیقه صبر کن، لطفاً.",
+        phr: "Wait on: Who is waiting on us?", phrFa: "سرویس دادن (در رستوران): چه کسی گارسون (خدمت‌رسان) ماست؟" 
+    },
+    { 
+        en: "meet", fa: "ملاقات کردن", 
+        def: "To see and talk to someone.", defFa: "دیدن و صحبت کردن با کسی.",
+        ex: "Nice to meet you.", exFa: "از دیدنت خوشحالم.",
+        col: "Meet a friend: I'll meet a friend today.", colFa: "ملاقات با دوست: امروز یک دوست را می‌بینم.",
+        phr: "Meet up: Let's meet up tonight.", phrFa: "قرار گذاشتن و دیدن: بیا امشب همدیگر را ببینیم." 
+    },
+    { 
+        en: "call", fa: "تماس گرفتن / صدا زدن", 
+        def: "To phone someone; to name.", defFa: "تلفن زدن به کسی؛ نامیدن.",
+        ex: "Call me tonight.", exFa: "امشب با من تماس بگیر.",
+        col: "Phone call: I have a phone call.", colFa: "تماس تلفنی: من یک تماس تلفنی دارم.",
+        phr: "Call back: I'll call you back.", phrFa: "دوباره زنگ زدن: دوباره بهت زنگ می‌زنم." 
+    },
+    { 
+        en: "open", fa: "باز کردن", 
+        def: "To move something so it's not closed.", defFa: "حرکت دادن چیزی تا دیگر بسته نباشد.",
+        ex: "Please open the window.", exFa: "لطفاً پنجره را باز کن.",
+        col: "Open mind: Have an open mind.", colFa: "ذهن باز: ذهن بازی داشته باش.",
+        phr: "Open up: He finally opened up to me.", phrFa: "دردِ دل کردن: او بالاخره سفره دلش را برای من باز کرد." 
+    },
+    { 
+        en: "close", fa: "بستن / نزدیک", 
+        def: "To shut; near.", defFa: "مسدود کردن؛ در مجاورت.",
+        ex: "Close the door, please.", exFa: "لطفاً در را ببندید.",
+        col: "Close friend: He is a close friend.", colFa: "دوست صمیمی: او یک دوست صمیمی است.",
+        phr: "Close down: The shop closed down.", phrFa: "تعطیل شدن (دائمی): آن مغازه برای همیشه بسته شد." 
+    },
+    { 
+        en: "buy", fa: "خریدن", 
+        def: "To get something with money.", defFa: "به دست آوردن چیزی با پول.",
+        ex: "I want to buy a new car.", exFa: "می‌خواهم یک ماشین جدید بخرم.",
+        col: "Buy time: We need to buy some time.", colFa: "زمان خریدن: باید کمی زمان بخریم (فرصت ایجاد کنیم).",
+        phr: "Buy into: I don't buy into that idea.", phrFa: "باور کردن (پذیرفتن ایده): من این حرف‌ها (ایده‌ها) را باور نمی‌کنم." 
+    },
+    { 
+        en: "pay", fa: "پرداخت کردن", 
+        def: "To give money for something.", defFa: "پول دادن بابت چیزی.",
+        ex: "Can I pay by card?", exFa: "می‌توانم با کارت پرداخت کنم؟",
+        col: "Pay attention: Pay attention to the teacher.", colFa: "توجه کردن: به معلم توجه کن.",
+        phr: "Pay back: I'll pay you back later.", phrFa: "پس دادن (پول): بعداً پولت را پس می‌دهم." 
+    },
+    { 
+        en: "bring", fa: "آوردن", 
+        def: "To take someone or something with you.", defFa: "بردن کسی یا چیزی همراه خود به جایی.",
+        ex: "Bring your book to the class.", exFa: "کتابت را به کلاس بیاور.",
+        col: "Bring luck: This ring brings luck.", colFa: "خوش‌شانسی آوردن: این انگشتر شانس می‌آورد.",
+        phr: "Bring up: She brought up three kids.", phrFa: "بزرگ کردن (فرزند): او سه تا بچه بزرگ کرد." 
+    },
+    { 
+        en: "take", fa: "برداشتن / گرفتن", 
+        def: "To get or carry something.", defFa: "گرفتن یا حمل کردن چیزی.",
+        ex: "Take an umbrella with you.", exFa: "با خودت چتر ببر.",
+        col: "Take a photo: Can you take a photo?", colFa: "عکس گرفتن: می‌توانی یک عکس بگیری؟",
+        phr: "Take off: The plane is taking off.", phrFa: "بلند شدن (هواپیما) / درآوردن (لباس): هواپیما دارد از زمین بلند می‌شود." 
+    },
+    { 
+        en: "find", fa: "پیدا کردن", 
+        def: "To discover something.", defFa: "کشف کردن یا یافتن چیزی.",
+        ex: "I can't find my keys.", exFa: "نمی‌توانم کلیدهایم را پیدا کنم.",
+        col: "Find out: I found out the truth.", colFa: "فهمیدن (کشف کردن): حقیقت را فهمیدم.",
+        phr: "Find fault: Don't find fault with everything.", phrFa: "ایراد گرفتن: از همه‌چیز ایراد نگیر." 
+    },
+    { 
+        en: "keep", fa: "نگه داشتن", 
+        def: "To continue to have or do.", defFa: "ادامه دادن به داشتن یا انجام دادن.",
+        ex: "Keep your room clean.", exFa: "اتاق خود را تمیز نگه دار.",
+        col: "Keep a secret: Can you keep a secret?", colFa: "رازدار بودن: می‌توانی یک راز را نگه داری؟",
+        phr: "Keep on: Keep on trying!", phrFa: "ادامه دادن: به تلاش کردن ادامه بده!" 
+    },
+    { 
+        en: "give", fa: "دادن", 
+        def: "To offer something to someone.", defFa: "ارائه دادن چیزی به کسی.",
+        ex: "Give me that book, please.", exFa: "لطفاً آن کتاب را به من بده.",
+        col: "Give a hand: Can you give me a hand?", colFa: "کمک کردن: می‌توانی به من کمک کنی؟",
+        phr: "Give up: Never give up!", phrFa: "تسلیم شدن: هرگز تسلیم نشو!" 
+    },
+    { 
+        en: "receive", fa: "دریافت کردن", 
+        def: "To get something given to you.", defFa: "گرفتن چیزی که به شما داده شده است.",
+        ex: "I received an email today.", exFa: "من امروز یک ایمیل دریافت کردم.",
+        col: "Receive a gift: She received a beautiful gift.", colFa: "هدیه گرفتن: او هدیه زیبایی گرفت.",
+        phr: "Receiving end: He was on the receiving end of the joke.", phrFa: "طرفِ موردِ هدف (در اتفاقات): او هدفِ آن شوخی قرار گرفت." 
+    },
+    { 
+        en: "learn", fa: "یاد گرفتن", 
+        def: "To get knowledge.", defFa: "به دست آوردن دانش.",
+        ex: "I want to learn English.", exFa: "من می‌خواهم انگلیسی یاد بگیرم.",
+        col: "Learn by heart: I learned it by heart.", colFa: "حفظ کردن: من آن را از حفظ یاد گرفتم.",
+        phr: "Learn from: Learn from your mistakes.", phrFa: "درس گرفتن از: از اشتباهاتت درس بگیر." 
+    },
+    { 
+        en: "teach", fa: "درس دادن", 
+        def: "To give knowledge.", defFa: "دادن دانش به دیگری.",
+        ex: "He teaches math.", exFa: "او ریاضی درس می‌دهد.",
+        col: "Teach a lesson: Experience teaches a lesson.", colFa: "درس دادن (آموزنده): تجربه به آدم درس می‌دهد.",
+        phr: "Teach-in: They organized a teach-in.", phrFa: "جلسه آموزشی: آن‌ها یک جلسه بحث و آموزش راه انداختند." 
+    },
+    { 
+        en: "practice", fa: "تمرین کردن", 
+        def: "To do something many times to be good.", defFa: "انجام دادن مکرر کاری برای ماهر شدن.",
+        ex: "I practice English every day.", exFa: "من هر روز انگلیسی تمرین می‌کنم.",
+        col: "Daily practice: Daily practice is important.", colFa: "تمرین روزانه: تمرین روزانه مهم است.",
+        phr: "Practice what you preach: You should practice what you preach.", phrFa: "به حرف خود عمل کردن: باید به چیزی که می‌گویی عمل کنی." 
+    },
+    { 
+        en: "understand", fa: "فهمیدن", 
+        def: "To know the meaning.", defFa: "دانستن معنا و مفهوم.",
+        ex: "Do you understand me?", exFa: "آیا حرف مرا می‌فهمی؟",
+        col: "Fully understand: I fully understand the situation.", colFa: "کاملاً فهمیدن: من کاملاً موقعیت را درک می‌کنم.",
+        phr: "Give to understand: He gave me to understand that he's leaving.", phrFa: "فهماندن (به طور غیر مستقیم): او به من فهماند که قصد رفتن دارد." 
+    },
+    { 
+        en: "remember", fa: "به خاطر سپردن", 
+        def: "To not forget.", defFa: "فراموش نکردن.",
+        ex: "Remember to close the door.", exFa: "یادت باشد در را ببندی.",
+        col: "Remember correctly: If I remember correctly...", colFa: "درست به یاد داشتن: اگر درست به خاطر داشته باشم...",
+        phr: "Remember me to: Remember me to your mom.", phrFa: "سلام رساندن: سلام مرا به مادرت برسان." 
+    }
+];
+
+];
+
