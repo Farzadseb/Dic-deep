@@ -3,111 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Dic-Deep Elite Pro</title>
+    <title>Dic-Deep Elite</title>
+    
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="manifest" href="manifest.json">
+
     <style>
-        :root { --bg: #e0e5ec; --accent: #4a90e2; --text: #444; --shadow: 9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px rgba(255,255,255, 0.5); }
-        body.dark { --bg: #2d3436; --accent: #4facfe; --text: #eee; --shadow: 5px 5px 10px #23282a, -5px -5px 10px #374042; }
-        body { background: var(--bg); font-family: Tahoma, sans-serif; transition: 0.3s; padding: 20px; margin: 0; color: var(--text); touch-action: manipulation; overflow-x: hidden; }
-        .neu-card { background: var(--bg); border-radius: 20px; box-shadow: var(--shadow); padding: 20px; margin-bottom: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.2); }
-        .neu-btn { border: none; background: var(--bg); box-shadow: var(--shadow); padding: 12px 20px; border-radius: 12px; cursor: pointer; color: var(--accent); font-weight: bold; transition: 0.2s; outline: none; -webkit-tap-highlight-color: transparent; }
-        .neu-btn:active { transform: scale(0.95); box-shadow: inset 2px 2px 5px #b8bec5; }
+        :root { 
+            --bg: #e0e5ec; 
+            --accent: #4a90e2; 
+            --main-word: #000000; 
+            --text: #444; 
+            --shadow: 9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px rgba(255,255,255, 0.5); 
+        }
+        body.dark { 
+            --bg: #2d3436; 
+            --accent: #4facfe; 
+            --main-word: #ffffff; 
+            --text: #eee; 
+            --shadow: 5px 5px 10px #23282a, -5px -5px 10px #374042;
+        }
+        body { background: var(--bg); font-family: Tahoma, sans-serif; transition: 0.3s; padding: 20px; margin: 0; color: var(--text); touch-action: manipulation; }
+        .neu-card { background: var(--bg); border-radius: 25px; box-shadow: var(--shadow); padding: 25px; margin-bottom: 25px; text-align: center; }
+        .neu-btn { border: none; background: var(--bg); box-shadow: var(--shadow); padding: 15px 20px; border-radius: 15px; cursor: pointer; color: var(--accent); font-weight: bold; transition: 0.2s; }
+        .neu-btn:active { transform: scale(0.96); box-shadow: inset 4px 4px 8px #b8bec5; }
+        .search-input { width: 100%; border: none; background: var(--bg); box-shadow: inset 6px 6px 12px #b8bec5, inset -6px -6px 12px #ffffff; padding: 18px; border-radius: 20px; outline: none; color: var(--accent); font-size: 16px; text-align: center; box-sizing: border-box; }
+        .main-word-style { color: var(--main-word); font-size: 1.5em; font-weight: 900; direction: ltr; display: inline-block; }
+        .example-box { font-size: 0.85em; background: rgba(0,0,0,0.03); padding: 15px; border-radius: 15px; margin-top: 15px; text-align: left; direction: ltr; border-left: 4px solid var(--accent); }
         .hidden { display: none !important; }
-        .search-input { width: 100%; border: none; background: var(--bg); box-shadow: inset 5px 5px 10px #b8bec5, inset -5px -5px 10px #ffffff; padding: 15px; border-radius: 15px; outline: none; color: var(--accent); font-size: 16px; text-align: center; box-sizing: border-box; }
-        .example-box { font-size: 0.85em; background: rgba(0,0,0,0.05); padding: 12px; border-radius: 12px; margin-top: 10px; text-align: left; direction: ltr; border-left: 3px solid var(--accent); }
-        @keyframes popIn { from { opacity: 0; transform: translate(-50%, -45%) scale(0.9); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
     </style>
 </head>
 <body class="light">
 
     <div class="neu-card">
         <div style="display:flex; justify-content: space-between; align-items: center;">
+            <div>Score: <span id="scoreDisp">0</span></div>
             <button class="neu-btn" onclick="app.toggleTheme()">🌓</button>
-            <h3 id="scoreDisp" style="margin:0;">Score: 0</h3>
-            <div id="starDisp" style="font-size: 1.2em;">⭐ 0</div>
+            <div>⭐ <span id="starDisp">0</span></div>
         </div>
     </div>
 
     <div id="vipArea" class="neu-card">
-        <div style="font-size: 50px; margin-bottom: 10px;">🔐</div>
-        <h3>ورود به پنل VIP</h3>
-        <p style="font-size: 0.8em; opacity: 0.7;">کد FRED-2025 را وارد کنید</p>
-        <input type="text" id="vipCode" class="search-input" placeholder="کد را اینجا بنویسید">
-        <button class="neu-btn" style="margin-top:20px; width:100%;" onclick="app.checkVIP()">تایید و ورود</button>
+        <h3>ورود VIP</h3>
+        <input type="text" id="vipCode" class="search-input" placeholder="کد ورود">
+        <button class="neu-btn" style="margin-top:20px; width:100%;" onclick="app.checkVIP()">تایید</button>
     </div>
 
     <div id="mainContent" class="hidden">
         <div class="neu-card">
-            <input type="text" id="wordInput" class="search-input" placeholder="🔍 جستجو در ۲۰۰ لغت..." oninput="app.liveSearch()">
-            <div id="results" style="margin-top: 15px;"></div>
+            <input type="text" id="wordInput" class="search-input" placeholder="🔍 جستجو..." oninput="app.liveSearch()">
+            <div id="results" style="margin-top: 20px;"></div>
         </div>
-        
         <div class="neu-card">
-            <h3 id="quizQ" style="color: var(--accent);">آماده چالش لغات؟</h3>
-            <div id="options" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px;"></div>
-            <button id="startBtn" class="neu-btn" style="width:100%; margin-top:10px;" onclick="app.startQuiz()">شروع مسابقه</button>
+            <h3 id="quizQ"></h3>
+            <div id="options" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px;"></div>
+            <button id="startBtn" class="neu-btn" style="width:100%; margin-top:15px;" onclick="app.startQuiz()">شروع مسابقه</button>
         </div>
     </div>
 
     <script src="dictionary.js"></script>
-
     <script>
         class DicDeepApp {
             constructor() {
-                this.score = 0;
-                this.stars = 0;
-                this.testCount = 0;
-                this.theme = 'light';
-                // لغت رزرو جهت اطمینان از باز شدن برنامه
-                this.fallbackDict = [{ en: "Test", fa: "تست", ex: "This is a sample word." }];
+                this.score = 0; this.stars = 0; this.testCount = 0; this.theme = 'light';
+                this.fallbackDict = [{ en: "usually", fa: "معمولاً", ex: "I usually go home at 5.", col: "as usually", phr: "---" }];
                 window.app = this;
             }
 
-            // تشخیص منبع کلمات (فایل خارجی یا رزرو)
-            getDict() {
-                if (typeof dictionary !== 'undefined' && Array.isArray(dictionary)) {
-                    return dictionary;
-                }
-                return this.fallbackDict;
+            speak(text) {
+                const msg = new SpeechSynthesisUtterance(text);
+                msg.lang = 'en-US';
+                window.speechSynthesis.speak(msg);
             }
 
-            toggleTheme() {
-                this.theme = this.theme === 'light' ? 'dark' : 'light';
-                document.body.className = this.theme;
+            toggleTheme() { 
+                this.theme = this.theme === 'light' ? 'dark' : 'light'; 
+                document.body.className = this.theme; 
             }
 
-            // تابع اصلاح شده برای حل مشکل ورود
             checkVIP() {
-                const inputElement = document.getElementById('vipCode');
-                const userInput = inputElement.value.trim().toUpperCase();
-                const correctSecret = "FRED-2025";
-
-                if (userInput === correctSecret) {
-                    document.getElementById('vipArea').style.display = 'none';
+                const val = document.getElementById('vipCode').value.trim().toUpperCase();
+                if (val === "FRED-2025") {
+                    document.getElementById('vipArea').classList.add('hidden');
                     document.getElementById('mainContent').classList.remove('hidden');
-                    this.sendLog("✅ ورود موفق کاربر");
-                } else {
-                    alert("❌ کد اشتباه است! دوباره تلاش کنید.");
-                    inputElement.value = "";
-                    inputElement.focus();
-                }
+                    this.sendLog("🚀 ورود موفق کاربر به اپلیکیشن");
+                } else { alert("کد اشتباه است!"); }
             }
 
             liveSearch() {
                 const term = document.getElementById('wordInput').value.toLowerCase().trim();
-                const res = document.getElementById('results');
-                res.innerHTML = "";
+                const res = document.getElementById('results'); res.innerHTML = "";
                 if(!term) return;
-                const data = this.getDict();
-                const filtered = data.filter(w => w.en.toLowerCase().includes(term) || w.fa.includes(term)).slice(0,3);
-                filtered.forEach(w => {
+                const data = (typeof dictionary !== 'undefined') ? dictionary : this.fallbackDict;
+                data.filter(w => w.en.toLowerCase().includes(term) || w.fa.includes(term)).slice(0,3).forEach(w => {
                     res.innerHTML += `
-                    <div class="neu-card" style="box-shadow:none; border:1px solid rgba(0,0,0,0.1); text-align:right; padding:15px; margin-bottom:10px;">
-                        <div style="display:flex; justify-content:space-between; font-weight:bold; color:var(--accent);">
-                            <span>${w.en}</span><span>${w.fa}</span>
-                        </div>
+                    <div class="neu-card" style="box-shadow:none; border:1px solid rgba(0,0,0,0.05); text-align:right;">
+                        <div onclick="app.speak('${w.en}')" style="cursor:pointer;"><span class="main-word-style">${w.en}</span> 🔊</div>
+                        <div><b>معنی:</b> ${w.fa}</div>
+                        <div style="font-size:0.8em; color:gray;">Col: ${w.col} | Phr: ${w.phr}</div>
                         <div class="example-box">${w.ex}</div>
                     </div>`;
                 });
@@ -115,68 +109,52 @@
 
             startQuiz() {
                 document.getElementById('startBtn').classList.add('hidden');
-                const data = this.getDict();
+                const data = (typeof dictionary !== 'undefined') ? dictionary : this.fallbackDict;
                 const correct = data[Math.floor(Math.random() * data.length)];
-                let opts = [correct];
+                this.speak(correct.en);
                 
-                while(opts.length < 4 && opts.length < data.length) {
+                let opts = [correct];
+                while(opts.length < 4) {
                     const r = data[Math.floor(Math.random() * data.length)];
-                    if(!opts.find(x => x.en === r.en)) opts.push(r);
+                    if(!opts.includes(r)) opts.push(r);
                 }
                 opts.sort(() => Math.random() - 0.5);
 
-                document.getElementById('quizQ').innerText = `معنی "${correct.en}"؟`;
-                const div = document.getElementById('options'); 
-                div.innerHTML = "";
+                document.getElementById('quizQ').innerHTML = `معنی <span class="main-word-style">"${correct.en}"?</span> چیست؟`;
                 
+                const div = document.getElementById('options'); div.innerHTML = "";
                 opts.forEach(o => {
-                    const b = document.createElement('button');
-                    b.className = "neu-btn";
-                    b.innerText = o.fa;
-                    b.onclick = () => this.handleAns(o.en === correct.en);
+                    const b = document.createElement('button'); b.className = "neu-btn"; b.innerText = o.fa;
+                    b.onclick = () => this.handleAns(o === correct);
                     div.appendChild(b);
                 });
             }
 
             handleAns(isCorrect) {
                 if(isCorrect) { 
-                    this.score += 20; 
-                    if(this.score % 100 === 0) this.stars++;
-                }
-                this.testCount++;
-                document.getElementById('scoreDisp').innerText = `Score: ${this.score}`;
-                document.getElementById('starDisp').innerText = `⭐ ${this.stars}`;
-                
-                if(this.testCount >= 5) {
-                    this.showModal();
-                    this.testCount = 0;
-                } else {
-                    this.startQuiz();
-                }
+                    this.score += 20; if(this.score % 100 === 0) this.stars++;
+                    document.getElementById('scoreDisp').innerText = this.score;
+                    document.getElementById('starDisp').innerText = this.stars;
+                    this.testCount++;
+                    if(this.testCount >= 5) { this.showModal(); this.testCount = 0; } else { this.startQuiz(); }
+                } else { alert("اشتباه بود!"); this.startQuiz(); }
             }
 
             showModal() {
-                const modalDiv = document.createElement('div');
-                modalDiv.id = "contactWrapper";
-                modalDiv.innerHTML = `
-                <div id="contactModal" style="position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); z-index:1000; width:85%; max-width:350px; padding:25px; border-radius:30px; background:var(--bg); box-shadow:var(--shadow); text-align:center; border:2px solid var(--accent); animation: popIn 0.3s ease-out;">
-                    <div style="font-size:45px;">🎓</div>
-                    <h2 style="color:var(--accent); margin:10px 0;">آموزش کامل با استاد</h2>
-                    <p style="line-height:1.6; font-size:0.95em;">برای تسلط به مکالمه و استفاده درست از این لغات، در کلاس‌های خصوصی شرکت کن.</p>
+                const m = document.createElement('div');
+                m.id = "modalWrap";
+                m.innerHTML = `
+                <div style="position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); z-index:2000; width:85%; max-width:320px; padding:30px; border-radius:30px; background:var(--bg); box-shadow: var(--shadow); text-align:center;">
+                    <h2 style="color:var(--accent);">پیشرفت عالی!</h2>
+                    <p>برای کلاس خصوصی با من تماس بگیر.</p>
                     <div style="display:flex; justify-content:space-around; margin-top:25px;">
-                        <a href="https://wa.me/989017708544?text=سلام استاد، مایل به شرکت در کلاس هستم." style="text-decoration:none;">
-                            <button class="neu-btn" style="background:#25D366; color:white; width:65px; height:65px; border-radius:50%; font-size:30px;">🟢</button>
-                            <div style="font-size:10px; margin-top:8px; font-weight:bold; color:var(--text);">WhatsApp</div>
-                        </a>
-                        <a href="tel:09017708544" style="text-decoration:none;">
-                            <button class="neu-btn" style="background:var(--accent); color:white; width:65px; height:65px; border-radius:50%; font-size:25px;">📞</button>
-                            <div style="font-size:10px; margin-top:8px; font-weight:bold; color:var(--text);">Call</div>
-                        </a>
+                        <a href="https://wa.me/989017708544" style="text-decoration:none;"><button class="neu-btn" style="background:#25D366; color:white;">WhatsApp</button></a>
+                        <a href="tel:09017708544" style="text-decoration:none;"><button class="neu-btn" style="background:var(--accent); color:white;">Call</button></a>
                     </div>
-                    <button class="neu-btn" onclick="document.getElementById('contactWrapper').remove(); app.startQuiz();" style="margin-top:30px; width:100%; border-radius:15px;">بعداً، ادامه تمرین 🚀</button>
+                    <button class="neu-btn" onclick="document.getElementById('modalWrap').remove(); app.startQuiz();" style="margin-top:30px; width:100%;">ادامه</button>
                 </div>
-                <div style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:999; backdrop-filter:blur(5px);"></div>`;
-                document.body.appendChild(modalDiv);
+                <div style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); backdrop-filter:blur(5px); z-index:1999;"></div>`;
+                document.body.appendChild(m);
             }
 
             async sendLog(msg) {
